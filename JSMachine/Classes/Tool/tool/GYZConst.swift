@@ -150,7 +150,7 @@ let userDefaults = UserDefaults.standard
 ///颜色常量
 
 /// 通用背景颜色
-let kBackgroundColor : UIColor = UIColor.UIColorFromRGB(valueRGB: 0xf2f2f2)
+let kBackgroundColor : UIColor = UIColor.UIColorFromRGB(valueRGB: 0xf8f8f8)
 /// 导航栏背景颜色
 let kNavBarColor : UIColor = UIColor.white
 /// 黑色字体颜色

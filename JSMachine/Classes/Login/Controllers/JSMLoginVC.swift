@@ -144,7 +144,7 @@ class JSMLoginVC: GYZBaseVC {
     @objc func clickedUserLoginBtn() {
         hiddenKeyBoard()
         
-//        userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
+        userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
         
         KeyWindow.rootViewController = GYZMainTabBarVC()
         

@@ -85,6 +85,9 @@
 		0A02A64021A591E5009F2A96 /* JSMHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A63F21A591E5009F2A96 /* JSMHomeVC.swift */; };
 		0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A64121A5921D009F2A96 /* JSMMineVC.swift */; };
 		0A02A64421A59249009F2A96 /* JSMPersonnelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A64321A59249009F2A96 /* JSMPersonnelVC.swift */; };
+		0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */; };
+		0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */; };
+		0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */; };
 		0AC5DB6321A59CD90087EE22 /* JSMLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC5DB6221A59CD90087EE22 /* JSMLoginVC.swift */; };
 		0AC5DB6521A5A49E0087EE22 /* JSMRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC5DB6421A5A49E0087EE22 /* JSMRegisterVC.swift */; };
 		0AC5DB6721A5ADE40087EE22 /* JSMForgetPwdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC5DB6621A5ADE40087EE22 /* JSMForgetPwdVC.swift */; };
@@ -196,6 +199,9 @@
 		0A02A63F21A591E5009F2A96 /* JSMHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeVC.swift; sourceTree = "<group>"; };
 		0A02A64121A5921D009F2A96 /* JSMMineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineVC.swift; sourceTree = "<group>"; };
 		0A02A64321A59249009F2A96 /* JSMPersonnelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPersonnelVC.swift; sourceTree = "<group>"; };
+		0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeHeaderView.swift; sourceTree = "<group>"; };
+		0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsHeaderView.swift; sourceTree = "<group>"; };
+		0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsCell.swift; sourceTree = "<group>"; };
 		0AC5DB6221A59CD90087EE22 /* JSMLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMLoginVC.swift; sourceTree = "<group>"; };
 		0AC5DB6421A5A49E0087EE22 /* JSMRegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMRegisterVC.swift; sourceTree = "<group>"; };
 		0AC5DB6621A5ADE40087EE22 /* JSMForgetPwdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMForgetPwdVC.swift; sourceTree = "<group>"; };
@@ -327,6 +333,9 @@
 		0A02A59321A58DE3009F2A96 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */,
+				0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */,
+				0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -869,6 +878,7 @@
 				0A02A60F21A58DE3009F2A96 /* GYZLoginInputView.swift in Sources */,
 				0A02A63421A58DE3009F2A96 /* GYZUpdateVersionTool.swift in Sources */,
 				0A02A60B21A58DE3009F2A96 /* GYZMainTabBarVC.swift in Sources */,
+				0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */,
 				0A02A61C21A58DE3009F2A96 /* LHSCustomAlertView.swift in Sources */,
 				0A02A60821A58DE3009F2A96 /* GYZCommonSwitchCell.swift in Sources */,
 				0A02A61121A58DE3009F2A96 /* ETNavBarTransparent.swift in Sources */,
@@ -888,7 +898,9 @@
 				0A02A60521A58DE3009F2A96 /* LHSSelectPayMethodView.swift in Sources */,
 				0A02A5FE21A58DE3009F2A96 /* GYZCommonInfoCell.swift in Sources */,
 				0A02A60D21A58DE3009F2A96 /* GYZBaseVC.swift in Sources */,
+				0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */,
 				0A02A63021A58DE3009F2A96 /* ScrollPageView.swift in Sources */,
+				0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */,
 				0A02A63A21A58DE3009F2A96 /* GYZTool.swift in Sources */,
 				0A02A62821A58DE3009F2A96 /* ZCycleLayout.swift in Sources */,
 				0A02A63621A58DE3009F2A96 /* GYZLunarFormatter.swift in Sources */,
