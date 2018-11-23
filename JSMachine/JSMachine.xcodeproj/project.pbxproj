@@ -88,6 +88,10 @@
 		0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */; };
 		0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */; };
 		0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */; };
+		0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */; };
+		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
+		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
+		0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */; };
 		0AC5DB6321A59CD90087EE22 /* JSMLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC5DB6221A59CD90087EE22 /* JSMLoginVC.swift */; };
 		0AC5DB6521A5A49E0087EE22 /* JSMRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC5DB6421A5A49E0087EE22 /* JSMRegisterVC.swift */; };
 		0AC5DB6721A5ADE40087EE22 /* JSMForgetPwdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC5DB6621A5ADE40087EE22 /* JSMForgetPwdVC.swift */; };
@@ -202,6 +206,10 @@
 		0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsCell.swift; sourceTree = "<group>"; };
+		0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineHeaderView.swift; sourceTree = "<group>"; };
+		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
+		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
+		0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZMyProfileCell.swift; sourceTree = "<group>"; };
 		0AC5DB6221A59CD90087EE22 /* JSMLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMLoginVC.swift; sourceTree = "<group>"; };
 		0AC5DB6421A5A49E0087EE22 /* JSMRegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMRegisterVC.swift; sourceTree = "<group>"; };
 		0AC5DB6621A5ADE40087EE22 /* JSMForgetPwdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMForgetPwdVC.swift; sourceTree = "<group>"; };
@@ -383,6 +391,7 @@
 				0A02A5A621A58DE3009F2A96 /* GYZImgAndTxtBtnView.swift */,
 				0A02A5A721A58DE3009F2A96 /* GYZBottomSendView.swift */,
 				0A02A5A821A58DE3009F2A96 /* GYZCommonSwitchCell.swift */,
+				0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,6 +409,7 @@
 		0A02A5AA21A58DE3009F2A96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -408,6 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				0A02A64121A5921D009F2A96 /* JSMMineVC.swift */,
+				0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -415,6 +426,7 @@
 		0A02A5AC21A58DE3009F2A96 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -884,6 +896,7 @@
 				0A02A61121A58DE3009F2A96 /* ETNavBarTransparent.swift in Sources */,
 				0A02A62E21A58DE3009F2A96 /* WXApiManager.swift in Sources */,
 				0A02A61721A58DE3009F2A96 /* GYZUIViewControl+Empty.swift in Sources */,
+				0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */,
 				0A02A64021A591E5009F2A96 /* JSMHomeVC.swift in Sources */,
 				0A02A5F821A58DE3009F2A96 /* LHSBaseModel.swift in Sources */,
 				0A02A56421A58741009F2A96 /* ViewController.swift in Sources */,
@@ -912,10 +925,12 @@
 				0A02A61621A58DE3009F2A96 /* GYZUIColor+Extension.swift in Sources */,
 				0AC5DB6521A5A49E0087EE22 /* JSMRegisterVC.swift in Sources */,
 				0A02A63121A58DE3009F2A96 /* ScrollSegmentView.swift in Sources */,
+				0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */,
 				0A02A63C21A58DE3009F2A96 /* GYZConst.swift in Sources */,
 				0A02A63721A58DE3009F2A96 /* GYZOpenCameraPhotosTool.swift in Sources */,
 				0A02A61D21A58DE3009F2A96 /* GYZLoadingView.swift in Sources */,
 				0A02A60321A58DE3009F2A96 /* BPChatBottomView.swift in Sources */,
+				0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */,
 				0A02A62721A58DE3009F2A96 /* ZCycleViewCell.swift in Sources */,
 				0A02A61F21A58DE3009F2A96 /* Picker.swift in Sources */,
 				0A02A60221A58DE3009F2A96 /* GYZLabAndFieldView.swift in Sources */,
@@ -936,6 +951,7 @@
 				0A02A61A21A58DE3009F2A96 /* GYZEmptyView.swift in Sources */,
 				0A02A60721A58DE3009F2A96 /* GYZBottomSendView.swift in Sources */,
 				0A02A61421A58DE3009F2A96 /* MBProgressHUD+Extension.swift in Sources */,
+				0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */,
 				0A02A63921A58DE3009F2A96 /* GYZThrowLineTool.swift in Sources */,
 				0A02A62921A58DE3009F2A96 /* ZPageControl.swift in Sources */,
 				0A02A61821A58DE3009F2A96 /* GYZDate+Extension.swift in Sources */,
