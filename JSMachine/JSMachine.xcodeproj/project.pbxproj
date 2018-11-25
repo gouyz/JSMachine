@@ -85,6 +85,14 @@
 		0A02A64021A591E5009F2A96 /* JSMHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A63F21A591E5009F2A96 /* JSMHomeVC.swift */; };
 		0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A64121A5921D009F2A96 /* JSMMineVC.swift */; };
 		0A02A64421A59249009F2A96 /* JSMPersonnelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A64321A59249009F2A96 /* JSMPersonnelVC.swift */; };
+		0A02EAA521AACFED000B5644 /* JSMModifyNickNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAA421AACFED000B5644 /* JSMModifyNickNameVC.swift */; };
+		0A02EAA721AAD0D6000B5644 /* JSMModifyEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAA621AAD0D6000B5644 /* JSMModifyEmailVC.swift */; };
+		0A02EAA921AAD1A7000B5644 /* JSMModifyPwdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAA821AAD1A7000B5644 /* JSMModifyPwdVC.swift */; };
+		0A02EAAB21AAD590000B5644 /* JSMMyFavouriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAAA21AAD590000B5644 /* JSMMyFavouriteVC.swift */; };
+		0A02EAAD21AAD8EF000B5644 /* JSMMyFavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAAC21AAD8EF000B5644 /* JSMMyFavouriteCell.swift */; };
+		0A02EAAF21AADD06000B5644 /* JSMOrderManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAAE21AADD06000B5644 /* JSMOrderManagerVC.swift */; };
+		0A02EAB121AADDBB000B5644 /* JSMOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAB021AADDBB000B5644 /* JSMOrderVC.swift */; };
+		0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAB221AADF0A000B5644 /* JSMOrderCell.swift */; };
 		0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */; };
 		0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */; };
 		0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */; };
@@ -203,6 +211,14 @@
 		0A02A63F21A591E5009F2A96 /* JSMHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeVC.swift; sourceTree = "<group>"; };
 		0A02A64121A5921D009F2A96 /* JSMMineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineVC.swift; sourceTree = "<group>"; };
 		0A02A64321A59249009F2A96 /* JSMPersonnelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPersonnelVC.swift; sourceTree = "<group>"; };
+		0A02EAA421AACFED000B5644 /* JSMModifyNickNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMModifyNickNameVC.swift; sourceTree = "<group>"; };
+		0A02EAA621AAD0D6000B5644 /* JSMModifyEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMModifyEmailVC.swift; sourceTree = "<group>"; };
+		0A02EAA821AAD1A7000B5644 /* JSMModifyPwdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMModifyPwdVC.swift; sourceTree = "<group>"; };
+		0A02EAAA21AAD590000B5644 /* JSMMyFavouriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyFavouriteVC.swift; sourceTree = "<group>"; };
+		0A02EAAC21AAD8EF000B5644 /* JSMMyFavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyFavouriteCell.swift; sourceTree = "<group>"; };
+		0A02EAAE21AADD06000B5644 /* JSMOrderManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderManagerVC.swift; sourceTree = "<group>"; };
+		0A02EAB021AADDBB000B5644 /* JSMOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderVC.swift; sourceTree = "<group>"; };
+		0A02EAB221AADF0A000B5644 /* JSMOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderCell.swift; sourceTree = "<group>"; };
 		0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsCell.swift; sourceTree = "<group>"; };
@@ -419,6 +435,12 @@
 			children = (
 				0A02A64121A5921D009F2A96 /* JSMMineVC.swift */,
 				0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */,
+				0A02EAA421AACFED000B5644 /* JSMModifyNickNameVC.swift */,
+				0A02EAA621AAD0D6000B5644 /* JSMModifyEmailVC.swift */,
+				0A02EAA821AAD1A7000B5644 /* JSMModifyPwdVC.swift */,
+				0A02EAAA21AAD590000B5644 /* JSMMyFavouriteVC.swift */,
+				0A02EAAE21AADD06000B5644 /* JSMOrderManagerVC.swift */,
+				0A02EAB021AADDBB000B5644 /* JSMOrderVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -427,6 +449,8 @@
 			isa = PBXGroup;
 			children = (
 				0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */,
+				0A02EAAC21AAD8EF000B5644 /* JSMMyFavouriteCell.swift */,
+				0A02EAB221AADF0A000B5644 /* JSMOrderCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -910,6 +934,8 @@
 				0A02A5FA21A58DE3009F2A96 /* GYZCommonArrowCell.swift in Sources */,
 				0A02A60521A58DE3009F2A96 /* LHSSelectPayMethodView.swift in Sources */,
 				0A02A5FE21A58DE3009F2A96 /* GYZCommonInfoCell.swift in Sources */,
+				0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */,
+				0A02EAA521AACFED000B5644 /* JSMModifyNickNameVC.swift in Sources */,
 				0A02A60D21A58DE3009F2A96 /* GYZBaseVC.swift in Sources */,
 				0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */,
 				0A02A63021A58DE3009F2A96 /* ScrollPageView.swift in Sources */,
@@ -936,7 +962,9 @@
 				0A02A60221A58DE3009F2A96 /* GYZLabAndFieldView.swift in Sources */,
 				0A02A5FC21A58DE3009F2A96 /* GYZFuncModelView.swift in Sources */,
 				0A02A62B21A58DE3009F2A96 /* MMCardItem.swift in Sources */,
+				0A02EAAD21AAD8EF000B5644 /* JSMMyFavouriteCell.swift in Sources */,
 				0A02A61021A58DE3009F2A96 /* GYZUIView+Extension.swift in Sources */,
+				0A02EAB121AADDBB000B5644 /* JSMOrderVC.swift in Sources */,
 				0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */,
 				0A02A5FD21A58DE3009F2A96 /* LHSGeneralHeaderView.swift in Sources */,
 				0A02A60121A58DE3009F2A96 /* LHSCheckView.swift in Sources */,
@@ -947,11 +975,15 @@
 				0A02A5FF21A58DE3009F2A96 /* GYZPhotoView.swift in Sources */,
 				0A02A62A21A58DE3009F2A96 /* MMShareSheet.swift in Sources */,
 				0A02A5FB21A58DE3009F2A96 /* LHSAddPhotoView.swift in Sources */,
+				0A02EAAF21AADD06000B5644 /* JSMOrderManagerVC.swift in Sources */,
 				0A02A62221A58DE3009F2A96 /* ToolBarView.swift in Sources */,
 				0A02A61A21A58DE3009F2A96 /* GYZEmptyView.swift in Sources */,
 				0A02A60721A58DE3009F2A96 /* GYZBottomSendView.swift in Sources */,
 				0A02A61421A58DE3009F2A96 /* MBProgressHUD+Extension.swift in Sources */,
+				0A02EAAB21AAD590000B5644 /* JSMMyFavouriteVC.swift in Sources */,
+				0A02EAA721AAD0D6000B5644 /* JSMModifyEmailVC.swift in Sources */,
 				0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */,
+				0A02EAA921AAD1A7000B5644 /* JSMModifyPwdVC.swift in Sources */,
 				0A02A63921A58DE3009F2A96 /* GYZThrowLineTool.swift in Sources */,
 				0A02A62921A58DE3009F2A96 /* ZPageControl.swift in Sources */,
 				0A02A61821A58DE3009F2A96 /* GYZDate+Extension.swift in Sources */,

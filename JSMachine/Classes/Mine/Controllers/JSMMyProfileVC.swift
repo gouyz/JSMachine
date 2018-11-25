@@ -142,6 +142,21 @@ class JSMMyProfileVC: GYZBaseVC {
         let vc = JSMLoginVC()
         navigationController?.pushViewController(vc, animated: true)
     }
+    /// 修改昵称
+    func goNickNameVC(){
+        let vc = JSMModifyNickNameVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 修改邮箱
+    func goEmailVC(){
+        let vc = JSMModifyEmailVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 修改密码
+    func goPwdVC(){
+        let vc = JSMModifyPwdVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension JSMMyProfileVC: UITableViewDelegate,UITableViewDataSource{
@@ -206,11 +221,11 @@ extension JSMMyProfileVC: UITableViewDelegate,UITableViewDataSource{
         if indexPath.row == 0 {//选择头像
             selectHeaderImg()
         }else if indexPath.row == 1{//昵称
-            
+            goNickNameVC()
         }else if indexPath.row == 3{/// 邮箱
-            
+            goEmailVC()
         }else if indexPath.row == 4{/// 修改密码
-            
+            goPwdVC()
         }
     }
     ///MARK : UITableViewDelegate

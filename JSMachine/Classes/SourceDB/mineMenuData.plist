@@ -8,7 +8,7 @@
 		<key>image</key>
 		<string>icon_mine_favourite</string>
 		<key>controller</key>
-		<string></string>
+		<string>JSMMyFavouriteVC</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -32,7 +32,7 @@
 		<key>image</key>
 		<string>icon_mine_order</string>
 		<key>controller</key>
-		<string></string>
+		<string>JSMOrderManagerVC</string>
 	</dict>
 	<dict>
 		<key>title</key>
