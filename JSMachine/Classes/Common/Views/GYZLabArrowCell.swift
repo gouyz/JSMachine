@@ -36,7 +36,7 @@ class GYZLabArrowCell: UITableViewCell {
         rightIconView.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)
             make.right.equalTo(-kMargin)
-            make.size.equalTo(CGSize.init(width: 7, height: 12))
+            make.size.equalTo(rightArrowSize)
         }
         lineView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(contentView)

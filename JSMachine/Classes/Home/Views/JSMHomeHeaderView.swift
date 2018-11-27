@@ -259,10 +259,10 @@ class JSMHomeHeaderView: UIView {
     
     ///平台介绍等操作
     @objc func onClickedFuncModel(sender: UITapGestureRecognizer){
-        let tag = sender.view?.tag
+        let tag = (sender.view?.tag)! - 200
         
         if funcModelBlock != nil {
-            funcModelBlock!(tag!)
+            funcModelBlock!(tag)
         }
     }
 }

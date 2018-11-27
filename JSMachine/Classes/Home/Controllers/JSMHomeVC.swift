@@ -39,6 +39,9 @@ class JSMHomeVC: GYZBaseVC {
         headerView.operatorBlock = {[weak self] (tag) in
             self?.dealOperator(index: tag)
         }
+        headerView.funcModelBlock = {[weak self] (tag) in
+            self?.dealFuncModel(index: tag)
+        }
         
     }
     
@@ -71,16 +74,46 @@ class JSMHomeVC: GYZBaseVC {
     func dealOperator(index : Int){
         switch index {
         case 1://技术在线
-            break
+            goOnLineVC()
         case 2://申请售后
             break
         case 3://需求发布
-            break
+            goPublishNeedVC()
         case 4://在线商城
             break
         default:
             break
         }
+    }
+    func dealFuncModel(index : Int){
+        switch index {
+        case 1://平台介绍
+            break
+        case 2://真伪查询
+            break
+        case 3://招商加盟
+            break
+        case 4://合作伙伴
+            break
+        default:
+            break
+        }
+    }
+    //技术在线
+    func goOnLineVC(){
+        let vc = JSMTechnologyOnlineVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //需求发布
+    func goPublishNeedVC(){
+        let vc = JSMPublishNeedVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    /// 行业资讯
+    @objc func onClickedNews(){
+        let vc = JSMNewsVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -106,6 +139,7 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeNewsHeader) as! JSMHomeNewsHeaderView
         
+        headerView.addOnClickListener(target: self, action: #selector(onClickedNews))
         
         return headerView
     }

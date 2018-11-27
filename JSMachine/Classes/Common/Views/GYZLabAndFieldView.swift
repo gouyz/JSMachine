@@ -14,19 +14,13 @@ class GYZLabAndFieldView: UIView {
         
         setupUI()
     }
-    convenience init(desName : String,placeHolder: String,isPhone: Bool){
+    convenience init(desName : String,placeHolder: String){
         self.init(frame: CGRect.zero)
         
         self.backgroundColor = kWhiteColor
         desLab.text = desName
         textFiled.placeholder = placeHolder
         
-        if isPhone {
-            textFiled.keyboardType = .numberPad
-        }else{
-            textFiled.keyboardType = .default
-            textFiled.isSecureTextEntry = true
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {

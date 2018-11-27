@@ -93,6 +93,13 @@
 		0A02EAAF21AADD06000B5644 /* JSMOrderManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAAE21AADD06000B5644 /* JSMOrderManagerVC.swift */; };
 		0A02EAB121AADDBB000B5644 /* JSMOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAB021AADDBB000B5644 /* JSMOrderVC.swift */; };
 		0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02EAB221AADF0A000B5644 /* JSMOrderCell.swift */; };
+		0A02F5EA21AD6E5E002E3BF9 /* JSMOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5E921AD6E5E002E3BF9 /* JSMOrderDetailVC.swift */; };
+		0A02F5EC21AD6F48002E3BF9 /* JSMOrderDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5EB21AD6F48002E3BF9 /* JSMOrderDetailHeaderView.swift */; };
+		0A02F5EE21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5ED21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift */; };
+		0A02F5F021AD7D7C002E3BF9 /* JSMNewsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5EF21AD7D7C002E3BF9 /* JSMNewsVC.swift */; };
+		0A02F5F221AD7E6B002E3BF9 /* JSMNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5F121AD7E6B002E3BF9 /* JSMNewsCell.swift */; };
+		0A02F5F421AD8474002E3BF9 /* JSMPublishNeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5F321AD8474002E3BF9 /* JSMPublishNeedVC.swift */; };
+		0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5F521AD91B4002E3BF9 /* JSMPublishSuccessVC.swift */; };
 		0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */; };
 		0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */; };
 		0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */; };
@@ -219,6 +226,13 @@
 		0A02EAAE21AADD06000B5644 /* JSMOrderManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderManagerVC.swift; sourceTree = "<group>"; };
 		0A02EAB021AADDBB000B5644 /* JSMOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderVC.swift; sourceTree = "<group>"; };
 		0A02EAB221AADF0A000B5644 /* JSMOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderCell.swift; sourceTree = "<group>"; };
+		0A02F5E921AD6E5E002E3BF9 /* JSMOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderDetailVC.swift; sourceTree = "<group>"; };
+		0A02F5EB21AD6F48002E3BF9 /* JSMOrderDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderDetailHeaderView.swift; sourceTree = "<group>"; };
+		0A02F5ED21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTechnologyOnlineVC.swift; sourceTree = "<group>"; };
+		0A02F5EF21AD7D7C002E3BF9 /* JSMNewsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNewsVC.swift; sourceTree = "<group>"; };
+		0A02F5F121AD7E6B002E3BF9 /* JSMNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNewsCell.swift; sourceTree = "<group>"; };
+		0A02F5F321AD8474002E3BF9 /* JSMPublishNeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPublishNeedVC.swift; sourceTree = "<group>"; };
+		0A02F5F521AD91B4002E3BF9 /* JSMPublishSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPublishSuccessVC.swift; sourceTree = "<group>"; };
 		0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsCell.swift; sourceTree = "<group>"; };
@@ -350,6 +364,10 @@
 			isa = PBXGroup;
 			children = (
 				0A02A63F21A591E5009F2A96 /* JSMHomeVC.swift */,
+				0A02F5ED21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift */,
+				0A02F5EF21AD7D7C002E3BF9 /* JSMNewsVC.swift */,
+				0A02F5F321AD8474002E3BF9 /* JSMPublishNeedVC.swift */,
+				0A02F5F521AD91B4002E3BF9 /* JSMPublishSuccessVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -360,6 +378,7 @@
 				0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */,
 				0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */,
 				0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */,
+				0A02F5F121AD7E6B002E3BF9 /* JSMNewsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -441,6 +460,7 @@
 				0A02EAAA21AAD590000B5644 /* JSMMyFavouriteVC.swift */,
 				0A02EAAE21AADD06000B5644 /* JSMOrderManagerVC.swift */,
 				0A02EAB021AADDBB000B5644 /* JSMOrderVC.swift */,
+				0A02F5E921AD6E5E002E3BF9 /* JSMOrderDetailVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -451,6 +471,7 @@
 				0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */,
 				0A02EAAC21AAD8EF000B5644 /* JSMMyFavouriteCell.swift */,
 				0A02EAB221AADF0A000B5644 /* JSMOrderCell.swift */,
+				0A02F5EB21AD6F48002E3BF9 /* JSMOrderDetailHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -924,6 +945,7 @@
 				0A02A64021A591E5009F2A96 /* JSMHomeVC.swift in Sources */,
 				0A02A5F821A58DE3009F2A96 /* LHSBaseModel.swift in Sources */,
 				0A02A56421A58741009F2A96 /* ViewController.swift in Sources */,
+				0A02F5EA21AD6E5E002E3BF9 /* JSMOrderDetailVC.swift in Sources */,
 				0A02A62421A58DE3009F2A96 /* UsefulPickerView.swift in Sources */,
 				0A02A60E21A58DE3009F2A96 /* LHSUserInfoModel.swift in Sources */,
 				0A02A62F21A58DE3009F2A96 /* SegmentStyle.swift in Sources */,
@@ -939,6 +961,7 @@
 				0A02A60D21A58DE3009F2A96 /* GYZBaseVC.swift in Sources */,
 				0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */,
 				0A02A63021A58DE3009F2A96 /* ScrollPageView.swift in Sources */,
+				0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */,
 				0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */,
 				0A02A63A21A58DE3009F2A96 /* GYZTool.swift in Sources */,
 				0A02A62821A58DE3009F2A96 /* ZCycleLayout.swift in Sources */,
@@ -950,13 +973,16 @@
 				0A02A63B21A58DE3009F2A96 /* GYZCheckTool.m in Sources */,
 				0A02A61621A58DE3009F2A96 /* GYZUIColor+Extension.swift in Sources */,
 				0AC5DB6521A5A49E0087EE22 /* JSMRegisterVC.swift in Sources */,
+				0A02F5F421AD8474002E3BF9 /* JSMPublishNeedVC.swift in Sources */,
 				0A02A63121A58DE3009F2A96 /* ScrollSegmentView.swift in Sources */,
 				0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */,
 				0A02A63C21A58DE3009F2A96 /* GYZConst.swift in Sources */,
 				0A02A63721A58DE3009F2A96 /* GYZOpenCameraPhotosTool.swift in Sources */,
 				0A02A61D21A58DE3009F2A96 /* GYZLoadingView.swift in Sources */,
+				0A02F5EC21AD6F48002E3BF9 /* JSMOrderDetailHeaderView.swift in Sources */,
 				0A02A60321A58DE3009F2A96 /* BPChatBottomView.swift in Sources */,
 				0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */,
+				0A02F5EE21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift in Sources */,
 				0A02A62721A58DE3009F2A96 /* ZCycleViewCell.swift in Sources */,
 				0A02A61F21A58DE3009F2A96 /* Picker.swift in Sources */,
 				0A02A60221A58DE3009F2A96 /* GYZLabAndFieldView.swift in Sources */,
@@ -991,7 +1017,9 @@
 				0A02A63821A58DE3009F2A96 /* GYZAlertViewTools.swift in Sources */,
 				0AC5DB6321A59CD90087EE22 /* JSMLoginVC.swift in Sources */,
 				0A02A61221A58DE3009F2A96 /* GYZUIButton+Extension.swift in Sources */,
+				0A02F5F221AD7E6B002E3BF9 /* JSMNewsCell.swift in Sources */,
 				0A02A60621A58DE3009F2A96 /* GYZImgAndTxtBtnView.swift in Sources */,
+				0A02F5F021AD7D7C002E3BF9 /* JSMNewsVC.swift in Sources */,
 				0A02A60C21A58DE3009F2A96 /* GYZBaseNavigationVC.swift in Sources */,
 				0A02A61B21A58DE3009F2A96 /* AXBadgeView.swift in Sources */,
 			);

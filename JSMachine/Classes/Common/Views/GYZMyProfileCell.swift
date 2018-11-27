@@ -45,7 +45,7 @@ class GYZMyProfileCell: UITableViewCell {
         rightIconView.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)
             make.right.equalTo(contentView).offset(-kMargin)
-            make.size.equalTo(CGSize.init(width: 8, height: 13))
+            make.size.equalTo(rightArrowSize)
         }
     }
     

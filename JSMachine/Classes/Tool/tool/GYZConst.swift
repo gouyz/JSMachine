@@ -55,6 +55,8 @@ let kSheetViewWidth  = kScreenWidth - kSheetMargin * 2
 let kDismissTime = 0.3
 /// 显示动画时间
 let kPushTime = 0.3
+/// 右侧箭头大小
+let rightArrowSize: CGSize = CGSize.init(width: 8, height: 13)
 
 /// alertViewController 取消的回调返回的索引
 let cancelIndex = -1

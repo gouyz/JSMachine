@@ -1,23 +1,22 @@
 //
-//  JSMOrderVC.swift
+//  JSMNewsVC.swift
 //  JSMachine
-//  订单
-//  Created by gouyz on 2018/11/25.
+//  行业资讯
+//  Created by gouyz on 2018/11/27.
 //  Copyright © 2018 gouyz. All rights reserved.
 //
 
 import UIKit
 import MBProgressHUD
 
-private let orderCell = "orderCell"
+private let newsCell = "newsCell"
 
-class JSMOrderVC: GYZBaseVC {
+class JSMNewsVC: GYZBaseVC {
 
-    var orderStatus: String = ""
-    var currPage : Int = 1
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "行业资讯"
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -26,77 +25,70 @@ class JSMOrderVC: GYZBaseVC {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     /// 懒加载UITableView
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
         table.dataSource = self
         table.delegate = self
-        table.separatorStyle = .none
+        table.separatorColor = kGrayLineColor
         
-        table.register(JSMOrderCell.self, forCellReuseIdentifier: orderCell)
+        table.register(JSMNewsCell.self, forCellReuseIdentifier: newsCell)
         
-//        weak var weakSelf = self
-        ///添加下拉刷新
-//        GYZTool.addPullRefresh(scorllView: table, pullRefreshCallBack: {
-//            weakSelf?.refresh()
-//        })
-        //        ///添加上拉加载更多
-        //        GYZTool.addLoadMore(scorllView: table, loadMoreCallBack: {
-        //            weakSelf?.loadMore()
-        //        })
         return table
     }()
     
-    /// 订单详情
-    func goDetailVC(){
-        let vc = JSMOrderDetailVC()
-        navigationController?.pushViewController(vc, animated: true)
+    /// 分享
+    @objc func onclickedShared(sender: UITapGestureRecognizer){
+        let cancelBtn = [
+            "title": "取消",
+            "type": "danger"
+        ]
+        let mmShareSheet = MMShareSheet.init(title: "分享至", cards: kSharedCards, duration: nil, cancelBtn: cancelBtn)
+        mmShareSheet.callBack = { [weak self](handler) ->() in
+            
+            if handler != "cancel" {// 取消
+                
+            }
+        }
+        mmShareSheet.present()
     }
-    
 }
-
-extension JSMOrderVC: UITableViewDelegate,UITableViewDataSource{
-    
+extension JSMNewsVC: UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 8
+        return 12
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: orderCell) as! JSMOrderCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: newsCell) as! JSMNewsCell
         
-        if orderStatus == "2" {
-            cell.statusNameLab.backgroundColor = UIColor.ColorHex("#a4a8b8")
-        }else{
-            cell.statusNameLab.backgroundColor = kRedFontColor
-        }
+        cell.sharedImgView.tag = indexPath.row
+        cell.sharedImgView.addOnClickListener(target: self, action: #selector(onclickedShared(sender:)))
         
         cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        
         return UIView()
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goDetailVC()
+        
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kTitleHeight * 3 + 90
+        
+        return 90
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.00001
