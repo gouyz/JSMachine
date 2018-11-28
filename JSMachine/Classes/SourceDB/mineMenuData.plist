@@ -16,7 +16,7 @@
 		<key>image</key>
 		<string>icon_mine_publish</string>
 		<key>controller</key>
-		<string></string>
+		<string>JSMMyPublishNeedManagerVC</string>
 	</dict>
 	<dict>
 		<key>title</key>
