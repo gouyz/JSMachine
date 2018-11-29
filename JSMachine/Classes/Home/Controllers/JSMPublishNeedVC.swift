@@ -234,6 +234,9 @@ class JSMPublishNeedVC: GYZBaseVC {
     }
     /// 选择日期
     @objc func onClickedSelectedDate(){
-        
+        UsefulPickerView.showDatePicker("请选择交货期") { [weak self](date) in
+            
+            self?.dateInputView.textFiled.text = date.dateToStringWithFormat(format: "yyyy-MM-dd")
+        }
     }
 }

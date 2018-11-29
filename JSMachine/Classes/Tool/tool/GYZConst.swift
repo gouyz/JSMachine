@@ -69,8 +69,8 @@ let kPhotosImgHeight4Processing: CGFloat = (kScreenWidth - 80)/3.0
 let kPhotosImgHeight4Comment: CGFloat = (kScreenWidth - 90)/3.0
 /// 最大上传图片张数
 let kMaxSelectCount = 9
-/// 懒人活动默认高度
-let kActivityCellHeightDefault = 75 + (kScreenWidth - kMargin) * 0.34
+/// 合作伙伴默认高度
+let kPartnerCellHeightDefault = ((kScreenWidth - klineDoubleWidth*2)/3.0 - kMargin * 2) * 0.87
 
 /// 记录版本号的key
 let LHSBundleShortVersionString = "LHSBundleShortVersionString"

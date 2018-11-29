@@ -90,11 +90,11 @@ class JSMHomeVC: GYZBaseVC {
         case 1://平台介绍
             break
         case 2://真伪查询
-            break
+            goAuthenticityVC()
         case 3://招商加盟
             break
         case 4://合作伙伴
-            break
+            goPartnerVC()
         default:
             break
         }
@@ -107,6 +107,16 @@ class JSMHomeVC: GYZBaseVC {
     //需求发布
     func goPublishNeedVC(){
         let vc = JSMPublishNeedVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //合作伙伴
+    func goPartnerVC(){
+        let vc = JSMPartnerVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //真伪查询
+    func goAuthenticityVC(){
+        let vc = JSMAuthenticityVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -24,9 +24,10 @@ class JSMHomeNewsHeaderView: UITableViewHeaderFooterView {
     
     func setupUI(){
         
-        contentView.addSubview(refreshBtn)
         contentView.addSubview(nameLab)
         contentView.addSubview(tagImgView)
+        contentView.addSubview(desLab)
+        contentView.addSubview(rightIconView)
         
         tagImgView.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
@@ -36,16 +37,19 @@ class JSMHomeNewsHeaderView: UITableViewHeaderFooterView {
         nameLab.snp.makeConstraints { (make) in
             make.left.equalTo(tagImgView.snp.right).offset(5)
             make.top.bottom.equalTo(contentView)
-            make.right.equalTo(refreshBtn.snp.left).offset(-kMargin)
+            make.right.equalTo(desLab.snp.left).offset(-kMargin)
         }
         
-        refreshBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(-kMargin)
-            make.top.bottom.equalTo(nameLab)
-            make.width.equalTo(100)
+        desLab.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(contentView)
+            make.right.equalTo(rightIconView.snp.left).offset(-5)
+            make.width.equalTo(60)
         }
-        
-        refreshBtn.set(image: UIImage.init(named: "icon_home_refresh"), title: "换一换", titlePosition: .left, additionalSpacing: kMargin, state: .normal)
+        rightIconView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(contentView)
+            make.right.equalTo(contentView).offset(-kMargin)
+            make.size.equalTo(rightArrowSize)
+        }
     }
     
     /// 分组名称
@@ -66,17 +70,15 @@ class JSMHomeNewsHeaderView: UITableViewHeaderFooterView {
         return imgView
     }()
     
-    /// 换一换
-    lazy var refreshBtn : UIButton = {
-        let btn = UIButton.init(type: .custom)
-        btn.titleLabel?.font = k13Font
-        btn.setTitleColor(kHeightGaryFontColor, for: .normal)
-        btn.addTarget(self, action: #selector(clickedOperateBtn), for: .touchUpInside)
-        return btn
-    }()
-    
-    /// 换一换
-    @objc func clickedOperateBtn(){
+    lazy var desLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k13Font
+        lab.textColor = kGaryFontColor
+        lab.textAlignment = .right
+        lab.text = "更多"
         
-    }
+        return lab
+    }()
+    /// 右侧箭头图标
+    lazy var rightIconView: UIImageView = UIImageView.init(image: UIImage.init(named: "icon_right_arrow"))
 }

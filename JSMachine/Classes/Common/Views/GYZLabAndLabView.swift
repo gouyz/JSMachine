@@ -1,26 +1,19 @@
 //
-//  GYZLabAndFieldView.swift
-//  TuAi
-//  label 和 textField View
-//  Created by gouyz on 2018/3/7.
-//  Copyright © 2018年 gyz. All rights reserved.
+//  GYZLabAndLabView.swift
+//  JSMachine
+//  label 和 label View
+//  Created by gouyz on 2018/11/29.
+//  Copyright © 2018 gouyz. All rights reserved.
 //
 
 import UIKit
 
-class GYZLabAndFieldView: UIView {
+class GYZLabAndLabView: UIView {
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupUI()
-    }
-    convenience init(desName : String,placeHolder: String){
-        self.init(frame: CGRect.zero)
-        
-        self.backgroundColor = kWhiteColor
-        desLab.text = desName
-        textFiled.placeholder = placeHolder
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,7 +23,7 @@ class GYZLabAndFieldView: UIView {
     fileprivate func setupUI(){
         // 添加子控件
         addSubview(desLab)
-        addSubview(textFiled)
+        addSubview(contentLab)
         
         // 布局子控件
         desLab.snp.makeConstraints { (make) in
@@ -39,7 +32,7 @@ class GYZLabAndFieldView: UIView {
             make.width.equalTo(100)
         }
         
-        textFiled.snp.makeConstraints { (make) in
+        contentLab.snp.makeConstraints { (make) in
             make.left.equalTo(desLab.snp.right).offset(kMargin)
             make.top.bottom.equalTo(self)
             make.right.equalTo(-kMargin)
@@ -54,13 +47,12 @@ class GYZLabAndFieldView: UIView {
         
         return lab
     }()
-    /// 输入框
-    lazy var textFiled : UITextField = {
+    /// 内容
+    lazy var contentLab : UILabel = {
+        let lab = UILabel()
+        lab.textColor = kBlackFontColor
+        lab.font = k15Font
         
-        let textFiled = UITextField()
-        textFiled.font = k15Font
-        textFiled.textColor = kBlackFontColor
-        textFiled.clearButtonMode = .whileEditing
-        return textFiled
+        return lab
     }()
 }
