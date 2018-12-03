@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0203AF21B552D8006D1738 /* JSMApplyServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203AE21B552D8006D1738 /* JSMApplyServiceVC.swift */; };
+		0A0203B121B56571006D1738 /* JSMMySaleServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B021B56571006D1738 /* JSMMySaleServiceVC.swift */; };
+		0A0203B321B5665E006D1738 /* JSMMySaleServiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B221B5665E006D1738 /* JSMMySaleServiceHeaderView.swift */; };
+		0A0203B521B56D9D006D1738 /* JSMMySaleServiceFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B421B56D9D006D1738 /* JSMMySaleServiceFooterView.swift */; };
+		0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B621B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift */; };
+		0A0203B921B57245006D1738 /* JSMSaleServiceOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B821B57245006D1738 /* JSMSaleServiceOrderCell.swift */; };
 		0A02A56221A58741009F2A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A56121A58741009F2A96 /* AppDelegate.swift */; };
 		0A02A56421A58741009F2A96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A56321A58741009F2A96 /* ViewController.swift */; };
 		0A02A56721A58741009F2A96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A02A56521A58741009F2A96 /* Main.storyboard */; };
@@ -140,6 +146,12 @@
 
 /* Begin PBXFileReference section */
 		08DF58750CDAB7D84170B31B /* Pods-JSMachine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSMachine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSMachine/Pods-JSMachine.debug.xcconfig"; sourceTree = "<group>"; };
+		0A0203AE21B552D8006D1738 /* JSMApplyServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMApplyServiceVC.swift; sourceTree = "<group>"; };
+		0A0203B021B56571006D1738 /* JSMMySaleServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceVC.swift; sourceTree = "<group>"; };
+		0A0203B221B5665E006D1738 /* JSMMySaleServiceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceHeaderView.swift; sourceTree = "<group>"; };
+		0A0203B421B56D9D006D1738 /* JSMMySaleServiceFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceFooterView.swift; sourceTree = "<group>"; };
+		0A0203B621B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMDealSaleServiceOrderVC.swift; sourceTree = "<group>"; };
+		0A0203B821B57245006D1738 /* JSMSaleServiceOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceOrderCell.swift; sourceTree = "<group>"; };
 		0A02A55E21A58741009F2A96 /* JSMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A02A56121A58741009F2A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A02A56321A58741009F2A96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +399,7 @@
 				0A76B7CE21AF8F5A00720A20 /* JSMPartnerVC.swift */,
 				0A76B7D221AFB58600720A20 /* JSMAuthenticityVC.swift */,
 				0A76B7D421AFC28C00720A20 /* JSMAuthenticityResultVC.swift */,
+				0A0203AE21B552D8006D1738 /* JSMApplyServiceVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -484,6 +497,8 @@
 				0A02F5E921AD6E5E002E3BF9 /* JSMOrderDetailVC.swift */,
 				0A02D2EF21AEDEFA00BE945C /* JSMMyPublishNeedManagerVC.swift */,
 				0A02D2F121AEDF5900BE945C /* JSMMyPublishNeedVC.swift */,
+				0A0203B021B56571006D1738 /* JSMMySaleServiceVC.swift */,
+				0A0203B621B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -496,6 +511,9 @@
 				0A02EAB221AADF0A000B5644 /* JSMOrderCell.swift */,
 				0A02F5EB21AD6F48002E3BF9 /* JSMOrderDetailHeaderView.swift */,
 				0A02D2F321AEE00300BE945C /* JSMMyPublishNeedCell.swift */,
+				0A0203B221B5665E006D1738 /* JSMMySaleServiceHeaderView.swift */,
+				0A0203B421B56D9D006D1738 /* JSMMySaleServiceFooterView.swift */,
+				0A0203B821B57245006D1738 /* JSMSaleServiceOrderCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -956,11 +974,13 @@
 			files = (
 				0A02A61321A58DE3009F2A96 /* GYZUIImage+Extension.swift in Sources */,
 				0A02A63221A58DE3009F2A96 /* ContentView.swift in Sources */,
+				0A0203B921B57245006D1738 /* JSMSaleServiceOrderCell.swift in Sources */,
 				0A02A60F21A58DE3009F2A96 /* GYZLoginInputView.swift in Sources */,
 				0A02A63421A58DE3009F2A96 /* GYZUpdateVersionTool.swift in Sources */,
 				0A02A60B21A58DE3009F2A96 /* GYZMainTabBarVC.swift in Sources */,
 				0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */,
 				0A02A61C21A58DE3009F2A96 /* LHSCustomAlertView.swift in Sources */,
+				0A0203B321B5665E006D1738 /* JSMMySaleServiceHeaderView.swift in Sources */,
 				0A02A60821A58DE3009F2A96 /* GYZCommonSwitchCell.swift in Sources */,
 				0A02A61121A58DE3009F2A96 /* ETNavBarTransparent.swift in Sources */,
 				0A02A62E21A58DE3009F2A96 /* WXApiManager.swift in Sources */,
@@ -979,6 +999,8 @@
 				0A02A61521A58DE3009F2A96 /* GYZString+Extension.swift in Sources */,
 				0A02A62521A58DE3009F2A96 /* SelectionTextField.swift in Sources */,
 				0A02A5FA21A58DE3009F2A96 /* GYZCommonArrowCell.swift in Sources */,
+				0A0203AF21B552D8006D1738 /* JSMApplyServiceVC.swift in Sources */,
+				0A0203B121B56571006D1738 /* JSMMySaleServiceVC.swift in Sources */,
 				0A02A60521A58DE3009F2A96 /* LHSSelectPayMethodView.swift in Sources */,
 				0A02A5FE21A58DE3009F2A96 /* GYZCommonInfoCell.swift in Sources */,
 				0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */,
@@ -987,6 +1009,7 @@
 				0A02A60D21A58DE3009F2A96 /* GYZBaseVC.swift in Sources */,
 				0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */,
 				0A02A63021A58DE3009F2A96 /* ScrollPageView.swift in Sources */,
+				0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */,
 				0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */,
 				0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */,
 				0A02A63A21A58DE3009F2A96 /* GYZTool.swift in Sources */,
@@ -1013,6 +1036,7 @@
 				0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */,
 				0A02F5EE21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift in Sources */,
 				0A02A62721A58DE3009F2A96 /* ZCycleViewCell.swift in Sources */,
+				0A0203B521B56D9D006D1738 /* JSMMySaleServiceFooterView.swift in Sources */,
 				0A02A61F21A58DE3009F2A96 /* Picker.swift in Sources */,
 				0A02A60221A58DE3009F2A96 /* GYZLabAndFieldView.swift in Sources */,
 				0A02A5FC21A58DE3009F2A96 /* GYZFuncModelView.swift in Sources */,

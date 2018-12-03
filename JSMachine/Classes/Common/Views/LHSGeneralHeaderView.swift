@@ -14,7 +14,7 @@ class LHSGeneralHeaderView: UITableViewHeaderFooterView {
         
         super.init(reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = kBackgroundColor
+        contentView.backgroundColor = kWhiteColor
         setupUI()
     }
     
@@ -24,32 +24,20 @@ class LHSGeneralHeaderView: UITableViewHeaderFooterView {
     
     func setupUI(){
         
-        contentView.addSubview(bgView)
-        bgView.addSubview(nameLab)
-        bgView.addSubview(lineView)
+        contentView.addSubview(nameLab)
+        contentView.addSubview(lineView)
         
-        bgView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(contentView)
-            make.top.equalTo(kMargin)
-        }
         nameLab.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
             make.right.equalTo(-kMargin)
-            make.top.equalTo(bgView)
+            make.top.equalTo(contentView)
             make.bottom.equalTo(lineView.snp.top)
         }
         lineView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(bgView)
+            make.left.right.bottom.equalTo(contentView)
             make.height.equalTo(klineWidth)
         }
     }
-    
-    lazy var bgView: UIView = {
-        let view = UIView()
-        view.backgroundColor = kWhiteColor
-        
-        return view
-    }()
     /// 分组名称
     lazy var nameLab : UILabel = {
         let lab = UILabel()

@@ -76,7 +76,7 @@ class JSMHomeVC: GYZBaseVC {
         case 1://技术在线
             goOnLineVC()
         case 2://申请售后
-            break
+            goApplyVC()
         case 3://需求发布
             goPublishNeedVC()
         case 4://在线商城
@@ -107,6 +107,11 @@ class JSMHomeVC: GYZBaseVC {
     //需求发布
     func goPublishNeedVC(){
         let vc = JSMPublishNeedVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //申请售后
+    func goApplyVC(){
+        let vc = JSMApplyServiceVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     //合作伙伴

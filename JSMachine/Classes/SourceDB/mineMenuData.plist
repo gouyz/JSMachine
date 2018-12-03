@@ -24,7 +24,7 @@
 		<key>image</key>
 		<string>icon_mine_sale</string>
 		<key>controller</key>
-		<string></string>
+		<string>JSMMySaleServiceVC</string>
 	</dict>
 	<dict>
 		<key>title</key>
