@@ -31,7 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //如果未登录进入登录界面，登录后进入首页
         if userDefaults.bool(forKey: kIsLoginTagKey) {
-            window?.rootViewController = GYZMainTabBarVC()
+            if userDefaults.bool(forKey: kIsEngineerLoginTagKey){//工程师登录
+                window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMEngineerHomerVC())
+            }else{
+                window?.rootViewController = GYZMainTabBarVC()
+            }
+        
         }else{
             window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMLoginVC())
         }

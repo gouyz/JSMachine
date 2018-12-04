@@ -36,7 +36,7 @@ class GYZCommonInfoCell: UITableViewCell {
         contentLab.snp.makeConstraints { (make) in
             make.top.equalTo(5)
             make.centerY.equalTo(contentView)
-            make.left.equalTo(titleLab.snp.right).offset(kMargin)
+            make.left.equalTo(titleLab.snp.right).offset(5)
             make.right.equalTo(-kMargin)
             make.height.greaterThanOrEqualTo(34)
         }

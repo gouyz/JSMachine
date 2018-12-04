@@ -1,28 +1,22 @@
 //
-//  JSMDealSaleServiceOrderVC.swift
+//  JSMEngineerOrderVC.swift
 //  JSMachine
-//  处理售后服务
-//  Created by gouyz on 2018/12/3.
+//  工程师处理订单
+//  Created by gouyz on 2018/12/4.
 //  Copyright © 2018 gouyz. All rights reserved.
 //
 
 import UIKit
 
-private let saleServiceOrderCell = "saleServiceOrderCell"
+private let engineerOrderCell = "engineerOrderCell"
 
-class JSMDealSaleServiceOrderVC: GYZBaseVC {
+class JSMEngineerOrderVC: GYZBaseVC {
 
     var currPage : Int = 1
-    var isDealing: Bool = true
+    var orderStatus: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if isDealing {
-            self.navigationItem.title = "处理中"
-        }else{
-            self.navigationItem.title = "已处理"
-        }
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -44,7 +38,7 @@ class JSMDealSaleServiceOrderVC: GYZBaseVC {
         table.delegate = self
         table.separatorStyle = .none
         
-        table.register(JSMSaleServiceOrderCell.self, forCellReuseIdentifier: saleServiceOrderCell)
+        table.register(JSMSaleServiceOrderCell.self, forCellReuseIdentifier: engineerOrderCell)
         
         //        weak var weakSelf = self
         ///添加下拉刷新
@@ -66,7 +60,7 @@ class JSMDealSaleServiceOrderVC: GYZBaseVC {
     
 }
 
-extension JSMDealSaleServiceOrderVC: UITableViewDelegate,UITableViewDataSource{
+extension JSMEngineerOrderVC: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -78,23 +72,44 @@ extension JSMDealSaleServiceOrderVC: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: saleServiceOrderCell) as! JSMSaleServiceOrderCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: engineerOrderCell) as! JSMSaleServiceOrderCell
         
-        if isDealing {
-            cell.statusNameLab.backgroundColor = UIColor.ColorHex("#a4a8b8")
-            cell.statusNameLab.text = "处理中"
-            cell.operatorLab.isHidden = true
-            cell.operatorLab.snp.updateConstraints { (make) in
-                make.right.equalTo(-1)
+        if orderStatus == "1" {
+            cell.statusNameLab.backgroundColor = kRedFontColor
+            cell.statusNameLab.text = "新分配"
+            cell.deleteLab.isHidden = true
+            cell.deleteLab.snp.updateConstraints { (make) in
                 make.width.equalTo(0)
             }
-        }else{
-            cell.statusNameLab.backgroundColor = kRedFontColor
-            cell.statusNameLab.text = "已处理"
+            cell.operatorLab.isHidden = false
+            cell.operatorLab.text = "接单"
+            cell.operatorLab.snp.updateConstraints { (make) in
+                make.right.equalTo(-kMargin)
+                make.width.equalTo(60)
+            }
+        }else if orderStatus == "2"{
+            cell.statusNameLab.backgroundColor = UIColor.ColorHex("#a4a8b8")
+            cell.statusNameLab.text = "处理中"
+            cell.deleteLab.isHidden = false
+            cell.deleteLab.snp.updateConstraints { (make) in
+                make.width.equalTo(60)
+            }
             cell.operatorLab.isHidden = false
             cell.operatorLab.snp.updateConstraints { (make) in
                 make.right.equalTo(-kMargin)
                 make.width.equalTo(60)
+            }
+        }else{
+            cell.statusNameLab.backgroundColor = kBlueFontColor
+            cell.statusNameLab.text = "已完成"
+            cell.deleteLab.isHidden = false
+            cell.deleteLab.snp.updateConstraints { (make) in
+                make.width.equalTo(60)
+            }
+            cell.operatorLab.isHidden = true
+            cell.operatorLab.snp.updateConstraints { (make) in
+                make.right.equalTo(-1)
+                make.width.equalTo(0)
             }
         }
         

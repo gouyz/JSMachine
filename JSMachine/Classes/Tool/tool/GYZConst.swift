@@ -76,6 +76,8 @@ let kPartnerCellHeightDefault = ((kScreenWidth - klineDoubleWidth*2)/3.0 - kMarg
 let LHSBundleShortVersionString = "LHSBundleShortVersionString"
 /// 是否登录标识
 let kIsLoginTagKey = "loginTag"
+/// 是否工程师登录标识
+let kIsEngineerLoginTagKey = "engineerLoginTag"
 /// 是否有认证地址标识
 let kIsConFirmAddressKey = "isConFirmAddressTag"
 

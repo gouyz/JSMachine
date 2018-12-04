@@ -138,13 +138,18 @@ class JSMLoginVC: GYZBaseVC {
     
     /// 工程师登录
     @objc func onClickedLoginBtn(){
+        hiddenKeyBoard()
         
+        userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
+        userDefaults.set(true, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
+        KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMEngineerHomerVC())
     }
     /// 用户登录
     @objc func clickedUserLoginBtn() {
         hiddenKeyBoard()
         
         userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
+        userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
         
         KeyWindow.rootViewController = GYZMainTabBarVC()
         
