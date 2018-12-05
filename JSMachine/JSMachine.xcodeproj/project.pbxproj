@@ -116,6 +116,11 @@
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
 		0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */; };
+		0A45CF7521B75E6400759230 /* JSMGoodsDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7421B75E6400759230 /* JSMGoodsDetailVC.swift */; };
+		0A45CF7721B7621900759230 /* JSMGoodsDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7621B7621900759230 /* JSMGoodsDetailHeaderView.swift */; };
+		0A45CF7921B76BD500759230 /* JSMGoodsDetailBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */; };
+		0A45CF7B21B772C600759230 /* JSMXunJiaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7A21B772C600759230 /* JSMXunJiaVC.swift */; };
+		0A45CF7D21B774E000759230 /* JSMXunJiaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7C21B774E000759230 /* JSMXunJiaCell.swift */; };
 		0A4E46AE21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46AD21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift */; };
 		0A4E46B021B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46AF21B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift */; };
 		0A4E46B221B6211F00DB2E50 /* GYZStepProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46B121B6211F00DB2E50 /* GYZStepProgressView.swift */; };
@@ -276,6 +281,11 @@
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
 		0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZMyProfileCell.swift; sourceTree = "<group>"; };
+		0A45CF7421B75E6400759230 /* JSMGoodsDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsDetailVC.swift; sourceTree = "<group>"; };
+		0A45CF7621B7621900759230 /* JSMGoodsDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsDetailHeaderView.swift; sourceTree = "<group>"; };
+		0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsDetailBottomView.swift; sourceTree = "<group>"; };
+		0A45CF7A21B772C600759230 /* JSMXunJiaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMXunJiaVC.swift; sourceTree = "<group>"; };
+		0A45CF7C21B774E000759230 /* JSMXunJiaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMXunJiaCell.swift; sourceTree = "<group>"; };
 		0A4E46AD21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceOrderDetailVC.swift; sourceTree = "<group>"; };
 		0A4E46AF21B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceDetailHeader.swift; sourceTree = "<group>"; };
 		0A4E46B121B6211F00DB2E50 /* GYZStepProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZStepProgressView.swift; sourceTree = "<group>"; };
@@ -430,6 +440,8 @@
 				0A4E46B721B64E2F00DB2E50 /* JSMEngineerOrderVC.swift */,
 				0A4E46B921B659B900DB2E50 /* JSMEngineerProfileVC.swift */,
 				0A4E46BD21B65E2100DB2E50 /* JSMShopsVC.swift */,
+				0A45CF7421B75E6400759230 /* JSMGoodsDetailVC.swift */,
+				0A45CF7A21B772C600759230 /* JSMXunJiaVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -446,6 +458,9 @@
 				0A4E46C321B66C1500DB2E50 /* JSMShopLeftCell.swift */,
 				0A4E46C521B6703300DB2E50 /* JSMShopCell.swift */,
 				0A4E46C721B671F600DB2E50 /* JSMShopHeaderView.swift */,
+				0A45CF7621B7621900759230 /* JSMGoodsDetailHeaderView.swift */,
+				0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */,
+				0A45CF7C21B774E000759230 /* JSMXunJiaCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1027,6 +1042,7 @@
 				0A02A61721A58DE3009F2A96 /* GYZUIViewControl+Empty.swift in Sources */,
 				0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */,
 				0A02A64021A591E5009F2A96 /* JSMHomeVC.swift in Sources */,
+				0A45CF7921B76BD500759230 /* JSMGoodsDetailBottomView.swift in Sources */,
 				0A02A5F821A58DE3009F2A96 /* LHSBaseModel.swift in Sources */,
 				0A02A56421A58741009F2A96 /* ViewController.swift in Sources */,
 				0A02F5EA21AD6E5E002E3BF9 /* JSMOrderDetailVC.swift in Sources */,
@@ -1062,8 +1078,10 @@
 				0A02A56221A58741009F2A96 /* AppDelegate.swift in Sources */,
 				0A02A60021A58DE3009F2A96 /* GYZCommonIconArrowCell.swift in Sources */,
 				0A02D2F421AEE00300BE945C /* JSMMyPublishNeedCell.swift in Sources */,
+				0A45CF7521B75E6400759230 /* JSMGoodsDetailVC.swift in Sources */,
 				0A02A60421A58DE3009F2A96 /* GYZLabArrowCell.swift in Sources */,
 				0A4E46C821B671F600DB2E50 /* JSMShopHeaderView.swift in Sources */,
+				0A45CF7D21B774E000759230 /* JSMXunJiaCell.swift in Sources */,
 				0A02A63B21A58DE3009F2A96 /* GYZCheckTool.m in Sources */,
 				0A02A61621A58DE3009F2A96 /* GYZUIColor+Extension.swift in Sources */,
 				0A76B7CF21AF8F5A00720A20 /* JSMPartnerVC.swift in Sources */,
@@ -1108,6 +1126,7 @@
 				0A76B7D321AFB58600720A20 /* JSMAuthenticityVC.swift in Sources */,
 				0A02A62221A58DE3009F2A96 /* ToolBarView.swift in Sources */,
 				0A4E46C221B668BC00DB2E50 /* GYZCollectionViewFlowLayout.swift in Sources */,
+				0A45CF7B21B772C600759230 /* JSMXunJiaVC.swift in Sources */,
 				0A02A61A21A58DE3009F2A96 /* GYZEmptyView.swift in Sources */,
 				0A02A60721A58DE3009F2A96 /* GYZBottomSendView.swift in Sources */,
 				0A02A61421A58DE3009F2A96 /* MBProgressHUD+Extension.swift in Sources */,
@@ -1118,6 +1137,7 @@
 				0A02EAA921AAD1A7000B5644 /* JSMModifyPwdVC.swift in Sources */,
 				0A02A63921A58DE3009F2A96 /* GYZThrowLineTool.swift in Sources */,
 				0A02A62921A58DE3009F2A96 /* ZPageControl.swift in Sources */,
+				0A45CF7721B7621900759230 /* JSMGoodsDetailHeaderView.swift in Sources */,
 				0A02A61821A58DE3009F2A96 /* GYZDate+Extension.swift in Sources */,
 				0A02A61921A58DE3009F2A96 /* GYZUIViewController+Loading.swift in Sources */,
 				0A02A63821A58DE3009F2A96 /* GYZAlertViewTools.swift in Sources */,

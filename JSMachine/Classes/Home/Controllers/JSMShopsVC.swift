@@ -97,6 +97,11 @@ class JSMShopsVC: GYZBaseVC {
     }()
     lazy var searchView: GYZSearchBtnView = GYZSearchBtnView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: kTitleHeight))
     
+    /// 去详情
+    func goDetailVC(){
+        let vc = JSMGoodsDetailVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 //MARK: - TableView DataSource Delegate
@@ -176,6 +181,9 @@ extension JSMShopsVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: kScreenWidth - 100, height: 30)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        goDetailVC()
     }
     
     // CollectionView 分区标题即将展示
