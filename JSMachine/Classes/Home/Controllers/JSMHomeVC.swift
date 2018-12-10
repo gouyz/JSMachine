@@ -111,7 +111,7 @@ class JSMHomeVC: GYZBaseVC {
     }
     //申请售后
     func goApplyVC(){
-        let vc = JSMApplyServiceVC()
+        let vc = JSMMySaleServiceVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     //在线商城
