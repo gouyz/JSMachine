@@ -10,6 +10,18 @@ import UIKit
 
 class JSMShopCell: UICollectionViewCell {
     
+    /// 填充数据
+    var dataModel : JSMGoodsModel?{
+        didSet{
+            if let model = dataModel {
+                
+                nameLab.text = model.shop_name
+                tagImgView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -26,7 +38,7 @@ class JSMShopCell: UICollectionViewCell {
             make.centerX.equalTo(bgView)
             make.left.equalTo(2)
             make.right.equalTo(-2)
-            make.height.equalTo((kScreenWidth - 100 - 4 - 4) / 2)
+            make.height.equalTo((kScreenWidth - 100 - 4 - 4) * 0.27)
         }
         
         nameLab.snp.makeConstraints { (make) in
@@ -51,6 +63,7 @@ class JSMShopCell: UICollectionViewCell {
     lazy var tagImgView: UIImageView = {
         let imgView = UIImageView()
         imgView.backgroundColor = kBackgroundColor
+        imgView.cornerRadius = 10
         
         return imgView
     }()

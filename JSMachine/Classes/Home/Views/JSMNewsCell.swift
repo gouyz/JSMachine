@@ -9,6 +9,19 @@
 import UIKit
 
 class JSMNewsCell: UITableViewCell {
+    /// 填充数据
+    var dataModel : JSMNewsModel?{
+        didSet{
+            if let model = dataModel {
+                
+                titleLab.text = model.title
+                contentLab.text = model.subtitle
+                contentImgView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                
+                timeLab.text = model.add_time?.getDateTime(format: "yyyy-MM-dd")
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)

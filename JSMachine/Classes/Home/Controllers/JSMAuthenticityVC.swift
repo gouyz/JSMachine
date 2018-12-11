@@ -7,14 +7,23 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class JSMAuthenticityVC: GYZBaseVC {
+    
+    var dataList: [JSMShopModel] = [JSMShopModel]()
+    var nameList: [String] = [String]()
+    
+    var selectedIndex: Int = -1
+    /// 查询结果
+    var resultStr: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.title = "真伪查询"
         setupUI()
+        requestShopDatas()
     }
     
     /// 创建UI
@@ -164,7 +173,7 @@ class JSMAuthenticityVC: GYZBaseVC {
         return line
     }()
     /// 出厂编号
-    lazy var numberInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "出厂编号：", placeHolder: "请输入产品型号")
+    lazy var numberInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "出厂编号：", placeHolder: "请输入出厂编号")
     
     /// 点击查询按钮
     fileprivate lazy var submitBtn : UIButton = {
@@ -191,19 +200,103 @@ class JSMAuthenticityVC: GYZBaseVC {
         return lab
     }()
     
+    ///获取品牌数据
+    func requestShopDatas(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("shop/authentic",parameters: nil,  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMShopModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                    weakSelf?.nameList.append(model.brand!)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.selectedIndex = 0
+                    weakSelf?.typeInputView.textFiled.text = weakSelf?.nameList[(weakSelf?.selectedIndex)!]
+                }
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
     /// 提交按钮
     @objc func onClickedSubmitBtn(){
         
-        goResultVC()
+        if (numberInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入出厂编号")
+            return
+        }
+        requestAuthenticityDatas()
     }
     /// 选择品牌
     @objc func onClickedSelectedType(){
+        if dataList.count > 0 {
+            UsefulPickerView.showSingleColPicker("请选择减速机品牌", data: nameList, defaultSelectedIndex: selectedIndex) {[weak self] (index, value) in
+                self?.selectedIndex = index
+                self?.typeInputView.textFiled.text = value
+            }
+        }
+    }
+    
+    ///真伪查询
+    func requestAuthenticityDatas(){
         
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("shop/queryAuthentic",parameters: ["shop_id":dataList[selectedIndex].shop_id!,"p_number":numberInputView.textFiled.text!],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.resultStr = response["data"]["p_model"].stringValue
+                weakSelf?.goResultVC(success: true)
+                
+            }else if response["status"].intValue == 202{
+                weakSelf?.resultStr = "未找到该产品型号"
+                weakSelf?.goResultVC(success: false)
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
     }
     /// 查看结果
-    func goResultVC(){
+    func goResultVC(success: Bool){
         let vc = JSMAuthenticityResultVC()
-        vc.isSuccess = false
+        vc.isSuccess = success
+        vc.shopName = typeInputView.textFiled.text!
+        vc.jsmNumber = numberInputView.textFiled.text!
+        vc.result = resultStr
         navigationController?.pushViewController(vc, animated: true)
     }
 }

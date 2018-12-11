@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 private let kLeftTableViewCell = "LeftTableViewCell"
 private let kShopCell = "kShopCell"
@@ -14,8 +15,10 @@ private let kShopHeader = "kShopHeader"
 
 class JSMShopsVC: GYZBaseVC {
     
-    fileprivate lazy var categoryList = ["减速机","电机","标准件","减速机配件","机械密封"]
-    fileprivate lazy var collectionDatas = [["减速机1","减速机1","减速机1","减速机1","减速机1"],["减速机2","减速机2","减速机2","减速机2","减速机2"],["减速机11","减速机11","减速机11","减速机11","减速机11"],["减速机12","减速机12","减速机12","减速机12","减速机12"],["减速机13","减速机13","减速机13","减速机13","减速机13","减速机13","减速机13","减速机13"]]
+    fileprivate lazy var categoryList: [String] = [String]()
+    fileprivate lazy var collectionDatas: [[JSMGoodsModel]] = [[JSMGoodsModel]]()
+    
+    var dataList: [JSMProductModel] = [JSMProductModel]()
     
     fileprivate var selectIndex = 0
     fileprivate var isScrollDown = true
@@ -50,7 +53,7 @@ class JSMShopsVC: GYZBaseVC {
             }
         }
         
-        leftTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+        requestProductDatas()
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,7 +83,7 @@ class JSMShopsVC: GYZBaseVC {
         flowlayout.scrollDirection = .vertical
         flowlayout.minimumLineSpacing = 2
         flowlayout.minimumInteritemSpacing = 2
-        flowlayout.itemSize = CGSize(width: (kScreenWidth - 100 - 4 - 4) / 2, height: (kScreenWidth - 100 - 4 - 4) / 2 + kTitleHeight)
+        flowlayout.itemSize = CGSize(width: (kScreenWidth - 100 - 4 - 4) / 2, height: (kScreenWidth - 100 - 4 - 4) * 0.27 + kTitleHeight)
         return flowlayout
     }()
     
@@ -98,9 +101,54 @@ class JSMShopsVC: GYZBaseVC {
     lazy var searchView: GYZSearchBtnView = GYZSearchBtnView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: kTitleHeight))
     
     /// 去详情
-    func goDetailVC(){
+    func goDetailVC(model: JSMGoodsModel){
         let vc = JSMGoodsDetailVC()
+        vc.goodsId = model.id!
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    ///获取商品列表数据
+    func requestProductDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("shop/show",parameters: nil,  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMProductModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                    weakSelf?.categoryList.append(model.class_name!)
+                    weakSelf?.collectionDatas.append(model.goodsList)
+                }
+                if weakSelf?.categoryList.count > 0{
+                    weakSelf?.leftTableView.reloadData()
+                    weakSelf?.collectionView.reloadData()
+                    weakSelf?.leftTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+        })
     }
 }
 
@@ -159,7 +207,7 @@ extension JSMShopsVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kShopCell, for: indexPath) as! JSMShopCell
         
-        cell.nameLab.text = collectionDatas[indexPath.section][indexPath.row]
+        cell.dataModel = collectionDatas[indexPath.section][indexPath.row]
         
         return cell
     }
@@ -183,7 +231,7 @@ extension JSMShopsVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         return CGSize(width: kScreenWidth - 100, height: 30)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        goDetailVC()
+        goDetailVC(model: collectionDatas[indexPath.section][indexPath.row])
     }
     
     // CollectionView 分区标题即将展示

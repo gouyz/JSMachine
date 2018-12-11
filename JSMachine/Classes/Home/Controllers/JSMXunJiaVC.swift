@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 private let xunJiaCell = "xunJiaCell"
 
 class JSMXunJiaVC: GYZBaseVC {
+    
+    var goodsId : String = ""
+    var dataList: [JSMXunJiaModel] = [JSMXunJiaModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +26,7 @@ class JSMXunJiaVC: GYZBaseVC {
             
             make.edges.equalTo(0)
         }
-        
+        requestProductDatas()
     }
     
     
@@ -37,7 +41,54 @@ class JSMXunJiaVC: GYZBaseVC {
         
         return table
     }()
-    
+    ///获取询价列表数据
+    func requestProductDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("shop/inquiry",parameters: ["id":goodsId],  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMXunJiaModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.hiddenEmptyView()
+                    weakSelf?.tableView.reloadData()
+                }else{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无商品询价信息")
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+            
+            weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
+                weakSelf?.requestProductDatas()
+                weakSelf?.hiddenEmptyView()
+            })
+        })
+    }
 }
 
 extension JSMXunJiaVC: UITableViewDelegate,UITableViewDataSource{
@@ -46,7 +97,7 @@ extension JSMXunJiaVC: UITableViewDelegate,UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 22
+        return dataList.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,10 +113,11 @@ extension JSMXunJiaVC: UITableViewDelegate,UITableViewDataSource{
             cell.operatorLab.text = "操作"
             cell.operatorLab.borderColor = kBackgroundColor
         }else{
+            let model = dataList[indexPath.row - 1]
             cell.nameLab.textColor = kHeightGaryFontColor
-            cell.nameLab.text = "泰隆"
+            cell.nameLab.text = model.title
             cell.moneyLab.textColor = kHeightGaryFontColor
-            cell.moneyLab.text = "￥6666.88"
+            cell.moneyLab.text = "￥\(model.price!)"
             cell.operatorLab.textColor = kRedFontColor
             cell.operatorLab.text = "询价"
             cell.operatorLab.borderColor = kRedFontColor

@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class JSMAuthenticityResultVC: GYZBaseVC {
     
     /// 查询成功
     var isSuccess: Bool = true
+    var result: String = ""
+    var shopName: String = ""
+    var jsmNumber: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -262,7 +266,7 @@ class JSMAuthenticityResultVC: GYZBaseVC {
     lazy var typeInputView : GYZLabAndLabView = {
         let inputView = GYZLabAndLabView()
         inputView.desLab.text = "减速机品牌："
-        inputView.contentLab.text = "泰隆减速机"
+        inputView.contentLab.text = shopName
         
         return inputView
     }()
@@ -276,7 +280,7 @@ class JSMAuthenticityResultVC: GYZBaseVC {
     lazy var numberInputView : GYZLabAndLabView = {
         let inputView = GYZLabAndLabView()
         inputView.desLab.text = "出厂编号："
-        inputView.contentLab.text = "045523465170"
+        inputView.contentLab.text = jsmNumber
         
         return inputView
     }()
@@ -290,7 +294,7 @@ class JSMAuthenticityResultVC: GYZBaseVC {
     lazy var resultView : GYZLabAndLabView = {
         let inputView = GYZLabAndLabView()
         inputView.desLab.text = "对应型号："
-        inputView.contentLab.text = "未查到该产品型号"
+        inputView.contentLab.text = result
         inputView.contentLab.textColor = kRedFontColor
         
         return inputView
@@ -384,6 +388,63 @@ class JSMAuthenticityResultVC: GYZBaseVC {
     
     /// 提交按钮
     @objc func onClickedSubmitBtn(){
+        if (complainCPInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入产品品牌")
+            return
+        }
+        if (complainCGInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入采购型号")
+            return
+        }
+        if (complainNoInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入出厂编号")
+            return
+        }
+        if (phoneInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入联系方式")
+            return
+        }
+        if !phoneInputView.textFiled.text!.isMobileNumber() {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入正确的联系方式")
+            return
+        }
+        if (companyInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入企业名称")
+            return
+        }
+        if (personInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入联系人姓名")
+            return
+        }
         
+        requestSubmitDatas()
+    }
+    
+    ///真伪查询投诉
+    func requestSubmitDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("shop/complaint",parameters: ["band":complainCPInputView.textFiled.text!,"model":complainCGInputView.textFiled.text!,"num":complainNoInputView.textFiled.text!,"phone":phoneInputView.textFiled.text!,"c_name":companyInputView.textFiled.text!,"name":personInputView.textFiled.text!],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.clickedBackBtn()
+                
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
     }
 }

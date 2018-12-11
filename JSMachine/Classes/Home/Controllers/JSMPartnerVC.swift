@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 private let partnerCell = "partnerCell"
 
 class JSMPartnerVC: GYZBaseVC {
     
     let itemWidth: CGFloat = (kScreenWidth - klineDoubleWidth*2)/3.0
+    
+    var dataList: [JSMPartnerModel] = [JSMPartnerModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,8 @@ class JSMPartnerVC: GYZBaseVC {
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
+        requestPartnerDatas()
     }
     
     lazy var collectionView: UICollectionView = {
@@ -45,6 +50,62 @@ class JSMPartnerVC: GYZBaseVC {
         
         return collView
     }()
+    ///获取合作伙伴列表数据
+    func requestPartnerDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("partner/showPartner",parameters: nil,  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMPartnerModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.hiddenEmptyView()
+                    weakSelf?.collectionView.reloadData()
+                }else{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无合作伙伴信息")
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+            
+            weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
+                weakSelf?.requestPartnerDatas()
+                weakSelf?.hiddenEmptyView()
+            })
+        })
+    }
+    
+    /// webVC
+    func goWebViewVC(title: String, url: String){
+        let vc = JSMWebViewVC()
+        vc.url = url
+        vc.webTitle = title
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 extension JSMPartnerVC: UICollectionViewDataSource,UICollectionViewDelegate{
     
@@ -53,19 +114,21 @@ extension JSMPartnerVC: UICollectionViewDataSource,UICollectionViewDelegate{
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 22
+        return dataList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: partnerCell, for: indexPath) as! JSMPartnerCell
         
+        cell.dataModel = dataList[indexPath.row]
         
         return cell
     }
     
     // MARK: UICollectionViewDelegate的代理方法
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let model = dataList[indexPath.row]
+        goWebViewVC(title: model.name!, url: model.url!)
     }
 
 }

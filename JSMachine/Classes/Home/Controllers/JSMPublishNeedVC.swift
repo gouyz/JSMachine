@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class JSMPublishNeedVC: GYZBaseVC {
+    
+    /// 选择时间戳
+    var selectTime: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,13 +233,62 @@ class JSMPublishNeedVC: GYZBaseVC {
     /// 提交按钮
     @objc func onClickedSubmitBtn(){
         
+        if (typeInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
+            return
+        }
+        if (speedInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入转速")
+            return
+        }
+        if (roteInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入传动比")
+            return
+        }
+        if (dateInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请选择交货期")
+            return
+        }
+        
+        requestSubmitDatas()
+    }
+    
+    ///需求提交
+    func requestSubmitDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("need/releaseNeed",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","pro_model":typeInputView.textFiled.text!,"pro_speed":speedInputView.textFiled.text!,"drive_ratio":roteInputView.textFiled.text!,"num":numInputView.textFiled.text!,"remark":noteInputView.textFiled.text ?? "","deal_date":selectTime],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.goSuccessVC()
+                
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 发布成功vc
+    func goSuccessVC(){
         let vc = JSMPublishSuccessVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 选择日期
     @objc func onClickedSelectedDate(){
         UsefulPickerView.showDatePicker("请选择交货期") { [weak self](date) in
-            
+            self?.selectTime = Int(date.timeIntervalSince1970)
             self?.dateInputView.textFiled.text = date.dateToStringWithFormat(format: "yyyy-MM-dd")
         }
     }

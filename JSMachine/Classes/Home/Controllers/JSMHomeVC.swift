@@ -235,6 +235,8 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let model = homeModel?.newModels[indexPath.row]
+        goWebViewVC(title: (model?.title)!, url: (model?.url)!)
     }
     ///MARK : UITableViewDelegate
     

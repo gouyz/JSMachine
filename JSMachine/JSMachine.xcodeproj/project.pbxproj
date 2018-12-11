@@ -137,6 +137,12 @@
 		0A5C2D6E21BF56850017FED6 /* JSMWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D6D21BF56850017FED6 /* JSMWebViewVC.swift */; };
 		0A5C2D7221BF5BB30017FED6 /* JSMHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7021BF5BB30017FED6 /* JSMHomeModel.swift */; };
 		0A5C2D7321BF5BB30017FED6 /* JSMNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7121BF5BB30017FED6 /* JSMNewsModel.swift */; };
+		0A5C2D7521BF61B70017FED6 /* JSMPartnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7421BF61B70017FED6 /* JSMPartnerModel.swift */; };
+		0A5C2D7721BF66F20017FED6 /* JSMShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7621BF66F20017FED6 /* JSMShopModel.swift */; };
+		0A5C2D7921BF9FDA0017FED6 /* JSMPublishNeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7821BF9FDA0017FED6 /* JSMPublishNeedModel.swift */; };
+		0A5C2D7B21BFA1EC0017FED6 /* JSMProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7A21BFA1EC0017FED6 /* JSMProductModel.swift */; };
+		0A5C2D7D21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7C21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift */; };
+		0A5C2D7F21BFB0650017FED6 /* JSMXunJiaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7E21BFB0650017FED6 /* JSMXunJiaModel.swift */; };
 		0A76B7CF21AF8F5A00720A20 /* JSMPartnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76B7CE21AF8F5A00720A20 /* JSMPartnerVC.swift */; };
 		0A76B7D121AF92A100720A20 /* JSMPartnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76B7D021AF92A100720A20 /* JSMPartnerCell.swift */; };
 		0A76B7D321AFB58600720A20 /* JSMAuthenticityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76B7D221AFB58600720A20 /* JSMAuthenticityVC.swift */; };
@@ -305,6 +311,12 @@
 		0A5C2D6D21BF56850017FED6 /* JSMWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMWebViewVC.swift; sourceTree = "<group>"; };
 		0A5C2D7021BF5BB30017FED6 /* JSMHomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMHomeModel.swift; sourceTree = "<group>"; };
 		0A5C2D7121BF5BB30017FED6 /* JSMNewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMNewsModel.swift; sourceTree = "<group>"; };
+		0A5C2D7421BF61B70017FED6 /* JSMPartnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPartnerModel.swift; sourceTree = "<group>"; };
+		0A5C2D7621BF66F20017FED6 /* JSMShopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMShopModel.swift; sourceTree = "<group>"; };
+		0A5C2D7821BF9FDA0017FED6 /* JSMPublishNeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPublishNeedModel.swift; sourceTree = "<group>"; };
+		0A5C2D7A21BFA1EC0017FED6 /* JSMProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMProductModel.swift; sourceTree = "<group>"; };
+		0A5C2D7C21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsDetailModel.swift; sourceTree = "<group>"; };
+		0A5C2D7E21BFB0650017FED6 /* JSMXunJiaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMXunJiaModel.swift; sourceTree = "<group>"; };
 		0A76B7CE21AF8F5A00720A20 /* JSMPartnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPartnerVC.swift; sourceTree = "<group>"; };
 		0A76B7D021AF92A100720A20 /* JSMPartnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPartnerCell.swift; sourceTree = "<group>"; };
 		0A76B7D221AFB58600720A20 /* JSMAuthenticityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMAuthenticityVC.swift; sourceTree = "<group>"; };
@@ -805,6 +817,12 @@
 			children = (
 				0A5C2D7021BF5BB30017FED6 /* JSMHomeModel.swift */,
 				0A5C2D7121BF5BB30017FED6 /* JSMNewsModel.swift */,
+				0A5C2D7421BF61B70017FED6 /* JSMPartnerModel.swift */,
+				0A5C2D7621BF66F20017FED6 /* JSMShopModel.swift */,
+				0A5C2D7821BF9FDA0017FED6 /* JSMPublishNeedModel.swift */,
+				0A5C2D7A21BFA1EC0017FED6 /* JSMProductModel.swift */,
+				0A5C2D7C21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift */,
+				0A5C2D7E21BFB0650017FED6 /* JSMXunJiaModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1035,6 +1053,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5C2D7F21BFB0650017FED6 /* JSMXunJiaModel.swift in Sources */,
 				0A5C2D7321BF5BB30017FED6 /* JSMNewsModel.swift in Sources */,
 				0A02A61321A58DE3009F2A96 /* GYZUIImage+Extension.swift in Sources */,
 				0A02A63221A58DE3009F2A96 /* ContentView.swift in Sources */,
@@ -1048,6 +1067,7 @@
 				0A0203B321B5665E006D1738 /* JSMMySaleServiceHeaderView.swift in Sources */,
 				0A02A60821A58DE3009F2A96 /* GYZCommonSwitchCell.swift in Sources */,
 				0A02A61121A58DE3009F2A96 /* ETNavBarTransparent.swift in Sources */,
+				0A5C2D7B21BFA1EC0017FED6 /* JSMProductModel.swift in Sources */,
 				0A02A62E21A58DE3009F2A96 /* WXApiManager.swift in Sources */,
 				0A02A61721A58DE3009F2A96 /* GYZUIViewControl+Empty.swift in Sources */,
 				0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */,
@@ -1074,10 +1094,12 @@
 				0A02A5FE21A58DE3009F2A96 /* GYZCommonInfoCell.swift in Sources */,
 				0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */,
 				0A76B7D121AF92A100720A20 /* JSMPartnerCell.swift in Sources */,
+				0A5C2D7521BF61B70017FED6 /* JSMPartnerModel.swift in Sources */,
 				0A02EAA521AACFED000B5644 /* JSMModifyNickNameVC.swift in Sources */,
 				0A02A60D21A58DE3009F2A96 /* GYZBaseVC.swift in Sources */,
 				0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */,
 				0A02A63021A58DE3009F2A96 /* ScrollPageView.swift in Sources */,
+				0A5C2D7921BF9FDA0017FED6 /* JSMPublishNeedModel.swift in Sources */,
 				0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */,
 				0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */,
 				0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */,
@@ -1122,6 +1144,7 @@
 				0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */,
 				0A76B7D921AFC3A000720A20 /* GYZLabAndLabView.swift in Sources */,
 				0A4E46C621B6703300DB2E50 /* JSMShopCell.swift in Sources */,
+				0A5C2D7D21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift in Sources */,
 				0A02A5FD21A58DE3009F2A96 /* LHSGeneralHeaderView.swift in Sources */,
 				0A02A60121A58DE3009F2A96 /* LHSCheckView.swift in Sources */,
 				0A02A64421A59249009F2A96 /* JSMPersonnelVC.swift in Sources */,
@@ -1147,6 +1170,7 @@
 				0A5C2D6E21BF56850017FED6 /* JSMWebViewVC.swift in Sources */,
 				0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */,
 				0A02EAA921AAD1A7000B5644 /* JSMModifyPwdVC.swift in Sources */,
+				0A5C2D7721BF66F20017FED6 /* JSMShopModel.swift in Sources */,
 				0A02A63921A58DE3009F2A96 /* GYZThrowLineTool.swift in Sources */,
 				0A02A62921A58DE3009F2A96 /* ZPageControl.swift in Sources */,
 				0A45CF7721B7621900759230 /* JSMGoodsDetailHeaderView.swift in Sources */,

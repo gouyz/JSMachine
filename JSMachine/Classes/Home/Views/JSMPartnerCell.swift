@@ -9,6 +9,18 @@
 import UIKit
 
 class JSMPartnerCell: UICollectionViewCell {
+    
+    /// 填充数据
+    var dataModel : JSMPartnerModel?{
+        didSet{
+            if let model = dataModel {
+                
+                nameLab.text = model.name
+                tagImgView.kf.setImage(with: URL.init(string: model.logo!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)

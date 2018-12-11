@@ -24,7 +24,7 @@ class JSMGoodsDetailHeaderView: UIView {
     
     func setupUI(){
         self.addSubview(bgView)
-        bgView.addSubview(iconView)
+        bgView.addSubview(adsImgView)
         bgView.addSubview(nameLab)
         bgView.addSubview(sharedBtn)
         
@@ -44,13 +44,13 @@ class JSMGoodsDetailHeaderView: UIView {
             make.height.equalTo(kScreenWidth * 0.6 + kTitleHeight)
         }
         
-        iconView.snp.makeConstraints { (make) in
+        adsImgView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(bgView)
             make.height.equalTo(kScreenWidth * 0.6)
         }
         nameLab.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
-            make.top.equalTo(iconView.snp.bottom)
+            make.top.equalTo(adsImgView.snp.bottom)
             make.right.equalTo(sharedBtn.snp.left).offset(-kMargin)
             make.height.equalTo(kTitleHeight)
         }
@@ -110,17 +110,17 @@ class JSMGoodsDetailHeaderView: UIView {
     }
     
     /// 广告轮播图
-    //    lazy var adsImgView: ZCycleView = {
-    //        let adsView = ZCycleView()
-    //        //        adsView.placeholderImage = UIImage.init(named: "icon_home_ads_default")
-    //        adsView.setImagesGroup([#imageLiteral(resourceName: "icon_home_banner"),#imageLiteral(resourceName: "icon_home_banner"),#imageLiteral(resourceName: "icon_home_banner")])
-    //        adsView.pageControlAlignment = .center
-    //        adsView.pageControlIndictirColor = kWhiteColor
-    //        adsView.pageControlCurrentIndictirColor = kBlueFontColor
-    //        adsView.scrollDirection = .horizontal
-    //
-    //        return adsView
-    //    }()
+    lazy var adsImgView: ZCycleView = {
+        let adsView = ZCycleView()
+        adsView.placeholderImage = UIImage.init(named: "")
+        //            adsView.setImagesGroup([#imageLiteral(resourceName: "icon_home_banner"),#imageLiteral(resourceName: "icon_home_banner"),#imageLiteral(resourceName: "icon_home_banner")])
+        adsView.pageControlAlignment = .center
+        adsView.pageControlIndictirColor = kWhiteColor
+        adsView.pageControlCurrentIndictirColor = kBlueFontColor
+        adsView.scrollDirection = .horizontal
+        
+        return adsView
+    }()
     
     lazy var bgView: UIView = {
         let view = UIView()
@@ -129,12 +129,12 @@ class JSMGoodsDetailHeaderView: UIView {
         return view
     }()
     /// 商品图标
-    lazy var iconView: UIImageView = {
-        let imgView = UIImageView()
-        imgView.backgroundColor = kBackgroundColor
-        
-        return imgView
-    }()
+//    lazy var iconView: UIImageView = {
+//        let imgView = UIImageView()
+//        imgView.backgroundColor = kBackgroundColor
+//
+//        return imgView
+//    }()
     /// 商品名称
     lazy var nameLab : UILabel = {
         let lab = UILabel()

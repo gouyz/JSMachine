@@ -15,7 +15,8 @@ class JSMGoodsDetailVC: GYZBaseVC {
     /// header 高度
     var headerViewH: CGFloat = kScreenWidth * 0.6 + kMargin * 2 + kTitleHeight * 3
     
-    var url : String = "https://www.baidu.com/"
+    var detailModel: JSMGoodsDetailModel?
+    var goodsId : String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +39,63 @@ class JSMGoodsDetailVC: GYZBaseVC {
         bottomView.operatorBlock = {[weak self] (index) in
             self?.bottomOperator(index: index)
         }
-//        webView.loadHTMLString((dataModel?.mobile_body)!.dealFuTextImgSize(), baseURL: nil)
-        
-        webView.load(URLRequest.init(url: URL.init(string: url)!))
-        
+        requestDetailDatas()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    ///获取商品详情数据
+    func requestDetailDatas(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("shop/shopInfo",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","id":goodsId],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].dictionaryObject else { return }
+                weakSelf?.detailModel = JSMGoodsDetailModel.init(dict: data)
+                weakSelf?.setData()
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    func setData(){
+        if detailModel != nil {
+            headerView.adsImgView.setUrlsGroup((detailModel?.goodImgList)!)
+            headerView.nameLab.text = detailModel?.goodsModel?.shop_name
+            
+            loadContent(url: (detailModel?.image_text_url)!)
+        }
+        
+    }
+    
+    /// 加载
+    func loadContent(url : String){
+        
+        if url.hasPrefix("http://") || url.hasPrefix("https://") {
+            //            webView.load(URLRequest.init(url: URL.init(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
+            webView.load(URLRequest.init(url: URL.init(string: url)!))
+        }else{
+            webView.loadHTMLString(url.dealFuTextImgSize(), baseURL: nil)
+        }
     }
     /// 设置返回键
     func setLeftNavItem(imgName: String){
@@ -94,8 +143,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
             headerView.lineView.isHidden = false
             headerView.paramsLab.isHighlighted = false
             headerView.lineView1.isHidden = true
-            url = "https://www.baidu.com/"
-            webView.load(URLRequest.init(url: URL.init(string: url)!))
+            loadContent(url: (detailModel?.image_text_url)!)
         }
     }
     /// 参数详情
@@ -105,8 +153,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
             headerView.lineView1.isHidden = false
             headerView.tuWenDetailLab.isHighlighted = false
             headerView.lineView.isHidden = true
-            url = "https://home.firefoxchina.cn/"
-            webView.load(URLRequest.init(url: URL.init(string: url)!))
+            loadContent(url: (detailModel?.parameter_url)!)
         }
     }
     /// 底部操作
@@ -149,6 +196,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
     /// 询价
     func goXunJiaVC(){
         let vc = JSMXunJiaVC()
+        vc.goodsId = goodsId
         navigationController?.pushViewController(vc, animated: true)
     }
     
