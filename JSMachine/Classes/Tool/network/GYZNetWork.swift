@@ -13,9 +13,9 @@ import MBProgressHUD
 
 /// 网络请求基地址
 #if DEBUG
-let BaseRequestURL = "http://yichong.0519app.com/index.php/home/"
+let BaseRequestURL = "http://jsj.0519app.com/index.php/Home/"
 #else
-let BaseRequestURL = "http://yichong.0519app.com/index.php/home/"
+let BaseRequestURL = "http://jsj.0519app.com/index.php/Home/"
 #endif
 
 class GYZNetWork: NSObject {

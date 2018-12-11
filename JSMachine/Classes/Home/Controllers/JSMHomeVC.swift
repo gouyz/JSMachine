@@ -15,6 +15,8 @@ private let homeNewsHeader = "homeNewsHeader"
 class JSMHomeVC: GYZBaseVC {
     
     let headerHeight: CGFloat = (kScreenWidth - kMargin * 2) * 0.47 + kStateHeight + (kScreenWidth - kMargin * 3) * 0.52 + 190
+    
+    var homeModel: JSMHomeModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,7 @@ class JSMHomeVC: GYZBaseVC {
             self?.dealFuncModel(index: tag)
         }
         
+        requestHomeDatas()
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,6 +73,59 @@ class JSMHomeVC: GYZBaseVC {
     
     lazy var headerView: JSMHomeHeaderView = JSMHomeHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: headerHeight))
     
+    ///获取首页数据
+    func requestHomeDatas(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("index/appIndex",parameters: nil,  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].dictionaryObject else { return }
+                weakSelf?.homeModel = JSMHomeModel.init(dict: data)
+                weakSelf?.setData()
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    func setData(){
+        
+        if homeModel != nil {
+            
+            if homeModel?.bannerModels.count > 0{
+                var imgUrlArr: [String] = [String]()
+                for imgUrl in (homeModel?.bannerModels)! {
+                    imgUrlArr.append(imgUrl.img!)
+                }
+                headerView.adsImgView.setUrlsGroup(imgUrlArr)
+            }
+            if homeModel?.hotModels.count > 0{
+                var hotTitleArr: [String] = [String]()
+                for item in (homeModel?.hotModels)! {
+                    hotTitleArr.append(item.content!)
+                }
+                headerView.hotTxtView.setTitlesGroup(hotTitleArr)
+            }
+            
+            tableView.reloadData()
+        }
+    }
+    
     /// 技术在线、申请售后、需求发布、在线商城
     func dealOperator(index : Int){
         switch index {
@@ -88,11 +144,11 @@ class JSMHomeVC: GYZBaseVC {
     func dealFuncModel(index : Int){
         switch index {
         case 1://平台介绍
-            break
+            goWebViewVC(title: "平台介绍", url: homeModel?.platform_url ?? "")
         case 2://真伪查询
             goAuthenticityVC()
         case 3://招商加盟
-            break
+            goWebViewVC(title: "招商加盟", url: homeModel?.join_url ?? "")
         case 4://合作伙伴
             goPartnerVC()
         default:
@@ -119,6 +175,13 @@ class JSMHomeVC: GYZBaseVC {
         let vc = JSMShopsVC()
         navigationController?.pushViewController(vc, animated: true)
     }
+    /// webVC
+    func goWebViewVC(title: String, url: String){
+        let vc = JSMWebViewVC()
+        vc.url = url
+        vc.webTitle = title
+        navigationController?.pushViewController(vc, animated: true)
+    }
     //合作伙伴
     func goPartnerVC(){
         let vc = JSMPartnerVC()
@@ -143,14 +206,17 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 4
+        if homeModel == nil {
+            return 0
+        }
+        return (homeModel?.newModels.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: homeNewsCell) as! JSMHomeNewsCell
         
+        cell.dataModel = homeModel?.newModels[indexPath.row]
         
         cell.selectionStyle = .none
         return cell

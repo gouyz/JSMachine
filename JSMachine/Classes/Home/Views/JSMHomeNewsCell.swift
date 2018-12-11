@@ -9,6 +9,20 @@
 import UIKit
 
 class JSMHomeNewsCell: UITableViewCell {
+    
+    /// 填充数据
+    var dataModel : JSMNewsModel?{
+        didSet{
+            if let model = dataModel {
+            
+                titleLab.text = model.title
+                contentLab.text = model.subtitle
+                contentImgView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                
+                timeLab.text = model.add_time?.getDateTime(format: "yyyy-MM-dd")
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -89,7 +103,7 @@ class JSMHomeNewsCell: UITableViewCell {
     lazy var contentImgView : UIImageView = {
         let imgView = UIImageView()
         imgView.cornerRadius = kCornerRadius
-        imgView.image = UIImage.init(named: "icon_news_default")
+        imgView.backgroundColor = kBackgroundColor
         
         return imgView
     }()
