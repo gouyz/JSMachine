@@ -137,6 +137,7 @@ class GYZTool: NSObject {
     /// 退出登录时，移除用户信息
     class func removeUserInfo(){
         userDefaults.removeObject(forKey: kIsLoginTagKey)
+        userDefaults.removeObject(forKey: kIsEngineerLoginTagKey)
         userDefaults.removeObject(forKey: "userId")//用户ID
         userDefaults.removeObject(forKey: "phone")//用户电话
     }

@@ -140,29 +140,30 @@ class JSMLoginVC: GYZBaseVC {
     @objc func onClickedLoginBtn(){
         hiddenKeyBoard()
         
-        userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
-        userDefaults.set(true, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
-        KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMEngineerHomerVC())
+        if !validPhoneNO() {
+            return
+        }
+        
+        if pwdInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
+            return
+        }
+        requestEngineerLogin()
     }
     /// 用户登录
     @objc func clickedUserLoginBtn() {
         hiddenKeyBoard()
         
-        userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
-        userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
-        
-        KeyWindow.rootViewController = GYZMainTabBarVC()
-        
-//        if !validPhoneNO() {
-//            return
-//        }
-//
-//        if pwdInputView.textFiled.text!.isEmpty {
-//            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
-//            return
-//        }
-//
-//        requestLogin()
+        if !validPhoneNO() {
+            return
+        }
+
+        if pwdInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
+            return
+        }
+
+        requestLogin()
     }
     /// 忘记密码
     @objc func clickedForgetPwdBtn() {
@@ -199,28 +200,60 @@ class JSMLoginVC: GYZBaseVC {
         pwdInputView.textFiled.resignFirstResponder()
     }
     
-    /// 登录
+    /// 用户登录
     func requestLogin(){
         
         weak var weakSelf = self
         createHUD(message: "登录中...")
         
-        GYZNetWork.requestNetwork("doctor/login", parameters: ["plone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!],  success: { (response) in
+        GYZNetWork.requestNetwork("login/userLogin", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!],  success: { (response) in
             
-            //            weakSelf?.hud?.hide(animated: true)
+            weakSelf?.hud?.hide(animated: true)
             //            GYZLog(response)
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
                 
                 userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
-                userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
-                userDefaults.set(data["plone"].stringValue, forKey: "phone")//用户电话
-                userDefaults.set(data["name"].stringValue, forKey: "userName")//用户姓名
+                userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
+                userDefaults.set(data["user_id"].stringValue, forKey: "userId")//用户ID
+                userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
+                userDefaults.set(data["head"].stringValue, forKey: "head")//用户头像
               
                 KeyWindow.rootViewController = GYZMainTabBarVC()
             }else{
-                weakSelf?.hud?.hide(animated: true)
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    /// 工程师登录
+    func requestEngineerLogin(){
+        
+        weak var weakSelf = self
+        createHUD(message: "登录中...")
+        
+        GYZNetWork.requestNetwork("login/engineerLogin", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            //            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                let data = response["data"]
+                
+                userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
+                userDefaults.set(true, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
+                userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
+                userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
+                userDefaults.set(data["head"].stringValue, forKey: "head")//用户头像
+                userDefaults.set(data["real_name"].stringValue, forKey: "realName")//用户姓名
+                
+                KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMEngineerHomerVC())
+            }else{
                 MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             }
             

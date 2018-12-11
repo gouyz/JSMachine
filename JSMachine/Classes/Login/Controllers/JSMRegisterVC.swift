@@ -10,6 +10,9 @@ import UIKit
 import MBProgressHUD
 
 class JSMRegisterVC: GYZBaseVC {
+    
+    /// 选择营业执照
+    var selectUserImg: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -239,34 +242,38 @@ class JSMRegisterVC: GYZBaseVC {
     @objc func clickedOkBtn(btn: UIButton){
         hiddenKeyBoard()
         
-//        if !validPhoneNO() {
-//            return
-//        }
-//        if codeInputView.textFiled.text!.isEmpty {
-//            MBProgressHUD.showAutoDismissHUD(message: "请输入验证码")
-//            return
-//        }
-//
-//        if pwdInputView.textFiled.text!.isEmpty {
-//            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
-//            return
-//        }
-//        if repwdInputView.textFiled.text!.isEmpty {
-//            MBProgressHUD.showAutoDismissHUD(message: "请输入确认密码")
-//            return
-//        }
-//        if (pwdInputView.textFiled.text != repwdInputView.textFiled.text){
-//            MBProgressHUD.showAutoDismissHUD(message: "密码和确认密码不一致")
-//            return
-//        }
-//
-//        requestRegister()
+        if !validPhoneNO() {
+            return
+        }
+        if codeInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入验证码")
+            return
+        }
+
+        if pwdInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
+            return
+        }
+        if repwdInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入确认密码")
+            return
+        }
+        if (pwdInputView.textFiled.text != repwdInputView.textFiled.text){
+            MBProgressHUD.showAutoDismissHUD(message: "密码和确认密码不一致")
+            return
+        }
+
+        requestRegister()
         
     }
     
     /// 选择营业执照
     @objc func onClickedSelectImg(){
-        
+        GYZOpenCameraPhotosTool.shareTool.choosePicture(self, editor: true, finished: { [weak self] (image) in
+            
+            self?.selectUserImg = image
+            self?.yyzzImgView.image = image
+        })
     }
     /// 判断手机号是否有效
     ///
@@ -300,20 +307,30 @@ class JSMRegisterVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "注册中...")
         
-        GYZNetWork.requestNetwork("doctor/register", parameters: ["plone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"passagain": repwdInputView.textFiled.text!,"code":codeInputView.textFiled.text!],  success: { (response) in
+        let imgParam: ImageFileUploadParam = ImageFileUploadParam()
+        if selectUserImg != nil {
+            
+            imgParam.name = "licence"
+            imgParam.fileName = "licence.jpg"
+            imgParam.mimeType = "image/jpg"
+            imgParam.data = UIImageJPEGRepresentation(selectUserImg!, 0.5)
+        }
+        
+        GYZNetWork.uploadImageRequest("login/register", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"passagain": repwdInputView.textFiled.text!,"code":codeInputView.textFiled.text!], uploadParam: selectUserImg == nil ? [] : [imgParam], success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
-            //            GYZLog(response)
+            GYZLog(response)
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
                 
                 userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
+                userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
                 userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
-                userDefaults.set(data["plone"].stringValue, forKey: "phone")//用户电话
-                userDefaults.set(data["name"].stringValue, forKey: "userName")//用户姓名
+                userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 
                 KeyWindow.rootViewController = GYZMainTabBarVC()
+                
             }else{
                 MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             }
@@ -337,15 +354,14 @@ class JSMRegisterVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "获取中...")
         
-        GYZNetWork.requestNetwork("doctor/sms_send1", parameters: ["plone":phoneInputView.textFiled.text!],  success: { (response) in
+        GYZNetWork.requestNetwork("login/sms_send", parameters: ["phone":phoneInputView.textFiled.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
-            if response["code"].intValue == kQuestSuccessTag{//请求成功
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
                 weakSelf?.codeBtn.startSMSWithDuration(duration: 60)
                 
-            }else{
-                MBProgressHUD.showAutoDismissHUD(message: response["message"].stringValue)
             }
             
         }, failture: { (error) in

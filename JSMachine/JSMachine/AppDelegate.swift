@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }else{
                 window?.rootViewController = GYZMainTabBarVC()
             }
-        
+
         }else{
             window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMLoginVC())
         }

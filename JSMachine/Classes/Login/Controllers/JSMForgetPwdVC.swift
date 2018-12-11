@@ -178,32 +178,28 @@ class JSMForgetPwdVC: GYZBaseVC {
     @objc func clickedOkBtn(btn: UIButton){
         hiddenKeyBoard()
         
-//        if !validPhoneNO() {
-//            return
-//        }
-//        if codeInputView.textFiled.text!.isEmpty {
-//            MBProgressHUD.showAutoDismissHUD(message: "请输入验证码",isBottom:false)
-//            return
-//        }
-//        if codeInputView.textFiled.text! != codeStr {
-//            MBProgressHUD.showAutoDismissHUD(message: "验证码不正确",isBottom:false)
-//            return
-//        }
-//
-//        if pwdInputView.textFiled.text!.isEmpty {
-//            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
-//            return
-//        }
-//        if (repwdInputView.textFiled.text?.isEmpty)! {
-//            MBProgressHUD.showAutoDismissHUD(message: "请输入确认密码")
-//            return
-//        }
-//        if repwdInputView.textFiled.text != pwdInputView.textFiled.text{
-//            MBProgressHUD.showAutoDismissHUD(message: "新密码与确认密码不一致")
-//            return
-//        }
+        if !validPhoneNO() {
+            return
+        }
+        if codeInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入验证码",isBottom:false)
+            return
+        }
+
+        if pwdInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
+            return
+        }
+        if (repwdInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入确认密码")
+            return
+        }
+        if repwdInputView.textFiled.text != pwdInputView.textFiled.text{
+            MBProgressHUD.showAutoDismissHUD(message: "新密码与确认密码不一致")
+            return
+        }
         
-//        requestUpdatePwd()
+        requestUpdatePwd()
         
     }
     /// 判断手机号是否有效
@@ -240,17 +236,17 @@ class JSMForgetPwdVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("connect&op=find_password", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"password_confirm": repwdInputView.textFiled.text!,"captcha":codeInputView.textFiled.text!,"client": "ios"],  success: { (response) in
+        GYZNetWork.requestNetwork("login/change_password", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"passagain": repwdInputView.textFiled.text!,"code":codeInputView.textFiled.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
-            if response["code"].intValue == kQuestSuccessTag{//请求成功
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 MBProgressHUD.showAutoDismissHUD(message: "修改密码成功，请重新登录")
                 
                 weakSelf?.goLogin()
             }else{
-                MBProgressHUD.showAutoDismissHUD(message: response["datas"]["error"].stringValue)
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             }
             
         }, failture: { (error) in
@@ -275,25 +271,17 @@ class JSMForgetPwdVC: GYZBaseVC {
     ///获取验证码
     func requestCode(){
         
-        if !GYZTool.checkNetWork() {
-            return
-        }
-        
         weak var weakSelf = self
         createHUD(message: "获取中...")
         
-        GYZNetWork.requestNetwork("connect&op=get_sms_captcha", parameters: ["phone":phoneInputView.textFiled.text!,"type": "3"],method :.get,  success: { (response) in
+        GYZNetWork.requestNetwork("login/sms_send", parameters: ["phone":phoneInputView.textFiled.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
-            if response["code"].intValue == kQuestSuccessTag{//请求成功
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.codeBtn.startSMSWithDuration(duration: 60)
                 
-                let data = response["datas"]
-                weakSelf?.codeStr = data["captcha"].stringValue
-                weakSelf?.codeBtn.startSMSWithDuration(duration: data["sms_time"].intValue)
-                
-            }else{
-                MBProgressHUD.showAutoDismissHUD(message: response["datas"]["error"].stringValue)
             }
             
         }, failture: { (error) in
