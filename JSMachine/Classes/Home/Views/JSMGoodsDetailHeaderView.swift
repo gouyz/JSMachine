@@ -28,10 +28,6 @@ class JSMGoodsDetailHeaderView: UIView {
         bgView.addSubview(nameLab)
         bgView.addSubview(sharedBtn)
         
-        self.addSubview(productView)
-        productView.addSubview(productLab)
-        productView.addSubview(rightIconView)
-        
         self.addSubview(tabView)
         tabView.addSubview(tuWenDetailLab)
         tabView.addSubview(lineView)
@@ -61,25 +57,9 @@ class JSMGoodsDetailHeaderView: UIView {
             make.height.equalTo(34)
         }
         
-        productView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(self)
-            make.top.equalTo(bgView.snp.bottom).offset(kMargin)
-            make.height.equalTo(kTitleHeight)
-        }
-        productLab.snp.makeConstraints { (make) in
-            make.left.equalTo(kMargin)
-            make.top.bottom.equalTo(productView)
-            make.right.equalTo(rightIconView.snp.left).offset(-kMargin)
-        }
-        rightIconView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(productView)
-            make.right.equalTo(-kMargin)
-            make.size.equalTo(rightArrowSize)
-        }
-        
         tabView.snp.makeConstraints { (make) in
             make.bottom.left.right.equalTo(self)
-            make.top.equalTo(productView.snp.bottom).offset(kMargin)
+            make.top.equalTo(bgView.snp.bottom).offset(kMargin)
         }
         tuWenDetailLab.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
@@ -153,27 +133,6 @@ class JSMGoodsDetailHeaderView: UIView {
         
         return btn
     }()
-    
-    /// 产品参数
-    lazy var productView: UIView = {
-        let view = UIView()
-        view.backgroundColor = kWhiteColor
-        
-        return view
-    }()
-    
-    ///
-    lazy var productLab : UILabel = {
-        let lab = UILabel()
-        lab.font = k15Font
-        lab.textColor = kHeightGaryFontColor
-        lab.text = "产品详细参数"
-        
-        return lab
-    }()
-    
-    /// 右侧箭头图标
-    lazy var rightIconView: UIImageView = UIImageView.init(image: UIImage.init(named: "icon_right_arrow"))
     
     /// 
     lazy var tabView: UIView = {

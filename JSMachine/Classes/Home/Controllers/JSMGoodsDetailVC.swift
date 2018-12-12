@@ -13,7 +13,7 @@ import MBProgressHUD
 class JSMGoodsDetailVC: GYZBaseVC {
     
     /// header 高度
-    var headerViewH: CGFloat = kScreenWidth * 0.6 + kMargin * 2 + kTitleHeight * 3
+    var headerViewH: CGFloat = kScreenWidth * 0.6 + kMargin + kTitleHeight * 2
     
     var detailModel: JSMGoodsDetailModel?
     var goodsId : String = ""
@@ -31,8 +31,6 @@ class JSMGoodsDetailVC: GYZBaseVC {
             make.left.right.bottom.equalTo(view)
             make.height.equalTo(kBottomTabbarHeight)
         }
-        
-        headerView.productView.addOnClickListener(target: self, action: #selector(onClickedProductView))
         headerView.tuWenDetailLab.addOnClickListener(target: self, action: #selector(onClickedTuWenDetail))
         headerView.paramsLab.addOnClickListener(target: self, action: #selector(onClickedParamsDetail))
         
@@ -132,12 +130,6 @@ class JSMGoodsDetailVC: GYZBaseVC {
     /// 底部View
     lazy var bottomView: JSMGoodsDetailBottomView = JSMGoodsDetailBottomView()
     
-    /// 产品参数
-    @objc func onClickedProductView(){
-//        let paramView = KZGoodsParamsView()
-//        paramView.dataModel = dataModel?.attr
-//        paramView.show()
-    }
     /// 图文详情
     @objc func onClickedTuWenDetail(){
         if !headerView.tuWenDetailLab.isHighlighted {
@@ -162,7 +154,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
     func bottomOperator(index: Int){
         switch index {
         case 1://咨询
-            break
+            goOnLineVC()
         case 2://收藏
             dealFavourite()
         case 3://询价
@@ -183,6 +175,11 @@ class JSMGoodsDetailVC: GYZBaseVC {
         }else{
             showCancleFavourite()
         }
+    }
+    //技术在线
+    func goOnLineVC(){
+        let vc = JSMTechnologyOnlineVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func showCancleFavourite(){

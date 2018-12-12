@@ -10,6 +10,25 @@ import UIKit
 
 class JSMMyPublishNeedCell: UITableViewCell {
     
+    /// 填充数据
+    var dataModel : JSMPublishNeedModel?{
+        didSet{
+            if let model = dataModel {
+                
+                useNameLab.text = model.needs
+                iconView.kf.setImage(with: URL.init(string: model.head!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                dateLab.text = model.create_date?.getDateTime(format: "yyyy/MM/dd")
+                
+                typeLab.text = "产品型号：\(model.pro_model!)"
+                speedLab.text = "产品转速：\(model.pro_speed!)"
+                roteLab.text = "传动比：\(model.drive_ratio!)"
+                numberLab.text = "产品数量：\(model.num!)(个)"
+                finishedDateLab.text = "交货日期：" + (model.deal_date?.getDateTime(format: "yyyy/MM/dd"))!
+                noteLab.text = "用户备注：\(model.remark!)"
+            }
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

@@ -15,6 +15,7 @@ class JSMMyPublishNeedVC: GYZBaseVC {
 
     var orderStatus: String = ""
     var currPage : Int = 1
+    var dataList: [JSMPublishNeedModel] = [JSMPublishNeedModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class JSMMyPublishNeedVC: GYZBaseVC {
             
             make.edges.equalTo(0)
         }
+        
+        requestPublishOrderDatas()
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,6 +67,54 @@ class JSMMyPublishNeedVC: GYZBaseVC {
 //        navigationController?.pushViewController(vc, animated: true)
 //    }
     
+    ///获取我的发布列表数据
+    func requestPublishOrderDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("need/myNeed",parameters: ["user_id": userDefaults.string(forKey: "userId") ?? "","type": orderStatus],  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMPublishNeedModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.hiddenEmptyView()
+                    weakSelf?.tableView.reloadData()
+                }else{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无发布需求信息")
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+            
+            weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
+                weakSelf?.requestPublishOrderDatas()
+                weakSelf?.hiddenEmptyView()
+            })
+        })
+    }
 }
 
 extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
@@ -73,12 +124,14 @@ extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 8
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: myPublishNeedCell) as! JSMMyPublishNeedCell
+        
+        cell.dataModel = dataList[indexPath.row]
         
         if orderStatus == "1" {
             cell.downLoadBtn.isHidden = false

@@ -228,7 +228,12 @@ class JSMPublishNeedVC: GYZBaseVC {
     
     /// 在线咨询按钮
     @objc func clickedZiXunBtn(){
-        
+        goOnLineVC()
+    }
+    //技术在线
+    func goOnLineVC(){
+        let vc = JSMTechnologyOnlineVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 提交按钮
     @objc func onClickedSubmitBtn(){

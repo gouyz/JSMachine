@@ -100,6 +100,15 @@ class JSMMyFavouriteVC: GYZBaseVC {
         vc.goodsId = model.shop_id!
         navigationController?.pushViewController(vc, animated: true)
     }
+    /// 咨询
+    @objc func onClickedZiXun(sender:UITapGestureRecognizer){
+        goOnLineVC()
+    }
+    //技术在线
+    func goOnLineVC(){
+        let vc = JSMTechnologyOnlineVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 extension JSMMyFavouriteVC: UITableViewDelegate,UITableViewDataSource{
     
@@ -117,6 +126,8 @@ extension JSMMyFavouriteVC: UITableViewDelegate,UITableViewDataSource{
         cell.dataModel = dataList[indexPath.row]
         cell.xunJiaLab.tag = indexPath.row
         cell.xunJiaLab.addOnClickListener(target: self, action: #selector(onClickedXunJia(sender:)))
+        cell.ziXunLab.tag = indexPath.row
+        cell.ziXunLab.addOnClickListener(target: self, action: #selector(onClickedZiXun(sender:)))
         cell.selectionStyle = .none
         return cell
     }
