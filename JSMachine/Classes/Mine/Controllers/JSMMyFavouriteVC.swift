@@ -12,6 +12,8 @@ import MBProgressHUD
 private let myFavouriteCell = "myFavouriteCell"
 
 class JSMMyFavouriteVC: GYZBaseVC {
+    
+    var dataList: [JSMFavouriteModel] = [JSMFavouriteModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,8 @@ class JSMMyFavouriteVC: GYZBaseVC {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
+        requestFavouriteDatas()
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,7 +43,63 @@ class JSMMyFavouriteVC: GYZBaseVC {
         return table
     }()
     
-    
+    ///获取我的收藏列表数据
+    func requestFavouriteDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("my/myFocus",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMFavouriteModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.hiddenEmptyView()
+                    weakSelf?.tableView.reloadData()
+                }else{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无收藏信息")
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+            
+            weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
+                weakSelf?.requestFavouriteDatas()
+                weakSelf?.hiddenEmptyView()
+            })
+        })
+    }
+    /// 询价
+    @objc func onClickedXunJia(sender: UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        let model = dataList[tag!]
+        
+        let vc = JSMXunJiaVC()
+        vc.goodsId = model.shop_id!
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 extension JSMMyFavouriteVC: UITableViewDelegate,UITableViewDataSource{
     
@@ -47,14 +107,16 @@ extension JSMMyFavouriteVC: UITableViewDelegate,UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: myFavouriteCell) as! JSMMyFavouriteCell
         
-        
+        cell.dataModel = dataList[indexPath.row]
+        cell.xunJiaLab.tag = indexPath.row
+        cell.xunJiaLab.addOnClickListener(target: self, action: #selector(onClickedXunJia(sender:)))
         cell.selectionStyle = .none
         return cell
     }

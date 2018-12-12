@@ -11,9 +11,9 @@ import MBProgressHUD
 
 class JSMModifyEmailVC: GYZBaseVC {
 
-    var name: String = ""
+    var email: String = ""
     /// 选择结果回调
-    var resultBlock:((_ name: String) -> Void)?
+    var resultBlock:((_ email: String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class JSMModifyEmailVC: GYZBaseVC {
             make.top.bottom.equalTo(nameLab)
         }
         
-        contentField.text = name
+        contentField.text = email
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,7 +95,11 @@ class JSMModifyEmailVC: GYZBaseVC {
             MBProgressHUD.showAutoDismissHUD(message: "请输入邮箱")
             return
         }
-        //        requestModifyUserInfo()
+        if !(content?.isValidateEmail())! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入正确的邮箱")
+            return
+        }
+       requestModifyUserInfo()
     }
     
     /// 修改个人资料
@@ -108,7 +112,7 @@ class JSMModifyEmailVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("doctor/doctor_edit", parameters: ["id": userDefaults.string(forKey: "userId") ?? "","name":contentField.text!],  success: { (response) in
+        GYZNetWork.requestNetwork("my/saveInfo", parameters: ["user_id": userDefaults.string(forKey: "userId") ?? "","email":contentField.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
@@ -119,7 +123,6 @@ class JSMModifyEmailVC: GYZBaseVC {
                 if weakSelf?.resultBlock != nil{
                     weakSelf?.resultBlock!((weakSelf?.contentField.text)!)
                 }
-                userDefaults.set((weakSelf?.contentField.text)!, forKey: "userName")//用户姓名
                 weakSelf?.clickedBackBtn()
             }
             

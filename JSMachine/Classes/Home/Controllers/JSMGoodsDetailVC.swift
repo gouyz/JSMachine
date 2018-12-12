@@ -82,6 +82,8 @@ class JSMGoodsDetailVC: GYZBaseVC {
             headerView.adsImgView.setUrlsGroup((detailModel?.goodImgList)!)
             headerView.nameLab.text = detailModel?.goodsModel?.shop_name
             
+            bottomView.favouriteBtn.isSelected = detailModel?.follow == "1"
+            
             loadContent(url: (detailModel?.image_text_url)!)
         }
         
@@ -162,11 +164,24 @@ class JSMGoodsDetailVC: GYZBaseVC {
         case 1://咨询
             break
         case 2://收藏
-            showCancleFavourite()
+            dealFavourite()
         case 3://询价
             goXunJiaVC()
         default:
             break
+        }
+    }
+    
+    func dealFavourite(){
+        if !userDefaults.bool(forKey: kIsLoginTagKey) {
+            showLogin()
+            return
+        }
+        // 是否收藏
+        if detailModel?.follow == "0" {
+            requestFavouriteGoods()
+        }else{
+            showCancleFavourite()
         }
     }
     
@@ -175,9 +190,67 @@ class JSMGoodsDetailVC: GYZBaseVC {
         GYZAlertViewTools.alertViewTools.showAlert(title: "取消收藏", message: "确定要取消收藏吗?", cancleTitle: "取消", viewController: self, buttonTitles: "确定") { (index) in
             
             if index != cancelIndex{
-               
+               weakSelf?.requestCancleFavouriteGoods()
             }
         }
+    }
+    ///商品收藏
+    func requestFavouriteGoods(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("shop/follow",parameters: ["id":goodsId,"user_id": userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                MBProgressHUD.showAutoDismissHUD(message: "收藏成功")
+                weakSelf?.detailModel?.follow = "1"
+               weakSelf?.bottomView.favouriteBtn.isSelected = true
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    ///商品取消收藏
+    func requestCancleFavouriteGoods(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("shop/cancelFollow",parameters: ["id":goodsId,"user_id": userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.detailModel?.follow = "0"
+                weakSelf?.bottomView.favouriteBtn.isSelected = false
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
     }
     
     func showLogin(){

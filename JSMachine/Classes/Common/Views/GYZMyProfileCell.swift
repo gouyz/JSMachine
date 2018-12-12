@@ -40,7 +40,7 @@ class GYZMyProfileCell: UITableViewCell {
         desLab.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(contentView)
             make.right.equalTo(rightIconView.snp.left).offset(-5)
-            make.width.equalTo(120)
+            make.width.equalTo(kScreenWidth * 0.5)
         }
         rightIconView.snp.makeConstraints { (make) in
             make.centerY.equalTo(contentView)

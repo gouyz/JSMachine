@@ -9,6 +9,19 @@
 import UIKit
 
 class JSMMyFavouriteCell: UITableViewCell {
+    
+    /// 填充数据
+    var dataModel : JSMFavouriteModel?{
+        didSet{
+            if let model = dataModel {
+                
+                nameLab.text = model.shop_name
+                iconView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                numberLab.text = "\(model.sum!)人关注"
+                
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)

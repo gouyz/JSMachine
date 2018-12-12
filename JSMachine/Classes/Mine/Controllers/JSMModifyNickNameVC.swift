@@ -95,7 +95,7 @@ class JSMModifyNickNameVC: GYZBaseVC {
             MBProgressHUD.showAutoDismissHUD(message: "请输入昵称")
             return
         }
-//        requestModifyUserInfo()
+        requestModifyUserInfo()
     }
     
     /// 修改个人资料
@@ -108,7 +108,7 @@ class JSMModifyNickNameVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("doctor/doctor_edit", parameters: ["id": userDefaults.string(forKey: "userId") ?? "","name":contentField.text!],  success: { (response) in
+        GYZNetWork.requestNetwork("my/saveInfo", parameters: ["user_id": userDefaults.string(forKey: "userId") ?? "","nickname":contentField.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
@@ -119,7 +119,6 @@ class JSMModifyNickNameVC: GYZBaseVC {
                 if weakSelf?.resultBlock != nil{
                     weakSelf?.resultBlock!((weakSelf?.contentField.text)!)
                 }
-                userDefaults.set((weakSelf?.contentField.text)!, forKey: "userName")//用户姓名
                 weakSelf?.clickedBackBtn()
             }
             

@@ -37,6 +37,7 @@ class JSMMyProfileVC: GYZBaseVC {
                 make.top.equalTo(kTitleAndStateHeight)
             }
         }
+        requestMineData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,7 +79,7 @@ class JSMMyProfileVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("doctor/doctor", parameters: ["id": userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
+        GYZNetWork.requestNetwork("my/myInfo", parameters: ["user_id": userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
@@ -103,8 +104,7 @@ class JSMMyProfileVC: GYZBaseVC {
         GYZOpenCameraPhotosTool.shareTool.choosePicture(self, editor: true, finished: { [weak self] (image) in
             
             self?.selectUserImg = image
-            self?.tableView.reloadData()
-//            self?.requestUpdateHeaderImg()
+            self?.requestUpdateHeaderImg()
         })
     }
     
@@ -119,7 +119,7 @@ class JSMMyProfileVC: GYZBaseVC {
         imgParam.mimeType = "image/jpg"
         imgParam.data = UIImageJPEGRepresentation(selectUserImg!, 0.5)
         
-        GYZNetWork.uploadImageRequest("doctor/file_head", parameters: ["id":userDefaults.string(forKey: "userId") ?? ""], uploadParam: [imgParam], success: { (response) in
+        GYZNetWork.uploadImageRequest("my/saveInfo", parameters: ["user_id":userDefaults.string(forKey: "userId") ?? ""], uploadParam: [imgParam], success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
@@ -145,11 +145,21 @@ class JSMMyProfileVC: GYZBaseVC {
     /// 修改昵称
     func goNickNameVC(){
         let vc = JSMModifyNickNameVC()
+        vc.name = (userInfoModel?.nickname)!
+        vc.resultBlock = {[weak self] (name) in
+            self?.userInfoModel?.nickname = name
+            self?.tableView.reloadData()
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 修改邮箱
     func goEmailVC(){
         let vc = JSMModifyEmailVC()
+        vc.email = (userInfoModel?.email)!
+        vc.resultBlock = {[weak self] (email) in
+            self?.userInfoModel?.email = email
+            self?.tableView.reloadData()
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 修改密码
@@ -183,23 +193,22 @@ extension JSMMyProfileVC: UITableViewDelegate,UITableViewDataSource{
             if selectUserImg != nil{
                 cell.userImgView.image = selectUserImg
             }else{
-                cell.userImgView.image = UIImage.init(named: "icon_header_default")
-//                cell.userImgView.kf.setImage(with: URL.init(string: (userInfoModel?.head)!), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
+                cell.userImgView.kf.setImage(with: URL.init(string: userInfoModel?.head ?? ""), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
             }
             
         } else if indexPath.row == 1{
             cell.nameLab.text = "昵称"
             cell.desLab.isHidden = false
-            cell.desLab.text = "未填写"
+            cell.desLab.text = userInfoModel?.nickname
         }else if indexPath.row == 2{
             cell.nameLab.text = "电话"
             cell.desLab.isHidden = false
             cell.rightIconView.isHidden = true
-            cell.desLab.text = "未填写"
+            cell.desLab.text = userInfoModel?.phone
         }else if indexPath.row == 3{
             cell.nameLab.text = "邮箱"
             cell.desLab.isHidden = false
-            cell.desLab.text = "未填写"
+            cell.desLab.text = userInfoModel?.email
         }else if indexPath.row == 4{
             cell.nameLab.text = "修改密码"
         }

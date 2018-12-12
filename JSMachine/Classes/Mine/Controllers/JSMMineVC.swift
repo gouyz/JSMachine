@@ -15,6 +15,7 @@ class JSMMineVC: GYZBaseVC {
     
     ///我的模块
     var menuModels: [JSMMineModel] = [JSMMineModel]()
+    var userInfoModel: LHSUserInfoModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,35 +83,39 @@ class JSMMineVC: GYZBaseVC {
     
     lazy var userHeaderView: JSMMineHeaderView = JSMMineHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: kScreenWidth * 0.48 + kStateHeight))
     
-    
     /// 获取我的 数据
     func requestMineData(){
-//        if !GYZTool.checkNetWork() {
-//            return
-//        }
-//
-//        weak var weakSelf = self
-//        createHUD(message: "加载中...")
-//
-//        GYZNetWork.requestNetwork("member_index&op=member_indexkz", parameters: ["key": userDefaults.string(forKey: "key") ?? ""],  success: { (response) in
-//
-//            weakSelf?.hud?.hide(animated: true)
-//            //            GYZLog(response)
-//            if response["code"].intValue == kQuestSuccessTag{//请求成功
-//
-//                weakSelf?.setHeaderData(data: response["datas"])
-//
-//
-//            }else{
-//                MBProgressHUD.showAutoDismissHUD(message: response["datas"]["error"].stringValue)
-//            }
-//
-//        }, failture: { (error) in
-//            weakSelf?.hud?.hide(animated: true)
-//            GYZLog(error)
-//        })
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/myInfo", parameters: ["user_id": userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                guard let data = response["data"].dictionaryObject else { return }
+                weakSelf?.userInfoModel = LHSUserInfoModel.init(dict: data)
+                weakSelf?.setHeaderData()
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
     }
-    
+    ///
+    func setHeaderData(){
+        userHeaderView.nameLab.text = userInfoModel?.nickname == "" ? userInfoModel?.phone : userInfoModel?.nickname
+        userHeaderView.userHeaderView.kf.setImage(with: URL.init(string: userInfoModel?.head ?? ""), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+    }
     ///
     func setEmptyHeaderData(){
         userHeaderView.nameLab.text = "登录/注册"

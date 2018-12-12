@@ -89,6 +89,17 @@ class JSMXunJiaVC: GYZBaseVC {
             })
         })
     }
+    
+    /// 申购
+    @objc func onClickedBuy(sender:UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        if tag == 0 {
+            return
+        }
+//        let model = dataList[tag! - 1]
+        let vc = JSMPublishSuccessVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension JSMXunJiaVC: UITableViewDelegate,UITableViewDataSource{
@@ -103,6 +114,9 @@ extension JSMXunJiaVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: xunJiaCell) as! JSMXunJiaCell
+        
+        cell.operatorLab.tag = indexPath.row
+        cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedBuy(sender:)))
         
         if indexPath.row == 0 {
             cell.nameLab.textColor = kBlueFontColor
@@ -119,7 +133,7 @@ extension JSMXunJiaVC: UITableViewDelegate,UITableViewDataSource{
             cell.moneyLab.textColor = kHeightGaryFontColor
             cell.moneyLab.text = "￥\(model.price!)"
             cell.operatorLab.textColor = kRedFontColor
-            cell.operatorLab.text = "询价"
+            cell.operatorLab.text = "申购"
             cell.operatorLab.borderColor = kRedFontColor
         }
         

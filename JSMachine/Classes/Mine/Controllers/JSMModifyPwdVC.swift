@@ -136,6 +136,65 @@ class JSMModifyPwdVC: GYZBaseVC {
     }()
     /// 确认修改
     @objc func clickedModifyBtn(){
+        hiddenKeyBoard()
+        if oldPwdFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入原密码")
+            return
+        }
+        if pwdFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入新密码")
+            return
+        }
+        if (rePwdFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入确认密码")
+            return
+        }
+        if rePwdFiled.text != pwdFiled.text{
+            MBProgressHUD.showAutoDismissHUD(message: "新密码与确认密码不一致")
+            return
+        }
         
+        requestUpdatePwd()
+    }
+    
+    /// 修改密码
+    func requestUpdatePwd(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/modifyPass", parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","password": oldPwdFiled.text!,"pass": pwdFiled.text!],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                MBProgressHUD.showAutoDismissHUD(message: "修改密码成功，请重新登录")
+                
+                weakSelf?.goLogin()
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 登录
+    func goLogin(){
+        GYZTool.removeUserInfo()
+        let vc = JSMLoginVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    /// 隐藏键盘
+    func hiddenKeyBoard(){
+        pwdFiled.resignFirstResponder()
+        oldPwdFiled.resignFirstResponder()
+        rePwdFiled.resignFirstResponder()
     }
 }

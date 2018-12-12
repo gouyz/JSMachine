@@ -60,6 +60,7 @@ class JSMGoodsDetailBottomView: UIView {
         
         ziXunBtn.set(image: UIImage.init(named: "icon_shop_question"), title: "咨询", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
         favouriteBtn.set(image: UIImage.init(named: "icon_shop_favourite"), title: "关注", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
+        favouriteBtn.set(image: UIImage.init(named: "icon_shop_favourite_selected"), title: "关注", titlePosition: .bottom, additionalSpacing: 5, state: .selected)
     }
     
     lazy var shopView: UIView = UIView()
