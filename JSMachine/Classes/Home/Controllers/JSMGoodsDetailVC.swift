@@ -16,6 +16,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
     var headerViewH: CGFloat = kScreenWidth * 0.6 + kMargin + kTitleHeight * 2
     
     var detailModel: JSMGoodsDetailModel?
+    var detailParamsModel: JSMGoodsParamsModel?
     var goodsId : String = ""
 
     override func viewDidLoad() {
@@ -38,6 +39,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
             self?.bottomOperator(index: index)
         }
         requestDetailDatas()
+        requestDetailParamsDatas()
     }
     
     override func didReceiveMemoryWarning() {
@@ -158,7 +160,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
         case 2://收藏
             dealFavourite()
         case 3://询价
-            goXunJiaVC()
+            showParamView()
         default:
             break
         }
@@ -264,12 +266,41 @@ class JSMGoodsDetailVC: GYZBaseVC {
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 询价
-    func goXunJiaVC(){
-        let vc = JSMXunJiaVC()
-        vc.goodsId = goodsId
-        navigationController?.pushViewController(vc, animated: true)
+//    func goXunJiaVC(){
+//        let vc = JSMXunJiaVC()
+//        vc.goodsId = goodsId
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
+    /// 选择参数
+    func showParamView(){
+        let paramView = JSMSelectGoodsParamsView()
+        paramView.dataModel = detailParamsModel
+        paramView.show()
     }
     
+    ///获取商品详情参数数据
+    func requestDetailParamsDatas(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        
+        GYZNetWork.requestNetwork("shop/shopParam",parameters: ["id":goodsId],  success: { (response) in
+            
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].dictionaryObject else { return }
+                weakSelf?.detailParamsModel = JSMGoodsParamsModel.init(dict: data)
+            }
+            
+        }, failture: { (error) in
+            
+            GYZLog(error)
+        })
+    }
 }
 extension JSMGoodsDetailVC : WKNavigationDelegate,UIScrollViewDelegate{
     ///MARK WKNavigationDelegate

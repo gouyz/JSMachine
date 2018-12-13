@@ -42,4 +42,6 @@ class JSMGoodsModel: LHSBaseModel {
     var shop_name : String? = ""
     /// 产品的转速
     var pro_speed : String? = ""
+    /// 产品品牌
+    var brand : String? = ""
 }

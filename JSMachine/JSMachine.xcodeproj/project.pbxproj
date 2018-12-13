@@ -117,6 +117,13 @@
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
 		0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */; };
 		0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */; };
+		0A45898D21C2341F00DC236F /* JSMSelectGoodsParamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */; };
+		0A45899921C2363F00DC236F /* HXTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A45898F21C2363E00DC236F /* HXTagCollectionViewCell.m */; };
+		0A45899A21C2363F00DC236F /* HXTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A45899121C2363E00DC236F /* HXTagsView.m */; };
+		0A45899B21C2363F00DC236F /* HXTagsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A45899221C2363E00DC236F /* HXTagsCell.m */; };
+		0A45899C21C2363F00DC236F /* HXTagAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A45899421C2363E00DC236F /* HXTagAttribute.m */; };
+		0A45899D21C2363F00DC236F /* HXTagCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A45899721C2363E00DC236F /* HXTagCollectionViewFlowLayout.m */; };
+		0A45899F21C251F800DC236F /* JSMGoodsParamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45899E21C251F800DC236F /* JSMGoodsParamsModel.swift */; };
 		0A45CF7521B75E6400759230 /* JSMGoodsDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7421B75E6400759230 /* JSMGoodsDetailVC.swift */; };
 		0A45CF7721B7621900759230 /* JSMGoodsDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7621B7621900759230 /* JSMGoodsDetailHeaderView.swift */; };
 		0A45CF7921B76BD500759230 /* JSMGoodsDetailBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */; };
@@ -292,6 +299,18 @@
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
 		0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZMyProfileCell.swift; sourceTree = "<group>"; };
 		0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMFavouriteModel.swift; sourceTree = "<group>"; };
+		0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSelectGoodsParamsView.swift; sourceTree = "<group>"; };
+		0A45898F21C2363E00DC236F /* HXTagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTagCollectionViewCell.m; sourceTree = "<group>"; };
+		0A45899021C2363E00DC236F /* HXTagAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTagAttribute.h; sourceTree = "<group>"; };
+		0A45899121C2363E00DC236F /* HXTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTagsView.m; sourceTree = "<group>"; };
+		0A45899221C2363E00DC236F /* HXTagsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTagsCell.m; sourceTree = "<group>"; };
+		0A45899321C2363E00DC236F /* HXTagCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTagCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		0A45899421C2363E00DC236F /* HXTagAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTagAttribute.m; sourceTree = "<group>"; };
+		0A45899521C2363E00DC236F /* HXTagCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTagCollectionViewCell.h; sourceTree = "<group>"; };
+		0A45899621C2363E00DC236F /* HXTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTagsView.h; sourceTree = "<group>"; };
+		0A45899721C2363E00DC236F /* HXTagCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTagCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		0A45899821C2363E00DC236F /* HXTagsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTagsCell.h; sourceTree = "<group>"; };
+		0A45899E21C251F800DC236F /* JSMGoodsParamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsParamsModel.swift; sourceTree = "<group>"; };
 		0A45CF7421B75E6400759230 /* JSMGoodsDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsDetailVC.swift; sourceTree = "<group>"; };
 		0A45CF7621B7621900759230 /* JSMGoodsDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsDetailHeaderView.swift; sourceTree = "<group>"; };
 		0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMGoodsDetailBottomView.swift; sourceTree = "<group>"; };
@@ -474,6 +493,7 @@
 				0A45CF7621B7621900759230 /* JSMGoodsDetailHeaderView.swift */,
 				0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */,
 				0A45CF7C21B774E000759230 /* JSMXunJiaCell.swift */,
+				0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -709,6 +729,7 @@
 		0A02A5CF21A58DE3009F2A96 /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
+				0A45898E21C2363E00DC236F /* TagsView */,
 				0A02A5D021A58DE3009F2A96 /* PickerView */,
 				0A02A5D921A58DE3009F2A96 /* ZCycleView */,
 				0A02A5DE21A58DE3009F2A96 /* ShareView */,
@@ -807,6 +828,23 @@
 			path = tool;
 			sourceTree = "<group>";
 		};
+		0A45898E21C2363E00DC236F /* TagsView */ = {
+			isa = PBXGroup;
+			children = (
+				0A45898F21C2363E00DC236F /* HXTagCollectionViewCell.m */,
+				0A45899021C2363E00DC236F /* HXTagAttribute.h */,
+				0A45899121C2363E00DC236F /* HXTagsView.m */,
+				0A45899221C2363E00DC236F /* HXTagsCell.m */,
+				0A45899321C2363E00DC236F /* HXTagCollectionViewFlowLayout.h */,
+				0A45899421C2363E00DC236F /* HXTagAttribute.m */,
+				0A45899521C2363E00DC236F /* HXTagCollectionViewCell.h */,
+				0A45899621C2363E00DC236F /* HXTagsView.h */,
+				0A45899721C2363E00DC236F /* HXTagCollectionViewFlowLayout.m */,
+				0A45899821C2363E00DC236F /* HXTagsCell.h */,
+			);
+			path = TagsView;
+			sourceTree = "<group>";
+		};
 		0A5C2D6C21BF56690017FED6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,6 +864,7 @@
 				0A5C2D7A21BFA1EC0017FED6 /* JSMProductModel.swift */,
 				0A5C2D7C21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift */,
 				0A5C2D7E21BFB0650017FED6 /* JSMXunJiaModel.swift */,
+				0A45899E21C251F800DC236F /* JSMGoodsParamsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1079,6 +1118,8 @@
 				0A02A5F821A58DE3009F2A96 /* LHSBaseModel.swift in Sources */,
 				0A02A56421A58741009F2A96 /* ViewController.swift in Sources */,
 				0A02F5EA21AD6E5E002E3BF9 /* JSMOrderDetailVC.swift in Sources */,
+				0A45899A21C2363F00DC236F /* HXTagsView.m in Sources */,
+				0A45899C21C2363F00DC236F /* HXTagAttribute.m in Sources */,
 				0A02A62421A58DE3009F2A96 /* UsefulPickerView.swift in Sources */,
 				0A02D2F221AEDF5900BE945C /* JSMMyPublishNeedVC.swift in Sources */,
 				0A02A60E21A58DE3009F2A96 /* LHSUserInfoModel.swift in Sources */,
@@ -1093,6 +1134,7 @@
 				0A02A5FA21A58DE3009F2A96 /* GYZCommonArrowCell.swift in Sources */,
 				0A0203AF21B552D8006D1738 /* JSMApplyServiceVC.swift in Sources */,
 				0A0203B121B56571006D1738 /* JSMMySaleServiceVC.swift in Sources */,
+				0A45899D21C2363F00DC236F /* HXTagCollectionViewFlowLayout.m in Sources */,
 				0A02A60521A58DE3009F2A96 /* LHSSelectPayMethodView.swift in Sources */,
 				0A02A5FE21A58DE3009F2A96 /* GYZCommonInfoCell.swift in Sources */,
 				0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */,
@@ -1104,6 +1146,7 @@
 				0A02A63021A58DE3009F2A96 /* ScrollPageView.swift in Sources */,
 				0A5C2D7921BF9FDA0017FED6 /* JSMPublishNeedModel.swift in Sources */,
 				0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */,
+				0A45899F21C251F800DC236F /* JSMGoodsParamsModel.swift in Sources */,
 				0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */,
 				0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */,
 				0A02A63A21A58DE3009F2A96 /* GYZTool.swift in Sources */,
@@ -1135,6 +1178,7 @@
 				0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */,
 				0A02F5EE21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift in Sources */,
 				0A5C2D7221BF5BB30017FED6 /* JSMHomeModel.swift in Sources */,
+				0A45899921C2363F00DC236F /* HXTagCollectionViewCell.m in Sources */,
 				0A02A62721A58DE3009F2A96 /* ZCycleViewCell.swift in Sources */,
 				0A0203B521B56D9D006D1738 /* JSMMySaleServiceFooterView.swift in Sources */,
 				0A02A61F21A58DE3009F2A96 /* Picker.swift in Sources */,
@@ -1168,6 +1212,7 @@
 				0A02A61A21A58DE3009F2A96 /* GYZEmptyView.swift in Sources */,
 				0A02A60721A58DE3009F2A96 /* GYZBottomSendView.swift in Sources */,
 				0A02A61421A58DE3009F2A96 /* MBProgressHUD+Extension.swift in Sources */,
+				0A45899B21C2363F00DC236F /* HXTagsCell.m in Sources */,
 				0A4E46B421B623EE00DB2E50 /* JSMSaleServiceDetailStepCell.swift in Sources */,
 				0A02EAAB21AAD590000B5644 /* JSMMyFavouriteVC.swift in Sources */,
 				0A02EAA721AAD0D6000B5644 /* JSMModifyEmailVC.swift in Sources */,
@@ -1175,6 +1220,7 @@
 				0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */,
 				0A02EAA921AAD1A7000B5644 /* JSMModifyPwdVC.swift in Sources */,
 				0A5C2D7721BF66F20017FED6 /* JSMShopModel.swift in Sources */,
+				0A45898D21C2341F00DC236F /* JSMSelectGoodsParamsView.swift in Sources */,
 				0A02A63921A58DE3009F2A96 /* GYZThrowLineTool.swift in Sources */,
 				0A02A62921A58DE3009F2A96 /* ZPageControl.swift in Sources */,
 				0A45CF7721B7621900759230 /* JSMGoodsDetailHeaderView.swift in Sources */,

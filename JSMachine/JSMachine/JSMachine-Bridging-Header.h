@@ -12,3 +12,8 @@
 #import "GYZCheckTool.h"
 /// 微信支付
 #import "WXApi.h"
+
+/// 多标签选择
+#import "HXTagsView.h"
+#import "HXTagAttribute.h"
+#import "HXTagCollectionViewFlowLayout.h"
