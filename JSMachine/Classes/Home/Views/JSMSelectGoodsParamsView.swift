@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class JSMSelectGoodsParamsView: UIView {
     
@@ -20,6 +21,11 @@ class JSMSelectGoodsParamsView: UIView {
     // 选择传动比
     var selectedRote: String = ""
     var number: Int = 1
+    /// 选择时间戳
+    var selectTime: Int = 0
+    
+    /// 选择结果回调
+    var resultBlock:((_ paramDic: [String: Any]) -> Void)?
     
     /// 填充数据
     var dataModel : JSMGoodsParamsModel?{
@@ -29,7 +35,7 @@ class JSMSelectGoodsParamsView: UIView {
                 nameLab.text = model.goodsModel?.shop_name
                 
                 tagImgView.kf.setImage(with: URL.init(string: model.goodsModel?.img ?? ""), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
-                speedLab.text = "产品转速:\((model.goodsModel?.pro_speed)!)"
+                speedLab.text = "产品转速:  \((model.goodsModel?.pro_speed)!)"
                 
                 for item in model.typeList{
                     typeArr.append(item.p_model!)
@@ -37,18 +43,18 @@ class JSMSelectGoodsParamsView: UIView {
                 if typeArr.count > 0{
                     selectedTypeIndex = 0
                     selectedType = typeArr[selectedTypeIndex]
+                    let typeHeight = HXTagsView.getHeightWithTags(typeArr, layout: typeTagsView.layout, tagAttribute: typeTagsView.tagAttribute, width: kScreenWidth)
+                    
+                    typeTagsView.snp.updateConstraints { (make) in
+                        make.height.equalTo(typeHeight)
+                    }
+                    typeTagsView.tags = typeArr
+                    typeTagsView.selectedTags = [selectedType]
+                    typeTagsView.reloadData()
+                    
+                    setRoteTags()
                 }
 
-                let typeHeight = HXTagsView.getHeightWithTags(typeArr, layout: typeTagsView.layout, tagAttribute: typeTagsView.tagAttribute, width: kScreenWidth)
-
-                typeTagsView.snp.updateConstraints { (make) in
-                    make.height.equalTo(typeHeight)
-                }
-                typeTagsView.tags = typeArr
-                typeTagsView.selectedTags = [selectedType]
-                typeTagsView.reloadData()
-
-                setRoteTags()
             }
         }
     }
@@ -91,6 +97,8 @@ class JSMSelectGoodsParamsView: UIView {
         roteTagsView.completion = {[weak self] (tags,index) in
             self?.selectedRote = tags![0] as! String
         }
+        dateInputView.textFiled.isEnabled = false
+        dateInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedDate))
         minusView.addOnClickListener(target: self, action: #selector(onClickedMinus))
         addView.addOnClickListener(target: self, action: #selector(onClickedAdd))
     }
@@ -420,11 +428,6 @@ class JSMSelectGoodsParamsView: UIView {
         removeAnimation()
     }
     
-    /// 点击bgView不消失
-    @objc func onBlankClicked(){
-        
-    }
-    
     /// 点击空白取消
     @objc func onTapCancle(sender:UITapGestureRecognizer){
         
@@ -432,7 +435,19 @@ class JSMSelectGoodsParamsView: UIView {
     }
     /// 确定
     @objc func clickedOkBtn(){
-        
+        if selectedRote == "" {
+            MBProgressHUD.showAutoDismissHUD(message: "请选择传动比")
+            return
+        }
+        if (dateInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请选择交货日期")
+            return
+        }
+        if resultBlock != nil {
+            let dic: [String: Any] = ["pro_speed": (dataModel?.goodsModel?.pro_speed)!,"pro_model":selectedType,"drive_ratio":selectedRote,"num":number,"t_data":selectTime,"remark":content]
+            resultBlock!(dic)
+        }
+        hide()
     }
     
     /// 减
@@ -448,6 +463,13 @@ class JSMSelectGoodsParamsView: UIView {
         number = Int.init(buyNumLab.text!)!
         number += 1
         buyNumLab.text = "\(number)"
+    }
+    /// 选择日期
+    @objc func onClickedSelectedDate(){
+        UsefulPickerView.showDatePicker("请选择交货期") { [weak self](date) in
+            self?.selectTime = Int(date.timeIntervalSince1970)
+            self?.dateInputView.textFiled.text = date.dateToStringWithFormat(format: "yyyy-MM-dd")
+        }
     }
 }
 extension JSMSelectGoodsParamsView : UITextViewDelegate

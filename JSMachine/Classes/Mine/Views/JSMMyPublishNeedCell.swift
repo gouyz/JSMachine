@@ -25,6 +25,54 @@ class JSMMyPublishNeedCell: UITableViewCell {
                 numberLab.text = "产品数量：\(model.num!)(个)"
                 finishedDateLab.text = "交货日期：" + (model.deal_date?.getDateTime(format: "yyyy/MM/dd"))!
                 noteLab.text = "用户备注：\(model.remark!)"
+                /// 已提交(0已提交未确认有货，只能下载合同。1已确认有货，可以下载合同和上传合同。2已上传合同，还未审核合同是否有效，只能查看合同)。
+                /// 未发货(3合同有效未发货，只能查看合同)
+                /// 已发货(4已发货，待完成，可以查看合同和确认收货)
+                /// 5完成订单,只能查看合同
+                let status: String = model.status!
+                tuiJianLab.isHidden = false
+                tagImgView.isHidden = false
+                operatorLab.isHidden = true
+                if status == "0"{
+                    downLoadBtn.isHidden = false
+                    contractLab.isHidden = true
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                }else if status == "1"{
+                    downLoadBtn.isHidden = false
+                    contractLab.isHidden = false
+                    contractLab.text = "上传合同"
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }else if status == "2" {
+                    downLoadBtn.isHidden = true
+                    contractLab.isHidden = false
+                    contractLab.text = "查看合同"
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }else if status == "3" || status == "5"{
+                    tuiJianLab.isHidden = true
+                    tagImgView.isHidden = true
+                    downLoadBtn.isHidden = true
+                    contractLab.isHidden = false
+                    contractLab.text = "查看合同"
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }else if status == "4"{
+                    tuiJianLab.isHidden = true
+                    tagImgView.isHidden = true
+                    downLoadBtn.isHidden = true
+                    contractLab.isHidden = false
+                    operatorLab.isHidden = false
+                    contractLab.text = "查看合同"
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }
             }
         }
     }
@@ -229,7 +277,7 @@ class JSMMyPublishNeedCell: UITableViewCell {
         let lab = UILabel()
         lab.font = k15Font
         lab.textColor = kBlueFontColor
-        lab.text = "推荐品牌"
+        lab.text = "推荐商品"
         
         return lab
     }()

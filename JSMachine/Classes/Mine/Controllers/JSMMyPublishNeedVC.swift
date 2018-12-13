@@ -13,6 +13,8 @@ private let myPublishNeedCell = "myPublishNeedCell"
 
 class JSMMyPublishNeedVC: GYZBaseVC {
 
+    /// 选择合同
+    var selectContractImg: UIImage?
     var orderStatus: String = ""
     var currPage : Int = 1
     var dataList: [JSMPublishNeedModel] = [JSMPublishNeedModel]()
@@ -115,6 +117,109 @@ class JSMMyPublishNeedVC: GYZBaseVC {
             })
         })
     }
+    /// 推荐商品
+    @objc func onClickedTuiJianGoods(sender: UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        let vc = JSMTuiJianGoodsVC()
+        vc.speed = dataList[tag!].pro_speed!
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    /// 下载合同
+    @objc func onClickedDownContract(sender: UIButton){
+        
+    }
+    /// 查看合同、上传合同
+    @objc func onClickedContract(sender: UITapGestureRecognizer){
+        let tag: Int = (sender.view?.tag)!
+        let model = dataList[tag]
+        let status: String = model.status!
+        if status == "1" {//上传合同
+            selectImg(model: model)
+        }else{// 查看合同
+            
+        }
+    }
+    /// 确认收货
+    @objc func onClickedOperator(sender: UITapGestureRecognizer){
+        let tag: Int = (sender.view?.tag)!
+        requestSureGoods(model: dataList[tag], rowIndex: tag)
+    }
+    
+    /// 确认收货
+    func requestSureGoods(model: JSMPublishNeedModel,rowIndex: Int){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("need/ureceipt", parameters: ["id": model.id ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.dealResult(status: "5",rowIndex: rowIndex)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 选择合同图片
+    func selectImg(model: JSMPublishNeedModel){
+        
+        GYZOpenCameraPhotosTool.shareTool.choosePicture(self, editor: false, finished: { [weak self] (image) in
+            
+            self?.selectContractImg = image
+            self?.requestUpdateContract(model: model)
+        })
+    }
+    /// 上传合同
+    func requestUpdateContract(model: JSMPublishNeedModel){
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        let imgParam: ImageFileUploadParam = ImageFileUploadParam()
+        imgParam.name = "contract_img"
+        imgParam.fileName = "contract_img.jpg"
+        imgParam.mimeType = "image/jpg"
+        imgParam.data = UIImageJPEGRepresentation(selectContractImg!, 0.5)
+        
+        GYZNetWork.uploadImageRequest("need/upContract", parameters: ["id": model.id ?? ""], uploadParam: [imgParam], success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            GYZLog(response)
+//            if response["status"].intValue == kQuestSuccessTag{//请求成功
+//
+//            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    func dealResult(status: String,rowIndex: Int){
+        dataList[rowIndex].status = status
+        if orderStatus != "1" {
+            if status == "5"{
+                dataList.remove(at: rowIndex)
+            }
+        }
+        tableView.reloadData()
+        if dataList.count == 0{
+            ///显示空页面
+            showEmptyView(content: "暂无发布需求信息")
+        }
+    }
 }
 
 extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
@@ -132,20 +237,15 @@ extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: myPublishNeedCell) as! JSMMyPublishNeedCell
         
         cell.dataModel = dataList[indexPath.row]
+        cell.tuiJianLab.tag = indexPath.row
+        cell.tuiJianLab.addOnClickListener(target: self, action: #selector(onClickedTuiJianGoods(sender:)))
+        cell.downLoadBtn.tag = indexPath.row
+        cell.downLoadBtn.addTarget(self, action: #selector(onClickedDownContract(sender:)), for: .touchUpInside)
+        cell.operatorLab.tag = indexPath.row
+        cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedOperator(sender:)))
+        cell.contractLab.tag = indexPath.row
+        cell.contractLab.addOnClickListener(target: self, action: #selector(onClickedContract(sender:)))
         
-        if orderStatus == "1" {
-            cell.downLoadBtn.isHidden = false
-            cell.operatorLab.isHidden = true
-            cell.contractLab.text = "上传合同"
-        }else if orderStatus == "2" {
-            cell.downLoadBtn.isHidden = true
-            cell.operatorLab.isHidden = true
-            cell.contractLab.text = "查看合同"
-        }else {
-            cell.downLoadBtn.isHidden = true
-            cell.operatorLab.isHidden = false
-            cell.contractLab.text = "查看合同"
-        }
         
         cell.selectionStyle = .none
         return cell

@@ -38,6 +38,8 @@ class JSMGoodsModel: LHSBaseModel {
     var id : String?
     /// 图片
     var img : String? = ""
+    /// id
+    var shop_id : String?
     /// 产品的名称
     var shop_name : String? = ""
     /// 产品的转速

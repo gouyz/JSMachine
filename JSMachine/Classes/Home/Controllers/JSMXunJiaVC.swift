@@ -15,6 +15,8 @@ class JSMXunJiaVC: GYZBaseVC {
     
     var goodsId : String = ""
     var dataList: [JSMXunJiaModel] = [JSMXunJiaModel]()
+    /// 申购参数
+    var paramsDic: [String: Any] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,8 +98,56 @@ class JSMXunJiaVC: GYZBaseVC {
         if tag == 0 {
             return
         }
-//        let model = dataList[tag! - 1]
+        showBuy(tag: tag!)
+    }
+    
+    func showBuy(tag: Int){
+        weak var weakSelf = self
+        GYZAlertViewTools.alertViewTools.showAlert(title: "申购", message: "确定要申购吗?", cancleTitle: "取消", viewController: self, buttonTitles: "确定") { (index) in
+            
+            if index != cancelIndex{
+                let model = weakSelf?.dataList[tag - 1]
+                weakSelf?.requestSubmitDatas(model: model!)
+            }
+        }
+    }
+    
+    ///申购提交
+    func requestSubmitDatas(model: JSMXunJiaModel){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        paramsDic["shop_id"] = goodsId
+        paramsDic["user_id"] = userDefaults.string(forKey: "userId") ?? ""
+        paramsDic["price"] = model.price ?? ""
+        paramsDic["brand"] = model.title ?? ""
+        
+        GYZNetWork.requestNetwork("shop/applyBuy",parameters: paramsDic,  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.goSuccessVC()
+                
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 申购成功
+    func goSuccessVC(){
         let vc = JSMPublishSuccessVC()
+        vc.isBuy = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }

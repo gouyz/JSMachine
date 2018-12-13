@@ -9,11 +9,13 @@
 import UIKit
 
 class JSMPublishSuccessVC: GYZBaseVC {
+    
+    var isBuy: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "发布成功"
+        self.navigationItem.title = isBuy ? "申购成功" : "发布成功"
         self.view.backgroundColor = kWhiteColor
         
         setupUI()

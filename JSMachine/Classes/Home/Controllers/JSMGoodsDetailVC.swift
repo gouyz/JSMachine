@@ -18,6 +18,8 @@ class JSMGoodsDetailVC: GYZBaseVC {
     var detailModel: JSMGoodsDetailModel?
     var detailParamsModel: JSMGoodsParamsModel?
     var goodsId : String = ""
+    /// 申购参数
+    var paramsDic: [String: Any] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -266,15 +268,20 @@ class JSMGoodsDetailVC: GYZBaseVC {
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 询价
-//    func goXunJiaVC(){
-//        let vc = JSMXunJiaVC()
-//        vc.goodsId = goodsId
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+    func goXunJiaVC(){
+        let vc = JSMXunJiaVC()
+        vc.goodsId = goodsId
+        vc.paramsDic = paramsDic
+        navigationController?.pushViewController(vc, animated: true)
+    }
     /// 选择参数
     func showParamView(){
         let paramView = JSMSelectGoodsParamsView()
         paramView.dataModel = detailParamsModel
+        paramView.resultBlock = {[weak self] (paramDic) in
+            self?.paramsDic = paramDic
+            self?.goXunJiaVC()
+        }
         paramView.show()
     }
     
