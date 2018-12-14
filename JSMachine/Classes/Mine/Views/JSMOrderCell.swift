@@ -9,6 +9,31 @@
 import UIKit
 
 class JSMOrderCell: UITableViewCell {
+    
+    var dataModel : JSMOrderModel?{
+        didSet{
+            if let model = dataModel {
+                
+                shopNameLab.text = model.title
+                iconView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                
+                nameLab.text = model.shop_name
+                guiGeLab.text = model.pro_model
+                var totalPrice: String = String(format: "%.2f", Double.init(model.price!)!)
+                if Int.init(model.num!) > 0{
+                    totalPrice = String(format: "%.2f", Double.init(model.price!)! * Double.init(model.num!)!)
+                }
+                desLab.text = model.pro_speed ?? "" + "  " + model.drive_ratio!
+                totalLab.text = "共计\(model.num!)件商品 合计￥\(totalPrice)(包含运费￥0.00)"
+                /// 已提交(0已提交未确认有货，只能下载合同。1已确认有货，可以下载合同和上传合同。2已上传合同，还未审核合同是否有效，只能查看合同)。
+                /// 未发货(3合同有效未发货，只能查看合同)
+                /// 已发货(4已发货，待完成，可以查看合同和确认收货)
+                /// 5完成订单,只能查看合同
+//                let status: String = model.status!
+                
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)

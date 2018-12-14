@@ -16,6 +16,8 @@ class JSMOrderVC: GYZBaseVC {
     var orderStatus: String = ""
     var currPage : Int = 1
     
+    var dataList: [JSMOrderModel] = [JSMOrderModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +26,7 @@ class JSMOrderVC: GYZBaseVC {
             
             make.edges.equalTo(0)
         }
+        requestOrderDatas()
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,6 +56,56 @@ class JSMOrderVC: GYZBaseVC {
         return table
     }()
     
+    
+    ///获取我的订单列表数据
+    func requestOrderDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("my/myOrder",parameters: ["user_id": userDefaults.string(forKey: "userId") ?? "","type": orderStatus],  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMOrderModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.hiddenEmptyView()
+                    weakSelf?.tableView.reloadData()
+                }else{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无订单信息")
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+            
+            weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
+                weakSelf?.requestOrderDatas()
+                weakSelf?.hiddenEmptyView()
+            })
+        })
+    }
+    
     /// 订单详情
     func goDetailVC(){
         let vc = JSMOrderDetailVC()
@@ -68,12 +121,14 @@ extension JSMOrderVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 8
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: orderCell) as! JSMOrderCell
+        
+        cell.dataModel = dataList[indexPath.row]
         
         if orderStatus == "2" {
             cell.statusNameLab.backgroundColor = UIColor.ColorHex("#a4a8b8")

@@ -118,6 +118,7 @@
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
 		0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */; };
+		0A38196821C3AA7200E81610 /* JSMOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A38196721C3AA7200E81610 /* JSMOrderModel.swift */; };
 		0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */; };
 		0A45898D21C2341F00DC236F /* JSMSelectGoodsParamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */; };
 		0A45899921C2363F00DC236F /* HXTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A45898F21C2363E00DC236F /* HXTagCollectionViewCell.m */; };
@@ -302,6 +303,7 @@
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
 		0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZMyProfileCell.swift; sourceTree = "<group>"; };
+		0A38196721C3AA7200E81610 /* JSMOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderModel.swift; sourceTree = "<group>"; };
 		0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMFavouriteModel.swift; sourceTree = "<group>"; };
 		0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSelectGoodsParamsView.swift; sourceTree = "<group>"; };
 		0A45898F21C2363E00DC236F /* HXTagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTagCollectionViewCell.m; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 			children = (
 				0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */,
 				0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */,
+				0A38196721C3AA7200E81610 /* JSMOrderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				0A02A63021A58DE3009F2A96 /* ScrollPageView.swift in Sources */,
 				0A5C2D7921BF9FDA0017FED6 /* JSMPublishNeedModel.swift in Sources */,
 				0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */,
+				0A38196821C3AA7200E81610 /* JSMOrderModel.swift in Sources */,
 				0A45899F21C251F800DC236F /* JSMGoodsParamsModel.swift in Sources */,
 				0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */,
 				0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */,
@@ -1418,6 +1422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FPA9N9SK5A;
 				INFOPLIST_FILE = JSMachine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1438,6 +1443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FPA9N9SK5A;
 				INFOPLIST_FILE = JSMachine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (

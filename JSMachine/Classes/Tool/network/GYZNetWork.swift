@@ -135,6 +135,49 @@ class GYZNetWork: NSObject {
             }
         })
     }
+    
+    /// 下载文件网络请求
+    ///
+    /// - Parameters:
+    /// - url: 请求URL
+    /// - parameters: 请求参数
+    /// - method:     请求类型POST/GET
+    /// - success: 上传成功的回调
+    /// - failture: 上传失败的回调
+    static func downLoadRequest(_ url : String,
+                                parameters : Parameters? = nil,
+                                method : HTTPMethod = .get,
+                                success : @escaping (_ response : JSON)->Void,
+                                failture : @escaping (_ error : Error?)-> Void){
+        
+        ///下载到用户文档目录下
+        let destination = DownloadRequest.suggestedDownloadDestination(
+            for: .cachesDirectory,
+            in: .userDomainMask
+        )
+        
+        Alamofire.download(url, method: method, parameters: parameters, to: destination).response { (response) in
+            if response.error == nil{
+                success(JSON(""))
+            }else{
+                failture(response.error)
+            }
+        }
+        
+            
+//            .responseJSON { (response) in
+//            if response.result.isSuccess{
+//                if let value = response.result.value {
+//
+//                    success(JSON(value))
+//                }
+//            }else{
+//                failture(response.result.error)
+//            }
+//        }
+       
+    }
+    
 }
 
 class ImageFileUploadParam: NSObject {

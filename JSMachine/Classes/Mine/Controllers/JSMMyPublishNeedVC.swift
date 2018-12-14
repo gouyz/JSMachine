@@ -18,6 +18,8 @@ class JSMMyPublishNeedVC: GYZBaseVC {
     var orderStatus: String = ""
     var currPage : Int = 1
     var dataList: [JSMPublishNeedModel] = [JSMPublishNeedModel]()
+    /// 下载合同url
+    var downLoadUrl:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,7 +129,17 @@ class JSMMyPublishNeedVC: GYZBaseVC {
     
     /// 下载合同
     @objc func onClickedDownContract(sender: UIButton){
-        
+        showTips()
+    }
+    
+    func showTips(){
+        weak var weakSelf = self
+        GYZAlertViewTools.alertViewTools.showAlert(title: "下载合同", message: "确定要下载合同吗?", cancleTitle: "取消", viewController: self, buttonTitles: "确定") { (index) in
+            
+            if index != cancelIndex{
+                weakSelf?.requestGetDownLoadURL()
+            }
+        }
     }
     /// 查看合同、上传合同
     @objc func onClickedContract(sender: UITapGestureRecognizer){
@@ -218,6 +230,45 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         if dataList.count == 0{
             ///显示空页面
             showEmptyView(content: "暂无发布需求信息")
+        }
+    }
+    
+    /// 获取下载合同url
+    func requestGetDownLoadURL(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "下载中...")
+        
+        GYZNetWork.requestNetwork("index/download",  success: { (response) in
+            
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.downLoadUrl = response["data"]["content"].stringValue
+                weakSelf?.requestDownLoadContract()
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 下载合同
+    func requestDownLoadContract(){
+        weak var weakSelf = self
+//        "http://www.hangge.com/blog/images/logo.png"
+        GYZNetWork.downLoadRequest( downLoadUrl, success: { (response) in
+            weakSelf?.hud?.hide(animated: true)
+            MBProgressHUD.showAutoDismissHUD(message: "下载成功")
+        }) { (error) in
+            GYZLog(error)
+            weakSelf?.hud?.hide(animated: true)
+            MBProgressHUD.showAutoDismissHUD(message: "下载失败，请重新下载")
         }
     }
 }

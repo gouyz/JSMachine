@@ -13,7 +13,7 @@ class JSMOrderManagerVC: GYZBaseVC {
     let titleArr : [String] = ["已提交","未发货","已发货","所有订单"]
     
     //订单状态
-    let stateValue : [String] = ["1","2","3","0"]
+    let stateValue : [String] = ["2","3","4","1"]
     var scrollPageView: ScrollPageView?
     
     override func viewDidLoad() {
