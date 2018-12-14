@@ -28,6 +28,10 @@ class JSMOrderModel: LHSBaseModel {
     var price : String? = "0"
     /// 产品展示图
     var img : String? = ""
+    /// 交货日期
+    var t_data : String? = ""
+    /// 用户备注
+    var remark : String? = ""
     /// 已提交(0已提交未确认有货，只能下载合同。1已确认有货，可以下载合同和上传合同。2已上传合同，还未审核合同是否有效，只能查看合同)。
     /// 未发货(3合同有效未发货，只能查看合同)
     /// 已发货(4已发货，待完成，可以查看合同和确认收货)

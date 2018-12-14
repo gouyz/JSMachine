@@ -167,7 +167,7 @@ class GYZTool: NSObject {
     class func createWebPhotos(urls: [String]?) -> [SKPhotoProtocol] {
         return (0..<(urls?.count)!).map { (i: Int) -> SKPhotoProtocol in
             
-            let photo = SKPhoto.photoWithImageURL((urls?[i].getOriginImgUrl())!)
+            let photo = SKPhoto.photoWithImageURL((urls?[i])!)
             //            SKPhotoBrowserOptions.displayToolbar = false
             ///隐藏分享按钮
             SKPhotoBrowserOptions.displayAction = false

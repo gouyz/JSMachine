@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class JSMApplyServiceVC: GYZBaseVC {
+    
+    /// 是否申请配件
+    var selectedIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -227,6 +231,7 @@ class JSMApplyServiceVC: GYZBaseVC {
         numberInputView.textFiled.keyboardType = .numberPad
         applyInputView.textFiled.isEnabled = false
         applyInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedApply))
+        applyInputView.textFiled.text = "否"
         
     }
     
@@ -412,11 +417,69 @@ class JSMApplyServiceVC: GYZBaseVC {
     
     /// 提交按钮
     @objc func onClickedSubmitBtn(){
+        if (nameInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入联系人姓名")
+            return
+        }
+        if (numberInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入联系方式")
+            return
+        }
+        if (cityInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入公司地址")
+            return
+        }
+        if (addressInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入具体地址")
+            return
+        }
+        if (typeInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
+            return
+        }
+        if (reasonInputView.textFiled.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入故障原因")
+            return
+        }
         
+        requestSubmitDatas()
+    }
+    
+    ///提交
+    func requestSubmitDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("application/apply",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","model":typeInputView.textFiled.text!,"a_name":nameInputView.textFiled.text!,"a_phone":numberInputView.textFiled.text!,"c_address":cityInputView.textFiled.text!,"s_address":addressInputView.textFiled.text!,"f_reason":reasonInputView.textFiled.text!,"a_remark":addressInputView.textFiled.text ?? "","a_part":selectedIndex],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.clickedBackBtn()
+                
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
     }
     /// 是否申请配件
     @objc func onClickedSelectedApply(){
-        
+        GYZAlertViewTools.alertViewTools.showSheet(title: "是否申请配件", message: nil, cancleTitle: "取消", titleArray: ["否","是"], viewController: self) { [weak self](index) in
+            
+            if index != cancelIndex{
+                self?.selectedIndex = index
+            }
+        }
     }
 
 }

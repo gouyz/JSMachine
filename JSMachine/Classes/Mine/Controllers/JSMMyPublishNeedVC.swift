@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import SKPhotoBrowser
 
 private let myPublishNeedCell = "myPublishNeedCell"
 
@@ -53,23 +54,17 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         
         table.register(JSMMyPublishNeedCell.self, forCellReuseIdentifier: myPublishNeedCell)
         
-        //        weak var weakSelf = self
+        weak var weakSelf = self
         ///添加下拉刷新
-        //        GYZTool.addPullRefresh(scorllView: table, pullRefreshCallBack: {
-        //            weakSelf?.refresh()
-        //        })
+        GYZTool.addPullRefresh(scorllView: table, pullRefreshCallBack: {
+            weakSelf?.refresh()
+        })
         //        ///添加上拉加载更多
         //        GYZTool.addLoadMore(scorllView: table, loadMoreCallBack: {
         //            weakSelf?.loadMore()
         //        })
         return table
     }()
-    
-    /// 订单详情
-//    func goDetailVC(){
-//        let vc = JSMOrderDetailVC()
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
     
     ///获取我的发布列表数据
     func requestPublishOrderDatas(){
@@ -84,6 +79,7 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         GYZNetWork.requestNetwork("need/myNeed",parameters: ["user_id": userDefaults.string(forKey: "userId") ?? "","type": orderStatus],  success: { (response) in
             
             weakSelf?.hiddenLoadingView()
+            weakSelf?.closeRefresh()
             GYZLog(response)
             
             if response["status"].intValue == kQuestSuccessTag{//请求成功
@@ -111,6 +107,7 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         }, failture: { (error) in
             
             weakSelf?.hiddenLoadingView()
+            weakSelf?.closeRefresh()
             GYZLog(error)
             
             weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
@@ -118,6 +115,30 @@ class JSMMyPublishNeedVC: GYZBaseVC {
                 weakSelf?.hiddenEmptyView()
             })
         })
+    }
+    
+    // MARK: - 上拉加载更多/下拉刷新
+    /// 下拉刷新
+    func refresh(){
+        currPage = 1
+        requestPublishOrderDatas()
+    }
+    
+    //    /// 上拉加载更多
+    //    func loadMore(){
+    //        currPage += 1
+    //        requestOrderDatas()
+    //    }
+    
+    /// 关闭上拉/下拉刷新
+    func closeRefresh(){
+        if tableView.mj_header.isRefreshing{//下拉刷新
+            dataList.removeAll()
+            GYZTool.endRefresh(scorllView: tableView)
+        }
+        //        else if tableView.mj_footer.isRefreshing{//上拉加载更多
+        //            GYZTool.endLoadMore(scorllView: tableView)
+        //        }
     }
     /// 推荐商品
     @objc func onClickedTuiJianGoods(sender: UITapGestureRecognizer){
@@ -149,13 +170,54 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         if status == "1" {//上传合同
             selectImg(model: model)
         }else{// 查看合同
-            
+            requestGetContractUrl(model: model)
         }
     }
     /// 确认收货
     @objc func onClickedOperator(sender: UITapGestureRecognizer){
         let tag: Int = (sender.view?.tag)!
         requestSureGoods(model: dataList[tag], rowIndex: tag)
+    }
+    /// 查看合同
+    func requestGetContractUrl(model: JSMPublishNeedModel){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("need/see", parameters: ["id": model.id ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+           
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.goBigPhotos(index: 0, urls: [response["data"]["contract_img"].stringValue])
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    /// 查看合同
+    ///
+    /// - Parameters:
+    ///   - index: 索引
+    ///   - urls: 图片路径
+    func goBigPhotos(index: Int, urls: [String]){
+        let browser = SKPhotoBrowser(photos: GYZTool.createWebPhotos(urls: urls))
+        browser.initializePageIndex(index)
+        //        browser.delegate = self
+        
+        present(browser, animated: true, completion: nil)
     }
     
     /// 确认收货

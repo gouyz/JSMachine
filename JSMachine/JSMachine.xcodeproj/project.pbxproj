@@ -1421,8 +1421,9 @@
 			baseConfigurationReference = 08DF58750CDAB7D84170B31B /* Pods-JSMachine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FPA9N9SK5A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JSMachine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1431,6 +1432,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouyz.JSMachine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JSMachine/JSMachine-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1442,8 +1444,9 @@
 			baseConfigurationReference = 62E6A30B92166BCEA7335916 /* Pods-JSMachine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FPA9N9SK5A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JSMachine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1452,6 +1455,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouyz.JSMachine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "JSMachine/JSMachine-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

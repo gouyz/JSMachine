@@ -15,7 +15,9 @@ private let orderDetailHeader = "orderDetailHeader"
 class JSMOrderDetailVC: GYZBaseVC {
     
     let titleArr: [String] = ["产品型号：","产品转速：","传动比：","交货期：","备注："]
-    let infoArr: [String] = ["ZSY160","700R/min","22.4","2018-11-27","无"]
+    var infoArr: [String] = [String]()
+    var orderCode: String = ""
+    var dataModel: JSMOrderModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,7 @@ class JSMOrderDetailVC: GYZBaseVC {
                 make.top.equalTo(kTitleAndStateHeight)
             }
         }
+        requestOrderDetailData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,6 +78,51 @@ class JSMOrderDetailVC: GYZBaseVC {
         return btn
     }()
     
+    /// 获取订单详情 数据
+    func requestOrderDetailData(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/orderDetail", parameters: ["code": orderCode],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                guard let data = response["data"].dictionaryObject else { return }
+                weakSelf?.dataModel = JSMOrderModel.init(dict: data)
+
+                weakSelf?.setData()
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    func setData(){
+        if dataModel != nil {
+            if dataModel?.status == "0" || dataModel?.status == "1"{
+                contractBtn.isHidden = true
+                contractBtn.snp.updateConstraints { (make) in
+                    make.height.equalTo(0)
+                }
+            }
+            infoArr.append((dataModel?.pro_model)!)
+            infoArr.append((dataModel?.pro_speed)!)
+            infoArr.append((dataModel?.drive_ratio)!)
+            infoArr.append((dataModel?.t_data?.getDateTime(format: "yyyy-MM-dd"))!)
+            infoArr.append((dataModel?.remark)!)
+            tableView.reloadData()
+        }
+    }
+    
     /// 查看合同
     @objc func clickedContractBtn(){
         
@@ -100,7 +148,10 @@ extension JSMOrderDetailVC: UITableViewDelegate,UITableViewDataSource{
         cell.lineView.isHidden = true
         
         cell.titleLab.text = titleArr[indexPath.row]
-        cell.contentLab.text = infoArr[indexPath.row]
+        if dataModel != nil {
+            cell.contentLab.text = infoArr[indexPath.row]
+        }
+        
         
         cell.selectionStyle = .none
         return cell
@@ -109,6 +160,7 @@ extension JSMOrderDetailVC: UITableViewDelegate,UITableViewDataSource{
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: orderDetailHeader) as! JSMOrderDetailHeaderView
         
+        headerView.dataModel = dataModel
         
         return headerView
     }

@@ -9,6 +9,22 @@
 import UIKit
 
 class JSMOrderDetailHeaderView: UITableViewHeaderFooterView {
+    
+    var dataModel : JSMOrderModel?{
+        didSet{
+            if let model = dataModel {
+                
+                nameLab.text = "供货商：" + model.title!
+                iconView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+                
+                goodsNameLab.text = model.shop_name
+                numberLab.text = "x" + model.num!
+                
+                
+            }
+        }
+    }
+    
     override init(reuseIdentifier: String?){
         
         super.init(reuseIdentifier: reuseIdentifier)

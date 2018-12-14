@@ -107,8 +107,9 @@ class JSMOrderVC: GYZBaseVC {
     }
     
     /// 订单详情
-    func goDetailVC(){
+    func goDetailVC(model: JSMOrderModel){
         let vc = JSMOrderDetailVC()
+        vc.orderCode = model.code!
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -147,7 +148,7 @@ extension JSMOrderVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goDetailVC()
+        goDetailVC(model: dataList[indexPath.row])
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
