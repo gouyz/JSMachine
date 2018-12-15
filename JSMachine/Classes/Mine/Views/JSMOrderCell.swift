@@ -19,6 +19,9 @@ class JSMOrderCell: UITableViewCell {
                 
                 nameLab.text = model.shop_name
                 guiGeLab.text = model.pro_model
+                if model.price == ""{
+                    model.price = "0"
+                }
                 var totalPrice: String = String(format: "%.2f", Double.init(model.price!)!)
                 if Int.init(model.num!) > 0{
                     totalPrice = String(format: "%.2f", Double.init(model.price!)! * Double.init(model.num!)!)
@@ -29,8 +32,92 @@ class JSMOrderCell: UITableViewCell {
                 /// 未发货(3合同有效未发货，只能查看合同)
                 /// 已发货(4已发货，待完成，可以查看合同和确认收货)
                 /// 5完成订单,只能查看合同
-//                let status: String = model.status!
+                let status: String = model.status!
+                var statusName: String = ""
+                var statusDes: String = ""
+                var colorBg: UIColor = UIColor.ColorHex("#a4a8b8")
                 
+                if status == "0"{
+                    statusDes = "未确认"
+                    statusName = "已提交"
+                    contractLab.isHidden = true
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    operatorLab.text = "下载合同"
+                    operatorLab.isHidden = false
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }else if status == "1"{
+                    statusDes = "已确认"
+                    statusName = "已提交"
+                    contractLab.text = "上传合同"
+                    contractLab.isHidden = false
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    operatorLab.text = "下载合同"
+                    operatorLab.isHidden = false
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }else if status == "2"{
+                    statusDes = "未审核"
+                    statusName = "已提交"
+                    contractLab.text = "查看合同"
+                    contractLab.isHidden = false
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    operatorLab.isHidden = true
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                }else if status == "3"{
+                    statusDes = "未发货"
+                    statusName = "未发货"
+                    contractLab.text = "查看合同"
+                    contractLab.isHidden = false
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    operatorLab.isHidden = true
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                }else if status == "4"{
+                    statusDes = "已发货"
+                    statusName = "已发货"
+                    colorBg = kRedFontColor
+                    contractLab.text = "查看合同"
+                    contractLab.isHidden = false
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    operatorLab.isHidden = false
+                    operatorLab.text = "确认收货"
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }else if status == "5"{
+                    statusDes = "已完成"
+                    statusName = "已完成"
+                    colorBg = kBlueFontColor
+                    contractLab.text = "查看合同"
+                    contractLab.isHidden = false
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    operatorLab.isHidden = true
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                }
+                
+                statusNameLab.text = statusName
+                stateLab.text = statusDes
+                statusNameLab.backgroundColor = colorBg
             }
         }
     }
