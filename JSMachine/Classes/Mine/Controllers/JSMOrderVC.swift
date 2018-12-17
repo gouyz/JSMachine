@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import SKPhotoBrowser
 
 private let orderCell = "orderCell"
 
@@ -15,8 +16,11 @@ class JSMOrderVC: GYZBaseVC {
 
     var orderStatus: String = ""
     var currPage : Int = 1
-    
+    /// 选择合同
+    var selectContractImg: UIImage?
     var dataList: [JSMOrderModel] = [JSMOrderModel]()
+    /// 下载合同url
+    var downLoadUrl:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +110,171 @@ class JSMOrderVC: GYZBaseVC {
         })
     }
     
+    /// 查看合同、上传合同
+    @objc func onClickedContract(sender: UITapGestureRecognizer){
+        let tag: Int = (sender.view?.tag)!
+        let model = dataList[tag]
+        let status: String = model.status!
+        if status == "1" {//上传合同
+            selectImg(model: model)
+        }else{// 查看合同
+            requestGetContractUrl(model: model)
+        }
+    }
+    /// 确认收货、下载合同
+    @objc func onClickedOperator(sender: UITapGestureRecognizer){
+        let tag: Int = (sender.view?.tag)!
+        let model = dataList[tag]
+        let status: String = model.status!
+        if status == "4" {//确认收货
+            requestSureGoods(model: dataList[tag], rowIndex: tag)
+        }else{// 下载合同
+            requestGetDownLoadURL()
+        }
+        
+    }
+    /// 查看合同
+    func requestGetContractUrl(model: JSMOrderModel){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/see", parameters: ["code": model.code ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.goBigPhotos(index: 0, urls: [response["data"]["pic"].stringValue])
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    /// 查看合同
+    ///
+    /// - Parameters:
+    ///   - index: 索引
+    ///   - urls: 图片路径
+    func goBigPhotos(index: Int, urls: [String]){
+        let browser = SKPhotoBrowser(photos: GYZTool.createWebPhotos(urls: urls))
+        browser.initializePageIndex(index)
+        //        browser.delegate = self
+        
+        present(browser, animated: true, completion: nil)
+    }
+    
+    /// 确认收货
+    func requestSureGoods(model: JSMOrderModel,rowIndex: Int){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/ureceipt", parameters: ["code": model.code ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.dealResult(status: "5",rowIndex: rowIndex)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 选择合同图片
+    func selectImg(model: JSMOrderModel){
+        
+        GYZOpenCameraPhotosTool.shareTool.choosePicture(self, editor: false, finished: { [weak self] (image) in
+            
+            self?.selectContractImg = image
+            self?.requestUpdateContract(model: model)
+        })
+    }
+    /// 上传合同
+    func requestUpdateContract(model: JSMOrderModel){
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        let imgParam: ImageFileUploadParam = ImageFileUploadParam()
+        imgParam.name = "pic"
+        imgParam.fileName = "pic.jpg"
+        imgParam.mimeType = "image/jpg"
+        imgParam.data = UIImageJPEGRepresentation(selectContractImg!, 0.5)
+        
+        GYZNetWork.uploadImageRequest("upContract", parameters: ["code": model.code ?? ""], uploadParam: [imgParam], success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            GYZLog(response)
+            //            if response["status"].intValue == kQuestSuccessTag{//请求成功
+            //
+            //            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    func dealResult(status: String,rowIndex: Int){
+        dataList[rowIndex].status = status
+        if orderStatus != "1" {
+            if status == "5"{
+                dataList.remove(at: rowIndex)
+            }
+        }
+        tableView.reloadData()
+        if dataList.count == 0{
+            ///显示空页面
+            showEmptyView(content: "暂无订单信息")
+        }
+    }
+    
+    /// 获取下载合同url
+    func requestGetDownLoadURL(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "下载中...")
+        
+        GYZNetWork.requestNetwork("index/download",  success: { (response) in
+            
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.downLoadUrl = response["data"]["content"].stringValue
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
     /// 订单详情
     func goDetailVC(model: JSMOrderModel){
         let vc = JSMOrderDetailVC()
@@ -131,11 +300,10 @@ extension JSMOrderVC: UITableViewDelegate,UITableViewDataSource{
         
         cell.dataModel = dataList[indexPath.row]
         
-        if orderStatus == "2" {
-            cell.statusNameLab.backgroundColor = UIColor.ColorHex("#a4a8b8")
-        }else{
-            cell.statusNameLab.backgroundColor = kRedFontColor
-        }
+        cell.operatorLab.tag = indexPath.row
+        cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedOperator(sender:)))
+        cell.contractLab.tag = indexPath.row
+        cell.contractLab.addOnClickListener(target: self, action: #selector(onClickedContract(sender:)))
         
         cell.selectionStyle = .none
         return cell

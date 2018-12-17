@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import SKPhotoBrowser
 
 private let orderDetailCell = "orderDetailCell"
 private let orderDetailHeader = "orderDetailHeader"
@@ -125,7 +126,49 @@ class JSMOrderDetailVC: GYZBaseVC {
     
     /// 查看合同
     @objc func clickedContractBtn(){
+        requestGetContractUrl()
+    }
+    
+    /// 查看合同
+    func requestGetContractUrl(){
         
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/see", parameters: ["code": orderCode],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.goBigPhotos(index: 0, urls: [response["data"]["pic"].stringValue])
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    /// 查看合同
+    ///
+    /// - Parameters:
+    ///   - index: 索引
+    ///   - urls: 图片路径
+    func goBigPhotos(index: Int, urls: [String]){
+        let browser = SKPhotoBrowser(photos: GYZTool.createWebPhotos(urls: urls))
+        browser.initializePageIndex(index)
+        //        browser.delegate = self
+        
+        present(browser, animated: true, completion: nil)
     }
 }
 
