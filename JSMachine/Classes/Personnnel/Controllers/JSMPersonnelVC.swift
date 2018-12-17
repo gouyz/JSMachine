@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class JSMPersonnelVC: GYZBaseVC {
+    
+    var jobList:[JSMJobModel] = [JSMJobModel]()
+    var jobNameList: [String] = [String]()
+    var selectedJobIndex: Int = 0
+    var sexNameList: [String] = ["女","男"]
+    var selectedSexIndex: Int = 1
+    /// 选择用户头像
+    var selectUserImg: UIImage?
+    var selectedBirthday: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +35,7 @@ class JSMPersonnelVC: GYZBaseVC {
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
         
         setupUI()
+        requestJobDatas()
     }
     
     /// 创建UI
@@ -166,6 +177,7 @@ class JSMPersonnelVC: GYZBaseVC {
     lazy var userHeaderView: UIImageView = {
         let imgView = UIImageView.init(image: UIImage.init(named: "icon_header_gray_default"))
         imgView.cornerRadius = 30
+        imgView.addOnClickListener(target: self, action: #selector(onClickedSelectedHead))
         
         return imgView
     }()
@@ -214,6 +226,7 @@ class JSMPersonnelVC: GYZBaseVC {
         lab.font = k15Font
         lab.textColor = kBlackFontColor
         lab.text = "请选择您的出生年月"
+        lab.addOnClickListener(target: self, action: #selector(onClickedSelectedDate))
         
         return lab
     }()
@@ -233,7 +246,8 @@ class JSMPersonnelVC: GYZBaseVC {
         let lab = UILabel()
         lab.font = k15Font
         lab.textColor = kBlackFontColor
-        lab.text = "请选择您的性别"
+        lab.text = sexNameList[selectedSexIndex]
+        lab.addOnClickListener(target: self, action: #selector(onClickedSelectedSex))
         
         return lab
     }()
@@ -280,6 +294,7 @@ class JSMPersonnelVC: GYZBaseVC {
         lab.font = k15Font
         lab.textColor = kBlackFontColor
         lab.text = "请选择您的职位"
+        lab.addOnClickListener(target: self, action: #selector(onClickedSelectedJob))
         
         return lab
     }()
@@ -305,8 +320,138 @@ class JSMPersonnelVC: GYZBaseVC {
         return textFiled
     }()
     
+    ///获取职位数据
+    func requestJobDatas(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("engineer/personnel",parameters: nil,  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMJobModel.init(dict: itemInfo)
+                    
+                    weakSelf?.jobList.append(model)
+                    weakSelf?.jobNameList.append(model.position!)
+                }
+                
+                if weakSelf?.jobList.count > 0{
+                    weakSelf?.selectedJobIndex = 0
+                    weakSelf?.jobLab.text = weakSelf?.jobNameList[0]
+                }
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
     /// 提交申请
     @objc func onClickRightBtn(){
+        if selectUserImg == nil {
+            MBProgressHUD.showAutoDismissHUD(message: "请选择头像")
+            return
+        }
+        if (nameTextField.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入真实姓名")
+            return
+        }
+        if selectedBirthday.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请选择出生年月")
+            return
+        }
+        if (phoneTextField.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入手机号")
+            return
+        }else if !(phoneTextField.text?.isMobileNumber())! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入正确的手机号")
+            return
+        }
+        if (addressTextField.text?.isEmpty)! {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入目前所在地")
+            return
+        }
         
+        requestSubmitDatas()
+    }
+    
+    /// 选择职位
+    @objc func onClickedSelectedJob(){
+        if jobList.count > 0 {
+            UsefulPickerView.showSingleColPicker("请选择职位", data: jobNameList, defaultSelectedIndex: selectedJobIndex) {[weak self] (index, value) in
+                self?.selectedJobIndex = index
+                self?.jobLab.text = value
+            }
+        }
+    }
+    /// 选择性别
+    @objc func onClickedSelectedSex(){
+        UsefulPickerView.showSingleColPicker("请选择性别", data: sexNameList, defaultSelectedIndex: selectedSexIndex) {[weak self] (index, value) in
+            self?.selectedSexIndex = index
+            self?.sexLab.text = value
+        }
+    }
+    /// 选择生日
+    @objc func onClickedSelectedDate(){
+        UsefulPickerView.showDatePicker("请选择出生年月") { [weak self](date) in
+            
+            self?.selectedBirthday = date.dateToStringWithFormat(format: "yyyy-MM-dd")
+            self?.birthdayLab.text = self?.selectedBirthday
+        }
+    }
+    
+    @objc func onClickedSelectedHead(){
+        GYZOpenCameraPhotosTool.shareTool.choosePicture(self, editor: true, finished: { [weak self] (image) in
+            
+            self?.selectUserImg = image
+            self?.userHeaderView.image = image
+        })
+    }
+    
+    /// 提交
+    func requestSubmitDatas(){
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        let imgParam: ImageFileUploadParam = ImageFileUploadParam()
+        imgParam.name = "head"
+        imgParam.fileName = "head.jpg"
+        imgParam.mimeType = "image/jpg"
+        imgParam.data = UIImageJPEGRepresentation(selectUserImg!, 0.5)
+        
+        
+        GYZNetWork.uploadImageRequest("engineer/apply", parameters: ["real_name":nameTextField.text!,"birthday":birthdayLab.text!,"sex":"\(selectedSexIndex)","phone":phoneTextField.text!,"type":jobList[selectedJobIndex].id!,"address":addressTextField.text!], uploadParam: [imgParam], success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.goSuccessVC()
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    func goSuccessVC(){
+        let vc = JSMPersonnelSuccessVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
