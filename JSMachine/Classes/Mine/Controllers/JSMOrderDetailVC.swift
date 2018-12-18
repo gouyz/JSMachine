@@ -15,7 +15,7 @@ private let orderDetailHeader = "orderDetailHeader"
 
 class JSMOrderDetailVC: GYZBaseVC {
     
-    let titleArr: [String] = ["产品型号：","产品转速：","传动比：","交货期：","备注："]
+    let titleArr: [String] = ["订单编号：","产品型号：","产品转速：","传动比：","交货期：","备注："]
     var infoArr: [String] = [String]()
     var orderCode: String = ""
     var dataModel: JSMOrderModel?
@@ -115,6 +115,7 @@ class JSMOrderDetailVC: GYZBaseVC {
                     make.height.equalTo(0)
                 }
             }
+            infoArr.append((dataModel?.code)!)
             infoArr.append((dataModel?.pro_model)!)
             infoArr.append((dataModel?.pro_speed)!)
             infoArr.append((dataModel?.drive_ratio)!)

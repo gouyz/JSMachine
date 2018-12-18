@@ -19,9 +19,6 @@ class JSMMySaleServiceHeaderView: UIView {
         
         self.backgroundColor = kBackgroundColor
         setupUI()
-        
-        dealedView.menuImg.badgeView.text = "2"
-        dealedView.menuImg.showBadge(animated: false)
     }
     
     required init?(coder aDecoder: NSCoder) {

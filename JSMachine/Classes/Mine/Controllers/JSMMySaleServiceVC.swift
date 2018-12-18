@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 private let saleServiceCell = "saleServiceCell"
 private let saleServiceHeader = "saleServiceHeader"
 private let saleServiceFooter = "saleServiceFooter"
 
 class JSMMySaleServiceVC: GYZBaseVC {
+    
+    var dataModel: JSMMySaleServiceModel?
+    var isShowMore: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "我的售后"
+        self.navigationItem.title = "售后申请"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_service_kefu")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(clickedKeFuBtn))
         
         view.addSubview(applyBtn)
@@ -40,6 +44,7 @@ class JSMMySaleServiceVC: GYZBaseVC {
         headerView.operatorBlock = {[weak self] (tag) in
             self?.dealOperator(index: tag)
         }
+        requestApplyDatas()
     }
     
     /// 懒加载UITableView
@@ -68,6 +73,50 @@ class JSMMySaleServiceVC: GYZBaseVC {
         return btn
     }()
     lazy var headerView: JSMMySaleServiceHeaderView = JSMMySaleServiceHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 100 + kTitleHeight))
+    
+    ///获取申请售后数据
+    func requestApplyDatas(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/indexApply",parameters: ["user_id": userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].dictionaryObject else { return }
+                weakSelf?.dataModel = JSMMySaleServiceModel.init(dict: data)
+                weakSelf?.setData()
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    func setData(){
+        
+        if dataModel != nil {
+            
+            headerView.dealingView.menuImg.badgeView.text = dataModel?.handingNum
+            headerView.dealingView.menuImg.showBadge(animated: false)
+            headerView.dealedView.menuImg.badgeView.text = dataModel?.handedNum
+            headerView.dealedView.menuImg.showBadge(animated: false)
+            
+            tableView.reloadData()
+        }
+    }
+    
     /// 客服
     @objc func clickedKeFuBtn(){
         
@@ -86,6 +135,12 @@ class JSMMySaleServiceVC: GYZBaseVC {
         }
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    /// 更多
+    @objc func onClickedShowMore(){
+        isShowMore = true
+        tableView.reloadData()
+    }
 }
 extension JSMMySaleServiceVC: UITableViewDelegate,UITableViewDataSource{
     
@@ -93,14 +148,21 @@ extension JSMMySaleServiceVC: UITableViewDelegate,UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        if dataModel != nil {
+            if dataModel?.problemModels.count > 5 && !isShowMore{
+                return 5
+            }else{
+                return (dataModel?.problemModels.count)!
+            }
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: saleServiceCell) as! GYZLabArrowCell
         
-        cell.nameLab.text = "减速机传动失效的4种情况及解决措施"
+        cell.nameLab.text = dataModel?.problemModels[indexPath.row].title
         cell.nameLab.textColor = kBlueFontColor
         
         cell.selectionStyle = .none
@@ -116,10 +178,15 @@ extension JSMMySaleServiceVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: saleServiceFooter) as! JSMMySaleServiceFooterView
+        if isShowMore {
+            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: saleServiceFooter) as! JSMMySaleServiceFooterView
+            
+            footerView.addOnClickListener(target: self, action: #selector(onClickedShowMore))
+            
+            return footerView
+        }
+        return UIView()
         
-        
-        return footerView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -132,6 +199,9 @@ extension JSMMySaleServiceVC: UITableViewDelegate,UITableViewDataSource{
         return 50
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 34
+        if isShowMore {
+            return 34
+        }
+        return 0
     }
 }

@@ -125,7 +125,7 @@ class JSMXunJiaVC: GYZBaseVC {
         paramsDic["shop_id"] = goodsId
         paramsDic["user_id"] = userDefaults.string(forKey: "userId") ?? ""
         paramsDic["price"] = model.price ?? ""
-        paramsDic["brand"] = model.title ?? ""
+        paramsDic["brand_id"] = model.brand_id ?? ""
         
         GYZNetWork.requestNetwork("shop/applyBuy",parameters: paramsDic,  success: { (response) in
             

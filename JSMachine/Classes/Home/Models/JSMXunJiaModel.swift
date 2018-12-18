@@ -16,4 +16,6 @@ class JSMXunJiaModel: LHSBaseModel {
     var title : String? = ""
     /// 产品的价格
     var price : String? = ""
+    /// 品牌的合作商id
+    var brand_id : String?
 }
