@@ -175,6 +175,17 @@ class JSMPublishSuccessVC: GYZBaseVC {
     /// 发布需求按钮
     @objc func clickedPublishBtn(){
         
+        if isBuy {
+            goPublishNeedVC()
+        }else{
+            clickedBackBtn()
+        }
+    }
+    
+    //需求发布
+    func goPublishNeedVC(){
+        let vc = JSMPublishNeedVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 下载合同按钮
     @objc func onClickedDownLoadBtn(){

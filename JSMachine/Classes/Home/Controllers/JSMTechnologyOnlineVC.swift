@@ -12,6 +12,8 @@ import MBProgressHUD
 private let technologyOnlineCell = "technologyOnlineCell"
 
 class JSMTechnologyOnlineVC: GYZBaseVC {
+    
+    var dataList: [JSMTechnologyOnLineModel] = [JSMTechnologyOnLineModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class JSMTechnologyOnlineVC: GYZBaseVC {
             
             make.edges.equalTo(0)
         }
+        requestOnLineDatas()
     }
     
     
@@ -37,6 +40,62 @@ class JSMTechnologyOnlineVC: GYZBaseVC {
         
         return table
     }()
+    
+    ///获取技术在线列表数据
+    func requestOnLineDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("index/online",parameters: nil,  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMTechnologyOnLineModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.hiddenEmptyView()
+                    weakSelf?.tableView.reloadData()
+                }else{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无技术在线信息")
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+            
+            weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
+                weakSelf?.requestOnLineDatas()
+                weakSelf?.hiddenEmptyView()
+            })
+        })
+    }
+    /// webVC
+    func goWebViewVC(title: String){
+        let vc = JSMWebViewVC()
+        vc.url = "http://jsj.0519app.com/service.html"
+        vc.webTitle = title
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 extension JSMTechnologyOnlineVC: UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,14 +103,14 @@ extension JSMTechnologyOnlineVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 12
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: technologyOnlineCell) as! GYZLabArrowCell
         
-        cell.nameLab.text = "圆柱齿轮传动减速机"
+        cell.nameLab.text = dataList[indexPath.row].type
         
         cell.selectionStyle = .none
         return cell
@@ -66,7 +125,7 @@ extension JSMTechnologyOnlineVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        goWebViewVC(title: dataList[indexPath.row].type!)
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

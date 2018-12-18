@@ -109,6 +109,9 @@
 		0A02F5F221AD7E6B002E3BF9 /* JSMNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5F121AD7E6B002E3BF9 /* JSMNewsCell.swift */; };
 		0A02F5F421AD8474002E3BF9 /* JSMPublishNeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5F321AD8474002E3BF9 /* JSMPublishNeedVC.swift */; };
 		0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02F5F521AD91B4002E3BF9 /* JSMPublishSuccessVC.swift */; };
+		0A052C7C21C7E0A5001E7BDE /* JSMTechnologyOnLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A052C7B21C7E0A5001E7BDE /* JSMTechnologyOnLineModel.swift */; };
+		0A052C7E21C7E5F1001E7BDE /* JSMJobModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A052C7D21C7E5F1001E7BDE /* JSMJobModel.swift */; };
+		0A052C8021C7EF27001E7BDE /* JSMPersonnelSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A052C7F21C7EF27001E7BDE /* JSMPersonnelSuccessVC.swift */; };
 		0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */; };
 		0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */; };
 		0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */; };
@@ -295,6 +298,9 @@
 		0A02F5F121AD7E6B002E3BF9 /* JSMNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNewsCell.swift; sourceTree = "<group>"; };
 		0A02F5F321AD8474002E3BF9 /* JSMPublishNeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPublishNeedVC.swift; sourceTree = "<group>"; };
 		0A02F5F521AD91B4002E3BF9 /* JSMPublishSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPublishSuccessVC.swift; sourceTree = "<group>"; };
+		0A052C7B21C7E0A5001E7BDE /* JSMTechnologyOnLineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTechnologyOnLineModel.swift; sourceTree = "<group>"; };
+		0A052C7D21C7E5F1001E7BDE /* JSMJobModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMJobModel.swift; sourceTree = "<group>"; };
+		0A052C7F21C7EF27001E7BDE /* JSMPersonnelSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPersonnelSuccessVC.swift; sourceTree = "<group>"; };
 		0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsCell.swift; sourceTree = "<group>"; };
@@ -633,6 +639,7 @@
 		0A02A5B121A58DE3009F2A96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0A052C7D21C7E5F1001E7BDE /* JSMJobModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -641,6 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				0A02A64321A59249009F2A96 /* JSMPersonnelVC.swift */,
+				0A052C7F21C7EF27001E7BDE /* JSMPersonnelSuccessVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -877,6 +885,7 @@
 				0A5C2D7C21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift */,
 				0A5C2D7E21BFB0650017FED6 /* JSMXunJiaModel.swift */,
 				0A45899E21C251F800DC236F /* JSMGoodsParamsModel.swift */,
+				0A052C7B21C7E0A5001E7BDE /* JSMTechnologyOnLineModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1119,6 +1128,7 @@
 				0A4E46BA21B659B900DB2E50 /* JSMEngineerProfileVC.swift in Sources */,
 				0A02A61C21A58DE3009F2A96 /* LHSCustomAlertView.swift in Sources */,
 				0A0203B321B5665E006D1738 /* JSMMySaleServiceHeaderView.swift in Sources */,
+				0A052C7E21C7E5F1001E7BDE /* JSMJobModel.swift in Sources */,
 				0A02A60821A58DE3009F2A96 /* GYZCommonSwitchCell.swift in Sources */,
 				0A02A61121A58DE3009F2A96 /* ETNavBarTransparent.swift in Sources */,
 				0A5C2D7B21BFA1EC0017FED6 /* JSMProductModel.swift in Sources */,
@@ -1194,6 +1204,7 @@
 				0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */,
 				0A02F5EE21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift in Sources */,
 				0A5C2D7221BF5BB30017FED6 /* JSMHomeModel.swift in Sources */,
+				0A052C8021C7EF27001E7BDE /* JSMPersonnelSuccessVC.swift in Sources */,
 				0A45899921C2363F00DC236F /* HXTagCollectionViewCell.m in Sources */,
 				0A02A62721A58DE3009F2A96 /* ZCycleViewCell.swift in Sources */,
 				0A0203B521B56D9D006D1738 /* JSMMySaleServiceFooterView.swift in Sources */,
@@ -1228,6 +1239,7 @@
 				0A02A61A21A58DE3009F2A96 /* GYZEmptyView.swift in Sources */,
 				0A02A60721A58DE3009F2A96 /* GYZBottomSendView.swift in Sources */,
 				0A02A61421A58DE3009F2A96 /* MBProgressHUD+Extension.swift in Sources */,
+				0A052C7C21C7E0A5001E7BDE /* JSMTechnologyOnLineModel.swift in Sources */,
 				0A45899B21C2363F00DC236F /* HXTagsCell.m in Sources */,
 				0A4E46B421B623EE00DB2E50 /* JSMSaleServiceDetailStepCell.swift in Sources */,
 				0A02EAAB21AAD590000B5644 /* JSMMyFavouriteVC.swift in Sources */,
