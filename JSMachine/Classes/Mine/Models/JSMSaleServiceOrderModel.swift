@@ -35,4 +35,6 @@ class JSMSaleServiceOrderModel: LHSBaseModel {
     var status : String? = ""
     /// 维修工程师电话
     var w_phone : String? = ""
+    /// 是否评价 0未评价 1已评价
+    var is_pj : String? = "0"
 }

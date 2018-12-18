@@ -121,13 +121,64 @@ class JSMDealSaleServiceOrderVC: GYZBaseVC {
             })
         })
     }
-    
-    /// 订单详情
-    func goDetailVC(){
+    /// 删除
+    @objc func onClickedDelete(sender: UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        weak var weakSelf = self
+        GYZAlertViewTools.alertViewTools.showAlert(title: "删除", message: "确定要删除该售后申请吗?", cancleTitle: "取消", viewController: self, buttonTitles: "确定") { (index) in
+            
+            if index != cancelIndex{
+                weakSelf?.requestDelete(rowIndex: tag!)
+            }
+        }
+    }
+    /// 查看详情
+    @objc func onClickedDetail(sender: UITapGestureRecognizer){
+        let tag = sender.view?.tag
         let vc = JSMSaleServiceOrderDetailVC()
+        vc.applyId = dataList[tag!].id!
         navigationController?.pushViewController(vc, animated: true)
     }
+    /// 维修记录
+    @objc func onClickedRecord(sender: UITapGestureRecognizer){
+        
+    }
+    /// 评价
+    @objc func onClickedConment(sender: UITapGestureRecognizer){
+        
+    }
     
+    /// 删除申请
+    func requestDelete(rowIndex: Int){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("my/delApply", parameters: ["id": dataList[rowIndex].id ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.dataList.remove(at: rowIndex)
+                weakSelf?.tableView.reloadData()
+                if weakSelf?.dataList.count == 0{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无售后申请信息")
+                }
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
 }
 
 extension JSMDealSaleServiceOrderVC: UITableViewDelegate,UITableViewDataSource{
@@ -146,23 +197,14 @@ extension JSMDealSaleServiceOrderVC: UITableViewDelegate,UITableViewDataSource{
         
         cell.dataModel = dataList[indexPath.row]
         
-        if orderStatus == "1" {
-            cell.statusNameLab.backgroundColor = UIColor.ColorHex("#a4a8b8")
-            cell.statusNameLab.text = "处理中"
-            cell.operatorLab.isHidden = true
-            cell.operatorLab.snp.updateConstraints { (make) in
-                make.right.equalTo(-1)
-                make.width.equalTo(0)
-            }
-        }else{
-            cell.statusNameLab.backgroundColor = kRedFontColor
-            cell.statusNameLab.text = "已处理"
-            cell.operatorLab.isHidden = false
-            cell.operatorLab.snp.updateConstraints { (make) in
-                make.right.equalTo(-kMargin)
-                make.width.equalTo(60)
-            }
-        }
+        cell.deleteLab.tag = indexPath.row
+        cell.deleteLab.addOnClickListener(target: self, action: #selector(onClickedDelete(sender:)))
+        cell.detailLab.tag = indexPath.row
+        cell.detailLab.addOnClickListener(target: self, action: #selector(onClickedDetail(sender:)))
+        cell.recordLab.tag = indexPath.row
+        cell.recordLab.addOnClickListener(target: self, action: #selector(onClickedRecord(sender:)))
+        cell.operatorLab.tag = indexPath.row
+        cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedConment(sender:)))
         
         cell.selectionStyle = .none
         return cell
@@ -173,9 +215,6 @@ extension JSMDealSaleServiceOrderVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goDetailVC()
     }
     ///MARK : UITableViewDelegate
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -20,54 +20,48 @@ class JSMSaleServiceOrderCell: UITableViewCell {
                 nameLab.text = "联系人：\(model.a_name!)"
                 phoneLab.text = "联系电话：\(model.a_phone!)"
                 desLab.text = "备注：\(model.a_remark!)"
-                /// 已提交(0已提交未确认有货，只能下载合同。1已确认有货，可以下载合同和上传合同。2已上传合同，还未审核合同是否有效，只能查看合同)。
-                /// 未发货(3合同有效未发货，只能查看合同)
-                /// 已发货(4已发货，待完成，可以查看合同和确认收货)
-                /// 5完成订单,只能查看合同
-//                let status: String = model.status!
-//                tuiJianLab.isHidden = false
-//                tagImgView.isHidden = false
-//                operatorLab.isHidden = true
-//                if status == "0"{
-//                    downLoadBtn.isHidden = false
-//                    contractLab.isHidden = true
-//                    contractLab.snp.updateConstraints { (make) in
-//                        make.width.equalTo(0)
-//                    }
-//                }else if status == "1"{
-//                    downLoadBtn.isHidden = false
-//                    contractLab.isHidden = false
-//                    contractLab.text = "上传合同"
-//                    contractLab.snp.updateConstraints { (make) in
-//                        make.width.equalTo(80)
-//                    }
-//                }else if status == "2" {
-//                    downLoadBtn.isHidden = true
-//                    contractLab.isHidden = false
-//                    contractLab.text = "查看合同"
-//                    contractLab.snp.updateConstraints { (make) in
-//                        make.width.equalTo(80)
-//                    }
-//                }else if status == "3" || status == "5"{
-//                    tuiJianLab.isHidden = true
-//                    tagImgView.isHidden = true
-//                    downLoadBtn.isHidden = true
-//                    contractLab.isHidden = false
-//                    contractLab.text = "查看合同"
-//                    contractLab.snp.updateConstraints { (make) in
-//                        make.width.equalTo(80)
-//                    }
-//                }else if status == "4"{
-//                    tuiJianLab.isHidden = true
-//                    tagImgView.isHidden = true
-//                    downLoadBtn.isHidden = true
-//                    contractLab.isHidden = false
-//                    operatorLab.isHidden = false
-//                    contractLab.text = "查看合同"
-//                    contractLab.snp.updateConstraints { (make) in
-//                        make.width.equalTo(80)
-//                    }
-//                }
+                /// 处理中状态为0、1、2客户只有查看和删除操作，已处理状态为3时查看、删除、维修记录、评价，为4和5时查看、删除、维修记录操作
+                let status: String = model.status!
+                var statusName: String = ""
+                var statusBgColor: UIColor = kRedFontColor
+                if Int.init(status) < 3{
+                    statusName = "处理中"
+                    statusBgColor = UIColor.ColorHex("#a4a8b8")
+                    var stateName: String = ""
+                    if status == "0"{
+                        stateName = "未分配"
+                    }else{
+                        stateName = "已分配"
+                    }
+                    stateLab.text = stateName
+                    operatorLab.isHidden = true
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    recordLab.isHidden = true
+                    recordLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                }else{
+                    statusName = "已处理"
+                    stateLab.text = ""
+                    if model.is_pj == "0"{
+                        operatorLab.text = "评价"
+                    }else{
+                        operatorLab.text = "已评价"
+                    }
+                    operatorLab.isHidden = false
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
+                    }
+                    recordLab.isHidden = false
+                    recordLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                }
+                
+                statusNameLab.backgroundColor = statusBgColor
+                statusNameLab.text = statusName
             }
         }
     }
@@ -95,6 +89,7 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         bgView.addSubview(desLab)
         bgView.addSubview(deleteLab)
         bgView.addSubview(recordLab)
+        bgView.addSubview(detailLab)
         bgView.addSubview(operatorLab)
         
         bgView.snp.makeConstraints { (make) in
@@ -152,9 +147,14 @@ class JSMSaleServiceOrderCell: UITableViewCell {
             make.width.equalTo(60)
         }
         recordLab.snp.makeConstraints { (make) in
-            make.right.equalTo(operatorLab.snp.left).offset(-kMargin)
+            make.right.equalTo(detailLab.snp.left).offset(-kMargin)
             make.bottom.height.equalTo(operatorLab)
             make.width.equalTo(80)
+        }
+        detailLab.snp.makeConstraints { (make) in
+            make.right.equalTo(operatorLab.snp.left).offset(-kMargin)
+            make.bottom.height.equalTo(operatorLab)
+            make.width.equalTo(60)
         }
         operatorLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
@@ -198,7 +198,7 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         lab.font = k15Font
         lab.textColor = kBlueFontColor
         lab.textAlignment = .right
-        lab.text = "已分配..."
+        lab.text = ""
         
         return lab
     }()
@@ -259,6 +259,20 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         lab.borderColor = kHeightGaryFontColor
         lab.borderWidth = klineWidth
         
+        
+        return lab
+    }()
+    /// 查看
+    lazy var detailLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k15Font
+        lab.textColor = kHeightGaryFontColor
+        lab.textAlignment = .center
+        lab.text = "查看"
+        lab.cornerRadius = kCornerRadius
+        lab.borderColor = kHeightGaryFontColor
+        lab.borderWidth = klineWidth
+        
         return lab
     }()
     /// 维修记录
@@ -280,7 +294,7 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         lab.font = k13Font
         lab.textColor = kRedFontColor
         lab.textAlignment = .center
-        lab.text = "完成"
+        lab.text = "评价"
         lab.cornerRadius = kCornerRadius
         lab.borderColor = kRedFontColor
         lab.borderWidth = klineWidth

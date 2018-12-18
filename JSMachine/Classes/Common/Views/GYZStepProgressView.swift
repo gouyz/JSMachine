@@ -15,6 +15,7 @@ let labelFont = 12.0
 class GYZStepProgressView: UIScrollView {
     let proWIDTH:Double = 40    //UIView控件的宽高
     let proConfig = 20          //整体控件的前后空隙
+    var selectedIndex: Int = 0 //完成的索引
     
     var auditTitles = NSArray() {
         didSet{
@@ -38,7 +39,7 @@ class GYZStepProgressView: UIScrollView {
                 if idx == 0 {
                     self.showOneUI(isShow: true, text: obj as! String)
                     
-                }else if idx > 0  &&  idx < (auditTitles.count - 1) {
+                }else if idx > 0  &&  idx <= selectedIndex {
                     self.showLaterViewToUI(idx: Double(idx), isShow: true, text: obj as! String)
                 }else {
                     self.showLaterViewToUI(idx: Double(idx), isShow: false, text: obj as! String)

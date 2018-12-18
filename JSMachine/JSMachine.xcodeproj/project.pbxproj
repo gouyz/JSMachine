@@ -13,6 +13,7 @@
 		0A0203B521B56D9D006D1738 /* JSMMySaleServiceFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B421B56D9D006D1738 /* JSMMySaleServiceFooterView.swift */; };
 		0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B621B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift */; };
 		0A0203B921B57245006D1738 /* JSMSaleServiceOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B821B57245006D1738 /* JSMSaleServiceOrderCell.swift */; };
+		0A02327C21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02327B21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift */; };
 		0A02A56221A58741009F2A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A56121A58741009F2A96 /* AppDelegate.swift */; };
 		0A02A56421A58741009F2A96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02A56321A58741009F2A96 /* ViewController.swift */; };
 		0A02A56721A58741009F2A96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A02A56521A58741009F2A96 /* Main.storyboard */; };
@@ -196,6 +197,7 @@
 		0A0203B421B56D9D006D1738 /* JSMMySaleServiceFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceFooterView.swift; sourceTree = "<group>"; };
 		0A0203B621B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMDealSaleServiceOrderVC.swift; sourceTree = "<group>"; };
 		0A0203B821B57245006D1738 /* JSMSaleServiceOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceOrderCell.swift; sourceTree = "<group>"; };
+		0A02327B21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceDetailBottomView.swift; sourceTree = "<group>"; };
 		0A02A55E21A58741009F2A96 /* JSMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A02A56121A58741009F2A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A02A56321A58741009F2A96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				0A4E46AF21B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift */,
 				0A4E46B321B623EE00DB2E50 /* JSMSaleServiceDetailStepCell.swift */,
 				0A05BF9821C2907D0063EBEB /* JSMTuiJianGoodsCell.swift */,
+				0A02327B21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1223,6 +1226,7 @@
 				0A02A61021A58DE3009F2A96 /* GYZUIView+Extension.swift in Sources */,
 				0A02EAB121AADDBB000B5644 /* JSMOrderVC.swift in Sources */,
 				0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */,
+				0A02327C21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift in Sources */,
 				0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */,
 				0A4F840E21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift in Sources */,
 				0A76B7D921AFC3A000720A20 /* GYZLabAndLabView.swift in Sources */,
