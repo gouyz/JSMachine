@@ -9,6 +9,68 @@
 import UIKit
 
 class JSMSaleServiceOrderCell: UITableViewCell {
+    
+    /// 填充数据
+    var dataModel : JSMSaleServiceOrderModel?{
+        didSet{
+            if let model = dataModel {
+                
+                reasonLab.text = "故障原因：\(model.f_reason!)"
+                dateLab.text = model.a_date
+                nameLab.text = "联系人：\(model.a_name!)"
+                phoneLab.text = "联系电话：\(model.a_phone!)"
+                desLab.text = "备注：\(model.a_remark!)"
+                /// 已提交(0已提交未确认有货，只能下载合同。1已确认有货，可以下载合同和上传合同。2已上传合同，还未审核合同是否有效，只能查看合同)。
+                /// 未发货(3合同有效未发货，只能查看合同)
+                /// 已发货(4已发货，待完成，可以查看合同和确认收货)
+                /// 5完成订单,只能查看合同
+//                let status: String = model.status!
+//                tuiJianLab.isHidden = false
+//                tagImgView.isHidden = false
+//                operatorLab.isHidden = true
+//                if status == "0"{
+//                    downLoadBtn.isHidden = false
+//                    contractLab.isHidden = true
+//                    contractLab.snp.updateConstraints { (make) in
+//                        make.width.equalTo(0)
+//                    }
+//                }else if status == "1"{
+//                    downLoadBtn.isHidden = false
+//                    contractLab.isHidden = false
+//                    contractLab.text = "上传合同"
+//                    contractLab.snp.updateConstraints { (make) in
+//                        make.width.equalTo(80)
+//                    }
+//                }else if status == "2" {
+//                    downLoadBtn.isHidden = true
+//                    contractLab.isHidden = false
+//                    contractLab.text = "查看合同"
+//                    contractLab.snp.updateConstraints { (make) in
+//                        make.width.equalTo(80)
+//                    }
+//                }else if status == "3" || status == "5"{
+//                    tuiJianLab.isHidden = true
+//                    tagImgView.isHidden = true
+//                    downLoadBtn.isHidden = true
+//                    contractLab.isHidden = false
+//                    contractLab.text = "查看合同"
+//                    contractLab.snp.updateConstraints { (make) in
+//                        make.width.equalTo(80)
+//                    }
+//                }else if status == "4"{
+//                    tuiJianLab.isHidden = true
+//                    tagImgView.isHidden = true
+//                    downLoadBtn.isHidden = true
+//                    contractLab.isHidden = false
+//                    operatorLab.isHidden = false
+//                    contractLab.text = "查看合同"
+//                    contractLab.snp.updateConstraints { (make) in
+//                        make.width.equalTo(80)
+//                    }
+//                }
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,6 +94,7 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         bgView.addSubview(phoneLab)
         bgView.addSubview(desLab)
         bgView.addSubview(deleteLab)
+        bgView.addSubview(recordLab)
         bgView.addSubview(operatorLab)
         
         bgView.snp.makeConstraints { (make) in
@@ -48,16 +111,18 @@ class JSMSaleServiceOrderCell: UITableViewCell {
             make.left.equalTo(statusNameLab.snp.right).offset(kMargin)
             make.right.equalTo(stateLab.snp.left).offset(-kMargin)
             make.top.equalTo(bgView).offset(kMargin)
-            make.height.equalTo(30)
+//            make.height.equalTo(30)
         }
         stateLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
-            make.top.height.equalTo(reasonLab)
+            make.top.equalTo(reasonLab)
             make.width.equalTo(80)
+            make.height.equalTo(30)
         }
         dateLab.snp.makeConstraints { (make) in
-            make.left.right.height.equalTo(reasonLab)
+            make.left.right.equalTo(reasonLab)
             make.top.equalTo(reasonLab.snp.bottom)
+            make.height.equalTo(30)
         }
         lineView.snp.makeConstraints { (make) in
             make.left.equalTo(dateLab)
@@ -78,13 +143,18 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         }
         desLab.snp.makeConstraints { (make) in
             make.left.right.equalTo(lineView)
-            make.top.equalTo(nameLab.snp.bottom)
-            make.height.equalTo(reasonLab)
+            make.top.equalTo(nameLab.snp.bottom).offset(kMargin)
+            make.bottom.equalTo(operatorLab.snp.top).offset(-kMargin)
         }
         deleteLab.snp.makeConstraints { (make) in
-            make.right.equalTo(operatorLab.snp.left).offset(-20)
+            make.right.equalTo(recordLab.snp.left).offset(-kMargin)
             make.bottom.height.equalTo(operatorLab)
             make.width.equalTo(60)
+        }
+        recordLab.snp.makeConstraints { (make) in
+            make.right.equalTo(operatorLab.snp.left).offset(-kMargin)
+            make.bottom.height.equalTo(operatorLab)
+            make.width.equalTo(80)
         }
         operatorLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
@@ -185,6 +255,19 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         lab.textColor = kHeightGaryFontColor
         lab.textAlignment = .center
         lab.text = "删除"
+        lab.cornerRadius = kCornerRadius
+        lab.borderColor = kHeightGaryFontColor
+        lab.borderWidth = klineWidth
+        
+        return lab
+    }()
+    /// 维修记录
+    lazy var recordLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k15Font
+        lab.textColor = kHeightGaryFontColor
+        lab.textAlignment = .center
+        lab.text = "维修记录"
         lab.cornerRadius = kCornerRadius
         lab.borderColor = kHeightGaryFontColor
         lab.borderWidth = klineWidth

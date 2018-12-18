@@ -108,10 +108,19 @@ class JSMMySaleServiceVC: GYZBaseVC {
         
         if dataModel != nil {
             
-            headerView.dealingView.menuImg.badgeView.text = dataModel?.handingNum
-            headerView.dealingView.menuImg.showBadge(animated: false)
-            headerView.dealedView.menuImg.badgeView.text = dataModel?.handedNum
-            headerView.dealedView.menuImg.showBadge(animated: false)
+            if Int.init((dataModel?.handingNum)!) > 0{
+                headerView.dealingView.menuImg.badgeView.text = dataModel?.handingNum
+                headerView.dealingView.menuImg.showBadge(animated: false)
+            }else{
+                headerView.dealingView.menuImg.clearBadge(animated: false)
+            }
+            if Int.init((dataModel?.handedNum)!) > 0{
+                headerView.dealedView.menuImg.badgeView.text = dataModel?.handedNum
+                headerView.dealedView.menuImg.showBadge(animated: false)
+            }else{
+                headerView.dealedView.menuImg.clearBadge(animated: false)
+            }
+            
             
             tableView.reloadData()
         }
@@ -130,8 +139,12 @@ class JSMMySaleServiceVC: GYZBaseVC {
     /// 售后服务
     func dealOperator(index : Int){
         let vc = JSMDealSaleServiceOrderVC()
-        if index == 2 {
-            vc.isDealing = false
+        if index == 1 {
+            vc.orderStatus = "1"
+        }else if index == 2 {
+            vc.orderStatus = "2"
+        }else if index == 3 {
+            vc.orderStatus = "0"
         }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -140,6 +153,13 @@ class JSMMySaleServiceVC: GYZBaseVC {
     @objc func onClickedShowMore(){
         isShowMore = true
         tableView.reloadData()
+    }
+    /// webVC
+    func goWebViewVC(title: String, url: String){
+        let vc = JSMWebViewVC()
+        vc.url = url
+        vc.webTitle = title
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 extension JSMMySaleServiceVC: UITableViewDelegate,UITableViewDataSource{
@@ -189,7 +209,8 @@ extension JSMMySaleServiceVC: UITableViewDelegate,UITableViewDataSource{
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let model = dataModel?.problemModels[indexPath.row]
+        goWebViewVC(title: (model?.title)!, url: (model?.url)!)
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

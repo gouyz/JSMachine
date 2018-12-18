@@ -148,6 +148,8 @@
 		0A4E46C421B66C1500DB2E50 /* JSMShopLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46C321B66C1500DB2E50 /* JSMShopLeftCell.swift */; };
 		0A4E46C621B6703300DB2E50 /* JSMShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46C521B6703300DB2E50 /* JSMShopCell.swift */; };
 		0A4E46C821B671F600DB2E50 /* JSMShopHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46C721B671F600DB2E50 /* JSMShopHeaderView.swift */; };
+		0A4F840E21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F840D21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift */; };
+		0A4F841021C8DD2300B05384 /* JSMSaleServiceOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F840F21C8DD2300B05384 /* JSMSaleServiceOrderModel.swift */; };
 		0A55E34021C7327B0055BC1B /* JSMMySaleServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A55E33F21C7327B0055BC1B /* JSMMySaleServiceModel.swift */; };
 		0A5C2D6E21BF56850017FED6 /* JSMWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D6D21BF56850017FED6 /* JSMWebViewVC.swift */; };
 		0A5C2D7221BF5BB30017FED6 /* JSMHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C2D7021BF5BB30017FED6 /* JSMHomeModel.swift */; };
@@ -342,6 +344,8 @@
 		0A4E46C321B66C1500DB2E50 /* JSMShopLeftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMShopLeftCell.swift; sourceTree = "<group>"; };
 		0A4E46C521B6703300DB2E50 /* JSMShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMShopCell.swift; sourceTree = "<group>"; };
 		0A4E46C721B671F600DB2E50 /* JSMShopHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMShopHeaderView.swift; sourceTree = "<group>"; };
+		0A4F840D21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceManagerVC.swift; sourceTree = "<group>"; };
+		0A4F840F21C8DD2300B05384 /* JSMSaleServiceOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceOrderModel.swift; sourceTree = "<group>"; };
 		0A55E33F21C7327B0055BC1B /* JSMMySaleServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceModel.swift; sourceTree = "<group>"; };
 		0A5C2D6D21BF56850017FED6 /* JSMWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMWebViewVC.swift; sourceTree = "<group>"; };
 		0A5C2D7021BF5BB30017FED6 /* JSMHomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMHomeModel.swift; sourceTree = "<group>"; };
@@ -573,6 +577,7 @@
 				0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */,
 				0A38196721C3AA7200E81610 /* JSMOrderModel.swift */,
 				0A55E33F21C7327B0055BC1B /* JSMMySaleServiceModel.swift */,
+				0A4F840F21C8DD2300B05384 /* JSMSaleServiceOrderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -595,6 +600,7 @@
 				0A0203B621B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift */,
 				0A4E46AD21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift */,
 				0A05BF9621C28CE60063EBEB /* JSMTuiJianGoodsVC.swift */,
+				0A4F840D21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1164,6 +1170,7 @@
 				0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */,
 				0A76B7D121AF92A100720A20 /* JSMPartnerCell.swift in Sources */,
 				0A5C2D7521BF61B70017FED6 /* JSMPartnerModel.swift in Sources */,
+				0A4F841021C8DD2300B05384 /* JSMSaleServiceOrderModel.swift in Sources */,
 				0A02EAA521AACFED000B5644 /* JSMModifyNickNameVC.swift in Sources */,
 				0A02A60D21A58DE3009F2A96 /* GYZBaseVC.swift in Sources */,
 				0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */,
@@ -1217,6 +1224,7 @@
 				0A02EAB121AADDBB000B5644 /* JSMOrderVC.swift in Sources */,
 				0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */,
 				0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */,
+				0A4F840E21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift in Sources */,
 				0A76B7D921AFC3A000720A20 /* GYZLabAndLabView.swift in Sources */,
 				0A4E46C621B6703300DB2E50 /* JSMShopCell.swift in Sources */,
 				0A5C2D7D21BFA9AB0017FED6 /* JSMGoodsDetailModel.swift in Sources */,

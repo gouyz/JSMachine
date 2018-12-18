@@ -38,7 +38,7 @@ class GYZMainTabBarVC: UITabBarController {
         addChildViewController(nav)
         childController.tabBarItem.title = title
         if title == "" {// 人才库
-            childController.tabBarItem.imageInsets = UIEdgeInsets.init(top: -10, left: 0, bottom: -10, right: 0)
+            childController.tabBarItem.imageInsets = UIEdgeInsets.init(top: -5, left: 0, bottom: 5, right: 0)
         }
 
         // 设置 tabbarItem 选中状态的图片(不被系统默认渲染,显示图像原始颜色)
