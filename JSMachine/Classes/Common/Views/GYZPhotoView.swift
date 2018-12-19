@@ -76,7 +76,7 @@ class GYZPhotoView: UIView {
                     let imgView: UIImageView = imageViewsArray[index]
                     
                     imgView.isHidden = false
-                    imgView.kf.setImage(with: URL.init(string: item.getThumbImgUrl(size: "w_300,h_300")), placeholder: UIImage.init(named: "icon_default"), options: nil, progressBlock: nil, completionHandler: nil)
+                    imgView.kf.setImage(with: URL.init(string: item), placeholder: UIImage.init(named: "icon_default"), options: nil, progressBlock: nil, completionHandler: nil)
                     
                     imgView.frame = CGRect.init(x: CGFloat.init(columnIndex) * (imgWidth + margin), y: CGFloat.init(rowIndex) * (imgHight + margin), width: imgWidth, height: imgHight)
                 }

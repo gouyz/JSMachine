@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 private let engineerOrderCell = "engineerOrderCell"
 
@@ -14,6 +15,7 @@ class JSMEngineerOrderVC: GYZBaseVC {
 
     var currPage : Int = 1
     var orderStatus: String = ""
+    var dataList: [JSMSaleServiceOrderModel] = [JSMSaleServiceOrderModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,8 @@ class JSMEngineerOrderVC: GYZBaseVC {
             
             make.edges.equalTo(0)
         }
+        
+        requestServiceDatas()
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,27 +41,126 @@ class JSMEngineerOrderVC: GYZBaseVC {
         table.dataSource = self
         table.delegate = self
         table.separatorStyle = .none
+        // 设置大概高度
+        table.estimatedRowHeight = 210
+        // 设置行高为自动适配
+        table.rowHeight = UITableViewAutomaticDimension
         
         table.register(JSMSaleServiceOrderCell.self, forCellReuseIdentifier: engineerOrderCell)
         
-        //        weak var weakSelf = self
-        ///添加下拉刷新
-        //        GYZTool.addPullRefresh(scorllView: table, pullRefreshCallBack: {
-        //            weakSelf?.refresh()
-        //        })
-        //        ///添加上拉加载更多
-        //        GYZTool.addLoadMore(scorllView: table, loadMoreCallBack: {
-        //            weakSelf?.loadMore()
-        //        })
         return table
     }()
     
-    /// 订单详情
-    func goDetailVC(){
-        let vc = JSMSaleServiceOrderDetailVC()
-        navigationController?.pushViewController(vc, animated: true)
+    ///获取售后d申请列表数据
+    func requestServiceDatas(){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        showLoadingView()
+        
+        GYZNetWork.requestNetwork("engineer/allot",parameters: ["engineer_id": userDefaults.string(forKey: "userId") ?? "","type":orderStatus],  success: { (response) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                guard let data = response["data"].array else { return }
+                
+                for item in data{
+                    guard let itemInfo = item.dictionaryObject else { return }
+                    let model = JSMSaleServiceOrderModel.init(dict: itemInfo)
+                    
+                    weakSelf?.dataList.append(model)
+                }
+                if weakSelf?.dataList.count > 0{
+                    weakSelf?.hiddenEmptyView()
+                    weakSelf?.tableView.reloadData()
+                }else{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无售后申请信息")
+                }
+                
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            
+            weakSelf?.hiddenLoadingView()
+            GYZLog(error)
+            
+            weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
+                weakSelf?.requestServiceDatas()
+                weakSelf?.hiddenEmptyView()
+            })
+        })
     }
     
+    /// 查看详情
+    @objc func onClickedDetail(sender: UITapGestureRecognizer){
+//        let tag = sender.view?.tag
+//        let vc = JSMSaleServiceOrderDetailVC()
+//        vc.applyId = dataList[tag!].id!
+//        navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 维修记录
+    @objc func onClickedRecord(sender: UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        let vc = JSMSaleServiceRecordVC()
+        vc.applyId = dataList[tag!].id!
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 处理、完成、看评价
+    @objc func onClickedOperator(sender: UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        let model = dataList[tag!]
+    }
+    /// 删除
+    @objc func onClickedDelete(sender: UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        weak var weakSelf = self
+        GYZAlertViewTools.alertViewTools.showAlert(title: "删除", message: "确定要删除该售后申请吗?", cancleTitle: "取消", viewController: self, buttonTitles: "确定") { (index) in
+            
+            if index != cancelIndex{
+                weakSelf?.requestDelete(rowIndex: tag!)
+            }
+        }
+    }
+    /// 删除申请
+    func requestDelete(rowIndex: Int){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("engineer/delAllot", parameters: ["id": dataList[rowIndex].id ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.dataList.remove(at: rowIndex)
+                weakSelf?.tableView.reloadData()
+                if weakSelf?.dataList.count == 0{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无售后申请信息")
+                }
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
 }
 
 extension JSMEngineerOrderVC: UITableViewDelegate,UITableViewDataSource{
@@ -67,51 +170,23 @@ extension JSMEngineerOrderVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 8
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: engineerOrderCell) as! JSMSaleServiceOrderCell
         
-        if orderStatus == "1" {
-            cell.statusNameLab.backgroundColor = kRedFontColor
-            cell.statusNameLab.text = "新分配"
-            cell.deleteLab.isHidden = true
-            cell.deleteLab.snp.updateConstraints { (make) in
-                make.width.equalTo(0)
-            }
-            cell.operatorLab.isHidden = false
-            cell.operatorLab.text = "接单"
-            cell.operatorLab.snp.updateConstraints { (make) in
-                make.right.equalTo(-kMargin)
-                make.width.equalTo(60)
-            }
-        }else if orderStatus == "2"{
-            cell.statusNameLab.backgroundColor = UIColor.ColorHex("#a4a8b8")
-            cell.statusNameLab.text = "处理中"
-            cell.deleteLab.isHidden = false
-            cell.deleteLab.snp.updateConstraints { (make) in
-                make.width.equalTo(60)
-            }
-            cell.operatorLab.isHidden = false
-            cell.operatorLab.snp.updateConstraints { (make) in
-                make.right.equalTo(-kMargin)
-                make.width.equalTo(60)
-            }
-        }else{
-            cell.statusNameLab.backgroundColor = kBlueFontColor
-            cell.statusNameLab.text = "已完成"
-            cell.deleteLab.isHidden = false
-            cell.deleteLab.snp.updateConstraints { (make) in
-                make.width.equalTo(60)
-            }
-            cell.operatorLab.isHidden = true
-            cell.operatorLab.snp.updateConstraints { (make) in
-                make.right.equalTo(-1)
-                make.width.equalTo(0)
-            }
-        }
+        cell.dataModelEngineer = dataList[indexPath.row]
+        
+        cell.deleteLab.tag = indexPath.row
+        cell.deleteLab.addOnClickListener(target: self, action: #selector(onClickedDelete(sender:)))
+        cell.detailLab.tag = indexPath.row
+        cell.detailLab.addOnClickListener(target: self, action: #selector(onClickedDetail(sender:)))
+        cell.recordLab.tag = indexPath.row
+        cell.recordLab.addOnClickListener(target: self, action: #selector(onClickedRecord(sender:)))
+        cell.operatorLab.tag = indexPath.row
+        cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedOperator(sender:)))
         
         cell.selectionStyle = .none
         return cell
@@ -123,13 +198,7 @@ extension JSMEngineerOrderVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goDetailVC()
-    }
     ///MARK : UITableViewDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 210
-    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.00001
     }

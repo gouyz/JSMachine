@@ -10,7 +10,7 @@ import UIKit
 
 class JSMSaleServiceOrderCell: UITableViewCell {
     
-    /// 填充数据
+    /// 填充数据 客户
     var dataModel : JSMSaleServiceOrderModel?{
         didSet{
             if let model = dataModel {
@@ -58,6 +58,88 @@ class JSMSaleServiceOrderCell: UITableViewCell {
                     recordLab.snp.updateConstraints { (make) in
                         make.width.equalTo(80)
                     }
+                }
+                
+                statusNameLab.backgroundColor = statusBgColor
+                statusNameLab.text = statusName
+            }
+        }
+    }
+    
+    /// 填充数据 工程师
+    var dataModelEngineer : JSMSaleServiceOrderModel?{
+        didSet{
+            if let model = dataModelEngineer {
+                
+                reasonLab.text = "故障原因：\(model.f_reason!)"
+                dateLab.text = model.a_date
+                nameLab.text = "联系人：\(model.a_name!)"
+                phoneLab.text = "联系电话：\(model.a_phone!)"
+                desLab.text = "备注：\(model.a_remark!)"
+                /// 状态（(1,已分配状态)(2,上门维修)(3,工程师维修完成)（4，客户评价确认完成））
+                /// 状态对应的操作显示：1：查看申请单、处理；2：查看申请单、完成 ；3：查看申请单，删除，查看维修单；4：查看申请单，删除，查看维修单；查看用户评价。
+                var stateName: String = ""
+                if model.first == "1"{
+                    stateName = "优先处理"
+                }
+                stateLab.text = stateName
+                
+                let status: String = model.status!
+                var statusName: String = ""
+                var statusBgColor: UIColor = UIColor.ColorHex("#a4a8b8")
+                operatorLab.isHidden = false
+                operatorLab.snp.updateConstraints { (make) in
+                    make.width.equalTo(60)
+                    make.right.equalTo(-kMargin)
+                }
+                
+                if status == "1"{
+                    statusName = "新分配"
+                    statusBgColor = kRedFontColor
+                
+                    deleteLab.isHidden = true
+                    deleteLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    recordLab.isHidden = true
+                    recordLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    operatorLab.text = "处理"
+                }else if status == "2"{
+                    statusName = "处理中"
+                    
+                    operatorLab.text = "完成"
+                    deleteLab.isHidden = true
+                    deleteLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    recordLab.isHidden = true
+                    recordLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                }else{
+                    statusName = "已完成"
+                    
+                    deleteLab.isHidden = false
+                    deleteLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
+                    }
+                    recordLab.isHidden = false
+                    recordLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    statusBgColor = kBlueFontColor
+                    if status == "3"{
+                        operatorLab.isHidden = true
+                        operatorLab.snp.updateConstraints { (make) in
+                            make.width.equalTo(0)
+                            make.right.equalTo(-1)
+                        }
+                    }else{
+                        operatorLab.text = "看评价"
+                    }
+                
                 }
                 
                 statusNameLab.backgroundColor = statusBgColor

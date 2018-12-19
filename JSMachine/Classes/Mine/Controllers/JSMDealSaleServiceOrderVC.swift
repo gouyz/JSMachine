@@ -141,8 +141,12 @@ class JSMDealSaleServiceOrderVC: GYZBaseVC {
     }
     /// 维修记录
     @objc func onClickedRecord(sender: UITapGestureRecognizer){
-        
+        let tag = sender.view?.tag
+        let vc = JSMSaleServiceRecordVC()
+        vc.applyId = dataList[tag!].id!
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
     /// 评价
     @objc func onClickedConment(sender: UITapGestureRecognizer){
         let tag = sender.view?.tag

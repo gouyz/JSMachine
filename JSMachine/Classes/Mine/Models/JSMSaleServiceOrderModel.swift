@@ -37,4 +37,6 @@ class JSMSaleServiceOrderModel: LHSBaseModel {
     var w_phone : String? = ""
     /// 是否评价 0未评价 1已评价
     var is_pj : String? = "0"
+    /// 0:不优先处理 ；1：优先处理
+    var first : String? = "0"
 }
