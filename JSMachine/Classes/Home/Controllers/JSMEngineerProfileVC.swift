@@ -15,7 +15,6 @@ class JSMEngineerProfileVC: GYZBaseVC {
 
     /// 选择用户头像
     var selectUserImg: UIImage?
-    var userInfoModel: LHSUserInfoModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,34 +68,6 @@ class JSMEngineerProfileVC: GYZBaseVC {
         return btn
     }()
     
-    /// 获取我的 数据
-    func requestMineData(){
-        if !GYZTool.checkNetWork() {
-            return
-        }
-        
-        weak var weakSelf = self
-        createHUD(message: "加载中...")
-        
-        GYZNetWork.requestNetwork("doctor/doctor", parameters: ["id": userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
-            
-            weakSelf?.hud?.hide(animated: true)
-            GYZLog(response)
-            if response["status"].intValue == kQuestSuccessTag{//请求成功
-                guard let data = response["data"].dictionaryObject else { return }
-                weakSelf?.userInfoModel = LHSUserInfoModel.init(dict: data)
-                weakSelf?.tableView.reloadData()
-                
-            }else{
-                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
-            }
-            
-        }, failture: { (error) in
-            weakSelf?.hud?.hide(animated: true)
-            GYZLog(error)
-        })
-    }
-    
     /// 选择头像
     func selectHeaderImg(){
         
@@ -104,7 +75,7 @@ class JSMEngineerProfileVC: GYZBaseVC {
             
             self?.selectUserImg = image
             self?.tableView.reloadData()
-            //            self?.requestUpdateHeaderImg()
+            self?.requestUpdateHeaderImg()
         })
     }
     
@@ -119,13 +90,13 @@ class JSMEngineerProfileVC: GYZBaseVC {
         imgParam.mimeType = "image/jpg"
         imgParam.data = UIImageJPEGRepresentation(selectUserImg!, 0.5)
         
-        GYZNetWork.uploadImageRequest("doctor/file_head", parameters: ["id":userDefaults.string(forKey: "userId") ?? ""], uploadParam: [imgParam], success: { (response) in
+        GYZNetWork.uploadImageRequest("engineer/editInfo", parameters: ["engineer_id":userDefaults.string(forKey: "userId") ?? ""], uploadParam: [imgParam], success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             GYZLog(response)
             if response["status"].intValue == kQuestSuccessTag{//请求成功
-                
+                userDefaults.set(response["data"]["head"].stringValue, forKey: "head")//用户头像
                 weakSelf?.tableView.reloadData()
                 
             }
@@ -145,6 +116,7 @@ class JSMEngineerProfileVC: GYZBaseVC {
     /// 修改密码
     func goPwdVC(){
         let vc = JSMModifyPwdVC()
+        vc.isEngineer = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -173,30 +145,30 @@ extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
             if selectUserImg != nil{
                 cell.userImgView.image = selectUserImg
             }else{
-                cell.userImgView.image = UIImage.init(named: "icon_header_default")
-                //                cell.userImgView.kf.setImage(with: URL.init(string: (userInfoModel?.head)!), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
+            
+                cell.userImgView.kf.setImage(with: URL.init(string: userDefaults.string(forKey: "head")!), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
             }
             
         } else if indexPath.row == 1{
             cell.nameLab.text = "姓名"
             cell.desLab.isHidden = false
             cell.rightIconView.isHidden = true
-            cell.desLab.text = "gyz"
+            cell.desLab.text = userDefaults.string(forKey: "realName")
         }else if indexPath.row == 2{
             cell.nameLab.text = "工号"
             cell.desLab.isHidden = false
             cell.rightIconView.isHidden = true
-            cell.desLab.text = "000001"
+            cell.desLab.text = userDefaults.string(forKey: "code")
         }else if indexPath.row == 3{
             cell.nameLab.text = "性别"
             cell.rightIconView.isHidden = true
             cell.desLab.isHidden = false
-            cell.desLab.text = "男"
+            cell.desLab.text = userDefaults.string(forKey: "sex") == "1" ? "男" : "女"
         }else if indexPath.row == 4{
             cell.nameLab.text = "手机号"
             cell.rightIconView.isHidden = true
             cell.desLab.isHidden = false
-            cell.desLab.text = "13812345678"
+            cell.desLab.text = userDefaults.string(forKey: "phone")
         }else if indexPath.row == 5{
             cell.nameLab.text = "修改密码"
         }

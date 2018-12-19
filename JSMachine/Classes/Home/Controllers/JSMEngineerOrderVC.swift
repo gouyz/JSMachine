@@ -48,6 +48,12 @@ class JSMEngineerOrderVC: GYZBaseVC {
         
         table.register(JSMSaleServiceOrderCell.self, forCellReuseIdentifier: engineerOrderCell)
         
+        weak var weakSelf = self
+        ///添加下拉刷新
+        GYZTool.addPullRefresh(scorllView: table, pullRefreshCallBack: {
+            weakSelf?.refresh()
+        })
+        
         return table
     }()
     
@@ -64,6 +70,7 @@ class JSMEngineerOrderVC: GYZBaseVC {
         GYZNetWork.requestNetwork("engineer/allot",parameters: ["engineer_id": userDefaults.string(forKey: "userId") ?? "","type":orderStatus],  success: { (response) in
             
             weakSelf?.hiddenLoadingView()
+            weakSelf?.closeRefresh()
             GYZLog(response)
             
             if response["status"].intValue == kQuestSuccessTag{//请求成功
@@ -91,6 +98,7 @@ class JSMEngineerOrderVC: GYZBaseVC {
         }, failture: { (error) in
             
             weakSelf?.hiddenLoadingView()
+            weakSelf?.closeRefresh()
             GYZLog(error)
             
             weakSelf?.showEmptyView(content: "加载失败，请点击重新加载", reload: {
@@ -100,12 +108,36 @@ class JSMEngineerOrderVC: GYZBaseVC {
         })
     }
     
+    // MARK: - 上拉加载更多/下拉刷新
+    /// 下拉刷新
+    func refresh(){
+        currPage = 1
+        requestServiceDatas()
+    }
+    
+    //    /// 上拉加载更多
+    //    func loadMore(){
+    //        currPage += 1
+    //        requestOrderDatas()
+    //    }
+    
+    /// 关闭上拉/下拉刷新
+    func closeRefresh(){
+        if tableView.mj_header.isRefreshing{//下拉刷新
+            dataList.removeAll()
+            GYZTool.endRefresh(scorllView: tableView)
+        }
+        //        else if tableView.mj_footer.isRefreshing{//上拉加载更多
+        //            GYZTool.endLoadMore(scorllView: tableView)
+        //        }
+    }
+    
     /// 查看详情
     @objc func onClickedDetail(sender: UITapGestureRecognizer){
-//        let tag = sender.view?.tag
-//        let vc = JSMSaleServiceOrderDetailVC()
-//        vc.applyId = dataList[tag!].id!
-//        navigationController?.pushViewController(vc, animated: true)
+        let tag = sender.view?.tag
+        let vc = JSMEngineerOrderDetailVC()
+        vc.applyId = dataList[tag!].id!
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 维修记录
     @objc func onClickedRecord(sender: UITapGestureRecognizer){
@@ -118,6 +150,20 @@ class JSMEngineerOrderVC: GYZBaseVC {
     @objc func onClickedOperator(sender: UITapGestureRecognizer){
         let tag = sender.view?.tag
         let model = dataList[tag!]
+        let status: String = model.status!
+        if status == "1" {/// 处理
+            requestDealOrder(rowIndex: tag!)
+        }else if status == "2" {/// 完成
+            
+        }else{/// 看评价
+            goConmentVC(id: model.id!)
+        }
+    }
+    /// 看评价
+    func goConmentVC(id: String){
+        let vc = JSMConmentDetailVC()
+        vc.orderId = id
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 删除
     @objc func onClickedDelete(sender: UITapGestureRecognizer){
@@ -141,6 +187,38 @@ class JSMEngineerOrderVC: GYZBaseVC {
         createHUD(message: "加载中...")
         
         GYZNetWork.requestNetwork("engineer/delAllot", parameters: ["id": dataList[rowIndex].id ?? ""],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.dataList.remove(at: rowIndex)
+                weakSelf?.tableView.reloadData()
+                if weakSelf?.dataList.count == 0{
+                    ///显示空页面
+                    weakSelf?.showEmptyView(content: "暂无售后申请信息")
+                }
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    
+    /// 处理
+    func requestDealOrder(rowIndex: Int){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("engineer/dealAllot", parameters: ["id": dataList[rowIndex].id ?? ""],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)

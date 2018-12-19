@@ -106,21 +106,10 @@ class JSMSaleServiceOrderCell: UITableViewCell {
                         make.width.equalTo(0)
                     }
                     operatorLab.text = "处理"
-                }else if status == "2"{
-                    statusName = "处理中"
-                    
-                    operatorLab.text = "完成"
-                    deleteLab.isHidden = true
-                    deleteLab.snp.updateConstraints { (make) in
-                        make.width.equalTo(0)
-                    }
-                    recordLab.isHidden = true
-                    recordLab.snp.updateConstraints { (make) in
-                        make.width.equalTo(0)
-                    }
-                }else{
+                }else if status == "4"{
                     statusName = "已完成"
-                    
+                    statusBgColor = kBlueFontColor
+                    operatorLab.text = "看评价"
                     deleteLab.isHidden = false
                     deleteLab.snp.updateConstraints { (make) in
                         make.width.equalTo(60)
@@ -129,15 +118,34 @@ class JSMSaleServiceOrderCell: UITableViewCell {
                     recordLab.snp.updateConstraints { (make) in
                         make.width.equalTo(80)
                     }
-                    statusBgColor = kBlueFontColor
+                }else{
+                    statusName = "处理中"
+                    
                     if status == "3"{
                         operatorLab.isHidden = true
                         operatorLab.snp.updateConstraints { (make) in
                             make.width.equalTo(0)
                             make.right.equalTo(-1)
                         }
+                        deleteLab.isHidden = false
+                        deleteLab.snp.updateConstraints { (make) in
+                            make.width.equalTo(60)
+                        }
+                        recordLab.isHidden = false
+                        recordLab.snp.updateConstraints { (make) in
+                            make.width.equalTo(80)
+                        }
                     }else{
-                        operatorLab.text = "看评价"
+                        
+                        operatorLab.text = "完成"
+                        deleteLab.isHidden = true
+                        deleteLab.snp.updateConstraints { (make) in
+                            make.width.equalTo(0)
+                        }
+                        recordLab.isHidden = true
+                        recordLab.snp.updateConstraints { (make) in
+                            make.width.equalTo(0)
+                        }
                     }
                 
                 }

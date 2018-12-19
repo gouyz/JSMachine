@@ -10,6 +10,9 @@ import UIKit
 import MBProgressHUD
 
 class JSMModifyPwdVC: GYZBaseVC {
+    
+    /// 工程师修改密码
+    var isEngineer: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +157,11 @@ class JSMModifyPwdVC: GYZBaseVC {
             return
         }
         
-        requestUpdatePwd()
+        if isEngineer {
+            requestEngineerUpdatePwd()
+        }else{
+            requestUpdatePwd()
+        }
     }
     
     /// 修改密码
@@ -167,6 +174,33 @@ class JSMModifyPwdVC: GYZBaseVC {
         createHUD(message: "加载中...")
         
         GYZNetWork.requestNetwork("my/modifyPass", parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","password": oldPwdFiled.text!,"pass": pwdFiled.text!],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                MBProgressHUD.showAutoDismissHUD(message: "修改密码成功，请重新登录")
+                
+                weakSelf?.goLogin()
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 工程师修改密码
+    func requestEngineerUpdatePwd(){
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("engineer/modifyPass", parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","password": oldPwdFiled.text!,"pass": pwdFiled.text!,"passagain":rePwdFiled.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)

@@ -56,6 +56,7 @@ class JSMServiceRecordImgsCell: UITableViewCell {
             make.top.equalTo(5)
             make.right.equalTo(-kMargin)
             make.height.equalTo(0)
+            make.bottom.equalTo(-5)
         }
     }
     

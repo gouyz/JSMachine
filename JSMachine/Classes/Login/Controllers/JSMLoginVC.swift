@@ -251,6 +251,9 @@ class JSMLoginVC: GYZBaseVC {
                 userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 userDefaults.set(data["head"].stringValue, forKey: "head")//用户头像
                 userDefaults.set(data["real_name"].stringValue, forKey: "realName")//用户姓名
+                userDefaults.set(data["code"].stringValue, forKey: "code")//工程师工号
+                userDefaults.set(data["sex"].stringValue, forKey: "sex")//性别（1男2女）
+                userDefaults.set(data["birthday"].stringValue, forKey: "birthday")//工程师生日
                 
                 KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMEngineerHomerVC())
             }else{

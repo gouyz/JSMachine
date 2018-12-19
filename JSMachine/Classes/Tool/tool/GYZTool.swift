@@ -140,6 +140,11 @@ class GYZTool: NSObject {
         userDefaults.removeObject(forKey: kIsEngineerLoginTagKey)
         userDefaults.removeObject(forKey: "userId")//用户ID
         userDefaults.removeObject(forKey: "phone")//用户电话
+        userDefaults.removeObject(forKey: "head")//用户ID
+        userDefaults.removeObject(forKey: "realName")//用户电话
+        userDefaults.removeObject(forKey: "code")//用户ID
+        userDefaults.removeObject(forKey: "sex")//用户电话
+        userDefaults.removeObject(forKey: "birthday")//用户ID
     }
     
     /// 字典或数组转json字符串

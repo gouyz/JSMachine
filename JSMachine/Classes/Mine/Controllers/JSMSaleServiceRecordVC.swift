@@ -60,7 +60,7 @@ class JSMSaleServiceRecordVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("engineer/submitlAllot", parameters: ["id": applyId],  success: { (response) in
+        GYZNetWork.requestNetwork("engineer/lookAllot", parameters: ["id": applyId],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
