@@ -145,7 +145,26 @@ class JSMDealSaleServiceOrderVC: GYZBaseVC {
     }
     /// 评价
     @objc func onClickedConment(sender: UITapGestureRecognizer){
-        
+        let tag = sender.view?.tag
+        let model = dataList[tag!]
+        if model.is_pj == "0" {//未评价
+            goConmentVC(id: model.id!,row: tag!,isConment: false)
+        }else{//  已评价
+            goConmentVC(id: model.id!,row: tag!,isConment: true)
+        }
+    }
+    /// 评价
+    func goConmentVC(id: String,row: Int,isConment: Bool){
+        let vc = JSMSaleServiceConmentVC()
+        vc.orderId = id
+        vc.isConment = isConment
+        if !isConment {
+            vc.resultBlock = {[weak self] () in
+                self?.dataList[row].is_pj = "1"
+                self?.tableView.reloadData()
+            }
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     /// 删除申请
