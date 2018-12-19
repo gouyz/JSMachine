@@ -91,15 +91,6 @@ class JSMMyFavouriteVC: GYZBaseVC {
             })
         })
     }
-    /// 询价
-    @objc func onClickedXunJia(sender: UITapGestureRecognizer){
-        let tag = sender.view?.tag
-        let model = dataList[tag!]
-        
-        let vc = JSMXunJiaVC()
-        vc.goodsId = model.shop_id!
-        navigationController?.pushViewController(vc, animated: true)
-    }
     /// 咨询
     @objc func onClickedZiXun(sender:UITapGestureRecognizer){
         goOnLineVC()
@@ -107,6 +98,12 @@ class JSMMyFavouriteVC: GYZBaseVC {
     //技术在线
     func goOnLineVC(){
         let vc = JSMTechnologyOnlineVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //商品详情
+    func goDetailVC(row: Int){
+        let vc = JSMGoodsDetailVC()
+        vc.goodsId = dataList[row].shop_id!
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -124,8 +121,6 @@ extension JSMMyFavouriteVC: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: myFavouriteCell) as! JSMMyFavouriteCell
         
         cell.dataModel = dataList[indexPath.row]
-        cell.xunJiaLab.tag = indexPath.row
-        cell.xunJiaLab.addOnClickListener(target: self, action: #selector(onClickedXunJia(sender:)))
         cell.ziXunLab.tag = indexPath.row
         cell.ziXunLab.addOnClickListener(target: self, action: #selector(onClickedZiXun(sender:)))
         cell.selectionStyle = .none
@@ -141,7 +136,7 @@ extension JSMMyFavouriteVC: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        goDetailVC(row: indexPath.row)
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

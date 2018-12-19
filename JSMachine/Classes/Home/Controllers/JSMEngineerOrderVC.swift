@@ -154,7 +154,7 @@ class JSMEngineerOrderVC: GYZBaseVC {
         if status == "1" {/// 处理
             requestDealOrder(rowIndex: tag!)
         }else if status == "2" {/// 完成
-            
+            goFinishedVC(id: model.id!, row: tag!)
         }else{/// 看评价
             goConmentVC(id: model.id!)
         }
@@ -163,6 +163,16 @@ class JSMEngineerOrderVC: GYZBaseVC {
     func goConmentVC(id: String){
         let vc = JSMConmentDetailVC()
         vc.orderId = id
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 完成
+    func goFinishedVC(id: String,row: Int){
+        let vc = JSMEngineerFinishedVC()
+        vc.orderId = id
+        vc.resultBlock = {[weak self] () in
+            self?.dataList[row].status = "3"
+            self?.tableView.reloadData()
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 删除

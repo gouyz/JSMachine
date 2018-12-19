@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A00300521CA948B007D7F3F /* JSMSearchShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A00300421CA948B007D7F3F /* JSMSearchShopVC.swift */; };
 		0A0203AF21B552D8006D1738 /* JSMApplyServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203AE21B552D8006D1738 /* JSMApplyServiceVC.swift */; };
 		0A0203B121B56571006D1738 /* JSMMySaleServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B021B56571006D1738 /* JSMMySaleServiceVC.swift */; };
 		0A0203B321B5665E006D1738 /* JSMMySaleServiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0203B221B5665E006D1738 /* JSMMySaleServiceHeaderView.swift */; };
@@ -198,6 +199,7 @@
 
 /* Begin PBXFileReference section */
 		08DF58750CDAB7D84170B31B /* Pods-JSMachine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSMachine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSMachine/Pods-JSMachine.debug.xcconfig"; sourceTree = "<group>"; };
+		0A00300421CA948B007D7F3F /* JSMSearchShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSearchShopVC.swift; sourceTree = "<group>"; };
 		0A0203AE21B552D8006D1738 /* JSMApplyServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMApplyServiceVC.swift; sourceTree = "<group>"; };
 		0A0203B021B56571006D1738 /* JSMMySaleServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceVC.swift; sourceTree = "<group>"; };
 		0A0203B221B5665E006D1738 /* JSMMySaleServiceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMySaleServiceHeaderView.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				0A4C6CD221CA587F00CA76F4 /* JSMEngineerOrderDetailVC.swift */,
 				0A4C6CD421CA5CC600CA76F4 /* JSMConmentDetailVC.swift */,
 				0A4C6CD621CA621600CA76F4 /* JSMEngineerFinishedVC.swift */,
+				0A00300421CA948B007D7F3F /* JSMSearchShopVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1274,6 +1277,7 @@
 				0A76B7D321AFB58600720A20 /* JSMAuthenticityVC.swift in Sources */,
 				0A02A62221A58DE3009F2A96 /* ToolBarView.swift in Sources */,
 				0A4E46C221B668BC00DB2E50 /* GYZCollectionViewFlowLayout.swift in Sources */,
+				0A00300521CA948B007D7F3F /* JSMSearchShopVC.swift in Sources */,
 				0A45CF7B21B772C600759230 /* JSMXunJiaVC.swift in Sources */,
 				0A02A61A21A58DE3009F2A96 /* GYZEmptyView.swift in Sources */,
 				0A02A60721A58DE3009F2A96 /* GYZBottomSendView.swift in Sources */,

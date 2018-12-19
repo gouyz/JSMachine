@@ -258,15 +258,16 @@ class JSMOrderVC: GYZBaseVC {
         }
         
         weak var weakSelf = self
-        createHUD(message: "下载中...")
+        createHUD(message: "加载中...")
         
         GYZNetWork.requestNetwork("index/download",  success: { (response) in
-            
+            weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
             
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 weakSelf?.downLoadUrl = response["data"]["content"].stringValue
+                GYZTool.openSafari(url: (weakSelf?.downLoadUrl)!)
             }
             
         }, failture: { (error) in

@@ -133,6 +133,13 @@ class GYZTool: NSObject {
         //有提示
         UIApplication.shared.openURL(URL(string: "telprompt://"+phone)!)
     }
+    /// 跳转到safari
+    ///
+    /// - Parameter url:
+    class func openSafari(url: String){
+        
+        UIApplication.shared.openURL(URL(string: url)!)
+    }
     
     /// 退出登录时，移除用户信息
     class func removeUserInfo(){

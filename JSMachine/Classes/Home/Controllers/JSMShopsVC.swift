@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import PYSearch
 
 private let kLeftTableViewCell = "LeftTableViewCell"
 private let kShopCell = "kShopCell"
@@ -52,6 +53,7 @@ class JSMShopsVC: GYZBaseVC {
                 make.top.equalTo(view)
             }
         }
+        searchView.searchBtn.addTarget(self, action: #selector(clickedSearchBtn), for: .touchUpInside)
         
         requestProductDatas()
     }
@@ -105,6 +107,24 @@ class JSMShopsVC: GYZBaseVC {
         let vc = JSMGoodsDetailVC()
         vc.goodsId = model.id!
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    ///搜索
+    @objc func clickedSearchBtn(){
+        let searchVC: PYSearchViewController = PYSearchViewController.init(hotSearches: [], searchBarPlaceholder: "输入您要搜索的内容") { (searchViewController, searchBar, searchText) in
+            
+            let searchVC = JSMSearchShopVC()
+            searchVC.searchContent = searchText!
+            searchViewController?.navigationController?.pushViewController(searchVC, animated: true)
+        }
+        searchVC.hotSearchStyle = .borderTag
+        searchVC.searchHistoryStyle = .borderTag
+        
+        let searchNav = GYZBaseNavigationVC(rootViewController:searchVC)
+        
+        searchVC.cancelButton.setTitleColor(kBlackFontColor, for: .normal)
+        self.present(searchNav, animated: true, completion: nil)
+        
     }
     
     ///获取商品列表数据

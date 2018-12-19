@@ -143,7 +143,7 @@ class LHSAddPhotoView: UIView {
     }
     
     /// 添加照片
-    lazy var addImgBtn: UIImageView = UIImageView.init(image: UIImage.init(named: "icon_dongtai_add"))
+    lazy var addImgBtn: UIImageView = UIImageView.init(image: UIImage.init(named: "icon_upload_img"))
     
     /// 添加照片
     @objc func addImgOnClick() {

@@ -189,6 +189,30 @@ class JSMPublishSuccessVC: GYZBaseVC {
     }
     /// 下载合同按钮
     @objc func onClickedDownLoadBtn(){
+        requestGetDownLoadURL()
+    }
+    /// 获取下载合同url
+    func requestGetDownLoadURL(){
         
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("index/download",  success: { (response) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                GYZTool.openSafari(url: response["data"]["content"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
     }
 }

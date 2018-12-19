@@ -39,7 +39,6 @@ class JSMMyFavouriteCell: UITableViewCell {
         contentView.addSubview(nameLab)
         contentView.addSubview(numberLab)
         contentView.addSubview(ziXunLab)
-        contentView.addSubview(xunJiaLab)
         
         iconView.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
@@ -61,10 +60,6 @@ class JSMMyFavouriteCell: UITableViewCell {
             make.bottom.equalTo(iconView)
             make.height.equalTo(20)
             make.width.equalTo(60)
-        }
-        xunJiaLab.snp.makeConstraints { (make) in
-            make.left.equalTo(ziXunLab.snp.right).offset(30)
-            make.bottom.height.width.equalTo(ziXunLab)
         }
     }
     
@@ -104,19 +99,6 @@ class JSMMyFavouriteCell: UITableViewCell {
         lab.text = "咨询"
         lab.cornerRadius = kCornerRadius
         lab.borderColor = kBlueFontColor
-        lab.borderWidth = klineWidth
-        
-        return lab
-    }()
-    /// 询价
-    lazy var xunJiaLab : UILabel = {
-        let lab = UILabel()
-        lab.font = k12Font
-        lab.textColor = kRedFontColor
-        lab.textAlignment = .center
-        lab.text = "询价"
-        lab.cornerRadius = kCornerRadius
-        lab.borderColor = kRedFontColor
         lab.borderWidth = klineWidth
         
         return lab

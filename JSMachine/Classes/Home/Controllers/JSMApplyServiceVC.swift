@@ -455,7 +455,7 @@ class JSMApplyServiceVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("application/apply",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","model":typeInputView.textFiled.text!,"a_name":nameInputView.textFiled.text!,"a_phone":numberInputView.textFiled.text!,"c_address":cityInputView.textFiled.text!,"s_address":addressInputView.textFiled.text!,"f_reason":reasonInputView.textFiled.text!,"a_remark":addressInputView.textFiled.text ?? "","a_part":selectedIndex],  success: { (response) in
+        GYZNetWork.requestNetwork("application/apply",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","model":typeInputView.textFiled.text!,"a_name":nameInputView.textFiled.text!,"a_phone":numberInputView.textFiled.text!,"c_address":cityInputView.textFiled.text!,"s_address":addressInputView.textFiled.text!,"f_reason":reasonInputView.textFiled.text!,"a_remark":noteInputView.textFiled.text ?? "","a_part":selectedIndex],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)

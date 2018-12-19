@@ -128,7 +128,7 @@ class JSMMySaleServiceVC: GYZBaseVC {
     
     /// 客服
     @objc func clickedKeFuBtn(){
-        
+        goWebViewVC(title: "在线客服", url: "http://jsj.0519app.com/service.html")
     }
     /// 申请售后服务
     @objc func clickedApplyBtn(){
