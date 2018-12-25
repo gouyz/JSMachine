@@ -153,7 +153,7 @@ class JSMConmentDetailVC: GYZBaseVC {
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
             
-            if response["status"].intValue == 2{//请求成功
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
                 weakSelf?.ratingView.rating = Double.init(data["pj_score"].stringValue) ?? 0

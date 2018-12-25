@@ -101,6 +101,7 @@ class JSMSelectGoodsParamsView: UIView {
         dateInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedDate))
         minusView.addOnClickListener(target: self, action: #selector(onClickedMinus))
         addView.addOnClickListener(target: self, action: #selector(onClickedAdd))
+        noteTxtView.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {

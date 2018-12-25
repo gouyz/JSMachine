@@ -280,7 +280,7 @@ class JSMEngineerFinishedVC: GYZBaseVC {
         var imgsParam: [ImageFileUploadParam] = [ImageFileUploadParam]()
         for (index,imgItem) in selectImgs.enumerated() {
             let imgParam: ImageFileUploadParam = ImageFileUploadParam()
-            imgParam.name = "pic"
+            imgParam.name = "pic[]"
             imgParam.fileName = "pic\(index).jpg"
             imgParam.mimeType = "image/jpg"
             imgParam.data = UIImageJPEGRepresentation(imgItem, 0.5)
