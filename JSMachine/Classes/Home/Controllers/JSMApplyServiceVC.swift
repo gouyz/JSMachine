@@ -417,32 +417,42 @@ class JSMApplyServiceVC: GYZBaseVC {
     
     /// 提交按钮
     @objc func onClickedSubmitBtn(){
-        if (nameInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入联系人姓名")
-            return
+
+        if !userDefaults.bool(forKey: kIsLoginTagKey) {
+            goLogin()
+        }else{
+            if (nameInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入联系人姓名")
+                return
+            }
+            if (numberInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入联系方式")
+                return
+            }
+            if (cityInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入公司地址")
+                return
+            }
+            if (addressInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入具体地址")
+                return
+            }
+            if (typeInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
+                return
+            }
+            if (reasonInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入故障原因")
+                return
+            }
+            
+            requestSubmitDatas()
         }
-        if (numberInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入联系方式")
-            return
-        }
-        if (cityInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入公司地址")
-            return
-        }
-        if (addressInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入具体地址")
-            return
-        }
-        if (typeInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
-            return
-        }
-        if (reasonInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入故障原因")
-            return
-        }
-        
-        requestSubmitDatas()
+    }
+    /// 登录
+    func goLogin(){
+        let vc = JSMLoginVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     ///提交

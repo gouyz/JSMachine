@@ -94,11 +94,20 @@ class JSMXunJiaVC: GYZBaseVC {
     
     /// 申购
     @objc func onClickedBuy(sender:UITapGestureRecognizer){
-        let tag = sender.view?.tag
-        if tag == 0 {
-            return
+        if !userDefaults.bool(forKey: kIsLoginTagKey) {
+            goLogin()
+        }else{
+            let tag = sender.view?.tag
+            if tag == 0 {
+                return
+            }
+            showBuy(tag: tag!)
         }
-        showBuy(tag: tag!)
+    }
+    /// 登录
+    func goLogin(){
+        let vc = JSMLoginVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func showBuy(tag: Int){

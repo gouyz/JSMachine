@@ -26,6 +26,8 @@ class JSMOrderModel: LHSBaseModel {
     var num : String? = "0"
     /// 价格
     var price : String? = "0"
+    /// 合计
+    var total : String? = "0"
     /// 产品展示图
     var img : String? = ""
     /// 交货日期

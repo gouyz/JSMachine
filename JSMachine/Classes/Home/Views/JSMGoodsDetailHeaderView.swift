@@ -130,7 +130,7 @@ class JSMGoodsDetailHeaderView: UIView {
     lazy var sharedBtn : UIButton = {
         let btn = UIButton.init(type: .custom)
         btn.setImage(UIImage.init(named: "icon_shared_blue"), for: .normal)
-        
+        btn.isHidden = true
         return btn
     }()
     

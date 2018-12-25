@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import SKPhotoBrowser
 
 private let saleServiceRecordCell = "saleServiceRecordCell"
 private let saleServiceRecordImgsCell = "saleServiceRecordImgsCell"
@@ -95,6 +96,15 @@ extension JSMSaleServiceRecordVC: UITableViewDelegate,UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: saleServiceRecordImgsCell) as! JSMServiceRecordImgsCell
             if dataModel != nil{
                 cell.dataModel = dataModel?.imgList
+                ///查看大图
+                cell.imgViews.onClickedImgDetailsBlock = {[weak self] (index,urls) in
+                    
+                    let browser = SKPhotoBrowser(photos: GYZTool.createWebPhotos(urls: urls))
+                    browser.initializePageIndex(index)
+                    //        browser.delegate = self
+                    
+                    self?.present(browser, animated: true, completion: nil)
+                }
             }
             
             cell.selectionStyle = .none

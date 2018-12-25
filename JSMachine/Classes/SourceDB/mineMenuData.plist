@@ -40,7 +40,7 @@
 		<key>image</key>
 		<string>icon_mine_rule</string>
 		<key>controller</key>
-		<string></string>
+		<string>JSMServiceRuleVC</string>
 	</dict>
 	<dict>
 		<key>title</key>

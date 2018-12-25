@@ -27,7 +27,7 @@ class JSMOrderCell: UITableViewCell {
                     totalPrice = String(format: "%.2f", Double.init(model.price!)! * Double.init(model.num!)!)
                 }
                 desLab.text = model.pro_speed ?? "" + "  " + model.drive_ratio!
-                totalLab.text = "共计\(model.num!)件商品 合计￥\(totalPrice)(包含运费￥0.00)"
+                totalLab.text = "共计\(model.num!)件商品 合计￥\(model.total!)(包含运费￥0.00)"
                 /// 已提交(0已提交未确认有货，只能下载合同。1已确认有货，可以下载合同和上传合同。2已上传合同，还未审核合同是否有效，只能查看合同)。
                 /// 未发货(3合同有效未发货，只能查看合同)
                 /// 已发货(4已发货，待完成，可以查看合同和确认收货)

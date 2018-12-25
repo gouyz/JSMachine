@@ -238,26 +238,35 @@ class JSMPublishNeedVC: GYZBaseVC {
     /// 提交按钮
     @objc func onClickedSubmitBtn(){
         
-        if (typeInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
-            return
-        }
-        if (speedInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入转速")
-            return
-        }
-        if (roteInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请输入传动比")
-            return
-        }
-        if (dateInputView.textFiled.text?.isEmpty)! {
-            MBProgressHUD.showAutoDismissHUD(message: "请选择交货期")
-            return
+        if !userDefaults.bool(forKey: kIsLoginTagKey) {
+            goLogin()
+        }else{
+            if (typeInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
+                return
+            }
+            if (speedInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入转速")
+                return
+            }
+            if (roteInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请输入传动比")
+                return
+            }
+            if (dateInputView.textFiled.text?.isEmpty)! {
+                MBProgressHUD.showAutoDismissHUD(message: "请选择交货期")
+                return
+            }
+            
+            requestSubmitDatas()
         }
         
-        requestSubmitDatas()
     }
-    
+    /// 登录
+    func goLogin(){
+        let vc = JSMLoginVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     ///需求提交
     func requestSubmitDatas(){
         

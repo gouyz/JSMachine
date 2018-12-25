@@ -30,17 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = kWhiteColor
         
         //如果未登录进入登录界面，登录后进入首页
-        if userDefaults.bool(forKey: kIsLoginTagKey) {
-            if userDefaults.bool(forKey: kIsEngineerLoginTagKey){//工程师登录
-                window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMEngineerHomerVC())
-            }else{
-                window?.rootViewController = GYZMainTabBarVC()
-            }
-
-        }else{
-            window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMLoginVC())
-        }
-//        window?.rootViewController = GYZMainTabBarVC()
+//        if userDefaults.bool(forKey: kIsLoginTagKey) {
+//            if userDefaults.bool(forKey: kIsEngineerLoginTagKey){//工程师登录
+//                window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMEngineerHomerVC())
+//            }else{
+//                window?.rootViewController = GYZMainTabBarVC()
+//            }
+//
+//        }else{
+//            window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMLoginVC())
+//        }
+        window?.rootViewController = GYZMainTabBarVC()
         window?.makeKeyAndVisible()
         
         return true
