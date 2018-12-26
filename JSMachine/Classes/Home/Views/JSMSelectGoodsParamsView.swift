@@ -131,7 +131,7 @@ class JSMSelectGoodsParamsView: UIView {
         contentView.addSubview(noteTxtView)
         bgView.addSubview(okBtn)
         
-        bgView.frame = CGRect.init(x: 0, y: frame.size.height, width: kScreenWidth, height: kScreenHeight * 0.8)
+        bgView.frame = CGRect.init(x: 0, y: frame.size.height, width: kScreenWidth, height: kScreenHeight * 0.7)
         tagImgView.snp.makeConstraints { (make) in
             make.top.equalTo(20)
             make.left.equalTo(kMargin)
@@ -223,7 +223,7 @@ class JSMSelectGoodsParamsView: UIView {
             // 这个很重要，viewContainer中的最后一个控件一定要约束到bottom，并且要小于等于viewContainer的bottom
             // 否则的话，上面的控件会被强制拉伸变形
             // 最后的-10是边距，这个可以随意设置
-            make.bottom.lessThanOrEqualTo(contentView).offset(-10)
+            make.bottom.lessThanOrEqualTo(contentView).offset(-300)
         }
         
         okBtn.snp.makeConstraints { (make) in
@@ -366,14 +366,14 @@ class JSMSelectGoodsParamsView: UIView {
     }()
     /// 备注
     lazy var noteTxtView: UITextView = {
-        
+
         let txtView = UITextView()
         txtView.font = k15Font
         txtView.textColor = kHeightGaryFontColor
         txtView.borderColor = kGrayLineColor
         txtView.borderWidth = klineWidth
         txtView.text = placeHolder
-        
+
         return txtView
     }()
     
