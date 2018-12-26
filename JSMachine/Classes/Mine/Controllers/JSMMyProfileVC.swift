@@ -37,7 +37,17 @@ class JSMMyProfileVC: GYZBaseVC {
                 make.top.equalTo(kTitleAndStateHeight)
             }
         }
-        requestMineData()
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if userDefaults.bool(forKey: kIsLoginTagKey) {
+            requestMineData()
+        }else{
+            userInfoModel = nil
+            tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {

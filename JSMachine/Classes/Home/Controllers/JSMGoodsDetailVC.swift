@@ -313,7 +313,7 @@ extension JSMGoodsDetailVC : WKNavigationDelegate,UIScrollViewDelegate{
     ///MARK WKNavigationDelegate
     // 页面开始加载时调用
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        
+        createHUD(message: "加载中...")
     }
     // 当内容开始返回时调用
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
@@ -323,14 +323,14 @@ extension JSMGoodsDetailVC : WKNavigationDelegate,UIScrollViewDelegate{
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         /// 获取网页title
         //        self.title = self.webView.title
-        //        self.hud?.hide(animated: true)
+        self.hud?.hide(animated: true)
         
         //        tableView.reloadData()
     }
     // 页面加载失败时调用
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         
-        //        self.hud?.hide(animated: true)
+        self.hud?.hide(animated: true)
     }
     
     //MARK:UIScrollViewDelegate

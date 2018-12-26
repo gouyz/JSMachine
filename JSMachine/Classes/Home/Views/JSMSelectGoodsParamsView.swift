@@ -131,7 +131,7 @@ class JSMSelectGoodsParamsView: UIView {
         contentView.addSubview(noteTxtView)
         bgView.addSubview(okBtn)
         
-        bgView.frame = CGRect.init(x: 0, y: frame.size.height, width: kScreenWidth, height: kScreenHeight * 0.7)
+        bgView.frame = CGRect.init(x: 0, y: frame.size.height, width: kScreenWidth, height: kScreenHeight * 0.8)
         tagImgView.snp.makeConstraints { (make) in
             make.top.equalTo(20)
             make.left.equalTo(kMargin)
