@@ -190,7 +190,12 @@ extension JSMMineVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.row != 4 {
+            if !userDefaults.bool(forKey: kIsLoginTagKey) {
+                goLogin()
+                return
+            }
+        }
         goController(menu: menuModels[indexPath.row])
     }
     ///MARK : UITableViewDelegate

@@ -219,11 +219,11 @@ class JSMSelectGoodsParamsView: UIView {
         noteTxtView.snp.makeConstraints { (make) in
             make.left.right.equalTo(noteDesLab)
             make.top.equalTo(noteDesLab.snp.bottom)
-            make.height.equalTo(80)
+            make.height.equalTo(100)
             // 这个很重要，viewContainer中的最后一个控件一定要约束到bottom，并且要小于等于viewContainer的bottom
             // 否则的话，上面的控件会被强制拉伸变形
             // 最后的-10是边距，这个可以随意设置
-            make.bottom.lessThanOrEqualTo(contentView).offset(-kMargin)
+            make.bottom.lessThanOrEqualTo(contentView).offset(-10)
         }
         
         okBtn.snp.makeConstraints { (make) in
