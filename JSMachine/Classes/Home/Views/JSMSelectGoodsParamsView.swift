@@ -54,7 +54,7 @@ class JSMSelectGoodsParamsView: UIView {
                     
                     setRoteTags()
                 }
-
+                
             }
         }
     }
@@ -70,7 +70,7 @@ class JSMSelectGoodsParamsView: UIView {
     }
     
     var typeArr: [String] = [String]()
-
+    
     // MARK: 生命周期方法
     override init(frame:CGRect){
         super.init(frame:frame)
@@ -110,7 +110,7 @@ class JSMSelectGoodsParamsView: UIView {
     
     func setupUI(){
         addSubview(bgView)
-//        bgView.addOnClickListener(target: self, action: #selector(onBlankClicked))
+        //        bgView.addOnClickListener(target: self, action: #selector(onBlankClicked))
         
         bgView.addSubview(tagImgView)
         bgView.addSubview(nameLab)
@@ -366,14 +366,14 @@ class JSMSelectGoodsParamsView: UIView {
     }()
     /// 备注
     lazy var noteTxtView: UITextView = {
-
+        
         let txtView = UITextView()
         txtView.font = k15Font
         txtView.textColor = kHeightGaryFontColor
         txtView.borderColor = kGrayLineColor
         txtView.borderWidth = klineWidth
         txtView.text = placeHolder
-
+        
         return txtView
     }()
     

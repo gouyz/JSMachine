@@ -47,11 +47,12 @@ class JSMShopsVC: GYZBaseVC {
             make.left.equalTo(leftTableView.snp.right).offset(2)
             make.right.equalTo(-2)
             make.bottom.equalTo(view)
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(kTitleAndStateHeight)
-            }else{
-                make.top.equalTo(view)
-            }
+            make.top.equalTo(kTitleAndStateHeight)
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(kTitleAndStateHeight)
+//            }else{
+//                make.top.equalTo(view)
+//            }
         }
         searchView.searchBtn.addTarget(self, action: #selector(clickedSearchBtn), for: .touchUpInside)
         
