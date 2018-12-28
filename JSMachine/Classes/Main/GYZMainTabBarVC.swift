@@ -22,7 +22,7 @@ class GYZMainTabBarVC: UITabBarController {
         tabBar.isTranslucent = false
         
         addViewController(JSMHomeVC(), title: "首页", normalImgName: "icon_tabbar_home")
-        addViewController(JSMPersonnelVC(), title: "", normalImgName: "icon_tabbar_personnel")
+        addViewController(JSMPersonneiDesVC(), title: "", normalImgName: "icon_tabbar_personnel")
         addViewController(JSMMineVC(), title: "我的", normalImgName: "icon_tabbar_mine")
         
     }

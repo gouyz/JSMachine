@@ -167,7 +167,18 @@ class JSMHomeVC: GYZBaseVC {
     }
     //申请售后
     func goApplyVC(){
-        let vc = JSMMySaleServiceVC()
+        
+        if !userDefaults.bool(forKey: kIsLoginTagKey) {
+            goLogin()
+        }else{
+            let vc = JSMMySaleServiceVC()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
+    /// 登录
+    func goLogin(){
+        let vc = JSMLoginVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     //在线商城

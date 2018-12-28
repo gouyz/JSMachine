@@ -124,6 +124,7 @@
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
 		0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */; };
 		0A1F4A8D21D2753D007D2A67 /* JSMServiceRuleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F4A8C21D2753D007D2A67 /* JSMServiceRuleVC.swift */; };
+		0A2F41AF21D67B8B0084A766 /* JSMPersonneiDesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F41AE21D67B8B0084A766 /* JSMPersonneiDesVC.swift */; };
 		0A38196821C3AA7200E81610 /* JSMOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A38196721C3AA7200E81610 /* JSMOrderModel.swift */; };
 		0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */; };
 		0A45898D21C2341F00DC236F /* JSMSelectGoodsParamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */; };
@@ -325,6 +326,7 @@
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
 		0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZMyProfileCell.swift; sourceTree = "<group>"; };
 		0A1F4A8C21D2753D007D2A67 /* JSMServiceRuleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMServiceRuleVC.swift; sourceTree = "<group>"; };
+		0A2F41AE21D67B8B0084A766 /* JSMPersonneiDesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPersonneiDesVC.swift; sourceTree = "<group>"; };
 		0A38196721C3AA7200E81610 /* JSMOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderModel.swift; sourceTree = "<group>"; };
 		0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMFavouriteModel.swift; sourceTree = "<group>"; };
 		0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSelectGoodsParamsView.swift; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 			children = (
 				0A02A64321A59249009F2A96 /* JSMPersonnelVC.swift */,
 				0A052C7F21C7EF27001E7BDE /* JSMPersonnelSuccessVC.swift */,
+				0A2F41AE21D67B8B0084A766 /* JSMPersonneiDesVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 				0A02A5FF21A58DE3009F2A96 /* GYZPhotoView.swift in Sources */,
 				0A02A62A21A58DE3009F2A96 /* MMShareSheet.swift in Sources */,
 				0A02A5FB21A58DE3009F2A96 /* LHSAddPhotoView.swift in Sources */,
+				0A2F41AF21D67B8B0084A766 /* JSMPersonneiDesVC.swift in Sources */,
 				0A02EAAF21AADD06000B5644 /* JSMOrderManagerVC.swift in Sources */,
 				0A76B7D321AFB58600720A20 /* JSMAuthenticityVC.swift in Sources */,
 				0A02A62221A58DE3009F2A96 /* ToolBarView.swift in Sources */,

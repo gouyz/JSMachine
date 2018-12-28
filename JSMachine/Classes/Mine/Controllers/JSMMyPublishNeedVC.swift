@@ -144,7 +144,7 @@ class JSMMyPublishNeedVC: GYZBaseVC {
     @objc func onClickedTuiJianGoods(sender: UITapGestureRecognizer){
         let tag = sender.view?.tag
         let vc = JSMTuiJianGoodsVC()
-        vc.speed = dataList[tag!].pro_speed!
+        vc.proModel = dataList[tag!].pro_model!
         navigationController?.pushViewController(vc, animated: true)
     }
     

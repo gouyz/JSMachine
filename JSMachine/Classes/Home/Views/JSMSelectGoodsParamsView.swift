@@ -20,6 +20,10 @@ class JSMSelectGoodsParamsView: UIView {
     var selectedTypeIndex: Int = -1
     // 选择传动比
     var selectedRote: String = ""
+    // 选择功率
+    var selectedPower: String = ""
+    // 选择安装方式id
+    var selectedInstallId: String = ""
     var number: Int = 1
     /// 选择时间戳
     var selectTime: Int = 0
@@ -35,7 +39,6 @@ class JSMSelectGoodsParamsView: UIView {
                 nameLab.text = model.goodsModel?.shop_name
                 
                 tagImgView.kf.setImage(with: URL.init(string: model.goodsModel?.img ?? ""), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
-                speedLab.text = "产品转速:  \((model.goodsModel?.pro_speed)!)"
                 
                 for item in model.typeList{
                     typeArr.append(item.p_model!)
@@ -53,23 +56,41 @@ class JSMSelectGoodsParamsView: UIView {
                     typeTagsView.reloadData()
                     
                     setRoteTags()
+                    setPowerTags()
                 }
-                
+                for item in model.installList{
+                    contentArr.append(item.content!)
+                }
             }
         }
     }
     
     func setRoteTags(){
+        selectedRote = ""
         let roteArr = dataModel!.typeList[selectedTypeIndex].ratioList
         let roteHeight = HXTagsView.getHeightWithTags(roteArr, layout: roteTagsView.layout, tagAttribute: roteTagsView.tagAttribute, width: kScreenWidth)
         roteTagsView.snp.updateConstraints { (make) in
             make.height.equalTo(roteHeight)
         }
         roteTagsView.tags = roteArr
+        roteTagsView.selectedTags = [selectedRote]
         roteTagsView.reloadData()
+    }
+    func setPowerTags(){
+        selectedPower = ""
+        let powerArr = dataModel!.typeList[selectedTypeIndex].powerList
+        let roteHeight = HXTagsView.getHeightWithTags(powerArr, layout: powerTagsView.layout, tagAttribute: powerTagsView.tagAttribute, width: kScreenWidth)
+        powerTagsView.snp.updateConstraints { (make) in
+            make.height.equalTo(roteHeight)
+        }
+        powerTagsView.tags = powerArr
+        powerTagsView.selectedTags = [selectedPower]
+        powerTagsView.reloadData()
     }
     
     var typeArr: [String] = [String]()
+    /// 安装方式name
+    var contentArr: [String] = [String]()
     
     // MARK: 生命周期方法
     override init(frame:CGRect){
@@ -93,12 +114,18 @@ class JSMSelectGoodsParamsView: UIView {
             self?.selectedTypeIndex = index
             self?.selectedType = tags![0] as! String
             self?.setRoteTags()
+            self?.setPowerTags()
         }
         roteTagsView.completion = {[weak self] (tags,index) in
             self?.selectedRote = tags![0] as! String
         }
+        powerTagsView.completion = {[weak self] (tags,index) in
+            self?.selectedPower = tags![0] as! String
+        }
         dateInputView.textFiled.isEnabled = false
         dateInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedDate))
+        installInputView.textFiled.isEnabled = false
+        installInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedInstall))
         minusView.addOnClickListener(target: self, action: #selector(onClickedMinus))
         addView.addOnClickListener(target: self, action: #selector(onClickedAdd))
         noteTxtView.delegate = self
@@ -118,9 +145,12 @@ class JSMSelectGoodsParamsView: UIView {
         scrollView.addSubview(contentView)
         contentView.addSubview(typeLab)
         contentView.addSubview(typeTagsView)
-        contentView.addSubview(speedLab)
         contentView.addSubview(roteLab)
         contentView.addSubview(roteTagsView)
+        contentView.addSubview(powerLab)
+        contentView.addSubview(powerTagsView)
+        contentView.addSubview(installInputView)
+        contentView.addSubview(rightIconView1)
         contentView.addSubview(dateInputView)
         contentView.addSubview(rightIconView)
         contentView.addSubview(buyDesLab)
@@ -167,35 +197,49 @@ class JSMSelectGoodsParamsView: UIView {
             make.top.equalTo(typeLab.snp.bottom)
             make.height.equalTo(0)
         }
-        speedLab.snp.makeConstraints { (make) in
-            make.left.right.equalTo(typeLab)
-            make.height.equalTo(kTitleHeight)
-            make.top.equalTo(typeTagsView.snp.bottom)
-        }
         roteLab.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(typeLab)
-            make.top.equalTo(speedLab.snp.bottom)
+            make.top.equalTo(typeTagsView.snp.bottom)
         }
         roteTagsView.snp.makeConstraints { (make) in
             make.left.right.equalTo(typeTagsView)
             make.top.equalTo(roteLab.snp.bottom)
             make.height.equalTo(0)
         }
+        powerLab.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(typeLab)
+            make.top.equalTo(roteTagsView.snp.bottom)
+        }
+        powerTagsView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(roteTagsView)
+            make.top.equalTo(powerLab.snp.bottom)
+            make.height.equalTo(0)
+        }
+    
         dateInputView.snp.makeConstraints { (make) in
             make.left.equalTo(contentView)
-            make.height.equalTo(speedLab)
+            make.height.equalTo(kTitleHeight)
             make.right.equalTo(rightIconView.snp.left)
-            make.top.equalTo(roteTagsView.snp.bottom)
+            make.top.equalTo(powerTagsView.snp.bottom)
         }
         rightIconView.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
             make.centerY.equalTo(dateInputView)
             make.size.equalTo(rightArrowSize)
         }
-        buyDesLab.snp.makeConstraints { (make) in
-            make.left.height.equalTo(speedLab)
-            make.right.equalTo(minusView.snp.left).offset(-kMargin)
+        installInputView.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(dateInputView)
             make.top.equalTo(dateInputView.snp.bottom)
+        }
+        rightIconView1.snp.makeConstraints { (make) in
+            make.right.size.equalTo(rightIconView)
+            make.centerY.equalTo(installInputView)
+        }
+        buyDesLab.snp.makeConstraints { (make) in
+            make.left.equalTo(kMargin)
+            make.height.equalTo(kTitleHeight)
+            make.right.equalTo(minusView.snp.left).offset(-kMargin)
+            make.top.equalTo(installInputView.snp.bottom)
         }
         minusView.snp.makeConstraints { (make) in
             make.centerY.equalTo(buyDesLab)
@@ -290,16 +334,6 @@ class JSMSelectGoodsParamsView: UIView {
         
         return view
     }()
-    
-    ///产品转速
-    lazy var speedLab: UILabel = {
-        let lab = UILabel()
-        lab.font = k15Font
-        lab.textColor = kHeightGaryFontColor
-        lab.text = "产品转速:"
-        
-        return lab
-    }()
     ///传动比
     lazy var roteLab: UILabel = {
         let lab = UILabel()
@@ -325,6 +359,35 @@ class JSMSelectGoodsParamsView: UIView {
         
         return view
     }()
+    ///功率
+    lazy var powerLab: UILabel = {
+        let lab = UILabel()
+        lab.font = k15Font
+        lab.textColor = kHeightGaryFontColor
+        lab.text = "产品功率:"
+        
+        return lab
+    }()
+    
+    /// 产品功率
+    lazy var powerTagsView: HXTagsView = {
+        
+        let view = HXTagsView()
+        view.tagAttribute.borderColor = kBlueFontColor
+        view.tagAttribute.normalBackgroundColor = kWhiteColor
+        view.tagAttribute.selectedBackgroundColor = kBlueFontColor
+        view.tagAttribute.textColor = kBlueFontColor
+        view.tagAttribute.selectedTextColor = kWhiteColor
+        /// 显示多行
+        view.layout.scrollDirection = .vertical
+        view.backgroundColor = kWhiteColor
+        
+        return view
+    }()
+    /// 安装方式
+    lazy var installInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "安装方式：", placeHolder: "请选择安装方式")
+    /// 右侧箭头图标
+    lazy var rightIconView1: UIImageView = UIImageView.init(image: UIImage.init(named: "icon_right_arrow"))
     /// 交货期
     lazy var dateInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "交货期：", placeHolder: "请选择交货期")
     /// 右侧箭头图标
@@ -436,16 +499,16 @@ class JSMSelectGoodsParamsView: UIView {
     }
     /// 确定
     @objc func clickedOkBtn(){
-        if selectedRote == "" {
-            MBProgressHUD.showAutoDismissHUD(message: "请选择传动比")
-            return
-        }
+//        if selectedRote == "" {
+//            MBProgressHUD.showAutoDismissHUD(message: "请选择传动比")
+//            return
+//        }
         if (dateInputView.textFiled.text?.isEmpty)! {
             MBProgressHUD.showAutoDismissHUD(message: "请选择交货日期")
             return
         }
         if resultBlock != nil {
-            let dic: [String: Any] = ["pro_speed": (dataModel?.goodsModel?.pro_speed)!,"pro_model":selectedType,"drive_ratio":selectedRote,"num":number,"t_data":selectTime,"remark":content]
+            let dic: [String: Any] = ["pro_model":selectedType,"drive_ratio":selectedRote,"power":selectedPower,"install_id":selectedInstallId,"num":number,"t_data":selectTime,"remark":content]
             resultBlock!(dic)
         }
         hide()
@@ -470,6 +533,16 @@ class JSMSelectGoodsParamsView: UIView {
         UsefulPickerView.showDatePicker("请选择交货期") { [weak self](date) in
             self?.selectTime = Int(date.timeIntervalSince1970)
             self?.dateInputView.textFiled.text = date.dateToStringWithFormat(format: "yyyy-MM-dd")
+        }
+    }
+    /// 选择安装方式
+    @objc func onClickedSelectedInstall(){
+        
+        if contentArr.count > 0 {
+            UsefulPickerView.showSingleColPicker("选择安装方式", data: contentArr, defaultSelectedIndex: nil) {[weak self] (index, value) in
+                self?.selectedInstallId = (self?.dataModel?.installList[index].id)!
+                self?.installInputView.textFiled.text = value
+            }
         }
     }
 }

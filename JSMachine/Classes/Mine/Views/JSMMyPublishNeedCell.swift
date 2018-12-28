@@ -20,7 +20,6 @@ class JSMMyPublishNeedCell: UITableViewCell {
                 dateLab.text = model.create_date?.getDateTime(format: "yyyy/MM/dd")
                 
                 typeLab.text = "产品型号：\(model.pro_model!)"
-                speedLab.text = "产品转速：\(model.pro_speed!)"
                 roteLab.text = "传动比：\(model.drive_ratio!)"
                 numberLab.text = "产品数量：\(model.num!)(个)"
                 finishedDateLab.text = "交货日期：" + (model.deal_date?.getDateTime(format: "yyyy/MM/dd"))!
@@ -94,7 +93,6 @@ class JSMMyPublishNeedCell: UITableViewCell {
         bgView.addSubview(useNameLab)
         bgView.addSubview(dateLab)
         bgView.addSubview(typeLab)
-        bgView.addSubview(speedLab)
         bgView.addSubview(roteLab)
         bgView.addSubview(numberLab)
         bgView.addSubview(finishedDateLab)
@@ -131,13 +129,9 @@ class JSMMyPublishNeedCell: UITableViewCell {
             make.top.equalTo(iconView.snp.bottom).offset(kMargin)
             make.height.equalTo(30)
         }
-        speedLab.snp.makeConstraints { (make) in
-            make.left.right.height.equalTo(typeLab)
-            make.top.equalTo(typeLab.snp.bottom)
-        }
         roteLab.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(typeLab)
-            make.top.equalTo(speedLab.snp.bottom)
+            make.top.equalTo(typeLab.snp.bottom)
         }
         numberLab.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(typeLab)
@@ -223,15 +217,6 @@ class JSMMyPublishNeedCell: UITableViewCell {
         lab.font = k15Font
         lab.textColor = kHeightGaryFontColor
         lab.text = "产品型号：KRV-40E-121-B"
-        
-        return lab
-    }()
-    /// 产品转速
-    lazy var speedLab : UILabel = {
-        let lab = UILabel()
-        lab.font = k15Font
-        lab.textColor = kHeightGaryFontColor
-        lab.text = "产品转速：70r/min"
         
         return lab
     }()

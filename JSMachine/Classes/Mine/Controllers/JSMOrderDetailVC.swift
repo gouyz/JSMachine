@@ -15,7 +15,7 @@ private let orderDetailHeader = "orderDetailHeader"
 
 class JSMOrderDetailVC: GYZBaseVC {
     
-    let titleArr: [String] = ["订单编号：","产品型号：","产品转速：","传动比：","交货期：","备注："]
+    let titleArr: [String] = ["订单编号：","产品型号：","传动比：","安装方式：","产品功率：","交货期：","备注："]
     var infoArr: [String] = [String]()
     var orderCode: String = ""
     var dataModel: JSMOrderModel?
@@ -117,8 +117,9 @@ class JSMOrderDetailVC: GYZBaseVC {
             }
             infoArr.append((dataModel?.code)!)
             infoArr.append((dataModel?.pro_model)!)
-            infoArr.append((dataModel?.pro_speed)!)
             infoArr.append((dataModel?.drive_ratio)!)
+            infoArr.append((dataModel?.install)!)
+            infoArr.append((dataModel?.power)!)
             infoArr.append((dataModel?.t_data?.getDateTime(format: "yyyy-MM-dd"))!)
             infoArr.append((dataModel?.remark)!)
             tableView.reloadData()

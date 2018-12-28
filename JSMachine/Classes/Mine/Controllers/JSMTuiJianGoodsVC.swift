@@ -13,7 +13,7 @@ private let tuiJianGoodsCell = "tuiJianGoodsCell"
 
 class JSMTuiJianGoodsVC: GYZBaseVC {
     
-    var speed: String = ""
+    var proModel: String = ""
     var dataList: [JSMGoodsModel] = [JSMGoodsModel]()
 
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class JSMTuiJianGoodsVC: GYZBaseVC {
         weak var weakSelf = self
         showLoadingView()
         
-        GYZNetWork.requestNetwork("need/recommend",parameters: ["pro_speed":speed],  success: { (response) in
+        GYZNetWork.requestNetwork("need/recommend",parameters: ["pro_model":proModel],  success: { (response) in
             
             weakSelf?.hiddenLoadingView()
             GYZLog(response)

@@ -31,8 +31,6 @@ class JSMPublishNeedVC: GYZBaseVC {
         
         contentView.addSubview(typeInputView)
         contentView.addSubview(lineView)
-        contentView.addSubview(speedInputView)
-        contentView.addSubview(lineView1)
         contentView.addSubview(roteInputView)
         contentView.addSubview(lineView2)
         contentView.addSubview(numInputView)
@@ -69,16 +67,8 @@ class JSMPublishNeedVC: GYZBaseVC {
             make.top.equalTo(typeInputView.snp.bottom)
             make.height.equalTo(klineWidth)
         }
-        speedInputView.snp.makeConstraints { (make) in
-            make.top.equalTo(lineView.snp.bottom)
-            make.left.right.height.equalTo(typeInputView)
-        }
-        lineView1.snp.makeConstraints { (make) in
-            make.left.right.height.equalTo(lineView)
-            make.top.equalTo(speedInputView.snp.bottom)
-        }
         roteInputView.snp.makeConstraints { (make) in
-            make.top.equalTo(lineView1.snp.bottom)
+            make.top.equalTo(lineView.snp.bottom)
             make.left.right.height.equalTo(typeInputView)
         }
         lineView2.snp.makeConstraints { (make) in
@@ -148,15 +138,6 @@ class JSMPublishNeedVC: GYZBaseVC {
     
     /// 分割线
     fileprivate lazy var lineView : UIView = {
-        let line = UIView()
-        line.backgroundColor = kGrayLineColor
-        return line
-    }()
-    /// 转速
-    fileprivate lazy var speedInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "转速：", placeHolder: "请输入转速")
-    
-    /// 分割线2
-    fileprivate lazy var lineView1 : UIView = {
         let line = UIView()
         line.backgroundColor = kGrayLineColor
         return line
@@ -245,10 +226,6 @@ class JSMPublishNeedVC: GYZBaseVC {
                 MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
                 return
             }
-            if (speedInputView.textFiled.text?.isEmpty)! {
-                MBProgressHUD.showAutoDismissHUD(message: "请输入转速")
-                return
-            }
             if (roteInputView.textFiled.text?.isEmpty)! {
                 MBProgressHUD.showAutoDismissHUD(message: "请输入传动比")
                 return
@@ -277,7 +254,7 @@ class JSMPublishNeedVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("need/releaseNeed",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","pro_model":typeInputView.textFiled.text!,"pro_speed":speedInputView.textFiled.text!,"drive_ratio":roteInputView.textFiled.text!,"num":numInputView.textFiled.text!,"remark":noteInputView.textFiled.text ?? "","deal_date":selectTime],  success: { (response) in
+        GYZNetWork.requestNetwork("need/releaseNeed",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","pro_model":typeInputView.textFiled.text!,"drive_ratio":roteInputView.textFiled.text!,"num":numInputView.textFiled.text!,"remark":noteInputView.textFiled.text ?? "","deal_date":selectTime],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)

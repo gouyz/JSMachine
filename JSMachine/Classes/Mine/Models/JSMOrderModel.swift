@@ -20,6 +20,10 @@ class JSMOrderModel: LHSBaseModel {
     var pro_model : String? = ""
     /// 产品转速
     var pro_speed : String? = ""
+    /// 安装方式
+    var install : String? = ""
+    /// 产品功率
+    var power : String? = ""
     /// 传动比
     var drive_ratio : String? = ""
     /// 产品数量
