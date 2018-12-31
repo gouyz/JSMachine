@@ -23,7 +23,7 @@ class JSMServiceRecordImgsCell: UITableViewCell {
                     if imgCount > kMaxSelectCount {
                         imgCount = kMaxSelectCount
                     }
-                    let rowIndex = ceil(CGFloat.init(imgCount) / 3.0)//向上取整
+                    let rowIndex = ceil(CGFloat.init(imgCount) / 4.0)//向上取整
                     imgViews.snp.updateConstraints({ (make) in
                         make.height.equalTo(kPhotosImgHeight * rowIndex + kMargin * (rowIndex - 1))
                     })

@@ -233,6 +233,11 @@ class JSMApplyServiceVC: GYZBaseVC {
         applyInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedApply))
         applyInputView.textFiled.text = "否"
         
+        if userDefaults.string(forKey: kCompanyCity) != nil {
+            cityInputView.textFiled.text = userDefaults.string(forKey: kCompanyCity)
+            addressInputView.textFiled.text = userDefaults.string(forKey: kCompanyAddress)
+        }
+        
     }
     
     /// scrollView
@@ -472,6 +477,7 @@ class JSMApplyServiceVC: GYZBaseVC {
             
             MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.saveCompanyInfo()
                 weakSelf?.clickedBackBtn()
                 
             }
@@ -481,6 +487,11 @@ class JSMApplyServiceVC: GYZBaseVC {
             weakSelf?.hud?.hide(animated: true)
             GYZLog(error)
         })
+    }
+    /// 保存公司信息
+    func saveCompanyInfo(){
+        userDefaults.set(cityInputView.textFiled.text!, forKey: kCompanyCity)
+        userDefaults.set(addressInputView.textFiled.text!, forKey: kCompanyAddress)
     }
     /// 是否申请配件
     @objc func onClickedSelectedApply(){

@@ -14,6 +14,8 @@ class JSMConmentDetailVC: GYZBaseVC {
     
     ///订单ID
     var orderId: String = ""
+    let typeArr: [String] = ["解决问题高效","态度友好","准时上门服务","穿戴工作服上岗证"]
+    var selectTypeNameArr: [String] = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +32,11 @@ class JSMConmentDetailVC: GYZBaseVC {
         view.addSubview(bgView)
         bgView.addSubview(userImgView)
         bgView.addSubview(nameLab)
-        bgView.addSubview(desLab)
-        bgView.addSubview(ratingView)
+        bgView.addSubview(tagsView)
         bgView.addSubview(lineView)
         bgView.addSubview(contentLab)
         
+        let height = HXTagsView.getHeightWithTags(typeArr, layout: tagsView.layout, tagAttribute: tagsView.tagAttribute, width: kScreenWidth)
         
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(kTitleAndStateHeight + kMargin)
@@ -50,21 +52,14 @@ class JSMConmentDetailVC: GYZBaseVC {
             make.top.height.equalTo(userImgView)
             make.right.equalTo(-kMargin)
         }
-        desLab.snp.makeConstraints { (make) in
-            make.left.equalTo(kMargin)
-            make.centerY.equalTo(ratingView)
-            make.height.equalTo(50)
-            make.width.equalTo(80)
-        }
-        ratingView.snp.makeConstraints { (make) in
-            make.left.equalTo(desLab.snp.right)
+        tagsView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(lineView)
             make.top.equalTo(userImgView.snp.bottom).offset(kMargin)
-            make.height.equalTo(50)
-            make.width.equalTo(220)
+            make.height.equalTo(height)
         }
         lineView.snp.makeConstraints { (make) in
             make.left.right.equalTo(bgView)
-            make.top.equalTo(ratingView.snp.bottom).offset(kMargin)
+            make.top.equalTo(tagsView.snp.bottom).offset(kMargin)
             make.height.equalTo(klineDoubleWidth)
         }
         contentLab.snp.makeConstraints { (make) in
@@ -95,31 +90,25 @@ class JSMConmentDetailVC: GYZBaseVC {
         
         return lab
     }()
+    
     ///
-    lazy var desLab : UILabel = {
-        let lab = UILabel()
-        lab.font = k15Font
-        lab.textColor = kBlackFontColor
-        lab.text = "服务打分"
+    lazy var tagsView: HXTagsView = {
         
-        return lab
-    }()
-    ///星星评分
-    lazy var ratingView: CosmosView = {
+        let view = HXTagsView()
+        view.tagAttribute.borderColor = kBlueFontColor
+        view.tagAttribute.cornerRadius = 10
+        view.tagAttribute.normalBackgroundColor = kWhiteColor
+        view.tagAttribute.selectedBackgroundColor = kBlueFontColor
+        view.tagAttribute.textColor = kBlueFontColor
+        view.tagAttribute.selectedTextColor = kWhiteColor
+        /// 显示多行
+        view.layout.scrollDirection = .vertical
+        view.isMultiSelect = true
+        view.backgroundColor = kWhiteColor
+        view.isUserInteractionEnabled = false
+        view.tags = typeArr
         
-        let ratingStart = CosmosView()
-        ratingStart.settings.updateOnTouch = false
-        ratingStart.settings.fillMode = .full
-        ratingStart.settings.filledColor = kRedFontColor
-        ratingStart.settings.emptyBorderColor = kRedFontColor
-        ratingStart.settings.filledBorderColor = kRedFontColor
-        ratingStart.settings.starMargin = 5
-        ratingStart.settings.starSize = 40.0
-        ratingStart.settings.minTouchRating = 0
-        ratingStart.rating = 5
-        
-        return ratingStart
-        
+        return view
     }()
     /// 分割线
     var lineView : UIView = {
@@ -156,10 +145,32 @@ class JSMConmentDetailVC: GYZBaseVC {
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
-                weakSelf?.ratingView.rating = Double.init(data["pj_score"].stringValue) ?? 0
+                
                 weakSelf?.contentLab.text = data["pj_jy"].stringValue
                 weakSelf?.nameLab.text = data["nickname"].stringValue
                 weakSelf?.userImgView.kf.setImage(with: URL.init(string: data["head"].stringValue), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
+                if data["is_efficient"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[0])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                if data["is_manner"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[1])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                if data["is_time"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[2])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                if data["is_post"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[3])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                weakSelf?.tagsView.selectedTags = [(weakSelf?.selectTypeNameArr[0])!,(weakSelf?.selectTypeNameArr[1])!,(weakSelf?.selectTypeNameArr[2])!,(weakSelf?.selectTypeNameArr[3])!]
+                weakSelf?.tagsView.reloadData()
             }else{
                 MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             }

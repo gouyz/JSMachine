@@ -12,10 +12,10 @@ class GYZPhotoView: UIView {
 
     var imageViewsArray:[UIImageView] = []
     
-    //默认3列，列间隔为10，距离屏幕边距左右各10
+    //默认4列，列间隔为10，距离屏幕边距左右各10
     var imgWidth: CGFloat = kPhotosImgHeight
     var imgHight: CGFloat = kPhotosImgHeight
-    var perRowItemCount = 3
+    var perRowItemCount = 4
     
     /// 点击查看大图
     var onClickedImgDetailsBlock: ((_ index: Int,_ urls: [String]) -> Void)?

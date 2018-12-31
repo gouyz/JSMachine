@@ -142,7 +142,7 @@ class JSMEngineerOrderVC: GYZBaseVC {
     /// 维修记录
     @objc func onClickedRecord(sender: UITapGestureRecognizer){
         let tag = sender.view?.tag
-        let vc = JSMSaleServiceRecordVC()
+        let vc = JSMSaleServiceRecordListVC()
         vc.applyId = dataList[tag!].id!
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -167,11 +167,17 @@ class JSMEngineerOrderVC: GYZBaseVC {
     }
     /// 完成
     func goFinishedVC(id: String,row: Int){
-        let vc = JSMEngineerFinishedVC()
-        vc.orderId = id
-        vc.resultBlock = {[weak self] () in
-            self?.dataList[row].status = "3"
-            self?.tableView.reloadData()
+        let vc = JSMSaleServiceRecordListVC()
+        vc.applyId = id
+        vc.resultBlock = {[weak self] (finished) in
+            if finished {
+                self?.dataList.remove(at: row)
+                self?.tableView.reloadData()
+                if self?.dataList.count == 0{
+                    ///显示空页面
+                    self?.showEmptyView(content: "暂无售后申请信息")
+                }
+            }
         }
         navigationController?.pushViewController(vc, animated: true)
     }

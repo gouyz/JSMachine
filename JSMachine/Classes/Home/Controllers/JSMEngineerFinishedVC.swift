@@ -18,6 +18,8 @@ class JSMEngineerFinishedVC: GYZBaseVC {
     var maxImgCount: Int = kMaxSelectCount
     ///订单ID
     var orderId: String = ""
+    ///是否完成
+    var isFinished: String = "0"
     /// 选择结果回调
     var resultBlock:(() -> Void)?
 
@@ -25,6 +27,14 @@ class JSMEngineerFinishedVC: GYZBaseVC {
         super.viewDidLoad()
         
         self.navigationItem.title = "维修记录"
+        let rightBtn = UIButton(type: .custom)
+        rightBtn.setTitle("提交", for: .normal)
+        rightBtn.titleLabel?.font = k13Font
+        rightBtn.setTitleColor(kBlackFontColor, for: .normal)
+        rightBtn.frame = CGRect.init(x: 0, y: 0, width: kTitleHeight, height: kTitleHeight)
+        rightBtn.addTarget(self, action: #selector(onClickedSubmitBtn), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
+        
         setupUI()
         addPhotosView.delegate = self
     }
@@ -51,7 +61,9 @@ class JSMEngineerFinishedVC: GYZBaseVC {
         noteBgView.addSubview(lineView3)
         noteBgView.addSubview(addPhotosView)
         
-        contentView.addSubview(submitBtn)
+        contentView.addSubview(finishBgView)
+        finishBgView.addSubview(finishLab)
+        finishBgView.addSubview(switchView)
         
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
@@ -137,17 +149,24 @@ class JSMEngineerFinishedVC: GYZBaseVC {
             make.bottom.equalTo(-kMargin)
         }
         
-        submitBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(30)
-            make.right.equalTo(-30)
-            make.top.equalTo(noteBgView.snp.bottom).offset(30)
-            make.height.equalTo(kUIButtonHeight)
+        finishBgView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(lineView)
+            make.top.equalTo(noteBgView.snp.bottom).offset(kMargin)
+            make.height.equalTo(kTitleHeight)
             // 这个很重要，viewContainer中的最后一个控件一定要约束到bottom，并且要小于等于viewContainer的bottom
             // 否则的话，上面的控件会被强制拉伸变形
             // 最后的-10是边距，这个可以随意设置
             make.bottom.lessThanOrEqualTo(contentView).offset(-kMargin)
         }
-        
+        finishLab.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(finishBgView)
+            make.left.equalTo(kMargin)
+            make.right.equalTo(switchView.snp.left).offset(-kMargin)
+        }
+        switchView.snp.makeConstraints { (make) in
+            make.right.equalTo(-kMargin)
+            make.centerY.equalTo(finishBgView)
+        }
         
     }
     
@@ -235,19 +254,30 @@ class JSMEngineerFinishedVC: GYZBaseVC {
     /// 添加照片View
     lazy var addPhotosView: LHSAddPhotoView = LHSAddPhotoView.init(frame: CGRect.zero, maxCount: maxImgCount)
     
-    /// 提交按钮
-    fileprivate lazy var submitBtn : UIButton = {
-        let btn = UIButton.init(type: .custom)
-        btn.backgroundColor = kBtnClickBGColor
-        btn.setTitleColor(kWhiteColor, for: .normal)
-        btn.setTitle("提 交", for: .normal)
-        btn.titleLabel?.font = k15Font
-        
-        btn.addTarget(self, action: #selector(onClickedSubmitBtn), for: .touchUpInside)
-        btn.cornerRadius = CGFloat(kUIButtonHeight * 0.5)
-        
-        return btn
+    ///
+    lazy var finishBgView : UIView = {
+        let line = UIView()
+        line.backgroundColor = kWhiteColor
+        return line
     }()
+    lazy var finishLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k15Font
+        lab.textColor = kBlackFontColor
+        lab.text = "是否完成"
+        
+        return lab
+    }()
+    /// 开关
+    lazy var switchView: UISwitch = {
+        let sw = UISwitch()
+        sw.addTarget(self, action: #selector(onClickedFinish(sender:)), for: .valueChanged)
+        return sw
+    }()
+    @objc func onClickedFinish(sender: UISwitch){
+        isFinished = sender.isOn ? "1" : "0"
+        GYZLog(isFinished)
+    }
     
     /// 提交按钮
     @objc func onClickedSubmitBtn(){
@@ -288,7 +318,7 @@ class JSMEngineerFinishedVC: GYZBaseVC {
             imgsParam.append(imgParam)
         }
         
-        GYZNetWork.uploadImageRequest("engineer/submitlAllot", parameters: ["id":orderId,"w_model":typeInputView.textFiled.text!,"w_reason":reasonInputView.textFiled.text!,"w_remark":noteInputView.textFiled.text ?? ""], uploadParam: imgsParam, success: { (response) in
+        GYZNetWork.uploadImageRequest("engineer/submitlAllot", parameters: ["id":orderId,"w_model":typeInputView.textFiled.text!,"w_reason":reasonInputView.textFiled.text!,"w_remark":noteInputView.textFiled.text ?? "","is_finish": isFinished], uploadParam: imgsParam, success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)

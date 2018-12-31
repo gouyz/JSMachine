@@ -89,10 +89,12 @@ let kDefaultLat = 31.7692000000
 /// 保存异常信息标识
 let ERROR_MESSAGE = "ERROR_MESSAGE"
 
-/// 发送小贴士等消息 通知名称
-let kSendMessageData = "kSendMessageData"
-/// 点击url消息 通知名称
-let kUrlMessagePushData = "kUrlMessagePushData"
+/// 公司名称
+let kCompanyName = "kCompanyName"
+/// 公司市/区
+let kCompanyCity = "kCompanyCity"
+/// 公司具体地址
+let kCompanyAddress = "kCompanyAddress"
 
 ///已读消息后，刷新消息角标 通知名称
 let kUMessageBadageRefreshData = "messageBadageRefreshData"

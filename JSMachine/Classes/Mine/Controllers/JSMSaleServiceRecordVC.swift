@@ -1,7 +1,7 @@
 //
 //  JSMSaleServiceRecordVC.swift
 //  JSMachine
-//  售后维修记录
+//  售后维修记录 详情
 //  Created by gouyz on 2018/12/19.
 //  Copyright © 2018 gouyz. All rights reserved.
 //
@@ -18,6 +18,7 @@ class JSMSaleServiceRecordVC: GYZBaseVC {
 
     let titleArr: [String] = ["故障详情","维修备注"]
     var applyId: String = ""
+    var listId: String = ""
     
     var dataModel: JSMSaleServiceRecordModel?
     
@@ -61,7 +62,7 @@ class JSMSaleServiceRecordVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("engineer/lookAllot", parameters: ["id": applyId],  success: { (response) in
+        GYZNetWork.requestNetwork("engineer/lookAllot", parameters: ["id": applyId,"list_id":listId],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)

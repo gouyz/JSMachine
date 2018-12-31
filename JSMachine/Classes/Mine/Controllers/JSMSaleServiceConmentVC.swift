@@ -15,12 +15,13 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
     ///txtView 提示文字
     let placeHolder = "您对我们的商品有什么意见或者建议，商品的有点或者美中不足的地方都可以说说"
     
+    let typeArr: [String] = ["解决问题高效","态度友好","准时上门服务","穿戴工作服上岗证"]
+    var selectTypeArr: [String] = ["0","0","0","0"]
+    var selectTypeNameArr: [String] = [String]()
     //投诉内容
     var noteContent: String = ""
     ///订单ID
     var orderId: String = ""
-    /// 评论星级
-    var starNum: Double = 5
     /// 选择结果回调
     var resultBlock:(() -> Void)?
     /// 是否评价过
@@ -34,15 +35,17 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
         
         if isConment {
             contentTxtView.isEditable = false
-            ratingView.settings.updateOnTouch = false
+            tagsView.isUserInteractionEnabled = false
             submitBtn.isHidden = true
             
             requestGetConment()
         }else{
             contentTxtView.text = placeHolder
             contentTxtView.delegate = self
-            
-            ratingView.didFinishTouchingCosmos = didFinishTouchingCosmos
+            tagsView.completion = {[weak self] (tags,index) in
+                self?.selectTypeArr[index] = "1"
+                self?.selectTypeNameArr = tags as! [String]
+            }
         }
         
     }
@@ -52,11 +55,13 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
         bgView.backgroundColor = kWhiteColor
         view.addSubview(bgView)
         bgView.addSubview(desLab)
-        bgView.addSubview(ratingView)
+        bgView.addSubview(desLab1)
         bgView.addSubview(lineView)
+        bgView.addSubview(tagsView)
         bgView.addSubview(contentTxtView)
         view.addSubview(submitBtn)
         
+        let height = HXTagsView.getHeightWithTags(typeArr, layout: tagsView.layout, tagAttribute: tagsView.tagAttribute, width: kScreenWidth)
         
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(kTitleAndStateHeight + kMargin)
@@ -64,24 +69,27 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
         }
         desLab.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
-            make.centerY.equalTo(ratingView)
-            make.height.equalTo(30)
-            make.width.equalTo(80)
-        }
-        ratingView.snp.makeConstraints { (make) in
-            make.left.equalTo(desLab.snp.right)
             make.top.equalTo(kMargin)
-            make.height.equalTo(50)
-            make.width.equalTo(220)
+            make.height.equalTo(30)
+            make.right.equalTo(-kMargin)
+        }
+        desLab1.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(desLab)
+            make.top.equalTo(desLab.snp.bottom)
         }
         lineView.snp.makeConstraints { (make) in
             make.left.right.equalTo(bgView)
-            make.top.equalTo(ratingView.snp.bottom).offset(kMargin)
-            make.height.equalTo(klineDoubleWidth)
+            make.top.equalTo(desLab1.snp.bottom)
+            make.height.equalTo(klineWidth)
+        }
+        tagsView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(lineView)
+            make.top.equalTo(lineView.snp.bottom).offset(kMargin)
+            make.height.equalTo(height)
         }
         contentTxtView.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
-            make.top.equalTo(lineView.snp.bottom).offset(kMargin)
+            make.top.equalTo(tagsView.snp.bottom).offset(20)
             make.right.equalTo(-kMargin)
             make.height.equalTo(120)
             make.bottom.equalTo(-kMargin)
@@ -99,28 +107,22 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
     ///
     lazy var desLab : UILabel = {
         let lab = UILabel()
-        lab.font = k15Font
+        lab.font = UIFont.boldSystemFont(ofSize: 18)
         lab.textColor = kBlackFontColor
-        lab.text = "服务打分"
+        lab.textAlignment = .center
+        lab.text = "维修已完成"
         
         return lab
     }()
-    ///星星评分
-    lazy var ratingView: CosmosView = {
+    ///
+    lazy var desLab1 : UILabel = {
+        let lab = UILabel()
+        lab.font = k15Font
+        lab.textColor = kBlackFontColor
+        lab.textAlignment = .center
+        lab.text = "请评价一下为您维修的工程师吧"
         
-        let ratingStart = CosmosView()
-        //        ratingStart.settings.updateOnTouch = false
-        ratingStart.settings.fillMode = .full
-        ratingStart.settings.filledColor = kRedFontColor
-        ratingStart.settings.emptyBorderColor = kRedFontColor
-        ratingStart.settings.filledBorderColor = kRedFontColor
-        ratingStart.settings.starMargin = 5
-        ratingStart.settings.starSize = 40.0
-        ratingStart.settings.minTouchRating = 0
-        ratingStart.rating = 5
-        
-        return ratingStart
-        
+        return lab
     }()
     /// 分割线
     var lineView : UIView = {
@@ -128,7 +130,24 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
         line.backgroundColor = kGrayLineColor
         return line
     }()
-    
+    ///
+    lazy var tagsView: HXTagsView = {
+        
+        let view = HXTagsView()
+        view.tagAttribute.borderColor = kBlueFontColor
+        view.tagAttribute.cornerRadius = 10
+        view.tagAttribute.normalBackgroundColor = kWhiteColor
+        view.tagAttribute.selectedBackgroundColor = kBlueFontColor
+        view.tagAttribute.textColor = kBlueFontColor
+        view.tagAttribute.selectedTextColor = kWhiteColor
+        /// 显示多行
+        view.layout.scrollDirection = .vertical
+        view.isMultiSelect = true
+        view.backgroundColor = kWhiteColor
+        view.tags = typeArr
+        
+        return view
+    }()
     /// 投诉内容
     lazy var contentTxtView: UITextView = {
         
@@ -151,10 +170,6 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
         return btn
     }()
     
-    /// 评论星级
-    func didFinishTouchingCosmos(_ rating: Double) {
-        starNum = rating
-    }
     /// 提交
     @objc func clickedSubmitBtn(){
         //除去前后空格,防止只输入空格的情况
@@ -177,7 +192,7 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("my/evaluate", parameters: ["id": orderId,"pj_score":starNum,"pj_jy":noteContent],  success: { (response) in
+        GYZNetWork.requestNetwork("my/evaluate", parameters: ["id": orderId,"pj_jy":noteContent,"is_efficient":selectTypeArr[0],"is_manner":selectTypeArr[1],"is_time":selectTypeArr[2],"is_post":selectTypeArr[3]],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
@@ -215,7 +230,28 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
-                weakSelf?.ratingView.rating = Double.init(data["pj_score"].stringValue) ?? 0
+                if data["is_efficient"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[0])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                if data["is_manner"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[1])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                if data["is_time"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[2])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                if data["is_post"].stringValue == "1"{
+                    weakSelf?.selectTypeNameArr.append((weakSelf?.typeArr[3])!)
+                }else{
+                    weakSelf?.selectTypeNameArr.append("")
+                }
+                weakSelf?.tagsView.selectedTags = [(weakSelf?.selectTypeNameArr[0])!,(weakSelf?.selectTypeNameArr[1])!,(weakSelf?.selectTypeNameArr[2])!,(weakSelf?.selectTypeNameArr[3])!]
+                weakSelf?.tagsView.reloadData()
                 weakSelf?.contentTxtView.text = data["pj_jy"].stringValue
             }else{
                 MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
@@ -226,6 +262,7 @@ class JSMSaleServiceConmentVC: GYZBaseVC {
             GYZLog(error)
         })
     }
+    
 }
 extension JSMSaleServiceConmentVC : UITextViewDelegate{
     ///MARK UITextViewDelegate

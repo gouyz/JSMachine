@@ -40,7 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }else{
 //            window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMLoginVC())
 //        }
-        window?.rootViewController = GYZMainTabBarVC()
+        if userDefaults.bool(forKey: kIsEngineerLoginTagKey){//工程师登录
+            window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMEngineerHomerVC())
+        }else{
+            window?.rootViewController = GYZMainTabBarVC()
+        }
         window?.makeKeyAndVisible()
         
         return true

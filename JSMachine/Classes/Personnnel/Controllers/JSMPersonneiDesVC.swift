@@ -62,7 +62,7 @@ class JSMPersonneiDesVC: GYZBaseVC {
     }()
     lazy var bottomView: UIView = {
         let btView = UIView()
-        btView.backgroundColor = kWhiteColor
+        btView.backgroundColor = kBackgroundColor
         
         return btView
     }()
@@ -73,8 +73,9 @@ class JSMPersonneiDesVC: GYZBaseVC {
         btn.setTitle("我想加入", for: .normal)
         btn.setTitleColor(kWhiteColor, for: .normal)
         btn.titleLabel?.font = k15Font
+        btn.cornerRadius = 22
         
-        btn.addTarget(self, action: #selector(clickedBackBtn), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(clickedJoinBtn), for: .touchUpInside)
         
         return btn
     }()
@@ -89,7 +90,7 @@ class JSMPersonneiDesVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("my/expalin",  success: { (response) in
+        GYZNetWork.requestNetwork("my/explain",  success: { (response) in
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
             
