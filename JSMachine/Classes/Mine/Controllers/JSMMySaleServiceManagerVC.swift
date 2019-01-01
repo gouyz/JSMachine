@@ -19,7 +19,7 @@ class JSMMySaleServiceManagerVC: GYZBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "我的售后"
+        self.navigationItem.title = "我的快修申请"
         
         setScrollView()
     }

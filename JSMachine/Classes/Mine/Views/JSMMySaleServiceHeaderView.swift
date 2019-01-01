@@ -81,7 +81,7 @@ class JSMMySaleServiceHeaderView: UIView {
         let lab = UILabel()
         lab.font = k15Font
         lab.textColor = kBlackFontColor
-        lab.text = "我的申请售后"
+        lab.text = "我的快修申请"
         
         return lab
     }()

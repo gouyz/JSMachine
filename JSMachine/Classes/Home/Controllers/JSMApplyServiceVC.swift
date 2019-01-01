@@ -1,7 +1,7 @@
 //
 //  JSMApplyServiceVC.swift
 //  JSMachine
-//  售后申请
+//  快修申请
 //  Created by gouyz on 2018/12/3.
 //  Copyright © 2018 gouyz. All rights reserved.
 //
@@ -17,7 +17,7 @@ class JSMApplyServiceVC: GYZBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "售后申请"
+        self.navigationItem.title = "快修申请"
         setupUI()
     }
     

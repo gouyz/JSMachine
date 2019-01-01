@@ -129,8 +129,8 @@ class JSMHomeHeaderView: UIView {
         }
         
         chatBtn.set(image: UIImage.init(named: "icon_home_chat"), title: "技术在线", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
-        saleBtn.set(image: UIImage.init(named: "icon_home_sale"), title: "申请售后", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
-        publishBtn.set(image: UIImage.init(named: "icon_home_publish"), title: "需求发布", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
+        saleBtn.set(image: UIImage.init(named: "icon_home_sale"), title: "快修申请", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
+        publishBtn.set(image: UIImage.init(named: "icon_home_publish"), title: "快购发布", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
         shopBtn.set(image: UIImage.init(named: "icon_home_shop"), title: "在线商城", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
     }
     

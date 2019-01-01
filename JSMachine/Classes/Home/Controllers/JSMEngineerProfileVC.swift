@@ -119,6 +119,11 @@ class JSMEngineerProfileVC: GYZBaseVC {
         vc.isEngineer = true
         navigationController?.pushViewController(vc, animated: true)
     }
+    /// 客户评价
+    func goConmentVC(){
+        let vc = JSMEngineerConmentVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
@@ -127,7 +132,7 @@ extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -171,6 +176,8 @@ extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.desLab.text = userDefaults.string(forKey: "phone")
         }else if indexPath.row == 5{
             cell.nameLab.text = "修改密码"
+        }else if indexPath.row == 6{
+            cell.nameLab.text = "我的客户评价"
         }
         
         cell.selectionStyle = .none
@@ -191,6 +198,8 @@ extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
             selectHeaderImg()
         }else if indexPath.row == 5{/// 修改密码
             goPwdVC()
+        }else if indexPath.row == 6{/// 客户评价
+            goConmentVC()
         }
     }
     ///MARK : UITableViewDelegate

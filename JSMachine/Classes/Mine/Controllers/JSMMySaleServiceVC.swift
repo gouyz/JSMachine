@@ -21,7 +21,7 @@ class JSMMySaleServiceVC: GYZBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "售后申请"
+        self.navigationItem.title = "快修申请"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_service_kefu")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(clickedKeFuBtn))
         
         view.addSubview(applyBtn)
@@ -64,7 +64,7 @@ class JSMMySaleServiceVC: GYZBaseVC {
     lazy var applyBtn : UIButton = {
         let btn = UIButton.init(type: .custom)
         btn.backgroundColor = kBtnClickBGColor
-        btn.setTitle("申请售后服务", for: .normal)
+        btn.setTitle("快修申请服务", for: .normal)
         btn.setTitleColor(kWhiteColor, for: .normal)
         btn.titleLabel?.font = k15Font
         

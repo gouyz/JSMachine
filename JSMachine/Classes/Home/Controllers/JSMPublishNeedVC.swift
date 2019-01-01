@@ -17,7 +17,7 @@ class JSMPublishNeedVC: GYZBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "发布需求"
+        self.navigationItem.title = "发布快购"
         self.view.backgroundColor = kWhiteColor
         
         setupUI()
@@ -197,7 +197,7 @@ class JSMPublishNeedVC: GYZBaseVC {
         let btn = UIButton.init(type: .custom)
         btn.backgroundColor = kBtnClickBGColor
         btn.setTitleColor(kWhiteColor, for: .normal)
-        btn.setTitle("提交需求", for: .normal)
+        btn.setTitle("提交快购", for: .normal)
         btn.titleLabel?.font = k15Font
         
         btn.addTarget(self, action: #selector(onClickedSubmitBtn), for: .touchUpInside)

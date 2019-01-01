@@ -126,14 +126,14 @@ class JSMHomeVC: GYZBaseVC {
         }
     }
     
-    /// 技术在线、申请售后、需求发布、在线商城
+    /// 技术在线、快修申请、需求发布、在线商城
     func dealOperator(index : Int){
         switch index {
         case 1://技术在线
             goOnLineVC()
-        case 2://申请售后
+        case 2://快修申请
             goApplyVC()
-        case 3://需求发布
+        case 3://快购发布
             goPublishNeedVC()
         case 4://在线商城
             goShopVC()
@@ -160,12 +160,12 @@ class JSMHomeVC: GYZBaseVC {
         let vc = JSMTechnologyOnlineVC()
         navigationController?.pushViewController(vc, animated: true)
     }
-    //需求发布
+    //快购发布
     func goPublishNeedVC(){
         let vc = JSMPublishNeedVC()
         navigationController?.pushViewController(vc, animated: true)
     }
-    //申请售后
+    //快修申请
     func goApplyVC(){
         
         if !userDefaults.bool(forKey: kIsLoginTagKey) {

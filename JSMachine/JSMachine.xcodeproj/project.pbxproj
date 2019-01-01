@@ -121,6 +121,13 @@
 		0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */; };
 		0A05BF9721C28CE60063EBEB /* JSMTuiJianGoodsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BF9621C28CE60063EBEB /* JSMTuiJianGoodsVC.swift */; };
 		0A05BF9921C2907D0063EBEB /* JSMTuiJianGoodsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BF9821C2907D0063EBEB /* JSMTuiJianGoodsCell.swift */; };
+		0A06C3F221DB74EE00033ED0 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A06C3ED21DB74ED00033ED0 /* ZZCircleProgress.bundle */; };
+		0A06C3F321DB74EE00033ED0 /* ZZCountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3EF21DB74ED00033ED0 /* ZZCountingLabel.m */; };
+		0A06C3F421DB74EE00033ED0 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F121DB74ED00033ED0 /* ZZCircleProgress.m */; };
+		0A06C3F621DB755900033ED0 /* JSMEngineerConmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F521DB755900033ED0 /* JSMEngineerConmentVC.swift */; };
+		0A06C3F821DB762400033ED0 /* JSMEngineerConmentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F721DB762400033ED0 /* JSMEngineerConmentHeaderView.swift */; };
+		0A06C3FA21DBABF500033ED0 /* JSMConmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */; };
+		0A06C3FC21DBADC900033ED0 /* JSMConmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3FB21DBADC900033ED0 /* JSMConmentListCell.swift */; };
 		0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */; };
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
@@ -325,6 +332,15 @@
 		0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsCell.swift; sourceTree = "<group>"; };
 		0A05BF9621C28CE60063EBEB /* JSMTuiJianGoodsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTuiJianGoodsVC.swift; sourceTree = "<group>"; };
 		0A05BF9821C2907D0063EBEB /* JSMTuiJianGoodsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTuiJianGoodsCell.swift; sourceTree = "<group>"; };
+		0A06C3ED21DB74ED00033ED0 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
+		0A06C3EE21DB74ED00033ED0 /* ZZCircleProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCircleProgress.h; sourceTree = "<group>"; };
+		0A06C3EF21DB74ED00033ED0 /* ZZCountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCountingLabel.m; sourceTree = "<group>"; };
+		0A06C3F021DB74ED00033ED0 /* ZZCountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCountingLabel.h; sourceTree = "<group>"; };
+		0A06C3F121DB74ED00033ED0 /* ZZCircleProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCircleProgress.m; sourceTree = "<group>"; };
+		0A06C3F521DB755900033ED0 /* JSMEngineerConmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerConmentVC.swift; sourceTree = "<group>"; };
+		0A06C3F721DB762400033ED0 /* JSMEngineerConmentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerConmentHeaderView.swift; sourceTree = "<group>"; };
+		0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMConmentModel.swift; sourceTree = "<group>"; };
+		0A06C3FB21DBADC900033ED0 /* JSMConmentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMConmentListCell.swift; sourceTree = "<group>"; };
 		0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineHeaderView.swift; sourceTree = "<group>"; };
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
@@ -522,6 +538,7 @@
 				0A4C6CD421CA5CC600CA76F4 /* JSMConmentDetailVC.swift */,
 				0A4C6CD621CA621600CA76F4 /* JSMEngineerFinishedVC.swift */,
 				0A00300421CA948B007D7F3F /* JSMSearchShopVC.swift */,
+				0A06C3F521DB755900033ED0 /* JSMEngineerConmentVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -542,6 +559,8 @@
 				0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */,
 				0A45CF7C21B774E000759230 /* JSMXunJiaCell.swift */,
 				0A45898C21C2341F00DC236F /* JSMSelectGoodsParamsView.swift */,
+				0A06C3F721DB762400033ED0 /* JSMEngineerConmentHeaderView.swift */,
+				0A06C3FB21DBADC900033ED0 /* JSMConmentListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -794,6 +813,7 @@
 		0A02A5CF21A58DE3009F2A96 /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
+				0A06C3EC21DB74ED00033ED0 /* ZZCircleProgress */,
 				0A45898E21C2363E00DC236F /* TagsView */,
 				0A02A5D021A58DE3009F2A96 /* PickerView */,
 				0A02A5D921A58DE3009F2A96 /* ZCycleView */,
@@ -893,6 +913,18 @@
 			path = tool;
 			sourceTree = "<group>";
 		};
+		0A06C3EC21DB74ED00033ED0 /* ZZCircleProgress */ = {
+			isa = PBXGroup;
+			children = (
+				0A06C3ED21DB74ED00033ED0 /* ZZCircleProgress.bundle */,
+				0A06C3EE21DB74ED00033ED0 /* ZZCircleProgress.h */,
+				0A06C3EF21DB74ED00033ED0 /* ZZCountingLabel.m */,
+				0A06C3F021DB74ED00033ED0 /* ZZCountingLabel.h */,
+				0A06C3F121DB74ED00033ED0 /* ZZCircleProgress.m */,
+			);
+			path = ZZCircleProgress;
+			sourceTree = "<group>";
+		};
 		0A45898E21C2363E00DC236F /* TagsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -931,6 +963,7 @@
 				0A5C2D7E21BFB0650017FED6 /* JSMXunJiaModel.swift */,
 				0A45899E21C251F800DC236F /* JSMGoodsParamsModel.swift */,
 				0A052C7B21C7E0A5001E7BDE /* JSMTechnologyOnLineModel.swift */,
+				0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1067,6 +1100,7 @@
 				0A02A62D21A58DE3009F2A96 /* noticeMusic.caf in Resources */,
 				0A02A62321A58DE3009F2A96 /* City.plist in Resources */,
 				0A02A56921A58742009F2A96 /* Assets.xcassets in Resources */,
+				0A06C3F221DB74EE00033ED0 /* ZZCircleProgress.bundle in Resources */,
 				0A02A56721A58741009F2A96 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,6 +1228,7 @@
 				0A4C6CCB21C9E83300CA76F4 /* JSMSaleServiceConmentVC.swift in Sources */,
 				0A4E46B621B64B6F00DB2E50 /* JSMEngineerHomerVC.swift in Sources */,
 				0A02A62F21A58DE3009F2A96 /* SegmentStyle.swift in Sources */,
+				0A06C3FC21DBADC900033ED0 /* JSMConmentListCell.swift in Sources */,
 				0A02A63521A58DE3009F2A96 /* GYZAddressBookManager.swift in Sources */,
 				0A05BF9721C28CE60063EBEB /* JSMTuiJianGoodsVC.swift in Sources */,
 				0A02A62621A58DE3009F2A96 /* ZCycleView.swift in Sources */,
@@ -1208,6 +1243,7 @@
 				0A0528BA21D919C6009FF2A7 /* JSMSaleServiceRecordListVC.swift in Sources */,
 				0A45899D21C2363F00DC236F /* HXTagCollectionViewFlowLayout.m in Sources */,
 				0A02A60521A58DE3009F2A96 /* LHSSelectPayMethodView.swift in Sources */,
+				0A06C3FA21DBABF500033ED0 /* JSMConmentModel.swift in Sources */,
 				0A4C6CCD21CA20EA00CA76F4 /* JSMSaleServiceRecordVC.swift in Sources */,
 				0A02A5FE21A58DE3009F2A96 /* GYZCommonInfoCell.swift in Sources */,
 				0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */,
@@ -1222,6 +1258,7 @@
 				0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */,
 				0A38196821C3AA7200E81610 /* JSMOrderModel.swift in Sources */,
 				0A45899F21C251F800DC236F /* JSMGoodsParamsModel.swift in Sources */,
+				0A06C3F621DB755900033ED0 /* JSMEngineerConmentVC.swift in Sources */,
 				0A02F5F621AD91B4002E3BF9 /* JSMPublishSuccessVC.swift in Sources */,
 				0A55E34021C7327B0055BC1B /* JSMMySaleServiceModel.swift in Sources */,
 				0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */,
@@ -1236,6 +1273,8 @@
 				0A02A60421A58DE3009F2A96 /* GYZLabArrowCell.swift in Sources */,
 				0A4E46C821B671F600DB2E50 /* JSMShopHeaderView.swift in Sources */,
 				0A45CF7D21B774E000759230 /* JSMXunJiaCell.swift in Sources */,
+				0A06C3F821DB762400033ED0 /* JSMEngineerConmentHeaderView.swift in Sources */,
+				0A06C3F321DB74EE00033ED0 /* ZZCountingLabel.m in Sources */,
 				0A02A63B21A58DE3009F2A96 /* GYZCheckTool.m in Sources */,
 				0A02A61621A58DE3009F2A96 /* GYZUIColor+Extension.swift in Sources */,
 				0A76B7CF21AF8F5A00720A20 /* JSMPartnerVC.swift in Sources */,
@@ -1279,6 +1318,7 @@
 				0A02A60121A58DE3009F2A96 /* LHSCheckView.swift in Sources */,
 				0A02A64421A59249009F2A96 /* JSMPersonnelVC.swift in Sources */,
 				0A4E46B221B6211F00DB2E50 /* GYZStepProgressView.swift in Sources */,
+				0A06C3F421DB74EE00033ED0 /* ZZCircleProgress.m in Sources */,
 				0A0528BC21D91D3D009FF2A7 /* JSMRecordListCell.swift in Sources */,
 				0A02A63321A58DE3009F2A96 /* GYZNetWork.swift in Sources */,
 				0A4E46BE21B65E2100DB2E50 /* JSMShopsVC.swift in Sources */,

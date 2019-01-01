@@ -26,9 +26,14 @@ class JSMSaleServiceRecordModel: LHSBaseModel {
     
     override func setValue(_ value: Any?, forKey key: String) {
         if key == "w_pic"{
-            guard let datas = value as? [[String : String]] else { return }
-            for dict in datas {
-                imgList.append(dict["pic"]!)
+            guard let datas = value as? [String] else { return }
+            for item in datas {
+                imgList.append(item)
+            }
+        }else if key == "pic"{
+            guard let datas = value as? [String] else { return }
+            for item in datas {
+                imgList.append(item)
             }
         }else {
             super.setValue(value, forKey: key)
