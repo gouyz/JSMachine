@@ -137,7 +137,7 @@ class JSMSaleServiceOrderCell: UITableViewCell {
                         }
                     }else{
                         
-                        operatorLab.text = "完成"
+                        operatorLab.text = "维修记录"
                         deleteLab.isHidden = true
                         deleteLab.snp.updateConstraints { (make) in
                             make.width.equalTo(0)

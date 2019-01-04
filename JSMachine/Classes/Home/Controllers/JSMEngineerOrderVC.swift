@@ -171,12 +171,8 @@ class JSMEngineerOrderVC: GYZBaseVC {
         vc.applyId = id
         vc.resultBlock = {[weak self] (finished) in
             if finished {
-                self?.dataList.remove(at: row)
+                self?.dataList[row].status = "3"
                 self?.tableView.reloadData()
-                if self?.dataList.count == 0{
-                    ///显示空页面
-                    self?.showEmptyView(content: "暂无售后申请信息")
-                }
             }
         }
         navigationController?.pushViewController(vc, animated: true)
