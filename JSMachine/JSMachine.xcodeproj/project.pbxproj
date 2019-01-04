@@ -119,6 +119,11 @@
 		0A05A5EC21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */; };
 		0A05A5EE21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */; };
 		0A05A5F021A709E900E6C9C0 /* JSMHomeNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */; };
+		0A05A87621DFAA350087EDC4 /* JSMNetDotHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A87521DFAA350087EDC4 /* JSMNetDotHomeVC.swift */; };
+		0A05A87821DFB28D0087EDC4 /* JSMNetDotListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A87721DFB28D0087EDC4 /* JSMNetDotListVC.swift */; };
+		0A05A87A21DFB8FE0087EDC4 /* JSMSelectedEngineerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A87921DFB8FE0087EDC4 /* JSMSelectedEngineerVC.swift */; };
+		0A05A87C21DFBA440087EDC4 /* JSMSelectedEngineerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A87B21DFBA440087EDC4 /* JSMSelectedEngineerModel.swift */; };
+		0A05A87E21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A87D21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift */; };
 		0A05BF9721C28CE60063EBEB /* JSMTuiJianGoodsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BF9621C28CE60063EBEB /* JSMTuiJianGoodsVC.swift */; };
 		0A05BF9921C2907D0063EBEB /* JSMTuiJianGoodsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BF9821C2907D0063EBEB /* JSMTuiJianGoodsCell.swift */; };
 		0A06C3F221DB74EE00033ED0 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A06C3ED21DB74ED00033ED0 /* ZZCircleProgress.bundle */; };
@@ -330,6 +335,11 @@
 		0A05A5EB21A6F7BF00E6C9C0 /* JSMHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5ED21A707F600E6C9C0 /* JSMHomeNewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsHeaderView.swift; sourceTree = "<group>"; };
 		0A05A5EF21A709E900E6C9C0 /* JSMHomeNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMHomeNewsCell.swift; sourceTree = "<group>"; };
+		0A05A87521DFAA350087EDC4 /* JSMNetDotHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNetDotHomeVC.swift; sourceTree = "<group>"; };
+		0A05A87721DFB28D0087EDC4 /* JSMNetDotListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNetDotListVC.swift; sourceTree = "<group>"; };
+		0A05A87921DFB8FE0087EDC4 /* JSMSelectedEngineerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSelectedEngineerVC.swift; sourceTree = "<group>"; };
+		0A05A87B21DFBA440087EDC4 /* JSMSelectedEngineerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSelectedEngineerModel.swift; sourceTree = "<group>"; };
+		0A05A87D21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSelectedEngineerCell.swift; sourceTree = "<group>"; };
 		0A05BF9621C28CE60063EBEB /* JSMTuiJianGoodsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTuiJianGoodsVC.swift; sourceTree = "<group>"; };
 		0A05BF9821C2907D0063EBEB /* JSMTuiJianGoodsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTuiJianGoodsCell.swift; sourceTree = "<group>"; };
 		0A06C3ED21DB74ED00033ED0 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
@@ -494,6 +504,7 @@
 		0A02A58F21A58DE3009F2A96 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0A05A87121DFAA080087EDC4 /* NetDot */,
 				0A02A59021A58DE3009F2A96 /* Home */,
 				0A02A59421A58DE3009F2A96 /* Common */,
 				0A02A5A921A58DE3009F2A96 /* Mine */,
@@ -913,6 +924,42 @@
 			path = tool;
 			sourceTree = "<group>";
 		};
+		0A05A87121DFAA080087EDC4 /* NetDot */ = {
+			isa = PBXGroup;
+			children = (
+				0A05A87221DFAA080087EDC4 /* Models */,
+				0A05A87321DFAA080087EDC4 /* Controllers */,
+				0A05A87421DFAA080087EDC4 /* Views */,
+			);
+			path = NetDot;
+			sourceTree = "<group>";
+		};
+		0A05A87221DFAA080087EDC4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0A05A87B21DFBA440087EDC4 /* JSMSelectedEngineerModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0A05A87321DFAA080087EDC4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A05A87521DFAA350087EDC4 /* JSMNetDotHomeVC.swift */,
+				0A05A87721DFB28D0087EDC4 /* JSMNetDotListVC.swift */,
+				0A05A87921DFB8FE0087EDC4 /* JSMSelectedEngineerVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0A05A87421DFAA080087EDC4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A05A87D21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0A06C3EC21DB74ED00033ED0 /* ZZCircleProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,6 +1292,7 @@
 				0A02A60521A58DE3009F2A96 /* LHSSelectPayMethodView.swift in Sources */,
 				0A06C3FA21DBABF500033ED0 /* JSMConmentModel.swift in Sources */,
 				0A4C6CCD21CA20EA00CA76F4 /* JSMSaleServiceRecordVC.swift in Sources */,
+				0A05A87E21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift in Sources */,
 				0A02A5FE21A58DE3009F2A96 /* GYZCommonInfoCell.swift in Sources */,
 				0A02EAB321AADF0A000B5644 /* JSMOrderCell.swift in Sources */,
 				0A76B7D121AF92A100720A20 /* JSMPartnerCell.swift in Sources */,
@@ -1282,6 +1330,7 @@
 				0A02F5F421AD8474002E3BF9 /* JSMPublishNeedVC.swift in Sources */,
 				0A4E46C421B66C1500DB2E50 /* JSMShopLeftCell.swift in Sources */,
 				0A02A63121A58DE3009F2A96 /* ScrollSegmentView.swift in Sources */,
+				0A05A87A21DFB8FE0087EDC4 /* JSMSelectedEngineerVC.swift in Sources */,
 				0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */,
 				0A76B7D521AFC28C00720A20 /* JSMAuthenticityResultVC.swift in Sources */,
 				0A4E46AE21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift in Sources */,
@@ -1343,10 +1392,12 @@
 				0A02EAAB21AAD590000B5644 /* JSMMyFavouriteVC.swift in Sources */,
 				0A02EAA721AAD0D6000B5644 /* JSMModifyEmailVC.swift in Sources */,
 				0A5C2D6E21BF56850017FED6 /* JSMWebViewVC.swift in Sources */,
+				0A05A87C21DFBA440087EDC4 /* JSMSelectedEngineerModel.swift in Sources */,
 				0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */,
 				0A02EAA921AAD1A7000B5644 /* JSMModifyPwdVC.swift in Sources */,
 				0A5C2D7721BF66F20017FED6 /* JSMShopModel.swift in Sources */,
 				0A45898D21C2341F00DC236F /* JSMSelectGoodsParamsView.swift in Sources */,
+				0A05A87621DFAA350087EDC4 /* JSMNetDotHomeVC.swift in Sources */,
 				0A02A63921A58DE3009F2A96 /* GYZThrowLineTool.swift in Sources */,
 				0A02A62921A58DE3009F2A96 /* ZPageControl.swift in Sources */,
 				0A45CF7721B7621900759230 /* JSMGoodsDetailHeaderView.swift in Sources */,
@@ -1356,6 +1407,7 @@
 				0AC5DB6321A59CD90087EE22 /* JSMLoginVC.swift in Sources */,
 				0A02A61221A58DE3009F2A96 /* GYZUIButton+Extension.swift in Sources */,
 				0A02F5F221AD7E6B002E3BF9 /* JSMNewsCell.swift in Sources */,
+				0A05A87821DFB28D0087EDC4 /* JSMNetDotListVC.swift in Sources */,
 				0A02A60621A58DE3009F2A96 /* GYZImgAndTxtBtnView.swift in Sources */,
 				0A4C6CD721CA621600CA76F4 /* JSMEngineerFinishedVC.swift in Sources */,
 				0A02F5F021AD7D7C002E3BF9 /* JSMNewsVC.swift in Sources */,

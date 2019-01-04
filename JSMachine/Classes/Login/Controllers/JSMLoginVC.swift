@@ -43,6 +43,7 @@ class JSMLoginVC: GYZBaseVC {
         view.addSubview(loginBtn)
         view.addSubview(forgetPwdBtn)
         view.addSubview(userLoginBtn)
+        view.addSubview(netDotLoginBtn)
         
         phoneInputView.snp.makeConstraints { (make) in
             make.top.equalTo(kTitleAndStateHeight + kMargin)
@@ -74,8 +75,12 @@ class JSMLoginVC: GYZBaseVC {
             make.left.right.height.equalTo(userLoginBtn)
             make.top.equalTo(userLoginBtn.snp.bottom).offset(30)
         }
+        netDotLoginBtn.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(userLoginBtn)
+            make.top.equalTo(loginBtn.snp.bottom).offset(30)
+        }
         forgetPwdBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(loginBtn.snp.bottom).offset(20)
+            make.top.equalTo(netDotLoginBtn.snp.bottom).offset(20)
             make.right.equalTo(loginBtn)
             make.size.equalTo(CGSize(width:70,height:20))
         }
@@ -135,6 +140,34 @@ class JSMLoginVC: GYZBaseVC {
         
         return btn
     }()
+    /// 网点登录按钮
+    fileprivate lazy var netDotLoginBtn : UIButton = {
+        let btn = UIButton.init(type: .custom)
+        btn.setTitleColor(kBlueFontColor, for: .normal)
+        btn.setTitle("网点登录", for: .normal)
+        btn.titleLabel?.font = k15Font
+        
+        btn.addTarget(self, action: #selector(onClickedNetDotLoginBtn), for: .touchUpInside)
+        btn.cornerRadius = CGFloat(kUIButtonHeight * 0.5)
+        btn.borderColor = kBtnClickBGColor
+        btn.borderWidth = klineWidth
+        
+        return btn
+    }()
+    /// 网点登录
+    @objc func onClickedNetDotLoginBtn(){
+        hiddenKeyBoard()
+        
+        if !validPhoneNO() {
+            return
+        }
+        
+        if pwdInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
+            return
+        }
+        requestNetDotLogin()
+    }
     
     /// 工程师登录
     @objc func onClickedLoginBtn(){
@@ -216,6 +249,7 @@ class JSMLoginVC: GYZBaseVC {
                 
                 userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
                 userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
+                userDefaults.set(false, forKey: kIsNetDotLoginTagKey)//是否网点登录标识
                 userDefaults.set(data["user_id"].stringValue, forKey: "userId")//用户ID
                 userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 userDefaults.set(data["head"].stringValue, forKey: "head")//用户头像
@@ -247,6 +281,7 @@ class JSMLoginVC: GYZBaseVC {
                 
                 userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
                 userDefaults.set(true, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
+                userDefaults.set(false, forKey: kIsNetDotLoginTagKey)//是否网点登录标识
                 userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
                 userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 userDefaults.set(data["head"].stringValue, forKey: "head")//用户头像
@@ -256,6 +291,37 @@ class JSMLoginVC: GYZBaseVC {
                 userDefaults.set(data["birthday"].stringValue, forKey: "birthday")//工程师生日
                 
                 KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMEngineerHomerVC())
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 网点登录
+    func requestNetDotLogin(){
+        
+        weak var weakSelf = self
+        createHUD(message: "登录中...")
+        
+        GYZNetWork.requestNetwork("login/dotLogin", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            //            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                let data = response["data"]
+                
+                userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
+                userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
+                userDefaults.set(true, forKey: kIsNetDotLoginTagKey)//是否网点登录标识
+                userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
+                userDefaults.set(data["dot_name"].stringValue, forKey: "dotName")//网点名称
+                userDefaults.set(data["fzr_phone"].stringValue, forKey: "phone")//网点负责人手机号
+                
+                KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMNetDotHomeVC())
             }else{
                 MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             }

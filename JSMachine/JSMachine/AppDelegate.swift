@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         if userDefaults.bool(forKey: kIsEngineerLoginTagKey){//工程师登录
             window?.rootViewController = GYZBaseNavigationVC(rootViewController: JSMEngineerHomerVC())
+        }else if userDefaults.bool(forKey: kIsNetDotLoginTagKey){ // 网点登录
+            window?.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMNetDotHomeVC())
         }else{
             window?.rootViewController = GYZMainTabBarVC()
         }

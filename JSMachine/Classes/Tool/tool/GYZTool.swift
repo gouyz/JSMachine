@@ -145,6 +145,7 @@ class GYZTool: NSObject {
     class func removeUserInfo(){
         userDefaults.removeObject(forKey: kIsLoginTagKey)
         userDefaults.removeObject(forKey: kIsEngineerLoginTagKey)
+        userDefaults.removeObject(forKey: kIsNetDotLoginTagKey)
         userDefaults.removeObject(forKey: "userId")//用户ID
         userDefaults.removeObject(forKey: "phone")//用户电话
         userDefaults.removeObject(forKey: "head")//用户ID
@@ -152,6 +153,7 @@ class GYZTool: NSObject {
         userDefaults.removeObject(forKey: "code")//用户ID
         userDefaults.removeObject(forKey: "sex")//用户电话
         userDefaults.removeObject(forKey: "birthday")//用户ID
+        userDefaults.removeObject(forKey: "dotName")//用户ID
     }
     
     /// 字典或数组转json字符串

@@ -155,6 +155,70 @@ class JSMSaleServiceOrderCell: UITableViewCell {
             }
         }
     }
+    
+    /// 填充数据 网点
+    var dataModelNetDot : JSMSaleServiceOrderModel?{
+        didSet{
+            if let model = dataModelNetDot {
+                
+                reasonLab.text = "故障原因：\(model.f_reason!)"
+                dateLab.text = model.a_date
+                nameLab.text = "联系人：\(model.a_name!)"
+                phoneLab.text = "联系电话：\(model.a_phone!)"
+                desLab.text = "备注：\(model.a_remark!)"
+                /// 待分配（1、status=0时 有申请详情和分配的功能 2、status=1时 只有申请详情的功能） 处理中（status=2和3 申请详情和维修记录的功能） 已完成（status=4 申请详情和维修记录的功能）
+                var stateName: String = ""
+                if model.first == "1"{
+                    stateName = "优先处理"
+                }
+                stateLab.text = stateName
+                
+                let status: String = model.status!
+                var statusName: String = ""
+                var statusBgColor: UIColor = UIColor.ColorHex("#a4a8b8")
+                operatorLab.isHidden = false
+                operatorLab.snp.updateConstraints { (make) in
+                    make.width.equalTo(80)
+                    make.right.equalTo(-kMargin)
+                }
+                deleteLab.isHidden = true
+                deleteLab.snp.updateConstraints { (make) in
+                    make.width.equalTo(0)
+                }
+                recordLab.isHidden = true
+                recordLab.snp.updateConstraints { (make) in
+                    make.width.equalTo(0)
+                }
+                
+                if status == "0"{
+                    statusName = "待分配"
+                    statusBgColor = kRedFontColor
+                    
+                    operatorLab.text = "分配"
+                }else if status == "1"{
+                    statusName = "已分配"
+                    statusBgColor = kRedFontColor
+                    operatorLab.isHidden = true
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                        make.right.equalTo(-1)
+                    }
+                }else if status == "4"{
+                    statusName = "已完成"
+                    statusBgColor = kBlueFontColor
+                    operatorLab.text = "维修记录"
+                }else{
+                    statusName = "处理中"
+                    
+                    operatorLab.text = "维修记录"
+                    
+                }
+                
+                statusNameLab.backgroundColor = statusBgColor
+                statusNameLab.text = statusName
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -244,7 +308,7 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         detailLab.snp.makeConstraints { (make) in
             make.right.equalTo(operatorLab.snp.left).offset(-kMargin)
             make.bottom.height.equalTo(operatorLab)
-            make.width.equalTo(60)
+            make.width.equalTo(80)
         }
         operatorLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
@@ -358,7 +422,7 @@ class JSMSaleServiceOrderCell: UITableViewCell {
         lab.font = k15Font
         lab.textColor = kHeightGaryFontColor
         lab.textAlignment = .center
-        lab.text = "查看"
+        lab.text = "申请详情"
         lab.cornerRadius = kCornerRadius
         lab.borderColor = kHeightGaryFontColor
         lab.borderWidth = klineWidth

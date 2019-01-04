@@ -78,6 +78,8 @@ let LHSBundleShortVersionString = "LHSBundleShortVersionString"
 let kIsLoginTagKey = "loginTag"
 /// 是否工程师登录标识
 let kIsEngineerLoginTagKey = "engineerLoginTag"
+/// 是否网点登录标识
+let kIsNetDotLoginTagKey = "netDotLoginTag"
 /// 是否有认证地址标识
 let kIsConFirmAddressKey = "isConFirmAddressTag"
 
