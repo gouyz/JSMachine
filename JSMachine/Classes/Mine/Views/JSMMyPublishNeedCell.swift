@@ -72,6 +72,29 @@ class JSMMyPublishNeedCell: UITableViewCell {
                         make.width.equalTo(80)
                     }
                 }
+                
+                if status == "4" || status == "5"{
+                    companyLab.text = "物流公司：" + model.wl_company!
+                    expressNoLab.text = "物流单号：" + model.wl_number!
+                    
+                    companyLab.isHidden = false
+                    companyLab.snp.updateConstraints { (make) in
+                        make.height.equalTo(30)
+                    }
+                    expressNoLab.isHidden = false
+                    expressNoLab.snp.updateConstraints { (make) in
+                        make.height.equalTo(30)
+                    }
+                }else{
+                    companyLab.isHidden = true
+                    companyLab.snp.updateConstraints { (make) in
+                        make.height.equalTo(0)
+                    }
+                    expressNoLab.isHidden = true
+                    expressNoLab.snp.updateConstraints { (make) in
+                        make.height.equalTo(0)
+                    }
+                }
             }
         }
     }
@@ -96,6 +119,8 @@ class JSMMyPublishNeedCell: UITableViewCell {
         bgView.addSubview(roteLab)
         bgView.addSubview(numberLab)
         bgView.addSubview(finishedDateLab)
+        bgView.addSubview(companyLab)
+        bgView.addSubview(expressNoLab)
         bgView.addSubview(noteLab)
         bgView.addSubview(tagImgView)
         bgView.addSubview(tuiJianLab)
@@ -141,9 +166,19 @@ class JSMMyPublishNeedCell: UITableViewCell {
             make.left.right.height.equalTo(typeLab)
             make.top.equalTo(numberLab.snp.bottom)
         }
-        noteLab.snp.makeConstraints { (make) in
-            make.left.right.height.equalTo(typeLab)
+        companyLab.snp.makeConstraints { (make) in
+            make.left.right.equalTo(typeLab)
             make.top.equalTo(finishedDateLab.snp.bottom)
+            make.height.equalTo(30)
+        }
+        expressNoLab.snp.makeConstraints { (make) in
+            make.left.right.equalTo(typeLab)
+            make.top.equalTo(companyLab.snp.bottom)
+            make.height.equalTo(30)
+        }
+        noteLab.snp.makeConstraints { (make) in
+            make.left.right.equalTo(typeLab)
+            make.top.equalTo(expressNoLab.snp.bottom).offset(kMargin)
         }
         tagImgView.snp.makeConstraints { (make) in
             make.left.equalTo(typeLab)
@@ -247,11 +282,28 @@ class JSMMyPublishNeedCell: UITableViewCell {
         
         return lab
     }()
+    /// 快递公司
+    lazy var companyLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k13Font
+        lab.textColor = kHeightGaryFontColor
+        
+        return lab
+    }()
+    /// 快递单号
+    lazy var expressNoLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k15Font
+        lab.textColor = kHeightGaryFontColor
+        
+        return lab
+    }()
     /// 用户备注
     lazy var noteLab : UILabel = {
         let lab = UILabel()
         lab.font = k15Font
         lab.textColor = kHeightGaryFontColor
+        lab.numberOfLines = 0
         lab.text = "用户备注：0.3kv"
         
         return lab

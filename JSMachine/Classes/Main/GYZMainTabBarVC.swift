@@ -26,6 +26,9 @@ class GYZMainTabBarVC: UITabBarController {
         addViewController(JSMMineVC(), title: "我的", normalImgName: "icon_tabbar_mine")
         
     }
+    override var shouldAutorotate: Bool{
+        return self.selectedViewController?.shouldAutorotate ?? false
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

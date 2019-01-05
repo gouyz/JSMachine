@@ -126,6 +126,9 @@
 		0A05A87E21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05A87D21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift */; };
 		0A05BF9721C28CE60063EBEB /* JSMTuiJianGoodsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BF9621C28CE60063EBEB /* JSMTuiJianGoodsVC.swift */; };
 		0A05BF9921C2907D0063EBEB /* JSMTuiJianGoodsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05BF9821C2907D0063EBEB /* JSMTuiJianGoodsCell.swift */; };
+		0A05F1FD21E0CD1F00BEDE1E /* JXMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05F1FC21E0CD1F00BEDE1E /* JXMarqueeView.swift */; };
+		0A05F1FF21E0DB5700BEDE1E /* JSMOrderDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05F1FE21E0DB5700BEDE1E /* JSMOrderDetailFooterView.swift */; };
+		0A05F20121E0E9F200BEDE1E /* JSMPlayVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05F20021E0E9F200BEDE1E /* JSMPlayVideoVC.swift */; };
 		0A06C3F221DB74EE00033ED0 /* ZZCircleProgress.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A06C3ED21DB74ED00033ED0 /* ZZCircleProgress.bundle */; };
 		0A06C3F321DB74EE00033ED0 /* ZZCountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3EF21DB74ED00033ED0 /* ZZCountingLabel.m */; };
 		0A06C3F421DB74EE00033ED0 /* ZZCircleProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F121DB74ED00033ED0 /* ZZCircleProgress.m */; };
@@ -342,6 +345,9 @@
 		0A05A87D21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSelectedEngineerCell.swift; sourceTree = "<group>"; };
 		0A05BF9621C28CE60063EBEB /* JSMTuiJianGoodsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTuiJianGoodsVC.swift; sourceTree = "<group>"; };
 		0A05BF9821C2907D0063EBEB /* JSMTuiJianGoodsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMTuiJianGoodsCell.swift; sourceTree = "<group>"; };
+		0A05F1FC21E0CD1F00BEDE1E /* JXMarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXMarqueeView.swift; sourceTree = "<group>"; };
+		0A05F1FE21E0DB5700BEDE1E /* JSMOrderDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderDetailFooterView.swift; sourceTree = "<group>"; };
+		0A05F20021E0E9F200BEDE1E /* JSMPlayVideoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPlayVideoVC.swift; sourceTree = "<group>"; };
 		0A06C3ED21DB74ED00033ED0 /* ZZCircleProgress.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZZCircleProgress.bundle; sourceTree = "<group>"; };
 		0A06C3EE21DB74ED00033ED0 /* ZZCircleProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCircleProgress.h; sourceTree = "<group>"; };
 		0A06C3EF21DB74ED00033ED0 /* ZZCountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCountingLabel.m; sourceTree = "<group>"; };
@@ -550,6 +556,7 @@
 				0A4C6CD621CA621600CA76F4 /* JSMEngineerFinishedVC.swift */,
 				0A00300421CA948B007D7F3F /* JSMSearchShopVC.swift */,
 				0A06C3F521DB755900033ED0 /* JSMEngineerConmentVC.swift */,
+				0A05F20021E0E9F200BEDE1E /* JSMPlayVideoVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -687,6 +694,7 @@
 				0A02327B21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift */,
 				0A4C6CCE21CA2ACE00CA76F4 /* JSMServiceRecordImgsCell.swift */,
 				0A0528BB21D91D3D009FF2A7 /* JSMRecordListCell.swift */,
+				0A05F1FE21E0DB5700BEDE1E /* JSMOrderDetailFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -824,6 +832,7 @@
 		0A02A5CF21A58DE3009F2A96 /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
+				0A05F1FB21E0CD1F00BEDE1E /* Marquee */,
 				0A06C3EC21DB74ED00033ED0 /* ZZCircleProgress */,
 				0A45898E21C2363E00DC236F /* TagsView */,
 				0A02A5D021A58DE3009F2A96 /* PickerView */,
@@ -958,6 +967,14 @@
 				0A05A87D21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0A05F1FB21E0CD1F00BEDE1E /* Marquee */ = {
+			isa = PBXGroup;
+			children = (
+				0A05F1FC21E0CD1F00BEDE1E /* JXMarqueeView.swift */,
+			);
+			path = Marquee;
 			sourceTree = "<group>";
 		};
 		0A06C3EC21DB74ED00033ED0 /* ZZCircleProgress */ = {
@@ -1177,6 +1194,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-JSMachine/Pods-JSMachine-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BMPlayer/BMPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/CLImageEditor/CLImageEditor.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/DKCamera/DKCamera.framework",
@@ -1187,6 +1205,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PYSearch/PYSearch.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SKPhotoBrowser/SKPhotoBrowser.framework",
@@ -1196,6 +1215,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CLImageEditor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DKCamera.framework",
@@ -1206,6 +1226,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PYSearch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKPhotoBrowser.framework",
@@ -1288,6 +1309,7 @@
 				0A0203AF21B552D8006D1738 /* JSMApplyServiceVC.swift in Sources */,
 				0A0203B121B56571006D1738 /* JSMMySaleServiceVC.swift in Sources */,
 				0A0528BA21D919C6009FF2A7 /* JSMSaleServiceRecordListVC.swift in Sources */,
+				0A05F20121E0E9F200BEDE1E /* JSMPlayVideoVC.swift in Sources */,
 				0A45899D21C2363F00DC236F /* HXTagCollectionViewFlowLayout.m in Sources */,
 				0A02A60521A58DE3009F2A96 /* LHSSelectPayMethodView.swift in Sources */,
 				0A06C3FA21DBABF500033ED0 /* JSMConmentModel.swift in Sources */,
@@ -1407,12 +1429,14 @@
 				0AC5DB6321A59CD90087EE22 /* JSMLoginVC.swift in Sources */,
 				0A02A61221A58DE3009F2A96 /* GYZUIButton+Extension.swift in Sources */,
 				0A02F5F221AD7E6B002E3BF9 /* JSMNewsCell.swift in Sources */,
+				0A05F1FD21E0CD1F00BEDE1E /* JXMarqueeView.swift in Sources */,
 				0A05A87821DFB28D0087EDC4 /* JSMNetDotListVC.swift in Sources */,
 				0A02A60621A58DE3009F2A96 /* GYZImgAndTxtBtnView.swift in Sources */,
 				0A4C6CD721CA621600CA76F4 /* JSMEngineerFinishedVC.swift in Sources */,
 				0A02F5F021AD7D7C002E3BF9 /* JSMNewsVC.swift in Sources */,
 				0A02A60C21A58DE3009F2A96 /* GYZBaseNavigationVC.swift in Sources */,
 				0A02D2F021AEDEFA00BE945C /* JSMMyPublishNeedManagerVC.swift in Sources */,
+				0A05F1FF21E0DB5700BEDE1E /* JSMOrderDetailFooterView.swift in Sources */,
 				0A1F4A8D21D2753D007D2A67 /* JSMServiceRuleVC.swift in Sources */,
 				0A02A61B21A58DE3009F2A96 /* AXBadgeView.swift in Sources */,
 				0A4E46B821B64E3000DB2E50 /* JSMEngineerOrderVC.swift in Sources */,

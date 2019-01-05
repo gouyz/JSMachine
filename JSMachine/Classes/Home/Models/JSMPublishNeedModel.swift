@@ -35,4 +35,8 @@ class JSMPublishNeedModel: LHSBaseModel {
     /// 已发货(4已发货，待完成，可以查看合同和确认收货)
     /// 5完成订单,只能查看合同
     var status : String? = ""
+    /// 物流公司
+    var wl_company : String? = ""
+    /// 物流单号
+    var wl_number : String? = ""
 }

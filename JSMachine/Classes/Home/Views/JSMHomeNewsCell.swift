@@ -61,7 +61,7 @@ class JSMHomeNewsCell: UITableViewCell {
         contentImgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(contentLab)
             make.top.equalTo(contentLab.snp.bottom).offset(5)
-            make.height.equalTo((kScreenWidth - kMargin * 2) * 0.27)
+            make.height.equalTo((kScreenWidth - kMargin * 2) * 0.7)
             make.bottom.equalTo(-kMargin)
         }
         

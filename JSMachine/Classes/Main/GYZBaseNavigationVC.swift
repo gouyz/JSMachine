@@ -60,4 +60,7 @@ class GYZBaseNavigationVC: UINavigationController ,UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return self.childViewControllers.count > 1
     }
+    override var shouldAutorotate: Bool{
+        return self.topViewController?.shouldAutorotate ?? false
+    }
 }

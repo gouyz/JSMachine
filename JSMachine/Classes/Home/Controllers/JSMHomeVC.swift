@@ -17,6 +17,14 @@ class JSMHomeVC: GYZBaseVC {
     let headerHeight: CGFloat = (kScreenWidth - kMargin * 2) * 0.47 + kStateHeight + (kScreenWidth - kMargin * 3) * 0.52 + 190
     
     var homeModel: JSMHomeModel?
+    /// 热点
+    lazy var hotLab : UILabel = {
+        let lab = UILabel()
+        lab.textColor = kBlackFontColor
+        lab.font = k15Font
+        
+        return lab
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +52,9 @@ class JSMHomeVC: GYZBaseVC {
         headerView.funcModelBlock = {[weak self] (tag) in
             self?.dealFuncModel(index: tag)
         }
+        headerView.adsImgView.didSelectedItem = {[weak self] (tag) in
+            self?.playVideo(index: tag)
+        }
         
         requestHomeDatas()
     }
@@ -52,7 +63,6 @@ class JSMHomeVC: GYZBaseVC {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     /// 懒加载UITableView
     lazy var tableView : UITableView = {
@@ -115,15 +125,24 @@ class JSMHomeVC: GYZBaseVC {
                 headerView.adsImgView.setUrlsGroup(imgUrlArr)
             }
             if homeModel?.hotModels.count > 0{
-                var hotTitleArr: [String] = [String]()
+//                var hotTitleArr: [String] = [String]()
+                var hotContent: String = ""
                 for item in (homeModel?.hotModels)! {
-                    hotTitleArr.append(item.content!)
+//                    hotTitleArr.append(item.content!)
+                    hotContent += item.content! + "    "
                 }
-                headerView.hotTxtView.setTitlesGroup(hotTitleArr)
+                hotLab.text = hotContent
+                headerView.hotTxtView.contentView = hotLab
+//                headerView.hotTxtView.setTitlesGroup(hotTitleArr)
             }
             
             tableView.reloadData()
         }
+    }
+    /// 播放视频
+    func playVideo(index : Int){
+        let vc = JSMPlayVideoVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     /// 技术在线、快修申请、需求发布、在线商城

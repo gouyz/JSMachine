@@ -73,4 +73,8 @@ class GYZBaseVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    /// 关闭屏幕旋转
+    override var shouldAutorotate: Bool{
+        return false
+    }
 }

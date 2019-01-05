@@ -237,16 +237,24 @@ class JSMHomeHeaderView: UIView {
     /// 喇叭 图片
     lazy var labaTagView: UIImageView = UIImageView.init(image: UIImage.init(named: "icon_home_laba"))
     /// 热点轮播
-    lazy var hotTxtView: ZCycleView = {
-        let adsView = ZCycleView()
-        adsView.scrollDirection = .vertical
-        adsView.titleBackgroundColor = kWhiteColor
-        adsView.titleColor = kBlackFontColor
-        adsView.titleFont = k15Font
-        adsView.setTitlesGroup(["热烈欢迎泰隆减速机有限公司入驻本平台","热烈欢迎AAAA减速机有限公司入驻本平台","热烈欢迎XX减速机有限公司入驻本平台"])
+    lazy var hotTxtView: JXMarqueeView = {
+        let hotView = JXMarqueeView()
+        hotView.backgroundColor = kWhiteColor
+        hotView.marqueeType = .left
         
-        return adsView
+        return hotView
     }()
+
+//    lazy var hotTxtView: ZCycleView = {
+//        let adsView = ZCycleView()
+//        adsView.scrollDirection = .horizontal
+//        adsView.titleBackgroundColor = kWhiteColor
+//        adsView.titleColor = kBlackFontColor
+//        adsView.titleFont = k15Font
+//        adsView.setTitlesGroup(["热烈欢迎泰隆减速机有限公司入驻本平台","热烈欢迎AAAA减速机有限公司入驻本平台","热烈欢迎XX减速机有限公司入驻本平台"])
+//
+//        return adsView
+//    }()
     
     ///操作
     @objc func clickedOperateBtn(btn : UIButton){

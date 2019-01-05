@@ -12,6 +12,7 @@ import SKPhotoBrowser
 
 private let orderDetailCell = "orderDetailCell"
 private let orderDetailHeader = "orderDetailHeader"
+private let orderDetailFooter = "orderDetailFooter"
 
 class JSMOrderDetailVC: GYZBaseVC {
     
@@ -62,6 +63,7 @@ class JSMOrderDetailVC: GYZBaseVC {
         
         table.register(GYZCommonInfoCell.self, forCellReuseIdentifier: orderDetailCell)
         table.register(JSMOrderDetailHeaderView.self, forHeaderFooterViewReuseIdentifier: orderDetailHeader)
+        table.register(JSMOrderDetailFooterView.self, forHeaderFooterViewReuseIdentifier: orderDetailFooter)
         
         return table
     }()
@@ -172,6 +174,11 @@ class JSMOrderDetailVC: GYZBaseVC {
         
         present(browser, animated: true, completion: nil)
     }
+    
+    /// 物流单大图
+    @objc func onClickedBigImg(){
+        goBigPhotos(index: 0, urls: [(dataModel?.wl_list)!])
+    }
 }
 
 extension JSMOrderDetailVC: UITableViewDelegate,UITableViewDataSource{
@@ -210,7 +217,16 @@ extension JSMOrderDetailVC: UITableViewDelegate,UITableViewDataSource{
         return headerView
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
+        if dataModel != nil {
+            if dataModel?.status == "4" || dataModel?.status == "5"{
+                let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: orderDetailFooter) as! JSMOrderDetailFooterView
+                
+                footerView.dataModel = dataModel
+                footerView.iconView.addOnClickListener(target: self, action: #selector(onClickedBigImg))
+                return footerView
+            }
+            return UIView()
+        }
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -222,6 +238,12 @@ extension JSMOrderDetailVC: UITableViewDelegate,UITableViewDataSource{
         return kTitleHeight + 100 + klineDoubleWidth
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.00001
+        if dataModel != nil {
+            if dataModel?.status == "4" || dataModel?.status == "5"{
+                return 100
+            }
+            return 0.000001
+        }
+        return 0.000001
     }
 }

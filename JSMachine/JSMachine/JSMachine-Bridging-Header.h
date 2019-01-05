@@ -19,3 +19,6 @@
 #import "HXTagCollectionViewFlowLayout.h"
 /// 高度可定制化环形进度条
 #import "ZZCircleProgress.h"
+
+/// 强制横屏
+#import "DeviceTool.h"
