@@ -38,10 +38,10 @@ class JSMNetDotHomeVC: GYZBaseVC {
     ///设置控制器
     func setChildVcs() -> [UIViewController] {
         
-        var childVC : [JSMEngineerOrderVC] = []
+        var childVC : [JSMNetDotListVC] = []
         for index in 0 ..< titleArr.count{
             
-            let vc = JSMEngineerOrderVC()
+            let vc = JSMNetDotListVC()
             vc.orderStatus = stateValue[index]
             childVC.append(vc)
         }

@@ -59,7 +59,7 @@ class JSMSelectedEngineerCell: UITableViewCell {
             make.right.equalTo(-kMargin)
             make.centerY.equalTo(contentView)
             make.width.equalTo(60)
-            make.height.equalTo(34)
+            make.height.equalTo(24)
         }
         
     }

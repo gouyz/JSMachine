@@ -55,7 +55,7 @@ class JSMSelectedEngineerVC: GYZBaseVC {
         weak var weakSelf = self
         showLoadingView()
         
-        GYZNetWork.requestNetwork("engineer/assignment",parameters: nil,  success: { (response) in
+        GYZNetWork.requestNetwork("engineer/assignment",parameters: ["dot_id":userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
             
             weakSelf?.hiddenLoadingView()
             GYZLog(response)
