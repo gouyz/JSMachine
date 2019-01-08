@@ -29,6 +29,8 @@ class JSMHomeHeaderView: UIView {
     
     func setupUI(){
         self.addSubview(adsImgView)
+        adsImgView.addSubview(playImgView)
+        playImgView.isHidden = true
         self.addSubview(chatBtn)
         self.addSubview(saleBtn)
         self.addSubview(publishBtn)
@@ -51,6 +53,10 @@ class JSMHomeHeaderView: UIView {
             make.right.equalTo(-kMargin)
             make.top.equalTo(kStateHeight)
             make.height.equalTo((kScreenWidth - kMargin * 2) * 0.47)
+        }
+        playImgView.snp.makeConstraints { (make) in
+            make.center.equalTo(adsImgView)
+            make.size.equalTo(CGSize.init(width: kTitleHeight, height: kTitleHeight))
         }
         chatBtn.snp.makeConstraints { (make) in
             make.left.equalTo(adsImgView)
@@ -146,6 +152,8 @@ class JSMHomeHeaderView: UIView {
         
         return adsView
     }()
+    /// 播放图片
+    lazy var playImgView: UIImageView = UIImageView.init(image: UIImage.init(named: "icon_video_play"))
     /// 技术在线
     lazy var chatBtn : UIButton = {
         let btn = UIButton.init(type: .custom)

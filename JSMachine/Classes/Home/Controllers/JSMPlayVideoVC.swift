@@ -15,7 +15,7 @@ class JSMPlayVideoVC: GYZBaseVC {
     
     /// 当前播放的时间
     var currentTime: TimeInterval = 0
-    var videoUrl: String = "http://baobab.wdjcdn.com/14525705791193.mp4"
+    var videoUrl: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +24,10 @@ class JSMPlayVideoVC: GYZBaseVC {
         
         view.addSubview(player)
         player.snp.makeConstraints { (make) in
-            make.top.equalTo(kStateHeight)
-            make.left.right.equalTo(view)
+            make.top.equalTo(view)
+            make.left.right.bottom.equalTo(view)
             // 注意此处，宽高比 16:9 优先级比 1000 低就行，在因为 iPhone 4S 宽高比不是 16：9
-            make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
+//            make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
         }
         resetPlayerManager()
         let asset = BMPlayerResource(url: URL.init(string: videoUrl)!)
@@ -70,6 +70,8 @@ class JSMPlayVideoVC: GYZBaseVC {
     
     /// 播放器自定义属性 创建播放器前设定
     func resetPlayerManager() {
+        /// 进行缩放充满屏幕
+        player.videoGravity = AVLayerVideoGravity.resize
         // 是否打印日志，默认false
         BMPlayerConf.allowLog = false
         // 是否自动播放，默认true
@@ -105,13 +107,13 @@ extension JSMPlayVideoVC: BMPlayerDelegate {
     
     func bmPlayer(player: BMPlayer, playerOrientChanged isFullscreen: Bool) {
         self.player.snp.remakeConstraints { (make) in
-            make.left.right.equalTo(view)
-            make.top.equalTo(kStateHeight)
-            if isFullscreen {
-                make.bottom.equalTo(view)
-            } else {
-                make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
-            }
+            make.left.right.bottom.equalTo(view)
+            make.top.equalTo(view)
+//            if isFullscreen {
+//                make.bottom.equalTo(view)
+//            } else {
+//                make.height.equalTo(view.snp.width).multipliedBy(9.0/16.0).priority(500)
+//            }
         }
     }
     

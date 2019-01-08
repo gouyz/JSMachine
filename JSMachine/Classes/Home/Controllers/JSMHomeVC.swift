@@ -8,6 +8,8 @@
 
 import UIKit
 import MBProgressHUD
+import AVFoundation
+import AVKit
 
 private let homeNewsCell = "homeNewsCell"
 private let homeNewsHeader = "homeNewsHeader"
@@ -17,6 +19,8 @@ class JSMHomeVC: GYZBaseVC {
     let headerHeight: CGFloat = (kScreenWidth - kMargin * 2) * 0.47 + kStateHeight + (kScreenWidth - kMargin * 3) * 0.52 + 190
     
     var homeModel: JSMHomeModel?
+    /// 是否是客户登录
+    var isUser: Bool = true
     /// 热点
     lazy var hotLab : UILabel = {
         let lab = UILabel()
@@ -36,11 +40,16 @@ class JSMHomeVC: GYZBaseVC {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(-kTitleAndStateHeight)
+            if isUser{
+                if #available(iOS 11.0, *) {
+                    make.top.equalTo(-kTitleAndStateHeight)
+                }else{
+                    make.top.equalTo(0)
+                }
             }else{
                 make.top.equalTo(0)
             }
+            
             make.left.right.bottom.equalTo(view)
         }
         
@@ -54,6 +63,13 @@ class JSMHomeVC: GYZBaseVC {
         }
         headerView.adsImgView.didSelectedItem = {[weak self] (tag) in
             self?.playVideo(index: tag)
+        }
+        headerView.adsImgView.didScrollToIndex = {[weak self] (tag) in
+            if self?.homeModel?.bannerModels[tag].is_video == "1" {
+                self?.headerView.playImgView.isHidden = false
+            }else{
+                self?.headerView.playImgView.isHidden = true
+            }
         }
         
         requestHomeDatas()
@@ -141,12 +157,25 @@ class JSMHomeVC: GYZBaseVC {
     }
     /// 播放视频
     func playVideo(index : Int){
-        let vc = JSMPlayVideoVC()
-        navigationController?.pushViewController(vc, animated: true)
+        let model = homeModel?.bannerModels[index]
+        if model?.is_video == "1" {
+            let vc = JSMPlayVideoVC()
+            vc.videoUrl = model?.video ?? ""
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
+//        let playerVC = AVPlayerViewController()
+//        playerVC.player = AVPlayer.init(url: URL.init(string: "http://baobab.wdjcdn.com/14525705791193.mp4")!)
+//        playerVC.videoGravity = AVLayerVideoGravity.resize.rawValue
+//        self.present(playerVC, animated: true, completion: nil)
     }
     
     /// 技术在线、快修申请、需求发布、在线商城
     func dealOperator(index : Int){
+        if !isUser  && index != 1 {/// 工程师和网点没有快修申请、需求发布、在线商城权限
+            MBProgressHUD.showAutoDismissHUD(message: "没有查看该功能的权限")
+            return
+        }
         switch index {
         case 1://技术在线
             goOnLineVC()

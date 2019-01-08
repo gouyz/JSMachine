@@ -42,6 +42,11 @@ class JSMEngineerProfileVC: GYZBaseVC {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
     
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -151,7 +156,7 @@ extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
                 cell.userImgView.image = selectUserImg
             }else{
             
-                cell.userImgView.kf.setImage(with: URL.init(string: userDefaults.string(forKey: "head")!), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
+                cell.userImgView.kf.setImage(with: URL.init(string: userDefaults.string(forKey: "head") ?? ""), placeholder: UIImage.init(named: "icon_header_default"), options: nil, progressBlock: nil, completionHandler: nil)
             }
             
         } else if indexPath.row == 1{

@@ -34,6 +34,13 @@ class JSMEngineerOrderVC: GYZBaseVC {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if !userDefaults.bool(forKey: kIsEngineerLoginTagKey) {
+            dataList.removeAll()
+            tableView.reloadData()
+            refresh()
+        }
+    }
     
     /// 懒加载UITableView
     lazy var tableView : UITableView = {
@@ -83,6 +90,7 @@ class JSMEngineerOrderVC: GYZBaseVC {
                     
                     weakSelf?.dataList.append(model)
                 }
+                
                 if weakSelf?.dataList.count > 0{
                     weakSelf?.hiddenEmptyView()
                     weakSelf?.tableView.reloadData()

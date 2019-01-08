@@ -63,7 +63,7 @@ class JSMHomeBannerModel: LHSBaseModel {
     /// 图片
     var img : String? = ""
     /// 是否是视频
-    var is_video : String?
+    var is_video : String? = "0"
     /// 视频连接
     var video : String? = ""
 }

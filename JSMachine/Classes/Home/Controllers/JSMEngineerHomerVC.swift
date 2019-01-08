@@ -10,10 +10,10 @@ import UIKit
 
 class JSMEngineerHomerVC: GYZBaseVC {
 
-    let titleArr : [String] = ["新分配","处理中","已完成"]
+    let titleArr : [String] = ["首页","新分配","处理中","已完成"]
     
     //订单状态
-    let stateValue : [String] = ["1","2","3"]
+    let stateValue : [String] = ["","1","2","3"]
     var scrollPageView: ScrollPageView?
     
     override func viewDidLoad() {
@@ -32,12 +32,18 @@ class JSMEngineerHomerVC: GYZBaseVC {
     ///设置控制器
     func setChildVcs() -> [UIViewController] {
         
-        var childVC : [JSMEngineerOrderVC] = []
+        var childVC : [GYZBaseVC] = []
         for index in 0 ..< titleArr.count{
             
-            let vc = JSMEngineerOrderVC()
-            vc.orderStatus = stateValue[index]
-            childVC.append(vc)
+            if index == 0{
+                let homeVC = JSMHomeVC()
+                homeVC.isUser = false
+                childVC.append(homeVC)
+            }else{
+                let vc = JSMEngineerOrderVC()
+                vc.orderStatus = stateValue[index]
+                childVC.append(vc)
+            }
         }
         
         return childVC

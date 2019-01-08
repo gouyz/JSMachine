@@ -9,10 +9,10 @@
 import UIKit
 
 class JSMNetDotHomeVC: GYZBaseVC {
-    let titleArr : [String] = ["待分配","处理中","已完成"]
+    let titleArr : [String] = ["首页","待分配","处理中","已完成"]
     
     //订单状态
-    let stateValue : [String] = ["1","2","3"]
+    let stateValue : [String] = ["","1","2","3"]
     var scrollPageView: ScrollPageView?
 
     override func viewDidLoad() {
@@ -38,12 +38,17 @@ class JSMNetDotHomeVC: GYZBaseVC {
     ///设置控制器
     func setChildVcs() -> [UIViewController] {
         
-        var childVC : [JSMNetDotListVC] = []
+        var childVC : [GYZBaseVC] = []
         for index in 0 ..< titleArr.count{
-            
-            let vc = JSMNetDotListVC()
-            vc.orderStatus = stateValue[index]
-            childVC.append(vc)
+            if index == 0{
+                let homeVC = JSMHomeVC()
+                homeVC.isUser = false
+                childVC.append(homeVC)
+            }else{
+                let vc = JSMNetDotListVC()
+                vc.orderStatus = stateValue[index]
+                childVC.append(vc)
+            }
         }
         
         return childVC

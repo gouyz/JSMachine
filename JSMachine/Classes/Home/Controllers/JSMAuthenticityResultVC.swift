@@ -24,7 +24,7 @@ class JSMAuthenticityResultVC: GYZBaseVC {
         
         setupUI()
         
-        if isSuccess {
+        if isSuccess || userDefaults.bool(forKey: kIsEngineerLoginTagKey) || userDefaults.bool(forKey: kIsNetDotLoginTagKey) {
             bgComplainView.isHidden = true
             submitBtn.isHidden = true
         }else{
