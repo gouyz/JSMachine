@@ -252,21 +252,30 @@ class JSMHomeVC: GYZBaseVC {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    /// 行业资讯
-    @objc func onClickedNews(){
-        let vc = JSMNewsVC()
-        navigationController?.pushViewController(vc, animated: true)
+    /// 行业资讯/企业动态
+    @objc func onClickedNews(sender:UITapGestureRecognizer){
+        let tag = sender.view?.tag
+        if tag == 0 {/// 行业资讯
+            let vc = JSMNewsVC()
+            navigationController?.pushViewController(vc, animated: true)
+        }else{
+            let vc = JSMDynamicVC()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
 extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if homeModel == nil {
             return 0
+        }
+        if section == 1 {
+            return (homeModel?.dynamicModels.count)!
         }
         return (homeModel?.newModels.count)!
     }
@@ -275,7 +284,11 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: homeNewsCell) as! JSMHomeNewsCell
         
-        cell.dataModel = homeModel?.newModels[indexPath.row]
+        if indexPath.section == 0 {
+            cell.dataModel = homeModel?.newModels[indexPath.row]
+        }else{
+            cell.dataModel = homeModel?.dynamicModels[indexPath.row]
+        }
         
         cell.selectionStyle = .none
         return cell
@@ -283,8 +296,13 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeNewsHeader) as! JSMHomeNewsHeaderView
-        
-        headerView.addOnClickListener(target: self, action: #selector(onClickedNews))
+        if section == 0 {
+            headerView.nameLab.text = "行业资讯"
+        }else{
+            headerView.nameLab.text = "企业动态"
+        }
+        headerView.tag = section
+        headerView.addOnClickListener(target: self, action: #selector(onClickedNews(sender:)))
         
         return headerView
     }
@@ -293,9 +311,13 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let model = homeModel?.newModels[indexPath.row]
-        goWebViewVC(title: (model?.title)!, url: (model?.url)!)
+        if indexPath.section == 0 {
+            let model = homeModel?.newModels[indexPath.row]
+            goWebViewVC(title: (model?.title)!, url: (model?.url)!)
+        }else{
+            let model = homeModel?.dynamicModels[indexPath.row]
+            goWebViewVC(title: (model?.title)!, url: (model?.url)!)
+        }
     }
     ///MARK : UITableViewDelegate
     

@@ -136,6 +136,7 @@
 		0A06C3F821DB762400033ED0 /* JSMEngineerConmentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F721DB762400033ED0 /* JSMEngineerConmentHeaderView.swift */; };
 		0A06C3FA21DBABF500033ED0 /* JSMConmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */; };
 		0A06C3FC21DBADC900033ED0 /* JSMConmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3FB21DBADC900033ED0 /* JSMConmentListCell.swift */; };
+		0A06EB2B21E4ED6700CBC2A0 /* JSMDynamicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06EB2A21E4ED6700CBC2A0 /* JSMDynamicVC.swift */; };
 		0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */; };
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
@@ -357,6 +358,7 @@
 		0A06C3F721DB762400033ED0 /* JSMEngineerConmentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerConmentHeaderView.swift; sourceTree = "<group>"; };
 		0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMConmentModel.swift; sourceTree = "<group>"; };
 		0A06C3FB21DBADC900033ED0 /* JSMConmentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMConmentListCell.swift; sourceTree = "<group>"; };
+		0A06EB2A21E4ED6700CBC2A0 /* JSMDynamicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMDynamicVC.swift; sourceTree = "<group>"; };
 		0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineHeaderView.swift; sourceTree = "<group>"; };
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 				0A00300421CA948B007D7F3F /* JSMSearchShopVC.swift */,
 				0A06C3F521DB755900033ED0 /* JSMEngineerConmentVC.swift */,
 				0A05F20021E0E9F200BEDE1E /* JSMPlayVideoVC.swift */,
+				0A06EB2A21E4ED6700CBC2A0 /* JSMDynamicVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1398,6 +1401,7 @@
 				0A02A5FF21A58DE3009F2A96 /* GYZPhotoView.swift in Sources */,
 				0A02A62A21A58DE3009F2A96 /* MMShareSheet.swift in Sources */,
 				0A02A5FB21A58DE3009F2A96 /* LHSAddPhotoView.swift in Sources */,
+				0A06EB2B21E4ED6700CBC2A0 /* JSMDynamicVC.swift in Sources */,
 				0A2F41AF21D67B8B0084A766 /* JSMPersonneiDesVC.swift in Sources */,
 				0A02EAAF21AADD06000B5644 /* JSMOrderManagerVC.swift in Sources */,
 				0A76B7D321AFB58600720A20 /* JSMAuthenticityVC.swift in Sources */,

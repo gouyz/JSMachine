@@ -16,6 +16,8 @@ class JSMHomeModel: LHSBaseModel {
     var hotModels: [JSMHotModel] = [JSMHotModel]()
     /// 资讯model
     var newModels: [JSMNewsModel] = [JSMNewsModel]()
+    /// 动态model
+    var dynamicModels: [JSMNewsModel] = [JSMNewsModel]()
     /// 平台介绍地址
     var platform_url: String? = ""
     /// 招商加盟地址
@@ -39,6 +41,12 @@ class JSMHomeModel: LHSBaseModel {
             for dict in datas {
                 let model = JSMNewsModel(dict: dict)
                 newModels.append(model)
+            }
+        }else if key == "dynamic"{
+            guard let datas = value as? [[String : Any]] else { return }
+            for dict in datas {
+                let model = JSMNewsModel(dict: dict)
+                dynamicModels.append(model)
             }
         }
         else {
