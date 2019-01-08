@@ -24,7 +24,7 @@ class JSMNetDotHomeVC: GYZBaseVC {
         rightBtn.setTitle("退出登录", for: .normal)
         rightBtn.titleLabel?.font = k13Font
         rightBtn.setTitleColor(kBlackFontColor, for: .normal)
-        rightBtn.frame = CGRect.init(x: 0, y: 0, width: kTitleHeight, height: kTitleHeight)
+        rightBtn.frame = CGRect.init(x: 0, y: 0, width: 80, height: kTitleHeight)
         rightBtn.addTarget(self, action: #selector(onClickedLoginOutBtn), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
         
