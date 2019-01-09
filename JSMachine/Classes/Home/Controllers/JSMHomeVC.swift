@@ -272,26 +272,26 @@ class JSMHomeVC: GYZBaseVC {
     /// - Parameter noti:
     @objc func refreshJPushView(noti:NSNotification){
         
-        let userInfo = noti.userInfo!
+//        let userInfo = noti.userInfo!
         
-        let type = userInfo["type"] as! String
-        let orderId = userInfo["id"] as! String
+//        let type = userInfo["type"] as! String
+//        let orderId = userInfo["id"] as! String
         
         //消息类型(1服务工单2报事工单3物业内部通知4车位预约5投诉6车位出租7巡更)
-        if type == "2" {//公共报事
-            
+//        if type == "2" {//公共报事
+        
 //            let detailVC = LHSBaoShiDetailVC()
 //            detailVC.orderId = orderId
 //            detailVC.mIsWaitDeal = true
 //            navigationController?.pushViewController(detailVC, animated: true)
             
-        }else if type == "1" {//家政服务
+//        }else if type == "1" {//家政服务
 //            let detailVC = LHSHouseKeepingDetailVC()
 //            detailVC.orderId = orderId
 //            detailVC.mIsWaitDeal = true
 //            navigationController?.pushViewController(detailVC, animated: true)
             
-        }
+//        }
     }
 }
 
