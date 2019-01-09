@@ -72,6 +72,9 @@ class JSMHomeVC: GYZBaseVC {
             }
         }
         
+        /// 极光推送跳转指定页面
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshJPushView(noti:)), name: NSNotification.Name(rawValue: kJPushRefreshData), object: nil)
+        
         requestHomeDatas()
     }
     
@@ -261,6 +264,33 @@ class JSMHomeVC: GYZBaseVC {
         }else{
             let vc = JSMDynamicVC()
             navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    /// 极光推送，跳转指定页面
+    ///
+    /// - Parameter noti:
+    @objc func refreshJPushView(noti:NSNotification){
+        
+        let userInfo = noti.userInfo!
+        
+        let type = userInfo["type"] as! String
+        let orderId = userInfo["id"] as! String
+        
+        //消息类型(1服务工单2报事工单3物业内部通知4车位预约5投诉6车位出租7巡更)
+        if type == "2" {//公共报事
+            
+//            let detailVC = LHSBaoShiDetailVC()
+//            detailVC.orderId = orderId
+//            detailVC.mIsWaitDeal = true
+//            navigationController?.pushViewController(detailVC, animated: true)
+            
+        }else if type == "1" {//家政服务
+//            let detailVC = LHSHouseKeepingDetailVC()
+//            detailVC.orderId = orderId
+//            detailVC.mIsWaitDeal = true
+//            navigationController?.pushViewController(detailVC, animated: true)
+            
         }
     }
 }

@@ -253,7 +253,9 @@ class JSMLoginVC: GYZBaseVC {
                 userDefaults.set(data["user_id"].stringValue, forKey: "userId")//用户ID
                 userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 userDefaults.set(data["head"].stringValue, forKey: "head")//用户头像
-              
+                JPUSHService.setAlias(data["user_id"].stringValue, completion: { (iResCode, iAlias, seq) in
+                    
+                }, seq: 0)
                 KeyWindow.rootViewController = GYZMainTabBarVC()
             }else{
                 MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)

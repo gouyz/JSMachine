@@ -20,7 +20,7 @@ pod 'PYSearch'  # 搜索框 https://github.com/ko1o/PYSearch
 
 pod 'BMPlayer'  # 基于AVPlayer封装的视频播放器  https://github.com/BrikerMan/BMPlayer
 
-#pod 'JPush'  #极光推送
+pod 'JPush'  #极光推送
 pod 'WechatOpenSDK' #微信SDK
 
 #pod 'JMessage' #极光IM

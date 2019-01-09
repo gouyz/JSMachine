@@ -116,7 +116,7 @@ let USERINFO = "userInfo"
 //APPID，应用提交时候替换
 let APPID = "1441962604"
 /// 极光推送AppKey
-let kJPushAppKey = "62f70fe9bed6d366b2c740a8"
+let kJPushAppKey = "ddfcafdee167ab7cd75bc75b"
 /// 微信APPID
 let kWeChatAppID = "wx91a992eb1ae1737e"
 /// 极光IM AppKey
