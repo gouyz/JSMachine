@@ -29,11 +29,19 @@ class JSMNetDotHomeVC: GYZBaseVC {
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
         
         setScrollView()
+        
+        /// 极光推送跳转指定页面
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshJPushView(noti:)), name: NSNotification.Name(rawValue: kJPushRefreshData), object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    //MARK: Dealloc
+    deinit{
+        ///移除通知
+        NotificationCenter.default.removeObserver(self)
     }
     ///设置控制器
     func setChildVcs() -> [UIViewController] {
@@ -81,5 +89,26 @@ class JSMNetDotHomeVC: GYZBaseVC {
         
         let vc = JSMLoginVC()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    /// 极光推送，跳转指定页面
+    ///
+    /// - Parameter noti:
+    @objc func refreshJPushView(noti:NSNotification){
+        
+        GYZLog(noti.userInfo)
+        let userInfo = noti.userInfo!
+        
+        // 角色（1、用户2、工程师3、网点）
+        let role = userInfo["role"] as! String
+        if role == "3" {
+            let type = userInfo["p_type"] as! String
+            //消息类型(1我的发布2我的订单3我的售后4工程师首页（新分配）5网点首页（待分配）)
+            if type == "5" {//网点首页（待分配
+                
+                scrollPageView?.selectedIndex(1, animated: true)
+            }
+        }
+        
     }
 }

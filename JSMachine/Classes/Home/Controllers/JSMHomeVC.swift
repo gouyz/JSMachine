@@ -82,6 +82,11 @@ class JSMHomeVC: GYZBaseVC {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    //MARK: Dealloc
+    deinit{
+        ///移除通知
+        NotificationCenter.default.removeObserver(self)
+    }
     
     /// 懒加载UITableView
     lazy var tableView : UITableView = {
@@ -272,26 +277,38 @@ class JSMHomeVC: GYZBaseVC {
     /// - Parameter noti:
     @objc func refreshJPushView(noti:NSNotification){
         
-//        let userInfo = noti.userInfo!
+        GYZLog(noti.userInfo)
+        let userInfo = noti.userInfo!
         
-//        let type = userInfo["type"] as! String
-//        let orderId = userInfo["id"] as! String
+        // 角色（1、用户2、工程师3、网点）
+        let role = userInfo["role"] as! String
+        if role == "1" {
+            let type = userInfo["p_type"] as! String
+            //消息类型(1我的发布2我的订单3我的售后4工程师首页（新分配）5网点首页（待分配）)
+            if type == "1" {//我的发布
+                let status = userInfo["type"] as! String
+                let vc = JSMMyPublishNeedManagerVC()
+                if status == "4"{//已发货
+                    vc.currIndex = 2
+                }
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }else if type == "2" {//我的订单
+                let status = userInfo["type"] as! String
+                
+                let vc = JSMOrderManagerVC()
+                if status == "4"{//已发货
+                    vc.currIndex = 2
+                }
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }else if type == "3" {//我的售后
+                let vc = JSMOrderManagerVC()
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }
+        }
         
-        //消息类型(1服务工单2报事工单3物业内部通知4车位预约5投诉6车位出租7巡更)
-//        if type == "2" {//公共报事
-        
-//            let detailVC = LHSBaoShiDetailVC()
-//            detailVC.orderId = orderId
-//            detailVC.mIsWaitDeal = true
-//            navigationController?.pushViewController(detailVC, animated: true)
-            
-//        }else if type == "1" {//家政服务
-//            let detailVC = LHSHouseKeepingDetailVC()
-//            detailVC.orderId = orderId
-//            detailVC.mIsWaitDeal = true
-//            navigationController?.pushViewController(detailVC, animated: true)
-            
-//        }
     }
 }
 

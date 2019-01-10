@@ -15,6 +15,9 @@ class JSMMySaleServiceManagerVC: GYZBaseVC {
     //订单状态
     let stateValue : [String] = ["1","2","0"]
     var scrollPageView: ScrollPageView?
+    /// 当前索引
+    var currIndex: Int = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,9 @@ class JSMMySaleServiceManagerVC: GYZBaseVC {
         self.navigationItem.title = "我的快修申请"
         
         setScrollView()
+        if currIndex > 0 {
+            scrollPageView?.selectedIndex(currIndex, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {

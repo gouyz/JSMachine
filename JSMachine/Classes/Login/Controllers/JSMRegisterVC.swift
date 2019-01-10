@@ -326,9 +326,13 @@ class JSMRegisterVC: GYZBaseVC {
                 
                 userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
                 userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
+                userDefaults.set(true, forKey: kIsNetDotLoginTagKey)//是否网点登录标识
                 userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
                 userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 
+                JPUSHService.setAlias(data["jg_id"].stringValue, completion: { (iResCode, iAlias, seq) in
+                    
+                }, seq: 0)
                 KeyWindow.rootViewController = GYZMainTabBarVC()
                 
             }else{

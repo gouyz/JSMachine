@@ -15,6 +15,8 @@ class JSMMyPublishNeedManagerVC: GYZBaseVC {
     //订单状态
     let stateValue : [String] = ["2","3","4","1"]
     var scrollPageView: ScrollPageView?
+    /// 当前索引
+    var currIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,9 @@ class JSMMyPublishNeedManagerVC: GYZBaseVC {
         self.navigationItem.title = "我的发布"
         
         setScrollView()
+        if currIndex > 0 {
+            scrollPageView?.selectedIndex(currIndex, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {

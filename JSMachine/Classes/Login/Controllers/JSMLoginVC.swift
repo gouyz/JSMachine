@@ -242,7 +242,7 @@ class JSMLoginVC: GYZBaseVC {
         GYZNetWork.requestNetwork("login/userLogin", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
-            //            GYZLog(response)
+            GYZLog(response)
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
@@ -253,7 +253,7 @@ class JSMLoginVC: GYZBaseVC {
                 userDefaults.set(data["user_id"].stringValue, forKey: "userId")//用户ID
                 userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 userDefaults.set(data["head"].stringValue, forKey: "head")//用户头像
-                JPUSHService.setAlias("testgyz", completion: { (iResCode, iAlias, seq) in
+                JPUSHService.setAlias(data["jg_id"].stringValue, completion: { (iResCode, iAlias, seq) in
                     
                 }, seq: 0)
                 KeyWindow.rootViewController = GYZMainTabBarVC()
@@ -276,7 +276,7 @@ class JSMLoginVC: GYZBaseVC {
         GYZNetWork.requestNetwork("login/engineerLogin", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
-            //            GYZLog(response)
+            GYZLog(response)
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
@@ -291,6 +291,9 @@ class JSMLoginVC: GYZBaseVC {
                 userDefaults.set(data["code"].stringValue, forKey: "code")//工程师工号
                 userDefaults.set(data["sex"].stringValue, forKey: "sex")//性别（1男2女）
                 userDefaults.set(data["birthday"].stringValue, forKey: "birthday")//工程师生日
+                JPUSHService.setAlias(data["jg_id"].stringValue, completion: { (iResCode, iAlias, seq) in
+                    
+                }, seq: 0)
                 
                 KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMEngineerHomerVC())
             }else{
@@ -311,7 +314,7 @@ class JSMLoginVC: GYZBaseVC {
         GYZNetWork.requestNetwork("login/dotLogin", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
-            //            GYZLog(response)
+            GYZLog(response)
             if response["status"].intValue == kQuestSuccessTag{//请求成功
                 
                 let data = response["data"]
@@ -322,6 +325,9 @@ class JSMLoginVC: GYZBaseVC {
                 userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
                 userDefaults.set(data["dot_name"].stringValue, forKey: "dotName")//网点名称
                 userDefaults.set(data["fzr_phone"].stringValue, forKey: "phone")//网点负责人手机号
+                JPUSHService.setAlias(data["jg_id"].stringValue, completion: { (iResCode, iAlias, seq) in
+                    
+                }, seq: 0)
                 
                 KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMNetDotHomeVC())
             }else{
