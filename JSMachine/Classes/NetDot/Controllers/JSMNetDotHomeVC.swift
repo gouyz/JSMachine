@@ -87,6 +87,10 @@ class JSMNetDotHomeVC: GYZBaseVC {
     @objc func onClickedLoginOutBtn(){
         GYZTool.removeUserInfo()
         
+        JPUSHService.deleteAlias({ (iResCode, iAlias, seq) in
+            
+        }, seq: 0)
+        
         let vc = JSMLoginVC()
         navigationController?.pushViewController(vc, animated: true)
     }

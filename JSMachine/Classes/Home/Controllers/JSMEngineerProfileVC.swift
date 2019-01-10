@@ -115,6 +115,10 @@ class JSMEngineerProfileVC: GYZBaseVC {
     @objc func clickedLoginOutBtn(){
         GYZTool.removeUserInfo()
         
+        JPUSHService.deleteAlias({ (iResCode, iAlias, seq) in
+            
+        }, seq: 0)
+        
         let vc = JSMLoginVC()
         navigationController?.pushViewController(vc, animated: true)
     }
