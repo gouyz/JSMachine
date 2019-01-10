@@ -8,8 +8,6 @@
 
 import UIKit
 import MBProgressHUD
-import AVFoundation
-import AVKit
 
 private let homeNewsCell = "homeNewsCell"
 private let homeNewsHeader = "homeNewsHeader"
@@ -294,16 +292,25 @@ class JSMHomeVC: GYZBaseVC {
                 navigationController?.pushViewController(vc, animated: true)
                 
             }else if type == "2" {//我的订单
-                let status = userInfo["type"] as! String
-                
-                let vc = JSMOrderManagerVC()
-                if status == "4"{//已发货
-                    vc.currIndex = 2
+                if userInfo.keys.contains("type"){
+                    let status = userInfo["type"] as! String
+                    let vc = JSMOrderManagerVC()
+                    if status == "2"{//已提交
+                        vc.currIndex = 0
+                    }
+                    navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    let code = userInfo["code"] as! String
+                    
+                    let vc = JSMOrderDetailVC()
+                    vc.orderCode = code
+                    navigationController?.pushViewController(vc, animated: true)
                 }
-                navigationController?.pushViewController(vc, animated: true)
                 
             }else if type == "3" {//我的售后
-                let vc = JSMOrderManagerVC()
+                let appId = userInfo["id"] as! String
+                let vc = JSMSaleServiceOrderDetailVC()
+                vc.applyId = appId
                 navigationController?.pushViewController(vc, animated: true)
                 
             }
