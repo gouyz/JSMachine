@@ -147,6 +147,16 @@ class JSMMyProfileVC: GYZBaseVC {
     }
     /// 退出登录
     @objc func clickedLoginOutBtn(){
+        weak var weakSelf = self
+        GYZAlertViewTools.alertViewTools.showAlert(title: "提示", message: "确定要退出登录吗?", cancleTitle: "取消", viewController: self, buttonTitles: "确定") { (index) in
+            
+            if index != cancelIndex{
+                weakSelf?.loginOut()
+            }
+        }
+    
+    }
+    func loginOut(){
         GYZTool.removeUserInfo()
         JPUSHService.deleteAlias({ (iResCode, iAlias, seq) in
             
