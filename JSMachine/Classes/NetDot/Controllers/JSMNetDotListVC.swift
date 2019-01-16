@@ -34,12 +34,15 @@ class JSMNetDotListVC: GYZBaseVC {
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
-        if !userDefaults.bool(forKey: kIsNetDotLoginTagKey) {
-
-            dataList.removeAll()
-            tableView.reloadData()
-            refresh()
-        }
+//        if !userDefaults.bool(forKey: kIsNetDotLoginTagKey) {
+//
+//            dataList.removeAll()
+//            tableView.reloadData()
+//            refresh()
+//        }
+        dataList.removeAll()
+        tableView.reloadData()
+        refresh()
     }
     
     /// 懒加载UITableView

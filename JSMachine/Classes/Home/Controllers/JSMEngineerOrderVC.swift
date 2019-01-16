@@ -35,11 +35,14 @@ class JSMEngineerOrderVC: GYZBaseVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if !userDefaults.bool(forKey: kIsEngineerLoginTagKey) {
-            dataList.removeAll()
-            tableView.reloadData()
-            refresh()
-        }
+//        if !userDefaults.bool(forKey: kIsEngineerLoginTagKey) {
+//            dataList.removeAll()
+//            tableView.reloadData()
+//            refresh()
+//        }
+        dataList.removeAll()
+        tableView.reloadData()
+        refresh()
     }
     
     /// 懒加载UITableView

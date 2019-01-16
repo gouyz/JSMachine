@@ -156,6 +156,11 @@ class JSMGoodsDetailVC: GYZBaseVC {
     }
     /// 底部操作
     func bottomOperator(index: Int){
+        if userDefaults.bool(forKey: kIsEngineerLoginTagKey) || userDefaults.bool(forKey: kIsNetDotLoginTagKey) {
+            /// 工程师和网点没有权限
+            MBProgressHUD.showAutoDismissHUD(message: "请使用用户身份登录")
+            return
+        }
         switch index {
         case 1://咨询
             goOnLineVC()

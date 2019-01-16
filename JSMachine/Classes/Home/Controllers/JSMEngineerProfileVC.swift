@@ -118,9 +118,20 @@ class JSMEngineerProfileVC: GYZBaseVC {
         JPUSHService.deleteAlias({ (iResCode, iAlias, seq) in
             
         }, seq: 0)
+        for i in 0..<(navigationController?.viewControllers.count)!{
+            
+            if navigationController?.viewControllers[i].isKind(of: JSMEngineerHomerVC.self) == true {
+                
+                let vc = navigationController?.viewControllers[i] as! JSMEngineerHomerVC
+                vc.scrollPageView?.selectedIndex(0, animated: true)
+                _ = navigationController?.popToViewController(vc, animated: true)
+                
+                break
+            }
+        }
         
-        let vc = JSMLoginVC()
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = JSMLoginVC()
+//        navigationController?.pushViewController(vc, animated: true)
     }
     /// 修改密码
     func goPwdVC(){

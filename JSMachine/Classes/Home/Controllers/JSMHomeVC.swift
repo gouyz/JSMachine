@@ -74,6 +74,7 @@ class JSMHomeVC: GYZBaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshJPushView(noti:)), name: NSNotification.Name(rawValue: kJPushRefreshData), object: nil)
         
         requestHomeDatas()
+        requestVersion()
     }
     
     override func didReceiveMemoryWarning() {
@@ -178,8 +179,8 @@ class JSMHomeVC: GYZBaseVC {
     
     /// 技术在线、快修申请、需求发布、在线商城
     func dealOperator(index : Int){
-        if !isUser  && index != 1 {/// 工程师和网点没有快修申请、需求发布、在线商城权限
-            MBProgressHUD.showAutoDismissHUD(message: "没有查看该功能的权限")
+        if !isUser  && (index == 2 || index == 3) {/// 工程师和网点没有快修申请、需求发布
+            MBProgressHUD.showAutoDismissHUD(message: "请使用用户身份登录")
             return
         }
         switch index {
@@ -425,8 +426,6 @@ extension JSMHomeVC{
                 
                 weakSelf?.checkVersion(newVersion: version, content: content)
                 
-            }else{
-                MBProgressHUD.showAutoDismissHUD(message: response["result"]["msg"].stringValue)
             }
             
         }, failture: { (error) in

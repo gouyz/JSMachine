@@ -114,7 +114,7 @@ let COMMUNITY_SELECTED = "community_selected"
 let USERINFO = "userInfo"
 
 //APPID，应用提交时候替换
-let APPID = "1441962604"
+let APPID = "1447642000"
 /// 极光推送AppKey
 let kJPushAppKey = "ddfcafdee167ab7cd75bc75b"
 /// 微信APPID

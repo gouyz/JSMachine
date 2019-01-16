@@ -91,8 +91,9 @@ class JSMNetDotHomeVC: GYZBaseVC {
             
         }, seq: 0)
         
-        let vc = JSMLoginVC()
-        navigationController?.pushViewController(vc, animated: true)
+        scrollPageView?.selectedIndex(0, animated: true)
+//        let vc = JSMLoginVC()
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     /// 极光推送，跳转指定页面
