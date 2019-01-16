@@ -144,6 +144,11 @@ class JSMEngineerProfileVC: GYZBaseVC {
         let vc = JSMEngineerConmentVC()
         navigationController?.pushViewController(vc, animated: true)
     }
+    /// 登录
+    func goLogin(){
+        let vc = JSMLoginVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
@@ -215,9 +220,17 @@ extension JSMEngineerProfileVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {//选择头像
-            selectHeaderImg()
+            if !userDefaults.bool(forKey: kIsLoginTagKey) {
+                goLogin()
+            }else{
+                selectHeaderImg()
+            }
         }else if indexPath.row == 5{/// 修改密码
-            goPwdVC()
+            if !userDefaults.bool(forKey: kIsLoginTagKey) {
+                goLogin()
+            }else{
+                goPwdVC()
+            }
         }else if indexPath.row == 6{/// 客户评价
             goConmentVC()
         }
