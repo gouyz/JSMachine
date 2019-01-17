@@ -26,31 +26,32 @@ class JSMGoodsDetailBottomView: UIView {
     }
     
     func setupUI(){
-        self.addSubview(shopView)
-        shopView.addSubview(ziXunBtn)
+//        self.addSubview(shopView)
+//        shopView.addSubview(ziXunBtn)
         self.addSubview(favouriteView)
         favouriteView.addSubview(favouriteBtn)
         self.addSubview(buyBtn)
         
-        shopView.snp.makeConstraints { (make) in
-            make.left.top.bottom.equalTo(self)
-            make.width.equalTo(favouriteView)
-        }
-        ziXunBtn.snp.makeConstraints { (make) in
-            make.center.equalTo(shopView)
-            make.size.equalTo(CGSize.init(width: kTitleHeight, height: kTitleHeight))
-        }
+//        shopView.snp.makeConstraints { (make) in
+//            make.left.top.bottom.equalTo(self)
+//            make.width.equalTo(favouriteView)
+//        }
+//        ziXunBtn.snp.makeConstraints { (make) in
+//            make.center.equalTo(shopView)
+//            make.size.equalTo(CGSize.init(width: kTitleHeight, height: kTitleHeight))
+//        }
         favouriteView.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(shopView)
-            make.left.equalTo(shopView.snp.right)
+//            make.top.bottom.equalTo(shopView)
+//            make.left.equalTo(shopView.snp.right)
+            make.left.top.bottom.equalTo(self)
             make.width.equalTo(buyBtn)
         }
         
         buyBtn.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(shopView)
+            make.top.bottom.equalTo(favouriteView)
             make.left.equalTo(favouriteView.snp.right)
             make.right.equalTo(self)
-            make.width.equalTo(shopView)
+            make.width.equalTo(favouriteView)
         }
         
         favouriteBtn.snp.makeConstraints { (make) in
@@ -58,21 +59,21 @@ class JSMGoodsDetailBottomView: UIView {
             make.size.equalTo(CGSize.init(width: kTitleHeight, height: kTitleHeight))
         }
         
-        ziXunBtn.set(image: UIImage.init(named: "icon_shop_question"), title: "咨询", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
+//        ziXunBtn.set(image: UIImage.init(named: "icon_shop_question"), title: "咨询", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
         favouriteBtn.set(image: UIImage.init(named: "icon_shop_favourite"), title: "关注", titlePosition: .bottom, additionalSpacing: 5, state: .normal)
         favouriteBtn.set(image: UIImage.init(named: "icon_shop_favourite_selected"), title: "关注", titlePosition: .bottom, additionalSpacing: 5, state: .selected)
     }
     
-    lazy var shopView: UIView = UIView()
-    /// 咨询
-    lazy var ziXunBtn : UIButton = {
-        let btn = UIButton.init(type: .custom)
-        btn.titleLabel?.font = k10Font
-        btn.setTitleColor(kBlackFontColor, for: .normal)
-        btn.tag = 101
-        btn.addTarget(self, action: #selector(clickedOperateBtn(btn:)), for: .touchUpInside)
-        return btn
-    }()
+//    lazy var shopView: UIView = UIView()
+//    /// 咨询
+//    lazy var ziXunBtn : UIButton = {
+//        let btn = UIButton.init(type: .custom)
+//        btn.titleLabel?.font = k10Font
+//        btn.setTitleColor(kBlackFontColor, for: .normal)
+//        btn.tag = 101
+//        btn.addTarget(self, action: #selector(clickedOperateBtn(btn:)), for: .touchUpInside)
+//        return btn
+//    }()
     lazy var favouriteView: UIView = UIView()
     /// 收藏
     lazy var favouriteBtn : UIButton = {

@@ -205,7 +205,8 @@ class JSMHomeVC: GYZBaseVC {
         case 3://招商加盟
             goWebViewVC(title: "招商加盟", url: homeModel?.join_url ?? "")
         case 4://合作伙伴
-            goPartnerVC()
+//            goPartnerVC()
+            goWebViewVC(title: "合作伙伴", url: homeModel?.partner_url ?? "")
         default:
             break
         }

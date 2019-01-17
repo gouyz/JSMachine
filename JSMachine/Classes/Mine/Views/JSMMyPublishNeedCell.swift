@@ -20,7 +20,7 @@ class JSMMyPublishNeedCell: UITableViewCell {
                 dateLab.text = model.create_date?.getDateTime(format: "yyyy/MM/dd")
                 
                 typeLab.text = "产品型号：\(model.pro_model!)"
-                roteLab.text = "传动比：\(model.drive_ratio!)"
+//                roteLab.text = "传动比：\(model.drive_ratio!)"
                 numberLab.text = "产品数量：\(model.num!)(个)"
                 finishedDateLab.text = "交货日期：" + (model.deal_date?.getDateTime(format: "yyyy/MM/dd"))!
                 noteLab.text = "用户备注：\(model.remark!)"
@@ -116,7 +116,7 @@ class JSMMyPublishNeedCell: UITableViewCell {
         bgView.addSubview(useNameLab)
         bgView.addSubview(dateLab)
         bgView.addSubview(typeLab)
-        bgView.addSubview(roteLab)
+//        bgView.addSubview(roteLab)
         bgView.addSubview(numberLab)
         bgView.addSubview(finishedDateLab)
         bgView.addSubview(companyLab)
@@ -154,13 +154,13 @@ class JSMMyPublishNeedCell: UITableViewCell {
             make.top.equalTo(iconView.snp.bottom).offset(kMargin)
             make.height.equalTo(30)
         }
-        roteLab.snp.makeConstraints { (make) in
-            make.left.right.height.equalTo(typeLab)
-            make.top.equalTo(typeLab.snp.bottom)
-        }
+//        roteLab.snp.makeConstraints { (make) in
+//            make.left.right.height.equalTo(typeLab)
+//            make.top.equalTo(typeLab.snp.bottom)
+//        }
         numberLab.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(typeLab)
-            make.top.equalTo(roteLab.snp.bottom)
+            make.top.equalTo(typeLab.snp.bottom)
         }
         finishedDateLab.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(typeLab)
@@ -256,14 +256,14 @@ class JSMMyPublishNeedCell: UITableViewCell {
         return lab
     }()
     /// 传动比
-    lazy var roteLab : UILabel = {
-        let lab = UILabel()
-        lab.font = k15Font
-        lab.textColor = kHeightGaryFontColor
-        lab.text = "传动比：2.2"
-        
-        return lab
-    }()
+//    lazy var roteLab : UILabel = {
+//        let lab = UILabel()
+//        lab.font = k15Font
+//        lab.textColor = kHeightGaryFontColor
+//        lab.text = "传动比：2.2"
+//
+//        return lab
+//    }()
     /// 产品数量
     lazy var numberLab : UILabel = {
         let lab = UILabel()

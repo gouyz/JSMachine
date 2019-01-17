@@ -13,6 +13,13 @@ class JSMPublishNeedVC: GYZBaseVC {
     
     /// 选择时间戳
     var selectTime: Int = 0
+    /// 型号控件数组
+    var typeViewArr: [GYZLabAndFieldView] = [GYZLabAndFieldView]()
+    /// 型号控件对应数量数组
+    var numViewArr: [GYZLabAndFieldView] = [GYZLabAndFieldView]()
+    
+    var inputModels: String = ""
+    var inputNums: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +38,9 @@ class JSMPublishNeedVC: GYZBaseVC {
         
         contentView.addSubview(typeInputView)
         contentView.addSubview(lineView)
-        contentView.addSubview(roteInputView)
-        contentView.addSubview(lineView2)
+//        contentView.addSubview(roteInputView)
+//        contentView.addSubview(lineView2)
+        contentView.addSubview(addBtn)
         contentView.addSubview(numInputView)
         contentView.addSubview(lineView3)
         contentView.addSubview(dateInputView)
@@ -67,28 +75,32 @@ class JSMPublishNeedVC: GYZBaseVC {
             make.top.equalTo(typeInputView.snp.bottom)
             make.height.equalTo(klineWidth)
         }
-        roteInputView.snp.makeConstraints { (make) in
-            make.top.equalTo(lineView.snp.bottom)
-            make.left.right.height.equalTo(typeInputView)
-        }
-        lineView2.snp.makeConstraints { (make) in
-            make.left.right.height.equalTo(lineView)
-            make.top.equalTo(roteInputView.snp.bottom)
-        }
-        
+//        roteInputView.snp.makeConstraints { (make) in
+//            make.top.equalTo(lineView.snp.bottom)
+//            make.left.right.height.equalTo(typeInputView)
+//        }
+//        lineView2.snp.makeConstraints { (make) in
+//            make.left.right.height.equalTo(lineView)
+//            make.top.equalTo(roteInputView.snp.bottom)
+//        }
+    
         numInputView.snp.makeConstraints { (make) in
-            make.top.equalTo(lineView2.snp.bottom)
+            make.top.equalTo(lineView.snp.bottom)
             make.left.right.height.equalTo(typeInputView)
         }
         lineView3.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(lineView)
             make.top.equalTo(numInputView.snp.bottom)
         }
-        
+        addBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(-kMargin)
+            make.top.equalTo(lineView3.snp.bottom)
+            make.size.equalTo(CGSize.init(width: 60, height: kTitleHeight))
+        }
         dateInputView.snp.makeConstraints { (make) in
             make.left.height.equalTo(typeInputView)
             make.right.equalTo(rightIconView.snp.left)
-            make.top.equalTo(lineView3.snp.bottom)
+            make.top.equalTo(addBtn.snp.bottom)
         }
         rightIconView.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
@@ -127,6 +139,9 @@ class JSMPublishNeedVC: GYZBaseVC {
         dateInputView.textFiled.isEnabled = false
         dateInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedDate))
         
+        typeViewArr.append(typeInputView)
+        numViewArr.append(numInputView)
+        
     }
     
     /// scrollView
@@ -143,14 +158,14 @@ class JSMPublishNeedVC: GYZBaseVC {
         return line
     }()
     /// 传动比
-    fileprivate lazy var roteInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "传动比：", placeHolder: "请输入传动比")
-    
-    /// 分割线2
-    fileprivate lazy var lineView2 : UIView = {
-        let line = UIView()
-        line.backgroundColor = kGrayLineColor
-        return line
-    }()
+//    fileprivate lazy var roteInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "传动比：", placeHolder: "请输入传动比")
+//
+//    /// 分割线2
+//    fileprivate lazy var lineView2 : UIView = {
+//        let line = UIView()
+//        line.backgroundColor = kGrayLineColor
+//        return line
+//    }()
     /// 数量
     fileprivate lazy var numInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "数量：", placeHolder: "请输入数量")
     /// 分割线3
@@ -158,6 +173,15 @@ class JSMPublishNeedVC: GYZBaseVC {
         let line = UIView()
         line.backgroundColor = kGrayLineColor
         return line
+    }()
+    /// 添加
+    lazy var addBtn : UIButton = {
+        let btn = UIButton.init(type: .custom)
+        btn.setImage(UIImage.init(named: "icon_goods_add"), for: .normal)
+        
+        btn.addTarget(self, action: #selector(onClickedAddBtn), for: .touchUpInside)
+        
+        return btn
     }()
     /// 交货期
     fileprivate lazy var dateInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "交货期：", placeHolder: "请选择交货期")
@@ -205,6 +229,55 @@ class JSMPublishNeedVC: GYZBaseVC {
         
         return btn
     }()
+    /// 添加按钮
+    @objc func onClickedAddBtn(){
+        /// 型号
+        let typeInputViews : GYZLabAndFieldView = GYZLabAndFieldView(desName: "型号：", placeHolder: "请输入型号")
+        
+        /// 分割线
+        let lineViews : UIView = {
+            let line = UIView()
+            line.backgroundColor = kGrayLineColor
+            return line
+        }()
+        /// 数量
+        let numInputViews : GYZLabAndFieldView = GYZLabAndFieldView(desName: "数量：", placeHolder: "请输入数量")
+        /// 分割线3
+        let lineViews1 : UIView = {
+            let line = UIView()
+            line.backgroundColor = kGrayLineColor
+            return line
+        }()
+        contentView.addSubview(typeInputViews)
+        contentView.addSubview(lineViews)
+        contentView.addSubview(numInputViews)
+        contentView.addSubview(lineViews1)
+        
+        typeInputViews.snp.makeConstraints { (make) in
+            make.top.equalTo(numViewArr[numViewArr.count - 1].snp.bottom).offset(klineWidth)
+            make.left.right.height.equalTo(typeInputView)
+        }
+        lineViews.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(lineView)
+            make.top.equalTo(typeInputViews.snp.bottom)
+        }
+        numInputViews.snp.makeConstraints { (make) in
+            make.top.equalTo(lineViews.snp.bottom)
+            make.left.right.height.equalTo(typeInputView)
+        }
+        lineViews1.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(lineView)
+            make.top.equalTo(numInputViews.snp.bottom)
+        }
+        addBtn.snp.remakeConstraints { (make) in
+            make.right.equalTo(contentView).offset(-kMargin)
+            make.top.equalTo(lineViews1.snp.bottom)
+            make.size.equalTo(CGSize.init(width: 60, height: kTitleHeight))
+        }
+        
+        typeViewArr.append(typeInputViews)
+        numViewArr.append(numInputViews)
+    }
     
     
     /// 在线咨询按钮
@@ -222,13 +295,26 @@ class JSMPublishNeedVC: GYZBaseVC {
         if !userDefaults.bool(forKey: kIsLoginTagKey) {
             goLogin()
         }else{
-            if (typeInputView.textFiled.text?.isEmpty)! {
-                MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
-                return
+            
+            for typeField in typeViewArr {
+                if (typeField.textFiled.text?.isEmpty)! {
+                    MBProgressHUD.showAutoDismissHUD(message: "请输入型号")
+                    return
+                }
+                inputModels += typeField.textFiled.text! + " / "
             }
-            if (roteInputView.textFiled.text?.isEmpty)! {
-                MBProgressHUD.showAutoDismissHUD(message: "请输入传动比")
-                return
+            if inputModels.count > 0{
+                inputModels = inputModels.subString(start: 0, length: inputModels.count - 3)
+            }
+            for typeField in numViewArr {
+                if (typeField.textFiled.text?.isEmpty)! {
+                    MBProgressHUD.showAutoDismissHUD(message: "请输入数量")
+                    return
+                }
+                inputNums += typeField.textFiled.text! + " / "
+            }
+            if inputNums.count > 0{
+                inputNums = inputNums.subString(start: 0, length: inputNums.count - 3)
             }
             if (dateInputView.textFiled.text?.isEmpty)! {
                 MBProgressHUD.showAutoDismissHUD(message: "请选择交货期")
@@ -254,7 +340,7 @@ class JSMPublishNeedVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("need/releaseNeed",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","pro_model":typeInputView.textFiled.text!,"drive_ratio":roteInputView.textFiled.text!,"num":numInputView.textFiled.text!,"remark":noteInputView.textFiled.text ?? "","deal_date":selectTime],  success: { (response) in
+        GYZNetWork.requestNetwork("need/releaseNeed",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? "","pro_model":inputModels,"num":inputNums,"remark":noteInputView.textFiled.text ?? "","deal_date":selectTime],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)

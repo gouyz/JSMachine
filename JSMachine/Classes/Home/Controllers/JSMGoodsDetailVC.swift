@@ -167,7 +167,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
         case 2://收藏
             dealFavourite()
         case 3://询价
-            showParamView()
+            goOnLineVC()
         default:
             break
         }

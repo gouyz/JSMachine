@@ -22,6 +22,8 @@ class JSMHomeModel: LHSBaseModel {
     var platform_url: String? = ""
     /// 招商加盟地址
     var join_url: String? = ""
+    /// 合作伙伴地址
+    var partner_url: String? = ""
     
     override func setValue(_ value: Any?, forKey key: String) {
         if key == "banner"{
