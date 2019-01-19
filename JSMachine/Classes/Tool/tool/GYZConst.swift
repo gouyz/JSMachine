@@ -118,7 +118,11 @@ let APPID = "1447642000"
 /// 极光推送AppKey
 let kJPushAppKey = "ddfcafdee167ab7cd75bc75b"
 /// 微信APPID
-let kWeChatAppID = "wx91a992eb1ae1737e"
+let kWeChatAppID = "wxb48bd80faa56c7cc"
+/// QQ AppKey
+let kQQAppKey = "11e0f92e5f885e589cb2a5407ab24e33"
+/// QQ APPID
+let kQQAppID = "101537412"
 /// 极光IM AppKey
 let kJChatAppKey = "f51b939c0390a680cd24f9ec"
 //  极光IM 定义
@@ -249,6 +253,8 @@ let kSharedCards = [
         ]
     ]
 ]
+
+let kSharedUrl = "http://app.yljsjw.com"
 
 /****** 自定义Log ******/
 func GYZLog<T>(_ message: T, fileName: String = #file, function: String = #function, lineNumber: Int = #line) {

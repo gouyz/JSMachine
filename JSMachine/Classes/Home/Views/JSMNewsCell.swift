@@ -114,7 +114,6 @@ class JSMNewsCell: UITableViewCell {
     lazy var sharedImgView : UIImageView = {
         let imgView = UIImageView()
         imgView.image = UIImage.init(named: "icon_shared_blue")
-        imgView.isHidden = true
         
         return imgView
     }()

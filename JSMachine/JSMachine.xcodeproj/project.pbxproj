@@ -157,6 +157,8 @@
 		0A45CF7921B76BD500759230 /* JSMGoodsDetailBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7821B76BD500759230 /* JSMGoodsDetailBottomView.swift */; };
 		0A45CF7B21B772C600759230 /* JSMXunJiaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7A21B772C600759230 /* JSMXunJiaVC.swift */; };
 		0A45CF7D21B774E000759230 /* JSMXunJiaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45CF7C21B774E000759230 /* JSMXunJiaCell.swift */; };
+		0A4C267321F2B23300343185 /* GYZTencentShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C267121F2B23300343185 /* GYZTencentShare.swift */; };
+		0A4C267421F2B23300343185 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4C267221F2B23300343185 /* TencentOpenAPI.framework */; };
 		0A4C6CCB21C9E83300CA76F4 /* JSMSaleServiceConmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C6CCA21C9E83300CA76F4 /* JSMSaleServiceConmentVC.swift */; };
 		0A4C6CCD21CA20EA00CA76F4 /* JSMSaleServiceRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C6CCC21CA20EA00CA76F4 /* JSMSaleServiceRecordVC.swift */; };
 		0A4C6CCF21CA2ACE00CA76F4 /* JSMServiceRecordImgsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C6CCE21CA2ACE00CA76F4 /* JSMServiceRecordImgsCell.swift */; };
@@ -385,6 +387,8 @@
 		0A45CF7A21B772C600759230 /* JSMXunJiaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMXunJiaVC.swift; sourceTree = "<group>"; };
 		0A45CF7C21B774E000759230 /* JSMXunJiaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMXunJiaCell.swift; sourceTree = "<group>"; };
 		0A461A1A21E5E17E0025F693 /* JSMachine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JSMachine.entitlements; sourceTree = "<group>"; };
+		0A4C267121F2B23300343185 /* GYZTencentShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYZTencentShare.swift; sourceTree = "<group>"; };
+		0A4C267221F2B23300343185 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		0A4C6CCA21C9E83300CA76F4 /* JSMSaleServiceConmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceConmentVC.swift; sourceTree = "<group>"; };
 		0A4C6CCC21CA20EA00CA76F4 /* JSMSaleServiceRecordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceRecordVC.swift; sourceTree = "<group>"; };
 		0A4C6CCE21CA2ACE00CA76F4 /* JSMServiceRecordImgsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMServiceRecordImgsCell.swift; sourceTree = "<group>"; };
@@ -435,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C0A32F1F4FC9DEC624C1480 /* Pods_JSMachine.framework in Frameworks */,
+				0A4C267421F2B23300343185 /* TencentOpenAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +842,7 @@
 		0A02A5CF21A58DE3009F2A96 /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
+				0A4C267021F2B23300343185 /* QQ */,
 				0A05F1FB21E0CD1F00BEDE1E /* Marquee */,
 				0A06C3EC21DB74ED00033ED0 /* ZZCircleProgress */,
 				0A45898E21C2363E00DC236F /* TagsView */,
@@ -1009,6 +1015,15 @@
 				0A45899821C2363E00DC236F /* HXTagsCell.h */,
 			);
 			path = TagsView;
+			sourceTree = "<group>";
+		};
+		0A4C267021F2B23300343185 /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				0A4C267121F2B23300343185 /* GYZTencentShare.swift */,
+				0A4C267221F2B23300343185 /* TencentOpenAPI.framework */,
+			);
+			path = QQ;
 			sourceTree = "<group>";
 		};
 		0A5C2D6C21BF56690017FED6 /* Controllers */ = {
@@ -1312,6 +1327,7 @@
 				0A02A62621A58DE3009F2A96 /* ZCycleView.swift in Sources */,
 				0A05BF9921C2907D0063EBEB /* JSMTuiJianGoodsCell.swift in Sources */,
 				0A4E46C021B65FFC00DB2E50 /* GYZSearchBtnView.swift in Sources */,
+				0A4C267321F2B23300343185 /* GYZTencentShare.swift in Sources */,
 				0A02A61521A58DE3009F2A96 /* GYZString+Extension.swift in Sources */,
 				0A02A62521A58DE3009F2A96 /* SelectionTextField.swift in Sources */,
 				0A4E46B021B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift in Sources */,
@@ -1631,6 +1647,10 @@
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 328JN8WLU8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Classes/Tool/3rdLib/QQ",
+				);
 				INFOPLIST_FILE = JSMachine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1656,6 +1676,10 @@
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 328JN8WLU8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Classes/Tool/3rdLib/QQ",
+				);
 				INFOPLIST_FILE = JSMachine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (

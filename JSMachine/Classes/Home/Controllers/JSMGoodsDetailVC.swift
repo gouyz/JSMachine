@@ -36,6 +36,7 @@ class JSMGoodsDetailVC: GYZBaseVC {
         }
         headerView.tuWenDetailLab.addOnClickListener(target: self, action: #selector(onClickedTuWenDetail))
         headerView.paramsLab.addOnClickListener(target: self, action: #selector(onClickedParamsDetail))
+        headerView.sharedBtn.addTarget(self, action: #selector(onClickedShared), for: .touchUpInside)
         
         bottomView.operatorBlock = {[weak self] (index) in
             self?.bottomOperator(index: index)
@@ -189,6 +190,52 @@ class JSMGoodsDetailVC: GYZBaseVC {
     func goOnLineVC(){
         let vc = JSMTechnologyOnlineVC()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 分享
+    @objc func onClickedShared(){
+        let cancelBtn = [
+            "title": "取消",
+            "type": "danger"
+        ]
+        let mmShareSheet = MMShareSheet.init(title: "分享至", cards: kSharedCards, duration: nil, cancelBtn: cancelBtn)
+        mmShareSheet.callBack = { [weak self](handler) ->() in
+            
+            if handler != "cancel" {// 取消
+                if handler == kWXFriendShared || handler == kWXMomentShared{/// 微信分享
+                    self?.weChatShared(tag: handler)
+                }else{// QQ
+                    self?.qqShared(tag: handler)
+                }
+            }
+        }
+        mmShareSheet.present()
+    }
+    /// 微信分享
+    func weChatShared(tag: String){
+        //发送给好友还是朋友圈（默认好友）
+        var scene = WXSceneSession
+        if tag == kWXMomentShared {//朋友圈
+            scene = WXSceneTimeline
+        }
+        
+        WXApiManager.shared.sendLinkURL(kSharedUrl, title: "闲力邦传动云平台", description: "技术、采购、售前、售中、售后一站式平台，赶紧来下载！", thumbImage: UIImage.init(named: "icon_logo")!, scene: scene,sender: self)
+    }
+    /// qq 分享
+    func qqShared(tag: String){
+        
+        if !GYZTencentShare.shared.isQQInstall() {
+            GYZAlertViewTools.alertViewTools.showAlert(title: "温馨提示", message: "QQ未安装", cancleTitle: nil, viewController: self, buttonTitles: "确定")
+            return
+        }
+        //发送给好友还是QQ空间（默认好友）
+        var scene: GYZTencentFlag = .QQ
+        if tag == kQZoneShared {//QQ空间
+            scene = .QZone
+        }
+        let imgData = UIImageJPEGRepresentation(UIImage.init(named: "icon_logo")!, 0.6)
+        GYZTencentShare.shared.shareNews(URL.init(string: kSharedUrl)!, preUrl: nil, preImage: imgData, title: "闲力邦传动云平台", description: "技术、采购、售前、售中、售后一站式平台，赶紧来下载！", flag: scene) { (success, description) in
+            
+        }
     }
     
     func showCancleFavourite(){

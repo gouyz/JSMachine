@@ -23,7 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setKeyboardManage()
         
         //微信注册
-        //        WXApi.registerApp(kWeChatAppID)
+        //微信注册
+        WXApi.registerApp(kWeChatAppID)
+        GYZTencentShare.shared.registeApp(kQQAppID)
         ///设置极光推送
         setJPush()
         #if DEBUG
@@ -56,6 +58,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        return dealPayResult(url: url)
+    }
+    // NOTE: 9.0以后使用新API接口
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        return dealPayResult(url: url)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -174,7 +186,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //隐藏键盘上的工具条(默认打开)
         IQKeyboardManager.shared.enableAutoToolbar = false
     }
-
+    ///支付宝/微信回调
+    func dealPayResult(url: URL) -> Bool{
+        
+        var result: Bool = true
+        if url.host == "safepay" {// 支付宝
+            //跳转支付宝钱包进行支付，处理支付结果
+//            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
+//                GYZLog(resultDic)
+//                if let alipayjson = resultDic {
+//                    /// 支付后回调
+//                    AliPayManager.shared.showResult(result: alipayjson as! [String: Any])
+//                }
+//                
+//            })
+//            
+//            //授权回调
+//            AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDic) in
+//                GYZLog(resultDic)
+//                if let alipayjson = resultDic {
+//                    /// 支付后回调
+//                    AliPayManager.shared.showAuth_V2Result(result: alipayjson as! [String : Any])
+//                }
+//            })
+        }else if url.host == "qzapp" || url.host == "response_from_qq" {// QQ授权登录或QQ 分享
+            
+            result = GYZTencentShare.shared.handle(url)
+        }else{//微信
+            result = WXApi.handleOpen(url, delegate:WXApiManager.shared)
+        }
+        
+        return result
+    }
 }
 // MARK: - JPUSHRegisterDelegate 极光推送代理
 extension AppDelegate : JPUSHRegisterDelegate{
