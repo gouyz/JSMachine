@@ -8,8 +8,11 @@
 
 import UIKit
 import MBProgressHUD
+import YBPopupMenu
 
 class JSMLoginVC: GYZBaseVC {
+    
+    let titleArr: [String] = ["企业注册","网点注册"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +25,7 @@ class JSMLoginVC: GYZBaseVC {
         rightBtn.titleLabel?.font = k15Font
         rightBtn.setTitleColor(kBlueFontColor, for: .normal)
         rightBtn.frame = CGRect.init(x: 0, y: 0, width: kTitleHeight, height: kTitleHeight)
-        rightBtn.addTarget(self, action: #selector(onClickRightBtn), for: .touchUpInside)
+        rightBtn.addTarget(self, action: #selector(onClickRightBtn(sender:)), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
         
         setupUI()
@@ -206,8 +209,21 @@ class JSMLoginVC: GYZBaseVC {
     }
     
     /// 注册
-    @objc func onClickRightBtn(){
+    @objc func onClickRightBtn(sender: UIButton){
+        
+        YBPopupMenu.showRely(on: sender, titles: titleArr, icons: nil, menuWidth: 120, otherSettings: {(popupMenu)in
+            popupMenu?.delegate = self
+            popupMenu?.textColor = kHeightGaryFontColor
+        })
+    }
+    /// 企业注册
+    func goCompanyRegisterVC(){
         let vc = JSMRegisterVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 网点注册
+    func goNetDotRegisterVC(){
+        let vc = JSMNetDotRegisterVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 判断手机号是否有效
@@ -338,5 +354,15 @@ class JSMLoginVC: GYZBaseVC {
             weakSelf?.hud?.hide(animated: true)
             GYZLog(error)
         })
+    }
+}
+
+extension JSMLoginVC: YBPopupMenuDelegate{
+    func ybPopupMenu(_ ybPopupMenu: YBPopupMenu!, didSelectedAt index: Int) {
+        if index == 0 {
+            goCompanyRegisterVC()
+        }else {
+            goNetDotRegisterVC()
+        }
     }
 }

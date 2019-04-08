@@ -75,6 +75,7 @@ PODS:
   - SnapKit (4.0.1)
   - SwiftyJSON (4.2.0)
   - WechatOpenSDK (1.8.3)
+  - YBPopupMenu (1.1.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7.3)
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
   - SwiftyJSON
   - WechatOpenSDK
+  - YBPopupMenu (~> 1.1.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -115,6 +117,7 @@ SPEC REPOS:
     - SnapKit
     - SwiftyJSON
     - WechatOpenSDK
+    - YBPopupMenu
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -138,7 +141,8 @@ SPEC CHECKSUMS:
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   WechatOpenSDK: 3117412f8aafde4758cac1e8d20b93c67cafcfef
+  YBPopupMenu: 6efb286385d95ba5f97c58b8464ec873645e8764
 
-PODFILE CHECKSUM: 01a91622123b447047bd8d2bf921de611a382cd5
+PODFILE CHECKSUM: b2ee6e2fd9abc336a16d0fc9277bd79de91dca14
 
 COCOAPODS: 1.5.3

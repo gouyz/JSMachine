@@ -1,23 +1,23 @@
 //
-//  JSMRegisterVC.swift
+//  JSMNetDotRegisterVC.swift
 //  JSMachine
-//  企业注册
-//  Created by gouyz on 2018/11/21.
-//  Copyright © 2018 gouyz. All rights reserved.
+//  网点注册
+//  Created by gouyz on 2019/4/8.
+//  Copyright © 2019 gouyz. All rights reserved.
 //
 
 import UIKit
 import MBProgressHUD
 
-class JSMRegisterVC: GYZBaseVC {
-    
+class JSMNetDotRegisterVC: GYZBaseVC {
+
     /// 选择营业执照
     var selectUserImg: UIImage?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.title = "企业注册"
+        
+        self.navigationItem.title = "网点注册"
         self.view.backgroundColor = kWhiteColor
         
         setupUI()
@@ -42,6 +42,13 @@ class JSMRegisterVC: GYZBaseVC {
         contentView.addSubview(lineView2)
         contentView.addSubview(repwdInputView)
         contentView.addSubview(lineView3)
+        contentView.addSubview(netDotNameInputView)
+        contentView.addSubview(lineView5)
+        contentView.addSubview(NetDotManagerInputView)
+        contentView.addSubview(lineView6)
+        contentView.addSubview(netDotAddressInputView)
+        contentView.addSubview(lineView7)
+        
         contentView.addSubview(yyzzInputView)
         contentView.addSubview(lineView4)
         contentView.addSubview(yyzzImgView)
@@ -117,10 +124,33 @@ class JSMRegisterVC: GYZBaseVC {
             make.top.equalTo(repwdInputView.snp.bottom)
             make.height.equalTo(lineView)
         }
-        
-        yyzzInputView.snp.makeConstraints { (make) in
+        netDotNameInputView.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(phoneInputView)
             make.top.equalTo(lineView3.snp.bottom)
+        }
+        lineView5.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(lineView)
+            make.top.equalTo(netDotNameInputView.snp.bottom)
+        }
+        NetDotManagerInputView.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(phoneInputView)
+            make.top.equalTo(lineView5.snp.bottom)
+        }
+        lineView6.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(lineView)
+            make.top.equalTo(NetDotManagerInputView.snp.bottom)
+        }
+        netDotAddressInputView.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(phoneInputView)
+            make.top.equalTo(lineView6.snp.bottom)
+        }
+        lineView7.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(lineView)
+            make.top.equalTo(netDotAddressInputView.snp.bottom)
+        }
+        yyzzInputView.snp.makeConstraints { (make) in
+            make.left.right.height.equalTo(phoneInputView)
+            make.top.equalTo(lineView7.snp.bottom)
         }
         lineView4.snp.makeConstraints { (make) in
             make.left.right.equalTo(lineView)
@@ -200,10 +230,38 @@ class JSMRegisterVC: GYZBaseVC {
         
         return btn
     }()
+    /// 网点名称
+    fileprivate lazy var netDotNameInputView : GYZLoginInputView = GYZLoginInputView(iconName: "icon_login_netdot_name", placeHolder: "请输入网点名称", isPhone: false)
+    
+    /// 分割线3
+    fileprivate lazy var lineView5 : UIView = {
+        let line = UIView()
+        line.backgroundColor = kGrayLineColor
+        return line
+    }()
+    /// 负责人姓名
+    fileprivate lazy var NetDotManagerInputView : GYZLoginInputView = GYZLoginInputView(iconName: "icon_login_netdot_manager_name", placeHolder: "请输入负责人姓名", isPhone: false)
+    
+    /// 分割线3
+    fileprivate lazy var lineView6 : UIView = {
+        let line = UIView()
+        line.backgroundColor = kGrayLineColor
+        return line
+    }()
+    /// 网点地址
+    fileprivate lazy var netDotAddressInputView : GYZLoginInputView = GYZLoginInputView(iconName: "icon_login_address", placeHolder: "请输入网点地址", isPhone: false)
+    
+    /// 分割线3
+    fileprivate lazy var lineView7 : UIView = {
+        let line = UIView()
+        line.backgroundColor = kGrayLineColor
+        return line
+    }()
     lazy var yyzzInputView : GYZLoginInputView = {
         let yyzzView = GYZLoginInputView()
         yyzzView.iconView.image = UIImage.init(named: "icon_yyzz")
         yyzzView.textFiled.isEnabled = false
+        yyzzView.textFiled.textColor = kGaryFontColor
         yyzzView.textFiled.text = "上传营业执照照片"
         
         return yyzzView
@@ -249,7 +307,7 @@ class JSMRegisterVC: GYZBaseVC {
             MBProgressHUD.showAutoDismissHUD(message: "请输入验证码")
             return
         }
-
+        
         if pwdInputView.textFiled.text!.isEmpty {
             MBProgressHUD.showAutoDismissHUD(message: "请输入密码")
             return
@@ -262,7 +320,23 @@ class JSMRegisterVC: GYZBaseVC {
             MBProgressHUD.showAutoDismissHUD(message: "密码和确认密码不一致")
             return
         }
-
+        if netDotNameInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入网点名称")
+            return
+        }
+        if NetDotManagerInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入负责人姓名")
+            return
+        }
+        if netDotAddressInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入网点地址")
+            return
+        }
+        if selectUserImg == nil {
+            MBProgressHUD.showAutoDismissHUD(message: "请上传营业执照")
+            return
+        }
+        
         requestRegister()
         
     }
@@ -316,7 +390,7 @@ class JSMRegisterVC: GYZBaseVC {
             imgParam.data = UIImageJPEGRepresentation(selectUserImg!, 0.5)
         }
         
-        GYZNetWork.uploadImageRequest("login/register", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"passagain": repwdInputView.textFiled.text!,"code":codeInputView.textFiled.text!], uploadParam: selectUserImg == nil ? [] : [imgParam], success: { (response) in
+        GYZNetWork.uploadImageRequest("login/dotReg", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"passagain": repwdInputView.textFiled.text!,"code":codeInputView.textFiled.text!,"fzr_name":NetDotManagerInputView.textFiled.text!,"dot_name":netDotNameInputView.textFiled.text!,"address":netDotAddressInputView.textFiled.text!], uploadParam: selectUserImg == nil ? [] : [imgParam], success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
@@ -326,14 +400,14 @@ class JSMRegisterVC: GYZBaseVC {
                 
                 userDefaults.set(true, forKey: kIsLoginTagKey)//是否登录标识
                 userDefaults.set(false, forKey: kIsEngineerLoginTagKey)//是否工程师登录标识
-                userDefaults.set(false, forKey: kIsNetDotLoginTagKey)//是否网点登录标识
+                userDefaults.set(true, forKey: kIsNetDotLoginTagKey)//是否网点登录标识
                 userDefaults.set(data["id"].stringValue, forKey: "userId")//用户ID
                 userDefaults.set(data["phone"].stringValue, forKey: "phone")//用户电话
                 
                 JPUSHService.setAlias(data["jg_id"].stringValue, completion: { (iResCode, iAlias, seq) in
                     
                 }, seq: 0)
-                KeyWindow.rootViewController = GYZMainTabBarVC()
+                KeyWindow.rootViewController = GYZBaseNavigationVC.init(rootViewController: JSMNetDotHomeVC())
                 
             }else{
                 MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
@@ -373,5 +447,5 @@ class JSMRegisterVC: GYZBaseVC {
             GYZLog(error)
         })
     }
-
+    
 }
