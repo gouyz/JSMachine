@@ -94,9 +94,9 @@ class JSMHomeVC: GYZBaseVC {
         table.delegate = self
         table.separatorColor = kGrayLineColor
         // 设置大概高度
-        table.estimatedRowHeight = 120
-        // 设置行高为自动适配
-        table.rowHeight = UITableViewAutomaticDimension
+//        table.estimatedRowHeight = 120
+//        // 设置行高为自动适配
+//        table.rowHeight = UITableViewAutomaticDimension
         
         table.register(JSMHomeNewsCell.self, forCellReuseIdentifier: homeNewsCell)
         table.register(JSMHomeNewsHeaderView.self, forHeaderFooterViewReuseIdentifier: homeNewsHeader)
@@ -177,36 +177,39 @@ class JSMHomeVC: GYZBaseVC {
 //        self.present(playerVC, animated: true, completion: nil)
     }
     
-    /// 技术在线、快修申请、需求发布、在线商城
+    ///
     func dealOperator(index : Int){
-        if !isUser  && (index == 2 || index == 3) {/// 工程师和网点没有快修申请、需求发布
-            MBProgressHUD.showAutoDismissHUD(message: "请使用用户身份登录")
-            return
-        }
         switch index {
-        case 1://技术在线
-            goOnLineVC()
-        case 2://快修申请
-            goApplyVC()
-        case 3://快购发布
-            goPublishNeedVC()
-        case 4://在线商城
-            goShopVC()
+        case 1://平台介绍
+            goWebViewVC(title: "平台介绍", url: homeModel?.platform_url ?? "")
+        case 2://合作伙伴
+            // goPartnerVC()
+            goWebViewVC(title: "合作伙伴", url: homeModel?.partner_url ?? "")
+        case 3://新闻中心
+//            goPublishNeedVC()
+            break
+        case 4://真伪查询
+            goAuthenticityVC()
         default:
             break
         }
     }
     func dealFuncModel(index : Int){
+        if !isUser  && (index == 1 || index == 2) {/// 工程师和网点没有快修申请、需求发布
+            MBProgressHUD.showAutoDismissHUD(message: "请使用用户身份登录")
+            return
+        }
         switch index {
-        case 1://平台介绍
-            goWebViewVC(title: "平台介绍", url: homeModel?.platform_url ?? "")
-        case 2://真伪查询
-            goAuthenticityVC()
-        case 3://招商加盟
-            goWebViewVC(title: "招商加盟", url: homeModel?.join_url ?? "")
-        case 4://合作伙伴
-//            goPartnerVC()
-            goWebViewVC(title: "合作伙伴", url: homeModel?.partner_url ?? "")
+        case 1://售后申请
+            goApplyVC()
+        case 3://技术在线
+            goOnLineVC()
+        case 2://需求发布
+            goPublishNeedVC()
+        case 4://辅件商城
+            goShopVC()
+        case 5://曝光台
+            break
         default:
             break
         }
@@ -324,7 +327,7 @@ class JSMHomeVC: GYZBaseVC {
 extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if homeModel == nil {
@@ -340,11 +343,11 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: homeNewsCell) as! JSMHomeNewsCell
         
-        if indexPath.section == 0 {
-            cell.dataModel = homeModel?.newModels[indexPath.row]
-        }else{
-            cell.dataModel = homeModel?.dynamicModels[indexPath.row]
-        }
+//        if indexPath.section == 0 {
+//            cell.dataModel = homeModel?.newModels[indexPath.row]
+//        }else{
+//            cell.dataModel = homeModel?.dynamicModels[indexPath.row]
+//        }
         
         cell.selectionStyle = .none
         return cell
@@ -352,13 +355,13 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeNewsHeader) as! JSMHomeNewsHeaderView
-        if section == 0 {
-            headerView.nameLab.text = "行业资讯"
-        }else{
-            headerView.nameLab.text = "企业动态"
-        }
-        headerView.tag = section
-        headerView.addOnClickListener(target: self, action: #selector(onClickedNews(sender:)))
+//        if section == 0 {
+//            headerView.nameLab.text = "行业资讯"
+//        }else{
+//            headerView.nameLab.text = "企业动态"
+//        }
+//        headerView.tag = section
+//        headerView.addOnClickListener(target: self, action: #selector(onClickedNews(sender:)))
         
         return headerView
     }
@@ -376,7 +379,9 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         }
     }
     ///MARK : UITableViewDelegate
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return kTitleHeight
+    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kTitleHeight
     }

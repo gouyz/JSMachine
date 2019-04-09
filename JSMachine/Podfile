@@ -22,6 +22,7 @@ pod 'BMPlayer'  # 基于AVPlayer封装的视频播放器  https://github.com/Bri
 
 pod 'JPush'  #极光推送
 pod 'WechatOpenSDK' #微信SDK
+pod 'YBPopupMenu', '~> 1.1.2' #弹出视图popup https://github.com/lyb5834/YBPopupMenu
 
 #pod 'JMessage' #极光IM
 #pod 'FMDB', '~> 2.6.2'

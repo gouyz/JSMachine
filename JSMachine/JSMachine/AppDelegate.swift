@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setKeyboardManage()
         
         //微信注册
-        //微信注册
         WXApi.registerApp(kWeChatAppID)
         GYZTencentShare.shared.registeApp(kQQAppID)
         ///设置极光推送

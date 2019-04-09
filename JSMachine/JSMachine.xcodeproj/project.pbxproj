@@ -141,6 +141,7 @@
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
 		0A10A4F321A848BB00FEE037 /* GYZMyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */; };
+		0A12AAAD225B955700C6811E /* JSMNetDotRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A12AAAC225B955700C6811E /* JSMNetDotRegisterVC.swift */; };
 		0A1F4A8D21D2753D007D2A67 /* JSMServiceRuleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F4A8C21D2753D007D2A67 /* JSMServiceRuleVC.swift */; };
 		0A2F41AF21D67B8B0084A766 /* JSMPersonneiDesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F41AE21D67B8B0084A766 /* JSMPersonneiDesVC.swift */; };
 		0A38196821C3AA7200E81610 /* JSMOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A38196721C3AA7200E81610 /* JSMOrderModel.swift */; };
@@ -365,6 +366,7 @@
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
 		0A10A4F221A848BB00FEE037 /* GYZMyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZMyProfileCell.swift; sourceTree = "<group>"; };
+		0A12AAAC225B955700C6811E /* JSMNetDotRegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNetDotRegisterVC.swift; sourceTree = "<group>"; };
 		0A1F4A8C21D2753D007D2A67 /* JSMServiceRuleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMServiceRuleVC.swift; sourceTree = "<group>"; };
 		0A2F41AE21D67B8B0084A766 /* JSMPersonneiDesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPersonneiDesVC.swift; sourceTree = "<group>"; };
 		0A38196721C3AA7200E81610 /* JSMOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderModel.swift; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 				0AC5DB6221A59CD90087EE22 /* JSMLoginVC.swift */,
 				0AC5DB6421A5A49E0087EE22 /* JSMRegisterVC.swift */,
 				0AC5DB6621A5ADE40087EE22 /* JSMForgetPwdVC.swift */,
+				0A12AAAC225B955700C6811E /* JSMNetDotRegisterVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1236,6 +1239,7 @@
 				"${BUILT_PRODUCTS_DIR}/SKPhotoBrowser/SKPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/YBPopupMenu/YBPopupMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1257,6 +1261,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YBPopupMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1290,6 +1295,7 @@
 			files = (
 				0A5C2D7F21BFB0650017FED6 /* JSMXunJiaModel.swift in Sources */,
 				0A5C2D7321BF5BB30017FED6 /* JSMNewsModel.swift in Sources */,
+				0A12AAAD225B955700C6811E /* JSMNetDotRegisterVC.swift in Sources */,
 				0A02A61321A58DE3009F2A96 /* GYZUIImage+Extension.swift in Sources */,
 				0A02A63221A58DE3009F2A96 /* ContentView.swift in Sources */,
 				0A0203B921B57245006D1738 /* JSMSaleServiceOrderCell.swift in Sources */,

@@ -11,18 +11,18 @@ import UIKit
 class JSMHomeNewsCell: UITableViewCell {
     
     /// 填充数据
-    var dataModel : JSMNewsModel?{
-        didSet{
-            if let model = dataModel {
-            
-                titleLab.text = model.title
-                contentLab.text = model.subtitle
-                contentImgView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
-                
-                timeLab.text = model.add_time?.getDateTime(format: "yyyy-MM-dd")
-            }
-        }
-    }
+//    var dataModel : JSMNewsModel?{
+//        didSet{
+//            if let model = dataModel {
+//
+//                titleLab.text = model.title
+//                contentLab.text = model.subtitle
+//                contentImgView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+//
+//                timeLab.text = model.add_time?.getDateTime(format: "yyyy-MM-dd")
+//            }
+//        }
+//    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,31 +38,23 @@ class JSMHomeNewsCell: UITableViewCell {
     func setupUI(){
         
         contentView.addSubview(titleLab)
-        contentView.addSubview(timeLab)
-        contentView.addSubview(contentLab)
-        contentView.addSubview(contentImgView)
+        contentView.addSubview(numberLab)
+        contentView.addSubview(detailLab)
         
         titleLab.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
-            make.right.equalTo(timeLab.snp.left).offset(-5)
-            make.height.equalTo(40)
-            make.top.equalTo(contentView)
+            make.right.equalTo(numberLab.snp.left).offset(-5)
+            make.top.bottom.equalTo(contentView)
         }
-        timeLab.snp.makeConstraints { (make) in
-            make.right.equalTo(-kMargin)
+        numberLab.snp.makeConstraints { (make) in
+            make.right.equalTo(detailLab.snp.left).offset(-kMargin)
             make.top.height.equalTo(titleLab)
             make.width.equalTo(70)
         }
-        contentLab.snp.makeConstraints { (make) in
-            make.left.equalTo(kMargin)
+        detailLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
-            make.top.equalTo(titleLab.snp.bottom)
-        }
-        contentImgView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(contentLab)
-            make.top.equalTo(contentLab.snp.bottom).offset(5)
-            make.height.equalTo((kScreenWidth - kMargin * 2) * 0.7)
-            make.bottom.equalTo(-kMargin)
+            make.centerY.equalTo(contentView)
+            make.size.equalTo(CGSize.init(width: 60, height: 24))
         }
         
     }
@@ -71,40 +63,34 @@ class JSMHomeNewsCell: UITableViewCell {
     lazy var titleLab : UILabel = {
         let lab = UILabel()
         lab.textColor = kBlackFontColor
-        lab.font = k15Font
-        lab.text = "《绳锯机的定义》"
+        lab.font = k13Font
+        lab.text = "TDY500_71_TDY500"
         
         return lab
     }()
     
-    /// 时间
-    lazy var timeLab : UILabel = {
+    /// 数量
+    lazy var numberLab : UILabel = {
         let lab = UILabel()
-        lab.textColor = kHeightGaryFontColor
-        lab.font = k12Font
-        lab.textAlignment = .right
-        lab.text = "2018.11.22"
+        lab.textColor = kBlackFontColor
+        lab.font = k13Font
+        lab.text = "5555台"
+        lab.textAlignment = .center
         
         return lab
     }()
     
     ///
-    lazy var contentLab : UILabel = {
+    lazy var detailLab : UILabel = {
         let lab = UILabel()
-        lab.textColor = kHeightGaryFontColor
+        lab.textColor = kWhiteColor
         lab.font = k13Font
-        lab.numberOfLines = 0
-        lab.text = "绳锯机是应用于绳锯机是应用于绳锯机是应用于绳锯机是应用于绳锯机是应用于绳锯机是应用于绳锯机是应用于。"
+        lab.backgroundColor = kBtnClickBGColor
+        lab.cornerRadius = kCornerRadius
+        lab.textAlignment = .center
+        lab.text = "详情"
         
         return lab
     }()
     
-    /// 图片
-    lazy var contentImgView : UIImageView = {
-        let imgView = UIImageView()
-        imgView.cornerRadius = kCornerRadius
-        imgView.backgroundColor = kBackgroundColor
-        
-        return imgView
-    }()
 }
