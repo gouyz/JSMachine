@@ -126,6 +126,12 @@ class JSMNeedVC: GYZBaseVC {
             GYZTool.endLoadMore(scorllView: tableView)
         }
     }
+    
+    func goDetailVC(needId: String){
+        let vc = JSMNeedDetailVC()
+        vc.needId = needId
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 extension JSMNeedVC: UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -156,8 +162,8 @@ extension JSMNeedVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        let model = dataList[indexPath.row]
-        
+        let model = dataList[indexPath.row]
+        goDetailVC(needId: model.id!)
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

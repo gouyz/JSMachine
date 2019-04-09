@@ -20,6 +20,22 @@
 	</dict>
 	<dict>
 		<key>title</key>
+		<string>竞标中</string>
+		<key>image</key>
+		<string>icon_mine_jingbiao</string>
+		<key>controller</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>已中标</string>
+		<key>image</key>
+		<string>icon_mine_jingbiao_finished</string>
+		<key>controller</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
 		<string>我的快修申请</string>
 		<key>image</key>
 		<string>icon_mine_sale</string>

@@ -64,9 +64,9 @@ class JSMSaleServiceOrderDetailVC: GYZBaseVC {
         table.delegate = self
         table.separatorStyle = .none
         // 设置大概高度
-        table.estimatedRowHeight = 50
-        // 设置行高为自动适配
-        table.rowHeight = UITableViewAutomaticDimension
+//        table.estimatedRowHeight = 100
+//        // 设置行高为自动适配
+//        table.rowHeight = UITableViewAutomaticDimension
         
         table.register(GYZCommonInfoCell.self, forCellReuseIdentifier: saleServiceDetailCell)
         table.register(JSMSaleServiceDetailHeader.self, forHeaderFooterViewReuseIdentifier: saleServiceDetailHeader)
@@ -211,6 +211,12 @@ extension JSMSaleServiceOrderDetailVC: UITableViewDelegate,UITableViewDataSource
         return UIView()
     }
     ///MARK : UITableViewDelegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 70
+        }
+        return 50
+    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
     }

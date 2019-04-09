@@ -276,10 +276,16 @@ class JSMHomeVC: GYZBaseVC {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    /// 需求信息
+    /// 需求信息 更多
     @objc func onClickedNews(sender:UITapGestureRecognizer){
 
         let vc = JSMNeedVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    /// 需求信息 详情
+    func goNeedDetailVC(needId: String){
+        let vc = JSMNeedDetailVC()
+        vc.needId = needId
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -367,7 +373,7 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        goNeedDetailVC(needId: (homeModel?.needsModels[indexPath.row].id)!)
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
