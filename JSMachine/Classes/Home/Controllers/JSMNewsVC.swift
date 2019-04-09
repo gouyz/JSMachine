@@ -12,6 +12,8 @@ import MBProgressHUD
 private let newsCell = "newsCell"
 
 class JSMNewsVC: GYZBaseVC {
+    
+    var type: String = "1"
     var currPage : Int = 1
     
     var dataList: [JSMNewsModel] = [JSMNewsModel]()
@@ -61,7 +63,7 @@ class JSMNewsVC: GYZBaseVC {
         weak var weakSelf = self
         showLoadingView()
         
-        GYZNetWork.requestNetwork("trade/showTrade",parameters: ["p": currPage,"count": kPageSize],  success: { (response) in
+        GYZNetWork.requestNetwork("second/newsCenter",parameters: ["p": currPage,"count": kPageSize,"type":type],  success: { (response) in
             
             weakSelf?.hiddenLoadingView()
             weakSelf?.closeRefresh()

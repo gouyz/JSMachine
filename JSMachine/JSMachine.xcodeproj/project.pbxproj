@@ -136,7 +136,6 @@
 		0A06C3F821DB762400033ED0 /* JSMEngineerConmentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F721DB762400033ED0 /* JSMEngineerConmentHeaderView.swift */; };
 		0A06C3FA21DBABF500033ED0 /* JSMConmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */; };
 		0A06C3FC21DBADC900033ED0 /* JSMConmentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06C3FB21DBADC900033ED0 /* JSMConmentListCell.swift */; };
-		0A06EB2B21E4ED6700CBC2A0 /* JSMDynamicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A06EB2A21E4ED6700CBC2A0 /* JSMDynamicVC.swift */; };
 		0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */; };
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
@@ -167,6 +166,10 @@
 		0A4C6CD321CA587F00CA76F4 /* JSMEngineerOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C6CD221CA587F00CA76F4 /* JSMEngineerOrderDetailVC.swift */; };
 		0A4C6CD521CA5CC600CA76F4 /* JSMConmentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C6CD421CA5CC600CA76F4 /* JSMConmentDetailVC.swift */; };
 		0A4C6CD721CA621600CA76F4 /* JSMEngineerFinishedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C6CD621CA621600CA76F4 /* JSMEngineerFinishedVC.swift */; };
+		0A4D6A01225C83D4009599C8 /* JSMNeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6A00225C83D4009599C8 /* JSMNeedModel.swift */; };
+		0A4D6A03225C87A5009599C8 /* JSMNeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6A02225C87A5009599C8 /* JSMNeedVC.swift */; };
+		0A4D6A05225C93DF009599C8 /* JSMNewsManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6A04225C93DF009599C8 /* JSMNewsManagerVC.swift */; };
+		0A4D6A07225C9641009599C8 /* JSMDynamicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6A06225C9640009599C8 /* JSMDynamicVC.swift */; };
 		0A4E46AE21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46AD21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift */; };
 		0A4E46B021B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46AF21B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift */; };
 		0A4E46B221B6211F00DB2E50 /* GYZStepProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46B121B6211F00DB2E50 /* GYZStepProgressView.swift */; };
@@ -361,7 +364,6 @@
 		0A06C3F721DB762400033ED0 /* JSMEngineerConmentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerConmentHeaderView.swift; sourceTree = "<group>"; };
 		0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMConmentModel.swift; sourceTree = "<group>"; };
 		0A06C3FB21DBADC900033ED0 /* JSMConmentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMConmentListCell.swift; sourceTree = "<group>"; };
-		0A06EB2A21E4ED6700CBC2A0 /* JSMDynamicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMDynamicVC.swift; sourceTree = "<group>"; };
 		0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineHeaderView.swift; sourceTree = "<group>"; };
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
@@ -398,6 +400,10 @@
 		0A4C6CD221CA587F00CA76F4 /* JSMEngineerOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerOrderDetailVC.swift; sourceTree = "<group>"; };
 		0A4C6CD421CA5CC600CA76F4 /* JSMConmentDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMConmentDetailVC.swift; sourceTree = "<group>"; };
 		0A4C6CD621CA621600CA76F4 /* JSMEngineerFinishedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerFinishedVC.swift; sourceTree = "<group>"; };
+		0A4D6A00225C83D4009599C8 /* JSMNeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedModel.swift; sourceTree = "<group>"; };
+		0A4D6A02225C87A5009599C8 /* JSMNeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedVC.swift; sourceTree = "<group>"; };
+		0A4D6A04225C93DF009599C8 /* JSMNewsManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNewsManagerVC.swift; sourceTree = "<group>"; };
+		0A4D6A06225C9640009599C8 /* JSMDynamicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMDynamicVC.swift; sourceTree = "<group>"; };
 		0A4E46AD21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceOrderDetailVC.swift; sourceTree = "<group>"; };
 		0A4E46AF21B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceDetailHeader.swift; sourceTree = "<group>"; };
 		0A4E46B121B6211F00DB2E50 /* GYZStepProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZStepProgressView.swift; sourceTree = "<group>"; };
@@ -547,6 +553,7 @@
 		0A02A59221A58DE3009F2A96 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A4D6A06225C9640009599C8 /* JSMDynamicVC.swift */,
 				0A02A63F21A591E5009F2A96 /* JSMHomeVC.swift */,
 				0A02F5ED21AD799E002E3BF9 /* JSMTechnologyOnlineVC.swift */,
 				0A02F5EF21AD7D7C002E3BF9 /* JSMNewsVC.swift */,
@@ -568,7 +575,8 @@
 				0A00300421CA948B007D7F3F /* JSMSearchShopVC.swift */,
 				0A06C3F521DB755900033ED0 /* JSMEngineerConmentVC.swift */,
 				0A05F20021E0E9F200BEDE1E /* JSMPlayVideoVC.swift */,
-				0A06EB2A21E4ED6700CBC2A0 /* JSMDynamicVC.swift */,
+				0A4D6A02225C87A5009599C8 /* JSMNeedVC.swift */,
+				0A4D6A04225C93DF009599C8 /* JSMNewsManagerVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1051,6 +1059,7 @@
 				0A45899E21C251F800DC236F /* JSMGoodsParamsModel.swift */,
 				0A052C7B21C7E0A5001E7BDE /* JSMTechnologyOnLineModel.swift */,
 				0A06C3F921DBABF500033ED0 /* JSMConmentModel.swift */,
+				0A4D6A00225C83D4009599C8 /* JSMNeedModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1325,6 +1334,7 @@
 				0A02D2F221AEDF5900BE945C /* JSMMyPublishNeedVC.swift in Sources */,
 				0A02A60E21A58DE3009F2A96 /* LHSUserInfoModel.swift in Sources */,
 				0A4C6CCB21C9E83300CA76F4 /* JSMSaleServiceConmentVC.swift in Sources */,
+				0A4D6A07225C9641009599C8 /* JSMDynamicVC.swift in Sources */,
 				0A4E46B621B64B6F00DB2E50 /* JSMEngineerHomerVC.swift in Sources */,
 				0A02A62F21A58DE3009F2A96 /* SegmentStyle.swift in Sources */,
 				0A06C3FC21DBADC900033ED0 /* JSMConmentListCell.swift in Sources */,
@@ -1391,6 +1401,7 @@
 				0A4C6CD121CA2CF600CA76F4 /* JSMSaleServiceRecordModel.swift in Sources */,
 				0A02A63C21A58DE3009F2A96 /* GYZConst.swift in Sources */,
 				0A02A63721A58DE3009F2A96 /* GYZOpenCameraPhotosTool.swift in Sources */,
+				0A4D6A05225C93DF009599C8 /* JSMNewsManagerVC.swift in Sources */,
 				0A02A61D21A58DE3009F2A96 /* GYZLoadingView.swift in Sources */,
 				0A02F5EC21AD6F48002E3BF9 /* JSMOrderDetailHeaderView.swift in Sources */,
 				0A02A60321A58DE3009F2A96 /* BPChatBottomView.swift in Sources */,
@@ -1426,11 +1437,11 @@
 				0A02A63321A58DE3009F2A96 /* GYZNetWork.swift in Sources */,
 				0A4E46BE21B65E2100DB2E50 /* JSMShopsVC.swift in Sources */,
 				0A02A62C21A58DE3009F2A96 /* GYZScanQrcodeVC.swift in Sources */,
+				0A4D6A01225C83D4009599C8 /* JSMNeedModel.swift in Sources */,
 				0A02A62121A58DE3009F2A96 /* PickerView.swift in Sources */,
 				0A02A5FF21A58DE3009F2A96 /* GYZPhotoView.swift in Sources */,
 				0A02A62A21A58DE3009F2A96 /* MMShareSheet.swift in Sources */,
 				0A02A5FB21A58DE3009F2A96 /* LHSAddPhotoView.swift in Sources */,
-				0A06EB2B21E4ED6700CBC2A0 /* JSMDynamicVC.swift in Sources */,
 				0A2F41AF21D67B8B0084A766 /* JSMPersonneiDesVC.swift in Sources */,
 				0A02EAAF21AADD06000B5644 /* JSMOrderManagerVC.swift in Sources */,
 				0A76B7D321AFB58600720A20 /* JSMAuthenticityVC.swift in Sources */,
@@ -1455,6 +1466,7 @@
 				0A05A87621DFAA350087EDC4 /* JSMNetDotHomeVC.swift in Sources */,
 				0A02A63921A58DE3009F2A96 /* GYZThrowLineTool.swift in Sources */,
 				0A02A62921A58DE3009F2A96 /* ZPageControl.swift in Sources */,
+				0A4D6A03225C87A5009599C8 /* JSMNeedVC.swift in Sources */,
 				0A45CF7721B7621900759230 /* JSMGoodsDetailHeaderView.swift in Sources */,
 				0A02A61821A58DE3009F2A96 /* GYZDate+Extension.swift in Sources */,
 				0A02A61921A58DE3009F2A96 /* GYZUIViewController+Loading.swift in Sources */,

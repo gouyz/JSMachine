@@ -1,26 +1,26 @@
 //
-//  JSMDynamicVC.swift
+//  JSMNeedVC.swift
 //  JSMachine
-//  曝光台
-//  Created by gouyz on 2019/1/8.
+//  更多竞标需求
+//  Created by gouyz on 2019/4/9.
 //  Copyright © 2019 gouyz. All rights reserved.
 //
 
 import UIKit
 import MBProgressHUD
 
-private let dynamicCell = "dynamicCell"
+private let needCell = "needCell"
 
-class JSMDynamicVC: GYZBaseVC {
+class JSMNeedVC: GYZBaseVC {
 
     var currPage : Int = 1
     
-    var dataList: [JSMNewsModel] = [JSMNewsModel]()
+    var dataList: [JSMNeedModel] = [JSMNeedModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "曝光台"
+        self.navigationItem.title = "需求信息栏"
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -38,7 +38,7 @@ class JSMDynamicVC: GYZBaseVC {
         table.delegate = self
         table.separatorColor = kGrayLineColor
         
-        table.register(JSMNewsCell.self, forCellReuseIdentifier: dynamicCell)
+        table.register(JSMHomeNewsCell.self, forCellReuseIdentifier: needCell)
         
         weak var weakSelf = self
         ///添加下拉刷新
@@ -52,7 +52,7 @@ class JSMDynamicVC: GYZBaseVC {
         
         return table
     }()
-    ///获取资讯列表数据
+    ///获取需求信息列表数据
     func requestNewsDatas(){
         
         if !GYZTool.checkNetWork() {
@@ -62,7 +62,7 @@ class JSMDynamicVC: GYZBaseVC {
         weak var weakSelf = self
         showLoadingView()
         
-        GYZNetWork.requestNetwork("second/exposure",parameters: ["p": currPage,"count": kPageSize],  success: { (response) in
+        GYZNetWork.requestNetwork("second/moreNeed",parameters: ["page": currPage,"user_id":userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
             
             weakSelf?.hiddenLoadingView()
             weakSelf?.closeRefresh()
@@ -74,7 +74,7 @@ class JSMDynamicVC: GYZBaseVC {
                 
                 for item in data{
                     guard let itemInfo = item.dictionaryObject else { return }
-                    let model = JSMNewsModel.init(dict: itemInfo)
+                    let model = JSMNeedModel.init(dict: itemInfo)
                     
                     weakSelf?.dataList.append(model)
                 }
@@ -83,7 +83,7 @@ class JSMDynamicVC: GYZBaseVC {
                     weakSelf?.tableView.reloadData()
                 }else{
                     ///显示空页面
-                    weakSelf?.showEmptyView(content: "暂无曝光信息")
+                    weakSelf?.showEmptyView(content: "暂无需求信息")
                 }
                 
             }else{
@@ -126,62 +126,8 @@ class JSMDynamicVC: GYZBaseVC {
             GYZTool.endLoadMore(scorllView: tableView)
         }
     }
-    /// 分享
-    @objc func onclickedShared(sender: UITapGestureRecognizer){
-        let cancelBtn = [
-            "title": "取消",
-            "type": "danger"
-        ]
-        let mmShareSheet = MMShareSheet.init(title: "分享至", cards: kSharedCards, duration: nil, cancelBtn: cancelBtn)
-        mmShareSheet.callBack = { [weak self](handler) ->() in
-            
-            if handler != "cancel" {// 取消
-                if handler == kWXFriendShared || handler == kWXMomentShared{/// 微信分享
-                    self?.weChatShared(tag: handler)
-                }else{// QQ
-                    self?.qqShared(tag: handler)
-                }
-            }
-        }
-        mmShareSheet.present()
-    }
-    /// 微信分享
-    func weChatShared(tag: String){
-        //发送给好友还是朋友圈（默认好友）
-        var scene = WXSceneSession
-        if tag == kWXMomentShared {//朋友圈
-            scene = WXSceneTimeline
-        }
-        
-        WXApiManager.shared.sendLinkURL(kSharedUrl, title: "闲力邦传动云平台", description: "技术、采购、售前、售中、售后一站式平台，赶紧来下载！", thumbImage: UIImage.init(named: "icon_logo")!, scene: scene,sender: self)
-    }
-    /// qq 分享
-    func qqShared(tag: String){
-        
-        if !GYZTencentShare.shared.isQQInstall() {
-            GYZAlertViewTools.alertViewTools.showAlert(title: "温馨提示", message: "QQ未安装", cancleTitle: nil, viewController: self, buttonTitles: "确定")
-            return
-        }
-        //发送给好友还是QQ空间（默认好友）
-        var scene: GYZTencentFlag = .QQ
-        if tag == kQZoneShared {//QQ空间
-            scene = .QZone
-        }
-        let imgData = UIImageJPEGRepresentation(UIImage.init(named: "icon_logo")!, 0.6)
-        GYZTencentShare.shared.shareNews(URL.init(string: kSharedUrl)!, preUrl: nil, preImage: imgData, title: "闲力邦传动云平台", description: "技术、采购、售前、售中、售后一站式平台，赶紧来下载！", flag: scene) { (success, description) in
-            
-        }
-    }
-    
-    /// webVC
-    func goWebViewVC(title: String, url: String){
-        let vc = JSMWebViewVC()
-        vc.url = url
-        vc.webTitle = title
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
-extension JSMDynamicVC: UITableViewDelegate,UITableViewDataSource{
+extension JSMNeedVC: UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -192,10 +138,7 @@ extension JSMDynamicVC: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: dynamicCell) as! JSMNewsCell
-        
-        cell.sharedImgView.tag = indexPath.row
-        cell.sharedImgView.addOnClickListener(target: self, action: #selector(onclickedShared(sender:)))
+        let cell = tableView.dequeueReusableCell(withIdentifier: needCell) as! JSMHomeNewsCell
         
         cell.dataModel = dataList[indexPath.row]
         
@@ -213,13 +156,13 @@ extension JSMDynamicVC: UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = dataList[indexPath.row]
-        goWebViewVC(title: model.title!, url: model.url!)
+//        let model = dataList[indexPath.row]
+        
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 90
+        return kTitleHeight
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.00001

@@ -14,14 +14,10 @@ class JSMHomeModel: LHSBaseModel {
     var bannerModels: [JSMHomeBannerModel] = [JSMHomeBannerModel]()
     /// 热点model
     var hotModels: [JSMHotModel] = [JSMHotModel]()
-    /// 资讯model
-    var newModels: [JSMNewsModel] = [JSMNewsModel]()
-    /// 动态model
-    var dynamicModels: [JSMNewsModel] = [JSMNewsModel]()
+    /// 需求model
+    var needsModels: [JSMNeedModel] = [JSMNeedModel]()
     /// 平台介绍地址
     var platform_url: String? = ""
-    /// 招商加盟地址
-    var join_url: String? = ""
     /// 合作伙伴地址
     var partner_url: String? = ""
     
@@ -38,20 +34,13 @@ class JSMHomeModel: LHSBaseModel {
                 let model = JSMHotModel(dict: dict)
                 hotModels.append(model)
             }
-        }else if key == "trade"{
+        }else if key == "bidding"{
             guard let datas = value as? [[String : Any]] else { return }
             for dict in datas {
-                let model = JSMNewsModel(dict: dict)
-                newModels.append(model)
+                let model = JSMNeedModel(dict: dict)
+                needsModels.append(model)
             }
-        }else if key == "dynamic"{
-            guard let datas = value as? [[String : Any]] else { return }
-            for dict in datas {
-                let model = JSMNewsModel(dict: dict)
-                dynamicModels.append(model)
-            }
-        }
-        else {
+        } else {
             super.setValue(value, forKey: key)
         }
     }
@@ -64,6 +53,8 @@ class JSMHotModel: LHSBaseModel {
     var id : String?
     /// 热点内容
     var content : String? = ""
+    /// 热点url
+    var url : String? = ""
 }
 /// 首页banner model
 @objcMembers

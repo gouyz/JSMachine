@@ -1,7 +1,7 @@
 //
 //  JSMHomeNewsCell.swift
 //  JSMachine
-//  首页行业资讯cell
+//  首页 需求信息cell
 //  Created by gouyz on 2018/11/22.
 //  Copyright © 2018 gouyz. All rights reserved.
 //
@@ -11,18 +11,15 @@ import UIKit
 class JSMHomeNewsCell: UITableViewCell {
     
     /// 填充数据
-//    var dataModel : JSMNewsModel?{
-//        didSet{
-//            if let model = dataModel {
-//
-//                titleLab.text = model.title
-//                contentLab.text = model.subtitle
-//                contentImgView.kf.setImage(with: URL.init(string: model.img!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
-//
-//                timeLab.text = model.add_time?.getDateTime(format: "yyyy-MM-dd")
-//            }
-//        }
-//    }
+    var dataModel : JSMNeedModel?{
+        didSet{
+            if let model = dataModel {
+
+                titleLab.text = model.pro_model
+                numberLab.text = "x" + model.num!
+            }
+        }
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)

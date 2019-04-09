@@ -69,6 +69,10 @@ class JSMHomeVC: GYZBaseVC {
                 self?.headerView.playImgView.isHidden = true
             }
         }
+        headerView.hotTxtView.didSelectedItem = {[weak self] (tag) in
+            let model = self?.homeModel?.hotModels[tag]
+            self?.goWebViewVC(title: (model?.content)!, url: (model?.url)!)
+        }
         
         /// 极光推送跳转指定页面
         NotificationCenter.default.addObserver(self, selector: #selector(refreshJPushView(noti:)), name: NSNotification.Name(rawValue: kJPushRefreshData), object: nil)
@@ -115,7 +119,7 @@ class JSMHomeVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("index/appIndex",parameters: nil,  success: { (response) in
+        GYZNetWork.requestNetwork("second/appIndex",parameters: nil,  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
@@ -148,15 +152,15 @@ class JSMHomeVC: GYZBaseVC {
                 headerView.adsImgView.setUrlsGroup(imgUrlArr)
             }
             if homeModel?.hotModels.count > 0{
-//                var hotTitleArr: [String] = [String]()
-                var hotContent: String = ""
+                var hotTitleArr: [String] = [String]()
+//                var hotContent: String = ""
                 for item in (homeModel?.hotModels)! {
-//                    hotTitleArr.append(item.content!)
-                    hotContent += item.content! + "    "
+                    hotTitleArr.append(item.content!)
+//                    hotContent += item.content! + "    "
                 }
-                hotLab.text = hotContent
-                headerView.hotTxtView.contentView = hotLab
-//                headerView.hotTxtView.setTitlesGroup(hotTitleArr)
+//                hotLab.text = hotContent
+//                headerView.hotTxtView.contentView = hotLab
+                headerView.hotTxtView.setTitlesGroup(hotTitleArr)
             }
             
             tableView.reloadData()
@@ -186,8 +190,7 @@ class JSMHomeVC: GYZBaseVC {
             // goPartnerVC()
             goWebViewVC(title: "合作伙伴", url: homeModel?.partner_url ?? "")
         case 3://新闻中心
-//            goPublishNeedVC()
-            break
+            goNewsCenterVC()
         case 4://真伪查询
             goAuthenticityVC()
         default:
@@ -209,7 +212,7 @@ class JSMHomeVC: GYZBaseVC {
         case 4://辅件商城
             goShopVC()
         case 5://曝光台
-            break
+            goBaoGuangVC()
         default:
             break
         }
@@ -234,6 +237,16 @@ class JSMHomeVC: GYZBaseVC {
             navigationController?.pushViewController(vc, animated: true)
         }
         
+    }
+    //新闻中心
+    func goNewsCenterVC(){
+        let vc = JSMNewsManagerVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    //曝光台
+    func goBaoGuangVC(){
+        let vc = JSMDynamicVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 登录
     func goLogin(){
@@ -263,16 +276,11 @@ class JSMHomeVC: GYZBaseVC {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    /// 行业资讯/企业动态
+    /// 需求信息
     @objc func onClickedNews(sender:UITapGestureRecognizer){
-        let tag = sender.view?.tag
-        if tag == 0 {/// 行业资讯
-            let vc = JSMNewsVC()
-            navigationController?.pushViewController(vc, animated: true)
-        }else{
-            let vc = JSMDynamicVC()
-            navigationController?.pushViewController(vc, animated: true)
-        }
+
+        let vc = JSMNeedVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     /// 极光推送，跳转指定页面
@@ -333,21 +341,14 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         if homeModel == nil {
             return 0
         }
-        if section == 1 {
-            return (homeModel?.dynamicModels.count)!
-        }
-        return (homeModel?.newModels.count)!
+        return (homeModel?.needsModels.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: homeNewsCell) as! JSMHomeNewsCell
         
-//        if indexPath.section == 0 {
-//            cell.dataModel = homeModel?.newModels[indexPath.row]
-//        }else{
-//            cell.dataModel = homeModel?.dynamicModels[indexPath.row]
-//        }
+        cell.dataModel = homeModel?.needsModels[indexPath.row]
         
         cell.selectionStyle = .none
         return cell
@@ -355,13 +356,9 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeNewsHeader) as! JSMHomeNewsHeaderView
-//        if section == 0 {
-//            headerView.nameLab.text = "行业资讯"
-//        }else{
-//            headerView.nameLab.text = "企业动态"
-//        }
-//        headerView.tag = section
-//        headerView.addOnClickListener(target: self, action: #selector(onClickedNews(sender:)))
+
+        headerView.tag = section
+        headerView.addOnClickListener(target: self, action: #selector(onClickedNews(sender:)))
         
         return headerView
     }
@@ -370,13 +367,7 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let model = homeModel?.newModels[indexPath.row]
-            goWebViewVC(title: (model?.title)!, url: (model?.url)!)
-        }else{
-            let model = homeModel?.dynamicModels[indexPath.row]
-            goWebViewVC(title: (model?.title)!, url: (model?.url)!)
-        }
+
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
