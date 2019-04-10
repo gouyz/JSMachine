@@ -386,7 +386,9 @@ extension JSMMyWinBiddingVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        goDetailVC()
+        let vc = JSMBiddingDetailVC()
+        vc.needId = dataList[indexPath.row].id!
+        navigationController?.pushViewController(vc, animated: true)
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

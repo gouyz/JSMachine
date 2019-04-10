@@ -39,4 +39,7 @@ class JSMPublishNeedModel: LHSBaseModel {
     var wl_company : String? = ""
     /// 物流单号
     var wl_number : String? = ""
+    
+    /// 新增中标者 如果为空是竞标者 不为空是中标者
+    var b_name : String? = ""
 }

@@ -20,79 +20,160 @@ class JSMMyPublishNeedCell: UITableViewCell {
                 dateLab.text = model.create_date?.getDateTime(format: "yyyy/MM/dd")
                 
                 typeLab.text = "产品型号：\(model.pro_model!)"
-//                roteLab.text = "传动比：\(model.drive_ratio!)"
                 numberLab.text = "产品数量：\(model.num!)(个)"
                 finishedDateLab.text = "交货日期：" + (model.deal_date?.getDateTime(format: "yyyy/MM/dd"))!
                 noteLab.text = "用户备注：\(model.remark!)"
                 /// 已提交(0已提交未确认有货，只能下载合同。1已确认有货，可以下载合同和上传合同。2已上传合同，还未审核合同是否有效，只能查看合同)。
-                /// 未发货(3合同有效未发货，只能查看合同)
-                /// 已发货(4已发货，待完成，可以查看合同和确认收货)
-                /// 5完成订单,只能查看合同
+                /// 未发货(3合同有效未发货，只能查看合同、上传支付凭证)
+                /// 已发货(4已发货，待完成，可以查看合同、确认收货、查看支付凭证、查看物流单)
+                /// 5完成订单,只能查看合同、查看支付凭证、查看物流单、评价
+                /// 6,只能查看合同、查看支付凭证、查看物流单
+                /// 7,只能查看合同、查看支付凭证、查看物流单
                 let status: String = model.status!
                 tuiJianLab.isHidden = false
                 tagImgView.isHidden = false
-                operatorLab.isHidden = true
                 if status == "0"{
                     downLoadBtn.isHidden = false
                     contractLab.isHidden = true
+                    payCertLab.isHidden = true
+                    expressListLab.isHidden = true
+                    operatorLab.isHidden = true
                     contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    payCertLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    expressListLab.snp.updateConstraints { (make) in
                         make.width.equalTo(0)
                     }
                 }else if status == "1"{
                     downLoadBtn.isHidden = false
                     contractLab.isHidden = false
                     contractLab.text = "上传合同"
+                    payCertLab.isHidden = true
+                    expressListLab.isHidden = true
+                    operatorLab.isHidden = true
                     contractLab.snp.updateConstraints { (make) in
-                        make.width.equalTo(80)
+                        make.width.equalTo(60)
+                    }
+                    payCertLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    expressListLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
                     }
                 }else if status == "2" {
                     downLoadBtn.isHidden = true
                     contractLab.isHidden = false
                     contractLab.text = "查看合同"
+                    payCertLab.isHidden = true
+                    expressListLab.isHidden = true
+                    operatorLab.isHidden = true
                     contractLab.snp.updateConstraints { (make) in
-                        make.width.equalTo(80)
+                        make.width.equalTo(60)
                     }
-                }else if status == "3" || status == "5"{
+                    payCertLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    expressListLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                }else if status == "3"{
                     tuiJianLab.isHidden = true
                     tagImgView.isHidden = true
                     downLoadBtn.isHidden = true
                     contractLab.isHidden = false
                     contractLab.text = "查看合同"
+                    payCertLab.isHidden = true
+                    expressListLab.isHidden = true
+                    operatorLab.isHidden = false
+                    operatorLab.text = "上传支付凭证"
                     contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
+                    }
+                    payCertLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    operatorLab.snp.updateConstraints { (make) in
                         make.width.equalTo(80)
+                    }
+                    expressListLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
                     }
                 }else if status == "4"{
                     tuiJianLab.isHidden = true
                     tagImgView.isHidden = true
                     downLoadBtn.isHidden = true
                     contractLab.isHidden = false
-                    operatorLab.isHidden = false
                     contractLab.text = "查看合同"
+                    payCertLab.isHidden = false
+                    expressListLab.isHidden = false
+                    operatorLab.isHidden = false
+                    operatorLab.text = "确认收货"
                     contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
+                    }
+                    payCertLab.snp.updateConstraints { (make) in
                         make.width.equalTo(80)
                     }
-                }
-                
-                if status == "4" || status == "5"{
-                    companyLab.text = "物流公司：" + model.wl_company!
-                    expressNoLab.text = "物流单号：" + model.wl_number!
-                    
-                    companyLab.isHidden = false
-                    companyLab.snp.updateConstraints { (make) in
-                        make.height.equalTo(30)
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
                     }
-                    expressNoLab.isHidden = false
-                    expressNoLab.snp.updateConstraints { (make) in
-                        make.height.equalTo(30)
+                    expressListLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(70)
                     }
-                }else{
-                    companyLab.isHidden = true
-                    companyLab.snp.updateConstraints { (make) in
-                        make.height.equalTo(0)
+                }else if status == "5"{
+                    tuiJianLab.isHidden = true
+                    tagImgView.isHidden = true
+                    downLoadBtn.isHidden = true
+                    contractLab.isHidden = false
+                    contractLab.text = "查看合同"
+                    payCertLab.isHidden = false
+                    expressListLab.isHidden = false
+                    operatorLab.isHidden = false
+                    operatorLab.text = "评价"
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
                     }
-                    expressNoLab.isHidden = true
-                    expressNoLab.snp.updateConstraints { (make) in
-                        make.height.equalTo(0)
+                    payCertLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
+                    }
+                    expressListLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(70)
+                    }
+                }else if status == "6" || status == "7"{
+                    tuiJianLab.isHidden = true
+                    tagImgView.isHidden = true
+                    downLoadBtn.isHidden = true
+                    contractLab.isHidden = false
+                    contractLab.text = "查看合同"
+                    payCertLab.isHidden = false
+                    expressListLab.isHidden = false
+                    operatorLab.isHidden = true
+                    contractLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(60)
+                    }
+                    payCertLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(80)
+                    }
+                    operatorLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(0)
+                    }
+                    expressListLab.snp.updateConstraints { (make) in
+                        make.width.equalTo(70)
                     }
                 }
             }
@@ -116,16 +197,17 @@ class JSMMyPublishNeedCell: UITableViewCell {
         bgView.addSubview(useNameLab)
         bgView.addSubview(dateLab)
         bgView.addSubview(typeLab)
-//        bgView.addSubview(roteLab)
         bgView.addSubview(numberLab)
         bgView.addSubview(finishedDateLab)
-        bgView.addSubview(companyLab)
-        bgView.addSubview(expressNoLab)
         bgView.addSubview(noteLab)
+        bgView.addSubview(bidImgView)
+        bgView.addSubview(biddingLab)
         bgView.addSubview(tagImgView)
         bgView.addSubview(tuiJianLab)
         bgView.addSubview(downLoadBtn)
         bgView.addSubview(contractLab)
+        bgView.addSubview(payCertLab)
+        bgView.addSubview(expressListLab)
         bgView.addSubview(operatorLab)
         
         bgView.snp.makeConstraints { (make) in
@@ -154,10 +236,6 @@ class JSMMyPublishNeedCell: UITableViewCell {
             make.top.equalTo(iconView.snp.bottom).offset(kMargin)
             make.height.equalTo(30)
         }
-//        roteLab.snp.makeConstraints { (make) in
-//            make.left.right.height.equalTo(typeLab)
-//            make.top.equalTo(typeLab.snp.bottom)
-//        }
         numberLab.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(typeLab)
             make.top.equalTo(typeLab.snp.bottom)
@@ -166,19 +244,20 @@ class JSMMyPublishNeedCell: UITableViewCell {
             make.left.right.height.equalTo(typeLab)
             make.top.equalTo(numberLab.snp.bottom)
         }
-        companyLab.snp.makeConstraints { (make) in
-            make.left.right.equalTo(typeLab)
-            make.top.equalTo(finishedDateLab.snp.bottom)
-            make.height.equalTo(30)
-        }
-        expressNoLab.snp.makeConstraints { (make) in
-            make.left.right.equalTo(typeLab)
-            make.top.equalTo(companyLab.snp.bottom)
-            make.height.equalTo(30)
-        }
         noteLab.snp.makeConstraints { (make) in
             make.left.right.equalTo(typeLab)
-            make.top.equalTo(expressNoLab.snp.bottom).offset(kMargin)
+            make.top.equalTo(finishedDateLab.snp.bottom).offset(kMargin)
+        }
+        bidImgView.snp.makeConstraints { (make) in
+            make.left.equalTo(typeLab)
+            make.centerY.equalTo(biddingLab)
+            make.size.equalTo(CGSize.init(width: 20, height: 20))
+        }
+        biddingLab.snp.makeConstraints { (make) in
+            make.left.equalTo(bidImgView.snp.right).offset(5)
+            make.top.equalTo(noteLab.snp.bottom).offset(kMargin)
+            make.right.equalTo(kScreenWidth * 0.5)
+            make.height.equalTo(30)
         }
         tagImgView.snp.makeConstraints { (make) in
             make.left.equalTo(typeLab)
@@ -187,25 +266,35 @@ class JSMMyPublishNeedCell: UITableViewCell {
         }
         tuiJianLab.snp.makeConstraints { (make) in
             make.left.equalTo(tagImgView.snp.right).offset(5)
-            make.top.equalTo(noteLab.snp.bottom).offset(kMargin)
+            make.top.equalTo(biddingLab.snp.bottom)
             make.width.equalTo(80)
             make.height.equalTo(24)
             make.bottom.equalTo(-kMargin)
         }
         downLoadBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(contractLab.snp.left).offset(-20)
+            make.right.equalTo(contractLab.snp.left).offset(-kMargin)
             make.bottom.height.equalTo(contractLab)
             make.width.equalTo(80)
         }
         operatorLab.snp.makeConstraints { (make) in
-            make.right.equalTo(contractLab.snp.left).offset(-20)
+            make.right.equalTo(expressListLab.snp.left).offset(-kMargin)
+            make.bottom.height.equalTo(contractLab)
+            make.width.equalTo(60)
+        }
+        expressListLab.snp.makeConstraints { (make) in
+            make.right.equalTo(payCertLab.snp.left).offset(-kMargin)
+            make.bottom.height.equalTo(contractLab)
+            make.width.equalTo(70)
+        }
+        payCertLab.snp.makeConstraints { (make) in
+            make.right.equalTo(contractLab.snp.left).offset(-kMargin)
             make.bottom.height.equalTo(contractLab)
             make.width.equalTo(80)
         }
         contractLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
             make.bottom.equalTo(-kMargin)
-            make.width.equalTo(80)
+            make.width.equalTo(60)
             make.height.equalTo(24)
         }
         
@@ -255,19 +344,10 @@ class JSMMyPublishNeedCell: UITableViewCell {
         
         return lab
     }()
-    /// 传动比
-//    lazy var roteLab : UILabel = {
-//        let lab = UILabel()
-//        lab.font = k15Font
-//        lab.textColor = kHeightGaryFontColor
-//        lab.text = "传动比：2.2"
-//
-//        return lab
-//    }()
     /// 产品数量
     lazy var numberLab : UILabel = {
         let lab = UILabel()
-        lab.font = k13Font
+        lab.font = k15Font
         lab.textColor = kHeightGaryFontColor
         lab.text = "产品数量：2（个）"
         
@@ -282,22 +362,6 @@ class JSMMyPublishNeedCell: UITableViewCell {
         
         return lab
     }()
-    /// 快递公司
-    lazy var companyLab : UILabel = {
-        let lab = UILabel()
-        lab.font = k13Font
-        lab.textColor = kHeightGaryFontColor
-        
-        return lab
-    }()
-    /// 快递单号
-    lazy var expressNoLab : UILabel = {
-        let lab = UILabel()
-        lab.font = k15Font
-        lab.textColor = kHeightGaryFontColor
-        
-        return lab
-    }()
     /// 用户备注
     lazy var noteLab : UILabel = {
         let lab = UILabel()
@@ -307,6 +371,24 @@ class JSMMyPublishNeedCell: UITableViewCell {
         lab.text = "用户备注：0.3kv"
         
         return lab
+    }()
+    /// 查看竞标者
+    lazy var biddingLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k15Font
+        lab.textColor = kBlueFontColor
+        lab.text = "查看竞标者"
+        
+        return lab
+    }()
+    
+    /// 图片
+    lazy var bidImgView : UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = UIImage.init(named: "icon_jingbiao_tag")
+        imgView.highlightedImage = UIImage.init(named: "icon_jingbiao_tag_gray")
+        
+        return imgView
     }()
     
     /// 推荐品牌
@@ -339,7 +421,7 @@ class JSMMyPublishNeedCell: UITableViewCell {
     /// 查看合同
     lazy var contractLab : UILabel = {
         let lab = UILabel()
-        lab.font = k13Font
+        lab.font = k12Font
         lab.textColor = kRedFontColor
         lab.textAlignment = .center
         lab.text = "查看合同"
@@ -349,10 +431,36 @@ class JSMMyPublishNeedCell: UITableViewCell {
         
         return lab
     }()
+    /// 查看支付凭证
+    lazy var payCertLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k12Font
+        lab.textColor = kRedFontColor
+        lab.textAlignment = .center
+        lab.text = "查看支付凭证"
+        lab.cornerRadius = kCornerRadius
+        lab.borderColor = kRedFontColor
+        lab.borderWidth = klineWidth
+        
+        return lab
+    }()
+    /// 查看物流单
+    lazy var expressListLab : UILabel = {
+        let lab = UILabel()
+        lab.font = k12Font
+        lab.textColor = kRedFontColor
+        lab.textAlignment = .center
+        lab.text = "查看物流单"
+        lab.cornerRadius = kCornerRadius
+        lab.borderColor = kRedFontColor
+        lab.borderWidth = klineWidth
+        
+        return lab
+    }()
     /// 操作
     lazy var operatorLab : UILabel = {
         let lab = UILabel()
-        lab.font = k13Font
+        lab.font = k12Font
         lab.textColor = kRedFontColor
         lab.textAlignment = .center
         lab.text = "确认收货"

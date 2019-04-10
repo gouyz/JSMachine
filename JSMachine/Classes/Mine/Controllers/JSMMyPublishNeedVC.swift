@@ -21,6 +21,8 @@ class JSMMyPublishNeedVC: GYZBaseVC {
     var dataList: [JSMPublishNeedModel] = [JSMPublishNeedModel]()
     /// 下载合同url
     var downLoadUrl:String = ""
+    /// 选择s支付凭证
+    var selectPayCertImg: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,15 +170,23 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         let model = dataList[tag]
         let status: String = model.status!
         if status == "1" {//上传合同
-            selectImg(model: model)
+            selectImg(model: model,rowIndex: tag)
         }else{// 查看合同
             requestGetContractUrl(model: model)
         }
     }
-    /// 确认收货
+    /// 确认收货、上传支付凭证、评价
     @objc func onClickedOperator(sender: UITapGestureRecognizer){
         let tag: Int = (sender.view?.tag)!
-        requestSureGoods(model: dataList[tag], rowIndex: tag)
+        let model = dataList[tag]
+        let status: String = model.status!
+        if status == "3" {//上传支付凭证
+            selectImg(model: model,rowIndex: tag)
+        }else if status == "4"{// 确认收货
+            requestSureGoods(model: dataList[tag], rowIndex: tag)
+        }else if status == "5"{// 评价
+            
+        }
     }
     /// 查看合同
     func requestGetContractUrl(model: JSMPublishNeedModel){
@@ -247,16 +257,22 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         })
     }
     /// 选择合同图片
-    func selectImg(model: JSMPublishNeedModel){
+    func selectImg(model: JSMPublishNeedModel,rowIndex: Int){
         
         GYZOpenCameraPhotosTool.shareTool.choosePicture(self, editor: false, finished: { [weak self] (image) in
             
-            self?.selectContractImg = image
-            self?.requestUpdateContract(model: model)
+            if model.status == "3"{
+                self?.selectPayCertImg = image
+                self?.requestUpdatePayCert(model: model,rowIndex: rowIndex)
+            }else{
+                self?.selectContractImg = image
+                self?.requestUpdateContract(model: model,rowIndex: rowIndex)
+            }
+            
         })
     }
     /// 上传合同
-    func requestUpdateContract(model: JSMPublishNeedModel){
+    func requestUpdateContract(model: JSMPublishNeedModel,rowIndex: Int){
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
@@ -271,9 +287,34 @@ class JSMMyPublishNeedVC: GYZBaseVC {
             weakSelf?.hud?.hide(animated: true)
             MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
             GYZLog(response)
-//            if response["status"].intValue == kQuestSuccessTag{//请求成功
-//
-//            }
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.dealResult(status: "2", rowIndex: rowIndex)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 上传支付凭证
+    func requestUpdatePayCert(model: JSMPublishNeedModel,rowIndex: Int){
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        let imgParam: ImageFileUploadParam = ImageFileUploadParam()
+        imgParam.name = "voucher"
+        imgParam.fileName = "voucher.jpg"
+        imgParam.mimeType = "image/jpg"
+        imgParam.data = UIImageJPEGRepresentation(selectPayCertImg!, 0.5)
+        
+        GYZNetWork.uploadImageRequest("second/upVoucher", parameters: ["id": model.id ?? ""], uploadParam: [imgParam], success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            GYZLog(response)
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                weakSelf?.dealResult(status: "6", rowIndex: rowIndex)
+            }
             
         }, failture: { (error) in
             weakSelf?.hud?.hide(animated: true)
@@ -284,9 +325,7 @@ class JSMMyPublishNeedVC: GYZBaseVC {
     func dealResult(status: String,rowIndex: Int){
         dataList[rowIndex].status = status
         if orderStatus != "1" {
-            if status == "5"{
-                dataList.remove(at: rowIndex)
-            }
+            dataList.remove(at: rowIndex)
         }
         tableView.reloadData()
         if dataList.count == 0{
@@ -333,6 +372,81 @@ class JSMMyPublishNeedVC: GYZBaseVC {
             MBProgressHUD.showAutoDismissHUD(message: "下载失败，请重新下载")
         }
     }
+    /// 查看竞标者
+    @objc func onClickedBidding(sender: UITapGestureRecognizer){
+        let tag: Int = (sender.view?.tag)!
+        if (dataList[tag].b_name?.isEmpty)! {
+            
+        }
+    }
+    /// 查看支付凭证
+    @objc func onClickedpayCertLab(sender:UITapGestureRecognizer){
+        
+        let tag: Int = (sender.view?.tag)!
+        requestGetPayCertUrl(needId: dataList[tag].id!)
+    }
+    /// 查看物流单
+    @objc func onClickedExpress(sender:UITapGestureRecognizer){
+        
+        let tag: Int = (sender.view?.tag)!
+        requestGetExpressUrl(needId: dataList[tag].id!)
+    }
+    /// 查看支付凭证
+    func requestGetPayCertUrl(needId: String){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("second/seeVoucher", parameters: ["id": needId],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.goBigPhotos(index: 0, urls: [response["data"]["pay_voucher"].stringValue])
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
+    /// 查看物流单
+    func requestGetExpressUrl(needId: String){
+        
+        if !GYZTool.checkNetWork() {
+            return
+        }
+        
+        weak var weakSelf = self
+        createHUD(message: "加载中...")
+        
+        GYZNetWork.requestNetwork("second/seeWl", parameters: ["id": needId],  success: { (response) in
+            
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(response)
+            
+            
+            if response["status"].intValue == kQuestSuccessTag{//请求成功
+                
+                weakSelf?.goBigPhotos(index: 0, urls: [response["data"]["wl_list"].stringValue])
+            }else{
+                MBProgressHUD.showAutoDismissHUD(message: response["msg"].stringValue)
+            }
+            
+        }, failture: { (error) in
+            weakSelf?.hud?.hide(animated: true)
+            GYZLog(error)
+        })
+    }
 }
 
 extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
@@ -349,7 +463,20 @@ extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: myPublishNeedCell) as! JSMMyPublishNeedCell
         
-        cell.dataModel = dataList[indexPath.row]
+        let model = dataList[indexPath.row]
+        cell.dataModel = model
+        if (model.b_name?.isEmpty)! {
+            cell.biddingLab.text = "查看竞标者"
+            cell.biddingLab.textColor = kBlueFontColor
+            cell.bidImgView.isHighlighted = false
+        }else{
+            cell.biddingLab.text = "中标者：" + model.b_name!
+            cell.biddingLab.textColor = kHeightGaryFontColor
+            cell.bidImgView.isHighlighted = true
+        }
+        cell.biddingLab.tag = indexPath.row
+        cell.biddingLab.addOnClickListener(target: self, action: #selector(onClickedBidding(sender:)))
+        
         cell.tuiJianLab.tag = indexPath.row
         cell.tuiJianLab.addOnClickListener(target: self, action: #selector(onClickedTuiJianGoods(sender:)))
         cell.downLoadBtn.tag = indexPath.row
@@ -358,6 +485,11 @@ extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
         cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedOperator(sender:)))
         cell.contractLab.tag = indexPath.row
         cell.contractLab.addOnClickListener(target: self, action: #selector(onClickedContract(sender:)))
+        
+        cell.expressListLab.tag = indexPath.row
+        cell.expressListLab.addOnClickListener(target: self, action: #selector(onClickedExpress(sender:)))
+        cell.payCertLab.tag = indexPath.row
+        cell.payCertLab.addOnClickListener(target: self, action: #selector(onClickedpayCertLab(sender:)))
         
         
         cell.selectionStyle = .none
@@ -371,7 +503,9 @@ extension JSMMyPublishNeedVC: UITableViewDelegate,UITableViewDataSource{
         return UIView()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        goDetailVC()
+        let vc = JSMBiddingDetailVC()
+        vc.needId = dataList[indexPath.row].id!
+        navigationController?.pushViewController(vc, animated: true)
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
