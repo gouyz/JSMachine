@@ -29,6 +29,21 @@ class JSMNeedModel: LHSBaseModel {
     /// 发布者备注
     var remark : String? = ""
     
+    /// 中标者手机号
+    var phone : String? = ""
+    /// 中标者昵称
+    var nickname : String? = ""
+    /// 中标者竞标价格
+    var price : String? = ""
+    /// 中标者交货日期
+    var time : String? = ""
+    /// 凭证图片 当status为4、5、6、7时显示
+    var pay_voucher : String? = ""
+    /// 物流单图片 当status为4、5、7时显示
+    var wl_list : String? = ""
+    /// 状态
+    var status : String? = ""
+    
     /// 需求产品model
     var needProductsModels: [JSMNeedProductModel] = [JSMNeedProductModel]()
     

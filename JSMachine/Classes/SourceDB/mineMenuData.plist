@@ -24,7 +24,7 @@
 		<key>image</key>
 		<string>icon_mine_jingbiao</string>
 		<key>controller</key>
-		<string></string>
+		<string>JSMJingBiaoVC</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -32,7 +32,7 @@
 		<key>image</key>
 		<string>icon_mine_jingbiao_finished</string>
 		<key>controller</key>
-		<string></string>
+		<string>JSMMyWinBiddingManagerVC</string>
 	</dict>
 	<dict>
 		<key>title</key>

@@ -96,7 +96,7 @@ class JSMNeedDetailVC: GYZBaseVC {
                 return
             }
             if selectTime == 0{
-                MBProgressHUD.showAutoDismissHUD(message: "请选择发货日期")
+                MBProgressHUD.showAutoDismissHUD(message: "请选择预发货日期")
                 return
             }
             requestSubmitDatas()
@@ -167,7 +167,7 @@ class JSMNeedDetailVC: GYZBaseVC {
         })
     }
     func selectDate(){
-        UsefulPickerView.showDatePicker("请选择发货日期") { [weak self](date) in
+        UsefulPickerView.showDatePicker("请选择预发货日期") { [weak self](date) in
             self?.selectTime = Int(date.timeIntervalSince1970)
             self?.tableView.reloadData()
         }
@@ -233,10 +233,10 @@ extension JSMNeedDetailVC: UITableViewDelegate,UITableViewDataSource{
                 cell.textFiled.isEnabled = true
                 cell.textFiled.addTarget(self, action: #selector(txtFieldChangeValue(txtFiled : )), for: .editingChanged)
             }else{
-                cell.desLab.text = "发货日期："
+                cell.desLab.text = "预发货日期："
                 cell.textFiled.isEnabled = false
                 cell.textFiled.keyboardType = .default
-                cell.textFiled.placeholder = "请选择发货日期"
+                cell.textFiled.placeholder = "请选择预发货日期"
                 if selectTime > 0{
                     cell.textFiled.text = String.init(selectTime).getDateTime(format: "yyyy-MM-dd")
                 }
