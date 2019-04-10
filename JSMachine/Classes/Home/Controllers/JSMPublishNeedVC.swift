@@ -323,7 +323,7 @@ class JSMPublishNeedVC: GYZBaseVC {
                 inputNums = inputNums.subString(start: 0, length: inputNums.count - 3)
             }
             for typeField in noteViewArr {
-                var txt: String = " "
+                var txt: String = "无"
                 if !(typeField.textFiled.text?.isEmpty)! {
                     txt = typeField.textFiled.text!
                 }
