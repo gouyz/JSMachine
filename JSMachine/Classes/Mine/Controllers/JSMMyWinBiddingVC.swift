@@ -313,6 +313,10 @@ class JSMMyWinBiddingVC: GYZBaseVC {
     /// 查看评价
     @objc func onClickedConment(sender: UITapGestureRecognizer){
         
+        let tag: Int = (sender.view?.tag)!
+        let vc = JSMNeedConmentDetailVC()
+        vc.needId = dataList[tag].id!
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 查看支付凭证
     @objc func onClickedpayCertLab(sender:UITapGestureRecognizer){

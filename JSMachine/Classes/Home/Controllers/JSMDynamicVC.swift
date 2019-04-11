@@ -13,14 +13,13 @@ private let dynamicCell = "dynamicCell"
 
 class JSMDynamicVC: GYZBaseVC {
 
+    var type: String = "1"
     var currPage : Int = 1
     
     var dataList: [JSMNewsModel] = [JSMNewsModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.title = "曝光台"
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -62,7 +61,7 @@ class JSMDynamicVC: GYZBaseVC {
         weak var weakSelf = self
         showLoadingView()
         
-        GYZNetWork.requestNetwork("second/exposure",parameters: ["p": currPage,"count": kPageSize],  success: { (response) in
+        GYZNetWork.requestNetwork("second/exposure",parameters: ["p": currPage,"count": kPageSize,"type":type],  success: { (response) in
             
             weakSelf?.hiddenLoadingView()
             weakSelf?.closeRefresh()

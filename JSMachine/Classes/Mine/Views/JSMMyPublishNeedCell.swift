@@ -161,7 +161,12 @@ class JSMMyPublishNeedCell: UITableViewCell {
                     contractLab.isHidden = false
                     contractLab.text = "查看合同"
                     payCertLab.isHidden = false
-                    expressListLab.isHidden = false
+                    if status == "6" {
+                        expressListLab.isHidden = true
+                    }else{
+                        expressListLab.isHidden = false
+                    }
+                    
                     operatorLab.isHidden = true
                     contractLab.snp.updateConstraints { (make) in
                         make.width.equalTo(60)
@@ -173,7 +178,11 @@ class JSMMyPublishNeedCell: UITableViewCell {
                         make.width.equalTo(0)
                     }
                     expressListLab.snp.updateConstraints { (make) in
-                        make.width.equalTo(70)
+                        if status == "6" {
+                            make.width.equalTo(0)
+                        }else{
+                            make.width.equalTo(70)
+                        }
                     }
                 }
             }

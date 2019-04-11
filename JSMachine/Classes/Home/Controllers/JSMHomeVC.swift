@@ -245,7 +245,7 @@ class JSMHomeVC: GYZBaseVC {
     }
     //曝光台
     func goBaoGuangVC(){
-        let vc = JSMDynamicVC()
+        let vc = JSMDynamicManagerVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     /// 登录

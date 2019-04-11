@@ -185,8 +185,18 @@ class JSMMyPublishNeedVC: GYZBaseVC {
         }else if status == "4"{// 确认收货
             requestSureGoods(model: dataList[tag], rowIndex: tag)
         }else if status == "5"{// 评价
-            
+            goConmentVC(rowIndex: tag)
         }
+    }
+    // 评价
+    func goConmentVC(rowIndex: Int){
+        let vc = JSMConmentVC()
+        vc.needId = dataList[rowIndex].id!
+        vc.resultBlock = { [weak self] () in
+            self?.dataList[rowIndex].status = "7"
+            self?.tableView.reloadData()
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 查看合同
     func requestGetContractUrl(model: JSMPublishNeedModel){
@@ -376,7 +386,14 @@ class JSMMyPublishNeedVC: GYZBaseVC {
     @objc func onClickedBidding(sender: UITapGestureRecognizer){
         let tag: Int = (sender.view?.tag)!
         if (dataList[tag].b_name?.isEmpty)! {
-            
+            let vc = JSMSelectBiddingPersonVC()
+            vc.needId = dataList[tag].id!
+            vc.resultBlock = {[weak self] (name) in
+                self?.dataList[tag].b_name = name
+                self?.dataList[tag].status = "1"
+                self?.tableView.reloadData()
+            }
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     /// 查看支付凭证
