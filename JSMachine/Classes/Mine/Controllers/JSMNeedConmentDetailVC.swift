@@ -1,7 +1,7 @@
 //
 //  JSMNeedConmentDetailVC.swift
 //  JSMachine
-//
+//  查看评价
 //  Created by gouyz on 2019/4/11.
 //  Copyright © 2019 gouyz. All rights reserved.
 //

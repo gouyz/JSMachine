@@ -25,7 +25,7 @@ class GYZMainTabBarVC: UITabBarController {
         let vc = JSMWebViewVC()
         vc.url = "http://jsj.0519app.com/service.html"
         vc.webTitle = "联系客服"
-        addViewController(vc, title: "", normalImgName: "icon_tabbar_personnel")
+        addViewController(vc, title: "", normalImgName: "icon_tabbar_kefu")
         addViewController(JSMMineVC(), title: "我的", normalImgName: "icon_tabbar_mine")
         
     }

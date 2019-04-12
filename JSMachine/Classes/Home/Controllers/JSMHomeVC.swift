@@ -286,6 +286,7 @@ class JSMHomeVC: GYZBaseVC {
     func goNeedDetailVC(needId: String){
         let vc = JSMNeedDetailVC()
         vc.needId = needId
+        vc.isUser = self.isUser
         navigationController?.pushViewController(vc, animated: true)
     }
     

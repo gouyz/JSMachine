@@ -343,7 +343,7 @@ class JSMConmentVC: GYZBaseVC {
         if selectImgs.count > 0 {
             for (index,img) in selectImgs.enumerated(){
                 let imgParam: ImageFileUploadParam = ImageFileUploadParam()
-                imgParam.name = "image"
+                imgParam.name = "image[]"
                 imgParam.fileName = "image\(index).jpg"
                 imgParam.mimeType = "image/jpg"
                 imgParam.data = UIImageJPEGRepresentation(img, 0.5)

@@ -27,6 +27,8 @@ class JSMNeedDetailVC: GYZBaseVC {
     var isHaveDian: Bool = false
     ///输入第一位是否是0
     var isFirstZero: Bool = false
+    /// 是否是客户登录
+    var isUser: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +90,10 @@ class JSMNeedDetailVC: GYZBaseVC {
     }()
     /// 提交
     @objc func onClickedSubmitBtn(){
+        if !isUser {/// 工程师和网点没有权限
+            MBProgressHUD.showAutoDismissHUD(message: "请使用用户身份登录")
+            return
+        }
         if !userDefaults.bool(forKey: kIsLoginTagKey) {
             goLogin()
         }else{

@@ -154,6 +154,10 @@
 		0A161F23225F93D700054035 /* JSMNeedConmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A161F22225F93D700054035 /* JSMNeedConmentModel.swift */; };
 		0A161F25225F971E00054035 /* JSMNeedConmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A161F24225F971E00054035 /* JSMNeedConmentCell.swift */; };
 		0A1F4A8D21D2753D007D2A67 /* JSMServiceRuleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F4A8C21D2753D007D2A67 /* JSMServiceRuleVC.swift */; };
+		0A2154EC22601C300037EDD6 /* JSMEngineerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2154EB22601C300037EDD6 /* JSMEngineerListVC.swift */; };
+		0A2154EE22601DA30037EDD6 /* JSMEngineerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2154ED22601DA30037EDD6 /* JSMEngineerListCell.swift */; };
+		0A2154F02260217E0037EDD6 /* JSMEngineerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2154EF2260217E0037EDD6 /* JSMEngineerModel.swift */; };
+		0A2154F2226035AF0037EDD6 /* JSMAddEngineerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2154F1226035AF0037EDD6 /* JSMAddEngineerVC.swift */; };
 		0A2F41AF21D67B8B0084A766 /* JSMPersonneiDesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F41AE21D67B8B0084A766 /* JSMPersonneiDesVC.swift */; };
 		0A38196821C3AA7200E81610 /* JSMOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A38196721C3AA7200E81610 /* JSMOrderModel.swift */; };
 		0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */; };
@@ -403,6 +407,10 @@
 		0A161F22225F93D700054035 /* JSMNeedConmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedConmentModel.swift; sourceTree = "<group>"; };
 		0A161F24225F971E00054035 /* JSMNeedConmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedConmentCell.swift; sourceTree = "<group>"; };
 		0A1F4A8C21D2753D007D2A67 /* JSMServiceRuleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMServiceRuleVC.swift; sourceTree = "<group>"; };
+		0A2154EB22601C300037EDD6 /* JSMEngineerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerListVC.swift; sourceTree = "<group>"; };
+		0A2154ED22601DA30037EDD6 /* JSMEngineerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerListCell.swift; sourceTree = "<group>"; };
+		0A2154EF2260217E0037EDD6 /* JSMEngineerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMEngineerModel.swift; sourceTree = "<group>"; };
+		0A2154F1226035AF0037EDD6 /* JSMAddEngineerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMAddEngineerVC.swift; sourceTree = "<group>"; };
 		0A2F41AE21D67B8B0084A766 /* JSMPersonneiDesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMPersonneiDesVC.swift; sourceTree = "<group>"; };
 		0A38196721C3AA7200E81610 /* JSMOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMOrderModel.swift; sourceTree = "<group>"; };
 		0A3A0BC321C0F9ED00A603D8 /* JSMFavouriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMFavouriteModel.swift; sourceTree = "<group>"; };
@@ -1032,6 +1040,7 @@
 			isa = PBXGroup;
 			children = (
 				0A05A87B21DFBA440087EDC4 /* JSMSelectedEngineerModel.swift */,
+				0A2154EF2260217E0037EDD6 /* JSMEngineerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1042,6 +1051,8 @@
 				0A05A87521DFAA350087EDC4 /* JSMNetDotHomeVC.swift */,
 				0A05A87721DFB28D0087EDC4 /* JSMNetDotListVC.swift */,
 				0A05A87921DFB8FE0087EDC4 /* JSMSelectedEngineerVC.swift */,
+				0A2154EB22601C300037EDD6 /* JSMEngineerListVC.swift */,
+				0A2154F1226035AF0037EDD6 /* JSMAddEngineerVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1050,6 +1061,7 @@
 			isa = PBXGroup;
 			children = (
 				0A05A87D21DFBB2A0087EDC4 /* JSMSelectedEngineerCell.swift */,
+				0A2154ED22601DA30037EDD6 /* JSMEngineerListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1372,6 +1384,7 @@
 				0A02A63221A58DE3009F2A96 /* ContentView.swift in Sources */,
 				0A0203B921B57245006D1738 /* JSMSaleServiceOrderCell.swift in Sources */,
 				0A02A60F21A58DE3009F2A96 /* GYZLoginInputView.swift in Sources */,
+				0A2154EE22601DA30037EDD6 /* JSMEngineerListCell.swift in Sources */,
 				0A54E4E6225DC153001B49D1 /* JSMJingBiaoModel.swift in Sources */,
 				0A02A63421A58DE3009F2A96 /* GYZUpdateVersionTool.swift in Sources */,
 				0A02A60B21A58DE3009F2A96 /* GYZMainTabBarVC.swift in Sources */,
@@ -1437,6 +1450,7 @@
 				0A5C2D7921BF9FDA0017FED6 /* JSMPublishNeedModel.swift in Sources */,
 				0A0203B721B570DA006D1738 /* JSMDealSaleServiceOrderVC.swift in Sources */,
 				0A0BC5FB225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift in Sources */,
+				0A2154F02260217E0037EDD6 /* JSMEngineerModel.swift in Sources */,
 				0A38196821C3AA7200E81610 /* JSMOrderModel.swift in Sources */,
 				0A45899F21C251F800DC236F /* JSMGoodsParamsModel.swift in Sources */,
 				0A06C3F621DB755900033ED0 /* JSMEngineerConmentVC.swift in Sources */,
@@ -1517,6 +1531,7 @@
 				0A4D6A01225C83D4009599C8 /* JSMNeedModel.swift in Sources */,
 				0A02A62121A58DE3009F2A96 /* PickerView.swift in Sources */,
 				0A02A5FF21A58DE3009F2A96 /* GYZPhotoView.swift in Sources */,
+				0A2154F2226035AF0037EDD6 /* JSMAddEngineerVC.swift in Sources */,
 				0A02A62A21A58DE3009F2A96 /* MMShareSheet.swift in Sources */,
 				0A02A5FB21A58DE3009F2A96 /* LHSAddPhotoView.swift in Sources */,
 				0A2F41AF21D67B8B0084A766 /* JSMPersonneiDesVC.swift in Sources */,
@@ -1537,6 +1552,7 @@
 				0A161F1B225F711300054035 /* JSMBidderCell.swift in Sources */,
 				0A02EAA721AAD0D6000B5644 /* JSMModifyEmailVC.swift in Sources */,
 				0A5C2D6E21BF56850017FED6 /* JSMWebViewVC.swift in Sources */,
+				0A2154EC22601C300037EDD6 /* JSMEngineerListVC.swift in Sources */,
 				0A05A87C21DFBA440087EDC4 /* JSMSelectedEngineerModel.swift in Sources */,
 				0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */,
 				0A02EAA921AAD1A7000B5644 /* JSMModifyPwdVC.swift in Sources */,

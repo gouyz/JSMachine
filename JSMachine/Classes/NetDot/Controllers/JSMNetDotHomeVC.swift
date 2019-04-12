@@ -28,6 +28,14 @@ class JSMNetDotHomeVC: GYZBaseVC {
         rightBtn.addTarget(self, action: #selector(onClickedLoginOutBtn), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
         
+        let leftBtn = UIButton(type: .custom)
+        leftBtn.setTitle("工程师", for: .normal)
+        leftBtn.titleLabel?.font = k13Font
+        leftBtn.setTitleColor(kBlackFontColor, for: .normal)
+        leftBtn.frame = CGRect.init(x: 0, y: 0, width: 60, height: kTitleHeight)
+        leftBtn.addTarget(self, action: #selector(onClickedEngineerBtn), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftBtn)
+        
         setScrollView()
         
         /// 极光推送跳转指定页面
@@ -126,5 +134,10 @@ class JSMNetDotHomeVC: GYZBaseVC {
             }
         }
         
+    }
+    /// 工程师
+    @objc func onClickedEngineerBtn(){
+        let vc = JSMEngineerListVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
