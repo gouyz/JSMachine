@@ -141,6 +141,8 @@
 		0A0BC5FB225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BC5FA225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift */; };
 		0A0BC5FD225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BC5FC225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift */; };
 		0A0BC5FF225CED36006FCF18 /* GYZLabAndFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BC5FE225CED36006FCF18 /* GYZLabAndFieldCell.swift */; };
+		0A0D7567226DF55900C156A9 /* JSMSubmitBiddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D7566226DF55900C156A9 /* JSMSubmitBiddingView.swift */; };
+		0A0D7569226E003700C156A9 /* JSMSubmitBidingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D7568226E003700C156A9 /* JSMSubmitBidingCell.swift */; };
 		0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */; };
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
 		0A10A4F121A8478100FEE037 /* JSMMyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */; };
@@ -394,6 +396,8 @@
 		0A0BC5FA225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedDetailUserHeaderView.swift; sourceTree = "<group>"; };
 		0A0BC5FC225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedDetailInfoHeader.swift; sourceTree = "<group>"; };
 		0A0BC5FE225CED36006FCF18 /* GYZLabAndFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZLabAndFieldCell.swift; sourceTree = "<group>"; };
+		0A0D7566226DF55900C156A9 /* JSMSubmitBiddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSubmitBiddingView.swift; sourceTree = "<group>"; };
+		0A0D7568226E003700C156A9 /* JSMSubmitBidingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSubmitBidingCell.swift; sourceTree = "<group>"; };
 		0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineHeaderView.swift; sourceTree = "<group>"; };
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
 		0A10A4F021A8478100FEE037 /* JSMMyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMyProfileVC.swift; sourceTree = "<group>"; };
@@ -654,6 +658,8 @@
 				0A0BC5F8225CDE82006FCF18 /* JSMNeedDetailCell.swift */,
 				0A0BC5FA225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift */,
 				0A0BC5FC225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift */,
+				0A0D7566226DF55900C156A9 /* JSMSubmitBiddingView.swift */,
+				0A0D7568226E003700C156A9 /* JSMSubmitBidingCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1428,6 +1434,7 @@
 				0A4E46B021B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift in Sources */,
 				0A02A5FA21A58DE3009F2A96 /* GYZCommonArrowCell.swift in Sources */,
 				0A0203AF21B552D8006D1738 /* JSMApplyServiceVC.swift in Sources */,
+				0A0D7569226E003700C156A9 /* JSMSubmitBidingCell.swift in Sources */,
 				0A0203B121B56571006D1738 /* JSMMySaleServiceVC.swift in Sources */,
 				0A0528BA21D919C6009FF2A7 /* JSMSaleServiceRecordListVC.swift in Sources */,
 				0A05F20121E0E9F200BEDE1E /* JSMPlayVideoVC.swift in Sources */,
@@ -1508,6 +1515,7 @@
 				0A4C6CCF21CA2ACE00CA76F4 /* JSMServiceRecordImgsCell.swift in Sources */,
 				0A02EAB121AADDBB000B5644 /* JSMOrderVC.swift in Sources */,
 				0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */,
+				0A0D7567226DF55900C156A9 /* JSMSubmitBiddingView.swift in Sources */,
 				0A02327C21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift in Sources */,
 				0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */,
 				0A4F840E21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift in Sources */,
