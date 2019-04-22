@@ -119,7 +119,7 @@ class JSMHomeVC: GYZBaseVC {
         weak var weakSelf = self
         createHUD(message: "加载中...")
         
-        GYZNetWork.requestNetwork("second/appIndex",parameters: nil,  success: { (response) in
+        GYZNetWork.requestNetwork("second/appIndex",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
