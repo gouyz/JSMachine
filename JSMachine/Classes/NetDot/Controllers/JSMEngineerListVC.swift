@@ -105,8 +105,8 @@ class JSMEngineerListVC: GYZBaseVC {
     /// 离职
     @objc func onClickedOperator(sender: UITapGestureRecognizer){
         
-        let tag:Int = (sender.view?.tag)!
-        leaveAlert(model: dataList[tag], row: tag)
+//        let tag:Int = (sender.view?.tag)!
+//        leaveAlert(model: dataList[tag], row: tag)
     }
     //离职
     func leaveAlert(model: JSMEngineerModel,row: Int){
@@ -173,8 +173,8 @@ extension JSMEngineerListVC: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: engineerListCell) as! JSMEngineerListCell
         
         cell.dataModel = dataList[indexPath.row]
-        cell.operatorLab.tag = indexPath.row
-        cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedOperator(sender:)))
+//        cell.operatorLab.tag = indexPath.row
+//        cell.operatorLab.addOnClickListener(target: self, action: #selector(onClickedOperator(sender:)))
         
         cell.selectionStyle = .none
         return cell

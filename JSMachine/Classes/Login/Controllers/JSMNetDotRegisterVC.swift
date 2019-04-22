@@ -21,6 +21,9 @@ class JSMNetDotRegisterVC: GYZBaseVC {
         self.view.backgroundColor = kWhiteColor
         
         setupUI()
+        netDotNameInputView.textFiled.isSecureTextEntry = false
+        NetDotManagerInputView.textFiled.isSecureTextEntry = false
+        netDotAddressInputView.textFiled.isSecureTextEntry = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

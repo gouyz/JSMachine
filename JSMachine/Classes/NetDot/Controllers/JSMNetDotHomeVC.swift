@@ -112,7 +112,8 @@ class JSMNetDotHomeVC: GYZBaseVC {
             
         }, seq: 0)
         
-        scrollPageView?.selectedIndex(0, animated: true)
+//        scrollPageView?.selectedIndex(0, animated: true)
+        KeyWindow.rootViewController = GYZMainTabBarVC()
     }
     
     /// 极光推送，跳转指定页面

@@ -132,7 +132,7 @@ class JSMHomeHeaderView: UIView {
         pgtImgView.snp.makeConstraints { (make) in
             make.centerX.equalTo(bgView)
             make.centerY.equalTo(ptjsImgView.snp.bottom).offset(5)
-            make.size.equalTo(CGSize.init(width: 190, height: 190))
+            make.size.equalTo(CGSize.init(width: 80, height: 80))
         }
         pgtLab.snp.makeConstraints { (make) in
             make.top.bottom.left.right.equalTo(pgtImgView)

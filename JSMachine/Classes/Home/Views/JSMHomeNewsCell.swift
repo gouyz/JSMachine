@@ -17,6 +17,7 @@ class JSMHomeNewsCell: UITableViewCell {
 
                 titleLab.text = model.pro_model
                 numberLab.text = "x" + model.num!
+                dateLab.text = model.create_date?.getDateTime(format: "yyyy-MM-dd")
             }
         }
     }
@@ -35,22 +36,29 @@ class JSMHomeNewsCell: UITableViewCell {
     func setupUI(){
         
         contentView.addSubview(titleLab)
+        contentView.addSubview(dateLab)
         contentView.addSubview(numberLab)
         contentView.addSubview(detailLab)
         
         titleLab.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
-            make.right.equalTo(numberLab.snp.left).offset(-5)
-            make.top.bottom.equalTo(contentView)
+            make.right.equalTo(dateLab.snp.left).offset(-5)
+            make.top.equalTo(contentView)
+            make.height.equalTo(30)
+        }
+        dateLab.snp.makeConstraints { (make) in
+            make.right.equalTo(-kMargin)
+            make.top.height.equalTo(titleLab)
+            make.width.equalTo(120)
         }
         numberLab.snp.makeConstraints { (make) in
             make.right.equalTo(detailLab.snp.left).offset(-kMargin)
-            make.top.height.equalTo(titleLab)
-            make.width.equalTo(70)
+            make.top.equalTo(titleLab.snp.bottom)
+            make.left.height.equalTo(titleLab)
         }
         detailLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
-            make.centerY.equalTo(contentView)
+            make.centerY.equalTo(numberLab)
             make.size.equalTo(CGSize.init(width: 60, height: 24))
         }
         
@@ -65,6 +73,16 @@ class JSMHomeNewsCell: UITableViewCell {
         
         return lab
     }()
+    ///
+    lazy var dateLab : UILabel = {
+        let lab = UILabel()
+        lab.textColor = kHeightGaryFontColor
+        lab.font = k13Font
+        lab.textAlignment = .right
+        lab.text = "2019-04-22"
+        
+        return lab
+    }()
     
     /// 数量
     lazy var numberLab : UILabel = {
@@ -72,7 +90,6 @@ class JSMHomeNewsCell: UITableViewCell {
         lab.textColor = kBlackFontColor
         lab.font = k13Font
         lab.text = "5555台"
-        lab.textAlignment = .center
         
         return lab
     }()

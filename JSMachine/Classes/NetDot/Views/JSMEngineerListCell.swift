@@ -89,8 +89,10 @@ class JSMEngineerListCell: UITableViewCell {
             make.right.equalTo(-kMargin)
             make.bottom.equalTo(-kMargin)
             make.width.equalTo(70)
-            make.height.equalTo(24)
-            make.top.equalTo(addressLab.snp.bottom).offset(kMargin)
+            make.height.equalTo(0)
+            make.top.equalTo(addressLab.snp.bottom)
+//            make.height.equalTo(24)
+//            make.top.equalTo(addressLab.snp.bottom).offset(kMargin)
         }
         
         
@@ -177,6 +179,7 @@ class JSMEngineerListCell: UITableViewCell {
         lab.cornerRadius = kCornerRadius
         lab.borderColor = kRedFontColor
         lab.borderWidth = klineWidth
+        lab.isHidden = true
         
         return lab
     }()
