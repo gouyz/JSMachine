@@ -105,6 +105,12 @@ class JSMHomeVC: GYZBaseVC {
         table.register(JSMHomeNewsCell.self, forCellReuseIdentifier: homeNewsCell)
         table.register(JSMHomeNewsHeaderView.self, forHeaderFooterViewReuseIdentifier: homeNewsHeader)
         
+        weak var weakSelf = self
+        ///添加下拉刷新
+        GYZTool.addPullRefresh(scorllView: table, pullRefreshCallBack: {
+            weakSelf?.refresh()
+        })
+        
         return table
     }()
     
@@ -122,6 +128,7 @@ class JSMHomeVC: GYZBaseVC {
         GYZNetWork.requestNetwork("second/appIndex",parameters: ["user_id":userDefaults.string(forKey: "userId") ?? ""],  success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
+            weakSelf?.closeRefresh()
             GYZLog(response)
             
             if response["status"].intValue == kQuestSuccessTag{//请求成功
@@ -136,6 +143,7 @@ class JSMHomeVC: GYZBaseVC {
         }, failture: { (error) in
             
             weakSelf?.hud?.hide(animated: true)
+            weakSelf?.closeRefresh()
             GYZLog(error)
         })
     }
@@ -164,6 +172,17 @@ class JSMHomeVC: GYZBaseVC {
             }
             
             tableView.reloadData()
+        }
+    }
+    /// 下拉刷新
+    func refresh(){
+        requestHomeDatas()
+    }
+    
+    /// 关闭上拉/下拉刷新
+    func closeRefresh(){
+        if tableView.mj_header.isRefreshing{//下拉刷新
+            GYZTool.endRefresh(scorllView: tableView)
         }
     }
     /// 播放视频
@@ -302,7 +321,7 @@ class JSMHomeVC: GYZBaseVC {
         let role = userInfo["role"] as! String
         if role == "1" {
             let type = userInfo["p_type"] as! String
-            //消息类型(1我的发布2我的订单3我的售后4工程师首页（新分配）5网点首页（待分配）)
+            //消息类型(1我的发布2我的订单3我的售后4工程师首页（新分配）5网点首页（待分配）11 竞标需求详情12我的发布-竞标者展示页面 13我的-已中标页面)
             if type == "1" {//我的发布
                 let status = userInfo["type"] as! String
                 let vc = JSMMyPublishNeedManagerVC()
@@ -331,6 +350,22 @@ class JSMHomeVC: GYZBaseVC {
                 let appId = userInfo["id"] as! String
                 let vc = JSMSaleServiceOrderDetailVC()
                 vc.applyId = appId
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }else if type == "12" {//我的发布-竞标者展示页面
+                
+                let appId = userInfo["id"] as! String
+                let vc = JSMSelectBiddingPersonVC()
+                vc.needId = appId
+                navigationController?.pushViewController(vc, animated: true)
+                
+            }else if type == "11" {//竞标需求需求界面
+                
+                let appId = userInfo["id"] as! String
+                goNeedDetailVC(needId: appId)
+                
+            }else if type == "13" {//我的-已中标页面
+                let vc = JSMMyWinBiddingManagerVC()
                 navigationController?.pushViewController(vc, animated: true)
                 
             }
@@ -378,7 +413,7 @@ extension JSMHomeVC: UITableViewDelegate,UITableViewDataSource{
     }
     ///MARK : UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kTitleHeight
+        return 60
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kTitleHeight

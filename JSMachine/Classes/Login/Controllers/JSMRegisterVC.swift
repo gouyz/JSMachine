@@ -42,6 +42,8 @@ class JSMRegisterVC: GYZBaseVC {
         contentView.addSubview(lineView2)
         contentView.addSubview(repwdInputView)
         contentView.addSubview(lineView3)
+        contentView.addSubview(companyNameInputView)
+        contentView.addSubview(lineView5)
         contentView.addSubview(yyzzInputView)
         contentView.addSubview(lineView4)
         contentView.addSubview(yyzzImgView)
@@ -117,10 +119,19 @@ class JSMRegisterVC: GYZBaseVC {
             make.top.equalTo(repwdInputView.snp.bottom)
             make.height.equalTo(lineView)
         }
-        
+        companyNameInputView.snp.makeConstraints { (make) in
+            make.top.equalTo(lineView3.snp.bottom)
+            make.left.right.equalTo(phoneInputView)
+            make.height.equalTo(phoneInputView)
+        }
+        lineView5.snp.makeConstraints { (make) in
+            make.left.right.equalTo(lineView)
+            make.top.equalTo(companyNameInputView.snp.bottom)
+            make.height.equalTo(lineView)
+        }
         yyzzInputView.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(phoneInputView)
-            make.top.equalTo(lineView3.snp.bottom)
+            make.top.equalTo(lineView5.snp.bottom)
         }
         lineView4.snp.makeConstraints { (make) in
             make.left.right.equalTo(lineView)
@@ -200,6 +211,15 @@ class JSMRegisterVC: GYZBaseVC {
         
         return btn
     }()
+    /// 网点名称
+    fileprivate lazy var companyNameInputView : GYZLoginInputView = GYZLoginInputView(iconName: "icon_login_netdot_name", placeHolder: "请输入公司全称", isPhone: false)
+    
+    /// 分割线3
+    fileprivate lazy var lineView5 : UIView = {
+        let line = UIView()
+        line.backgroundColor = kGrayLineColor
+        return line
+    }()
     lazy var yyzzInputView : GYZLoginInputView = {
         let yyzzView = GYZLoginInputView()
         yyzzView.iconView.image = UIImage.init(named: "icon_yyzz")
@@ -262,6 +282,10 @@ class JSMRegisterVC: GYZBaseVC {
             MBProgressHUD.showAutoDismissHUD(message: "密码和确认密码不一致")
             return
         }
+        if companyNameInputView.textFiled.text!.isEmpty {
+            MBProgressHUD.showAutoDismissHUD(message: "请输入公司全称")
+            return
+        }
 
         requestRegister()
         
@@ -316,7 +340,7 @@ class JSMRegisterVC: GYZBaseVC {
             imgParam.data = UIImageJPEGRepresentation(selectUserImg!, 0.5)
         }
         
-        GYZNetWork.uploadImageRequest("login/register", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"passagain": repwdInputView.textFiled.text!,"code":codeInputView.textFiled.text!], uploadParam: selectUserImg == nil ? [] : [imgParam], success: { (response) in
+        GYZNetWork.uploadImageRequest("login/register", parameters: ["phone":phoneInputView.textFiled.text!,"password": pwdInputView.textFiled.text!,"passagain": repwdInputView.textFiled.text!,"code":codeInputView.textFiled.text!,"company_name":companyNameInputView.textFiled.text!], uploadParam: selectUserImg == nil ? [] : [imgParam], success: { (response) in
             
             weakSelf?.hud?.hide(animated: true)
             GYZLog(response)
