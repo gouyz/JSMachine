@@ -43,7 +43,7 @@ class JSMHomeNewsCell: UITableViewCell {
         titleLab.snp.makeConstraints { (make) in
             make.left.equalTo(kMargin)
             make.right.equalTo(dateLab.snp.left).offset(-5)
-            make.top.equalTo(contentView)
+            make.top.equalTo(kMargin)
             make.height.equalTo(30)
         }
         dateLab.snp.makeConstraints { (make) in
@@ -55,6 +55,7 @@ class JSMHomeNewsCell: UITableViewCell {
             make.right.equalTo(detailLab.snp.left).offset(-kMargin)
             make.top.equalTo(titleLab.snp.bottom)
             make.left.height.equalTo(titleLab)
+            make.bottom.equalTo(-kMargin)
         }
         detailLab.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)

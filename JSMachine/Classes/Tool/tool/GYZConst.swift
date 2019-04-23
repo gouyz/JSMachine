@@ -46,7 +46,7 @@ let kLineHeight : CGFloat = 0.5
 /// 间距
 let kSheetMargin: CGFloat = 6.0
 /// sheetView cell高度
-let kCellH : CGFloat = 45
+let kCellH : CGFloat = 80
 /// sheetView 最大高度
 let kSheetViewMaxH : CGFloat = kScreenHeight * 0.7
 /// sheetView 宽度
