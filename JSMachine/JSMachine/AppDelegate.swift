@@ -55,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 收到推送消息实现的方法
             self.perform(#selector(receivePush), with: remote, afterDelay: 1.0);
         }
+        /// 设置启动动画停留时间
+        Thread.sleep(forTimeInterval: 2)
         
         return true
     }
