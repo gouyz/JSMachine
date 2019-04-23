@@ -21,6 +21,7 @@ class JSMRegisterVC: GYZBaseVC {
         self.view.backgroundColor = kWhiteColor
         
         setupUI()
+        companyNameInputView.textFiled.isSecureTextEntry = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
