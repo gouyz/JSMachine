@@ -141,7 +141,6 @@
 		0A0BC5FB225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BC5FA225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift */; };
 		0A0BC5FD225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BC5FC225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift */; };
 		0A0BC5FF225CED36006FCF18 /* GYZLabAndFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BC5FE225CED36006FCF18 /* GYZLabAndFieldCell.swift */; };
-		0A0D7567226DF55900C156A9 /* JSMSubmitBiddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D7566226DF55900C156A9 /* JSMSubmitBiddingView.swift */; };
 		0A0D7569226E003700C156A9 /* JSMSubmitBidingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0D7568226E003700C156A9 /* JSMSubmitBidingCell.swift */; };
 		0A10A4ED21A833FA00FEE037 /* JSMMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */; };
 		0A10A4EF21A843AB00FEE037 /* JSMMineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */; };
@@ -188,6 +187,7 @@
 		0A4D6A03225C87A5009599C8 /* JSMNeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6A02225C87A5009599C8 /* JSMNeedVC.swift */; };
 		0A4D6A05225C93DF009599C8 /* JSMNewsManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6A04225C93DF009599C8 /* JSMNewsManagerVC.swift */; };
 		0A4D6A07225C9641009599C8 /* JSMDynamicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D6A06225C9640009599C8 /* JSMDynamicVC.swift */; };
+		0A4E0B93227030C80064046B /* JSMSubmitBiddingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E0B92227030C80064046B /* JSMSubmitBiddingVC.swift */; };
 		0A4E46AE21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46AD21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift */; };
 		0A4E46B021B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46AF21B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift */; };
 		0A4E46B221B6211F00DB2E50 /* GYZStepProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E46B121B6211F00DB2E50 /* GYZStepProgressView.swift */; };
@@ -396,7 +396,6 @@
 		0A0BC5FA225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedDetailUserHeaderView.swift; sourceTree = "<group>"; };
 		0A0BC5FC225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedDetailInfoHeader.swift; sourceTree = "<group>"; };
 		0A0BC5FE225CED36006FCF18 /* GYZLabAndFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZLabAndFieldCell.swift; sourceTree = "<group>"; };
-		0A0D7566226DF55900C156A9 /* JSMSubmitBiddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSubmitBiddingView.swift; sourceTree = "<group>"; };
 		0A0D7568226E003700C156A9 /* JSMSubmitBidingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSubmitBidingCell.swift; sourceTree = "<group>"; };
 		0A10A4EC21A833FA00FEE037 /* JSMMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineHeaderView.swift; sourceTree = "<group>"; };
 		0A10A4EE21A843AB00FEE037 /* JSMMineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMMineModel.swift; sourceTree = "<group>"; };
@@ -449,6 +448,7 @@
 		0A4D6A02225C87A5009599C8 /* JSMNeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNeedVC.swift; sourceTree = "<group>"; };
 		0A4D6A04225C93DF009599C8 /* JSMNewsManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMNewsManagerVC.swift; sourceTree = "<group>"; };
 		0A4D6A06225C9640009599C8 /* JSMDynamicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMDynamicVC.swift; sourceTree = "<group>"; };
+		0A4E0B92227030C80064046B /* JSMSubmitBiddingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSubmitBiddingVC.swift; sourceTree = "<group>"; };
 		0A4E46AD21B617B600DB2E50 /* JSMSaleServiceOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceOrderDetailVC.swift; sourceTree = "<group>"; };
 		0A4E46AF21B6198C00DB2E50 /* JSMSaleServiceDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSMSaleServiceDetailHeader.swift; sourceTree = "<group>"; };
 		0A4E46B121B6211F00DB2E50 /* GYZStepProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYZStepProgressView.swift; sourceTree = "<group>"; };
@@ -633,6 +633,7 @@
 				0A4D6A04225C93DF009599C8 /* JSMNewsManagerVC.swift */,
 				0A0BC5F6225CD753006FCF18 /* JSMNeedDetailVC.swift */,
 				0A161F1C225F7DD800054035 /* JSMDynamicManagerVC.swift */,
+				0A4E0B92227030C80064046B /* JSMSubmitBiddingVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -658,7 +659,6 @@
 				0A0BC5F8225CDE82006FCF18 /* JSMNeedDetailCell.swift */,
 				0A0BC5FA225CE18D006FCF18 /* JSMNeedDetailUserHeaderView.swift */,
 				0A0BC5FC225CE38C006FCF18 /* JSMNeedDetailInfoHeader.swift */,
-				0A0D7566226DF55900C156A9 /* JSMSubmitBiddingView.swift */,
 				0A0D7568226E003700C156A9 /* JSMSubmitBidingCell.swift */,
 			);
 			path = Views;
@@ -1515,7 +1515,6 @@
 				0A4C6CCF21CA2ACE00CA76F4 /* JSMServiceRecordImgsCell.swift in Sources */,
 				0A02EAB121AADDBB000B5644 /* JSMOrderVC.swift in Sources */,
 				0A3A0BC421C0F9ED00A603D8 /* JSMFavouriteModel.swift in Sources */,
-				0A0D7567226DF55900C156A9 /* JSMSubmitBiddingView.swift in Sources */,
 				0A02327C21C93B69000E0D29 /* JSMSaleServiceDetailBottomView.swift in Sources */,
 				0A02A64221A5921D009F2A96 /* JSMMineVC.swift in Sources */,
 				0A4F840E21C8D14900B05384 /* JSMMySaleServiceManagerVC.swift in Sources */,
@@ -1589,6 +1588,7 @@
 				0A02D2F021AEDEFA00BE945C /* JSMMyPublishNeedManagerVC.swift in Sources */,
 				0A05F1FF21E0DB5700BEDE1E /* JSMOrderDetailFooterView.swift in Sources */,
 				0A1F4A8D21D2753D007D2A67 /* JSMServiceRuleVC.swift in Sources */,
+				0A4E0B93227030C80064046B /* JSMSubmitBiddingVC.swift in Sources */,
 				0A54E4EC225DCBB5001B49D1 /* JSMMyWinBiddingVC.swift in Sources */,
 				0A54E4EE225DD045001B49D1 /* JSMWinBiddingCell.swift in Sources */,
 				0A02A61B21A58DE3009F2A96 /* AXBadgeView.swift in Sources */,

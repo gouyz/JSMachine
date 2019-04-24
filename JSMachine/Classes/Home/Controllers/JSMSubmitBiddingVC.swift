@@ -1,17 +1,20 @@
 //
-//  JSMSubmitBiddingView.swift
+//  JSMSubmitBiddingVC.swift
 //  JSMachine
-//  提交竞标
-//  Created by gouyz on 2019/4/22.
+//  //  提交竞标
+//  Created by gouyz on 2019/4/24.
 //  Copyright © 2019 gouyz. All rights reserved.
 //
 
 import UIKit
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 private let submitBiddingCell = "submitBiddingCell"
+private let submitBiddingHeaderView = "submitBiddingHeaderView"
 
-class JSMSubmitBiddingView: UIView {
+class JSMSubmitBiddingVC: UIViewController {
+    
     /// 闭包
     var didSubmitBlock : ((_ prices:String,_ selectTime: Int) -> ())?
     
@@ -31,38 +34,40 @@ class JSMSubmitBiddingView: UIView {
     var isHaveDian: Bool = false
     ///输入第一位是否是0
     var isFirstZero: Bool = false
-    
-    init(model: JSMNeedModel){
-        super.init(frame: UIScreen.main.bounds)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        detailModel = model
-        KeyWindow.addSubview(self)
-        
-        addSubview(bgButton)
-        addSubview(contentView)
+        self.view.addSubview(bgButton)
+        self.view.addSubview(contentView)
         contentView.addSubview(footerBtn)
         contentView.addSubview(tableView)
         
         setupDefaultStyle()
-        pushDefaultStyeSheetView()
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //隐藏键盘上的工具条(默认打开)
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //隐藏键盘上的工具条(默认打开)
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
     /// 背景view
-    fileprivate lazy var bgButton : UIButton = {
-        let btn = UIButton.init(frame: self.frame)
+    fileprivate lazy var bgButton : UIView = {
+        let btn = UIView.init(frame: self.view.frame)
         btn.backgroundColor = UIColor.black
         btn.alpha = 0.35
-        btn.addTarget(self, action: #selector(dismissSheetView), for: .touchUpInside)
+        btn.addOnClickListener(target: self, action: #selector(dismissSheetView))
         
         return btn
     }()
     /// title和sheetView的容器View
     fileprivate lazy var contentView : UIView = UIView()
-    /// 取消按钮
+    /// 按钮
     fileprivate lazy var footerBtn : UIButton = {
         let btn = UIButton.init(frame: CGRect.zero)
         btn.backgroundColor = kBtnClickBGColor
@@ -94,7 +99,7 @@ class JSMSubmitBiddingView: UIView {
         table.separatorStyle = .none
         
         table.register(JSMSubmitBidingCell.self, forCellReuseIdentifier: submitBiddingCell)
-        
+        table.register(LHSGeneralHeaderView.self, forHeaderFooterViewReuseIdentifier: submitBiddingHeaderView)
         return table
     }()
     
@@ -113,38 +118,18 @@ class JSMSubmitBiddingView: UIView {
         } else {
             tableView.isScrollEnabled = false
         }
-        contentView.frame = CGRect.init(x: 0, y: kScreenHeight, width: kScreenWidth, height: contentVH)
+        contentViewY = kScreenHeight - contentVH
+        contentView.frame = CGRect.init(x: 0, y: contentViewY, width: kScreenWidth, height: contentVH)
         let sheetHeight = contentView.height - titleView.height - kCellH
         
         tableView.frame = CGRect.init(x: 0, y: titleView.bottomY, width: contentView.width, height: sheetHeight)
         footerBtn.frame = CGRect.init(x: 20, y: tableView.bottomY + 20, width: kScreenWidth - 40, height: kTitleHeight)
-        contentViewY = kScreenHeight - contentVH
         
-    }
-    /// 显示默认样式
-    fileprivate func pushDefaultStyeSheetView(){
-        weak var weakSelf = self
-        UIView.animate(withDuration: kPushTime, animations:{
-            weakSelf?.contentView.frame = CGRect.init(x: kSheetMargin, y: (weakSelf?.contentViewY)!, width: kScreenWidth, height: (weakSelf?.contentVH)!)
-            weakSelf?.bgButton.alpha = 0.35
-        })
     }
     
     //消失默认样式
     func dismissDefaulfSheetView(){
-        weak var weakSelf = self
-        UIView.animate(withDuration: kDismissTime, animations: {
-            
-            weakSelf?.contentView.frame = CGRect.init(x: kSheetMargin, y: kScreenHeight, width: kScreenWidth, height: (weakSelf?.contentVH)!)
-            weakSelf?.bgButton.alpha = 0.0
-            
-        }, completion: { (finished) in
-            if finished {
-                weakSelf?.contentView.removeFromSuperview()
-                weakSelf?.bgButton.removeFromSuperview()
-                weakSelf?.removeFromSuperview()
-            }
-        })
+        self.dismiss(animated: true, completion: nil)
     }
     /// 消失样式
     @objc func dismissSheetView(){
@@ -187,7 +172,7 @@ class JSMSubmitBiddingView: UIView {
     }
 }
 
-extension JSMSubmitBiddingView: UITableViewDelegate,UITableViewDataSource{
+extension JSMSubmitBiddingVC: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -252,7 +237,7 @@ extension JSMSubmitBiddingView: UITableViewDelegate,UITableViewDataSource{
         return 0.00001
     }
 }
-extension JSMSubmitBiddingView: UITextFieldDelegate{
+extension JSMSubmitBiddingVC: UITextFieldDelegate{
     //1.要求用户输入首位不能为小数点;
     //2.小数点后不超过两位，小数点无法输入超过一个;
     //3.如果首位为0，后面仅能输入小数点

@@ -158,6 +158,11 @@ class JSMHomeVC: GYZBaseVC {
                     imgUrlArr.append(imgUrl.img!)
                 }
                 headerView.adsImgView.setUrlsGroup(imgUrlArr)
+                if imgUrlArr.count == 1{
+                    if homeModel?.bannerModels[0].is_video == "1" {
+                        headerView.playImgView.isHidden = false
+                    }
+                }
             }
             if homeModel?.hotModels.count > 0{
                 var hotTitleArr: [String] = [String]()

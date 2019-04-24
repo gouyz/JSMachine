@@ -87,12 +87,15 @@ class JSMNeedDetailVC: GYZBaseVC {
         if !userDefaults.bool(forKey: kIsLoginTagKey) {
             goLogin()
         }else{
-            let biddingView = JSMSubmitBiddingView.init(model: detailModel!)
-            biddingView.didSubmitBlock = {[weak self] (prices,time) in
+            let vc = JSMSubmitBiddingVC()
+            vc.modalPresentationStyle = .custom
+            vc.detailModel = detailModel
+            vc.didSubmitBlock = {[weak self] (prices,time) in
                 self?.biddingPrices = prices
                 self?.selectTime = time
                 self?.requestSubmitDatas()
             }
+            self.present(vc, animated: true, completion: nil)
         }
     }
     ///获取详情数据
