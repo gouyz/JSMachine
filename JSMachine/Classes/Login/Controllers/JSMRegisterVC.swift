@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 class JSMRegisterVC: GYZBaseVC {
     
@@ -26,6 +27,17 @@ class JSMRegisterVC: GYZBaseVC {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //隐藏键盘上的工具条(默认打开)
+        IQKeyboardManager.shared.enableAutoToolbar = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //隐藏键盘上的工具条(默认打开)
+        IQKeyboardManager.shared.enableAutoToolbar = false
     }
     /// 创建UI
     fileprivate func setupUI(){

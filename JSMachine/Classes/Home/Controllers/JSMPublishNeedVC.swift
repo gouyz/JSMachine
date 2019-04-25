@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 class JSMPublishNeedVC: GYZBaseVC {
     
@@ -19,6 +20,8 @@ class JSMPublishNeedVC: GYZBaseVC {
     var numViewArr: [GYZLabAndFieldView] = [GYZLabAndFieldView]()
     /// 备注控件数组
     var noteViewArr: [GYZLabAndFieldView] = [GYZLabAndFieldView]()
+    ///控件数组
+    var viewArr: [UIView] = [UIView]()
     
     var inputModels: String = ""
     var inputNums: String = ""
@@ -32,6 +35,17 @@ class JSMPublishNeedVC: GYZBaseVC {
         
         setupUI()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //隐藏键盘上的工具条(默认打开)
+        IQKeyboardManager.shared.enableAutoToolbar = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //隐藏键盘上的工具条(默认打开)
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
     
     /// 创建UI
     fileprivate func setupUI(){
@@ -39,16 +53,19 @@ class JSMPublishNeedVC: GYZBaseVC {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        contentView.addSubview(typeInputView)
-        contentView.addSubview(lineView)
+        contentView.addSubview(bgView)
+        bgView.addSubview(typeInputView)
+        bgView.addSubview(lineView)
+        bgView.addSubview(numInputView)
+        bgView.addSubview(lineView3)
+        bgView.addSubview(noteInputView)
+        bgView.addSubview(lineView5)
         contentView.addSubview(addBtn)
-        contentView.addSubview(numInputView)
-        contentView.addSubview(lineView3)
+        contentView.addSubview(minusBtn)
         contentView.addSubview(dateInputView)
         contentView.addSubview(rightIconView)
         contentView.addSubview(lineView4)
-        contentView.addSubview(noteInputView)
-        contentView.addSubview(lineView5)
+        
         
         contentView.addSubview(ziXunBtn)
         contentView.addSubview(submitBtn)
@@ -65,14 +82,18 @@ class JSMPublishNeedVC: GYZBaseVC {
             // 必须要比scroll的高度大一，这样才能在scroll没有填充满的时候，保持可以拖动
             make.height.greaterThanOrEqualTo(scrollView).offset(1)
         }
-        
-        typeInputView.snp.makeConstraints { (make) in
+        bgView.snp.makeConstraints { (make) in
             make.top.equalTo(kMargin)
             make.left.right.equalTo(contentView)
+            make.height.equalTo(50 * 3 + klineWidth * 3)
+        }
+        typeInputView.snp.makeConstraints { (make) in
+            make.top.equalTo(bgView)
+            make.left.right.equalTo(bgView)
             make.height.equalTo(50)
         }
         lineView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(contentView)
+            make.left.right.equalTo(bgView)
             make.top.equalTo(typeInputView.snp.bottom)
             make.height.equalTo(klineWidth)
         }
@@ -93,9 +114,13 @@ class JSMPublishNeedVC: GYZBaseVC {
             make.left.right.height.equalTo(lineView)
             make.top.equalTo(noteInputView.snp.bottom)
         }
+        minusBtn.snp.makeConstraints { (make) in
+            make.top.size.equalTo(addBtn)
+            make.right.equalTo(addBtn.snp.left).offset(-30)
+        }
         addBtn.snp.makeConstraints { (make) in
             make.right.equalTo(-kMargin)
-            make.top.equalTo(lineView5.snp.bottom)
+            make.top.equalTo(bgView.snp.bottom)
             make.size.equalTo(CGSize.init(width: 60, height: kTitleHeight))
         }
         dateInputView.snp.makeConstraints { (make) in
@@ -132,6 +157,7 @@ class JSMPublishNeedVC: GYZBaseVC {
         dateInputView.textFiled.isEnabled = false
         dateInputView.addOnClickListener(target: self, action: #selector(onClickedSelectedDate))
         
+        viewArr.append(bgView)
         typeViewArr.append(typeInputView)
         numViewArr.append(numInputView)
         noteViewArr.append(noteInputView)
@@ -141,6 +167,7 @@ class JSMPublishNeedVC: GYZBaseVC {
     var scrollView: UIScrollView = UIScrollView()
     /// 内容View
     var contentView: UIView = UIView()
+    var bgView: UIView = UIView()
     /// 型号
     fileprivate lazy var typeInputView : GYZLabAndFieldView = GYZLabAndFieldView(desName: "型号：", placeHolder: "请输入型号")
     
@@ -165,6 +192,15 @@ class JSMPublishNeedVC: GYZBaseVC {
         let line = UIView()
         line.backgroundColor = kGrayLineColor
         return line
+    }()
+    /// 减
+    lazy var minusBtn : UIButton = {
+        let btn = UIButton.init(type: .custom)
+        btn.setImage(UIImage.init(named: "icon_goods_minus"), for: .normal)
+        btn.isHidden = true
+        btn.addTarget(self, action: #selector(onClickedMinusBtn), for: .touchUpInside)
+        
+        return btn
     }()
     /// 添加
     lazy var addBtn : UIButton = {
@@ -215,6 +251,7 @@ class JSMPublishNeedVC: GYZBaseVC {
     }()
     /// 添加按钮
     @objc func onClickedAddBtn(){
+        let bgView1: UIView = UIView()
         /// 型号
         let typeInputViews : GYZLabAndFieldView = GYZLabAndFieldView(desName: "型号：", placeHolder: "请输入型号")
         
@@ -240,16 +277,22 @@ class JSMPublishNeedVC: GYZBaseVC {
             line.backgroundColor = kGrayLineColor
             return line
         }()
-        contentView.addSubview(typeInputViews)
-        contentView.addSubview(lineViews)
-        contentView.addSubview(numInputViews)
-        contentView.addSubview(lineViews1)
-        contentView.addSubview(noteInputViews)
-        contentView.addSubview(lineViews2)
+        contentView.addSubview(bgView1)
+        bgView1.addSubview(typeInputViews)
+        bgView1.addSubview(lineViews)
+        bgView1.addSubview(numInputViews)
+        bgView1.addSubview(lineViews1)
+        bgView1.addSubview(noteInputViews)
+        bgView1.addSubview(lineViews2)
+        
+        bgView1.snp.makeConstraints { (make) in
+            make.top.equalTo(viewArr[viewArr.count - 1].snp.bottom).offset(klineWidth)
+            make.left.right.height.equalTo(bgView)
+        }
         
         typeInputViews.snp.makeConstraints { (make) in
-            make.top.equalTo(noteViewArr[noteViewArr.count - 1].snp.bottom).offset(klineWidth)
-            make.left.right.height.equalTo(typeInputView)
+            make.top.left.right.equalTo(bgView1)
+            make.height.equalTo(typeInputView)
         }
         lineViews.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(lineView)
@@ -273,15 +316,36 @@ class JSMPublishNeedVC: GYZBaseVC {
         }
         addBtn.snp.remakeConstraints { (make) in
             make.right.equalTo(contentView).offset(-kMargin)
-            make.top.equalTo(lineViews2.snp.bottom)
+            make.top.equalTo(bgView1.snp.bottom)
             make.size.equalTo(CGSize.init(width: 60, height: kTitleHeight))
         }
         
+        viewArr.append(bgView1)
         typeViewArr.append(typeInputViews)
         numViewArr.append(numInputViews)
         noteViewArr.append(noteInputViews)
+        minusBtn.isHidden = false
     }
-    
+    /// 减少按钮
+    @objc func onClickedMinusBtn(){
+        
+        viewArr[viewArr.count - 1].removeFromSuperview()
+        viewArr.remove(at: viewArr.count - 1)
+        typeViewArr.remove(at: typeViewArr.count - 1)
+        numViewArr.remove(at: numViewArr.count - 1)
+        noteViewArr.remove(at: noteViewArr.count - 1)
+        addBtn.snp.remakeConstraints { (make) in
+            make.right.equalTo(contentView).offset(-kMargin)
+            make.top.equalTo(viewArr[viewArr.count - 1].snp.bottom)
+            make.size.equalTo(CGSize.init(width: 60, height: kTitleHeight))
+        }
+        
+        if viewArr.count > 1 {
+            minusBtn.isHidden = false
+        }else{
+            minusBtn.isHidden = true
+        }
+    }
     
     /// 在线咨询按钮
     @objc func clickedZiXunBtn(){

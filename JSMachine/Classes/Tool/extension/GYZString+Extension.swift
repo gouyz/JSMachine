@@ -113,7 +113,7 @@ extension String {
     func limitMaxTextShow(limit : Int) -> String {
         
         if self.count > limit {
-            return self.substring(to: self.index(self.startIndex, offsetBy: limit))
+            return self.subString(start: 0, length: limit)
         }
         return self
     }
